@@ -15,5 +15,8 @@
     <string name="a_lbl_net_title">Network</string>
     <string name="a_lbl_sign_back_in">Sign Back In</string>
     <string name="a_lbl_session_timeout">This session has timed out</string>
+    <string name="a_hint_price_effective_date">PRICE EFFECTIVE DATE</string>
+    <string name="a_hint_tag_type">TAG TYPE</string>
+    <string name="a_btn_select_template">Select Template</string>
 
 </resources>

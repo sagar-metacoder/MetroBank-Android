@@ -32,7 +32,7 @@
      </style>-->
     <style name="AppButton.Colored" parent="Widget.AppCompat.Button.Colored">
         <item name="android:layout_gravity">end</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColor">@color/color_4A4A4A</item>
         <item name="colorControlHighlight">@color/colorWhite</item>
         <item name="android:backgroundTint" tools:targetApi="lollipop">@color/colorAccent</item>
         <item name="android:textSize">@dimen/font_button</item>
@@ -106,7 +106,7 @@
 
     <!--Floating label text style-->
     <style name="AppEditText.HintText" parent="TextAppearance.AppCompat.Small">
-        <item name="android:textColor">@color/color_00A9E0</item>
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">@dimen/font_floating_text</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
@@ -118,8 +118,7 @@
         <item name="android:maxLines">1</item>
         <item name="android:maxLength">50</item>
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textColorHint">@color/color_00A9E0</item>
-        <item name="theme">@style/AppEditText.InputText</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
         <item name="hintTextAppearance">@style/AppEditText.HintText</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:layout_marginStart">@dimen/margin_minus_3</item>
@@ -134,17 +133,17 @@
         <item name="android:maxLines">1</item>
         <item name="android:maxLength">10</item>
         <item name="passwordToggleTint">@color/colorWhite</item>
-        <item name="android:textColorHint">@color/color_00A9E0</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="errorEnabled">true</item>
     </style>
 
     <style name="AppEditText.InputText" parent="Theme.AppCompat.Light">
-        <item name="android:textColorHint">@color/color_00A9E0</item>
-        <item name="colorControlNormal">@color/color_00A9E0</item>
-        <item name="colorControlHighlight">@color/color_00A9E0</item>
-        <item name="colorControlActivated">@color/color_00A9E0</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
+        <item name="colorControlNormal">@color/colorWhite</item>
+        <item name="colorControlHighlight">@color/colorWhite</item>
+        <item name="colorControlActivated">@color/colorWhite</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">@dimen/font_input</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
@@ -153,11 +152,11 @@
     <style name="AppEditText.EditText" parent="Theme.AppCompat.Light">
         <item name="android:textCursorDrawable">@drawable/bg_cursor_drawable</item>
         <item name="android:cursorVisible">true</item>
-        <item name="android:textColorHint">@color/color_00A9E0</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
         <item name="android:maxLines">1</item>
         <item name="android:maxLength">50</item>
         <item name="android:imeOptions">actionNext</item>
-        <item name="backgroundTint">@color/color_00A9E0</item>
+        <item name="backgroundTint">@color/colorWhite</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">@dimen/font_input</item>
         <item name="android:paddingBottom">@dimen/margin_20</item>
@@ -172,7 +171,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColorHint">@color/color_B7B7BA</item>
-        <item name="android:textColor">@color/color_0062A1</item>
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">@dimen/font_hint</item>
         <item name="android:singleLine">true</item>
         <item name="android:maxLines">1</item>
@@ -392,14 +391,14 @@
     </style>
 
     <style name="MyEditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorControlNormal">@color/color_00A9E0</item>
-        <item name="colorControlActivated">@color/color_00A9E0</item>
-        <item name="colorControlHighlight">@color/color_00A9E0</item>
-        <item name="backgroundTint">@color/color_00A9E0</item>
+        <item name="colorControlNormal">@color/colorWhite</item>
+        <item name="colorControlActivated">@color/colorWhite</item>
+        <item name="colorControlHighlight">@color/colorWhite</item>
+        <item name="backgroundTint">@color/colorWhite</item>
     </style>
     <style name="TextAppearance.App.TextInputLayout" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/color_00A9E0</item>
-        <item name="backgroundTint">@color/color_00A9E0</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="backgroundTint">@color/colorWhite</item>
     </style>
 
     <style name="AppTextView.Spinner" parent="Theme.AppCompat.Light">

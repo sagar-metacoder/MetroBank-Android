@@ -1,5 +1,5 @@
 package com.ng.printtag.interfaces
 
-interface ScanResuktListener {
+interface ScanResultListener {
     fun onDocumentScanned(imageBase64: String, docType: String)
 }
