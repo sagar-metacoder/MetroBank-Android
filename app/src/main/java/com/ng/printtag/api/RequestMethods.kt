@@ -9,6 +9,7 @@ import com.ng.printtag.R
 import com.ng.printtag.apputils.BaseSharedPreference
 import com.ng.printtag.apputils.Constant
 import com.ng.printtag.interfaces.CallBackInterfaces
+import com.ng.printtag.models.generic.GenericRootResponse
 import ng.pdp.api.ApiResponseListener
 import ng.pdp.api.RestClientModel
 import okhttp3.RequestBody
