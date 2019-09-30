@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="margin_1">1dp</dimen>
+	<dimen name="margin_2">2dp</dimen>
+	<dimen name="margin_3">3dp</dimen>
+	<dimen name="margin_4">4dp</dimen>
+	<dimen name="margin_5">5dp</dimen>
+	<dimen name="margin_6">6dp</dimen>
+	<dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_7">7dp</dimen>
+	<dimen name="margin_10">10dp</dimen>
+	<dimen name="margin_12">12dp</dimen>
+	<dimen name="margin_14">14dp</dimen>
+	<dimen name="margin_15">15dp</dimen>
+	<dimen name="margin_16">16dp</dimen>
+	<dimen name="margin_18">18dp</dimen>
+	<dimen name="margin_20">20dp</dimen>
+	<dimen name="margin_22">22dp</dimen>
+	<dimen name="margin_24">24dp</dimen>
+	<dimen name="margin_25">25dp</dimen>
+	<dimen name="margin_26">26dp</dimen>
+	<dimen name="margin_28">28dp</dimen>
+	<dimen name="margin_30">30dp</dimen>
+	<dimen name="margin_35">35dp</dimen>
+	<dimen name="margin_40">40dp</dimen>
+	<dimen name="margin_45">45dp</dimen>
+    <dimen name="margin_60">60dp</dimen>
+    <dimen name="margin_50">50dp</dimen>
+	<dimen name="margin_58">58dp</dimen>
+	<dimen name="margin_70">70dp</dimen>
+	<dimen name="margin_80">80dp</dimen>
+	<dimen name="margin_100">100dp</dimen>
+    <dimen name="margin_120">120dp</dimen>
+	<dimen name="margin_150">150dp</dimen>
+	<dimen name="margin_200">200dp</dimen>
+	<dimen name="margin_230">230dp</dimen>
+	<dimen name="margin_248">238dp</dimen>
+    <dimen name="margin_250">250dp</dimen>
+	<dimen name="margin_280">280dp</dimen>
+    <dimen name="margin_300">300dp</dimen>
+	<dimen name="margin_330">330dp</dimen>
+	<dimen name="margin_350">350dp</dimen>
+	<dimen name="margin_360">360dp</dimen>
+	<dimen name="margin_380">380dp</dimen>
+
+    <dimen name="margin_minus_3">-3dp</dimen>
+
+    <dimen name="weight_input">0.15</dimen>
+    <dimen name="margin_below_title">40dp</dimen>
+    <dimen name="margin_button_top_vertical">20dp</dimen>
+
+    <dimen name="page_side_margin">120dp</dimen>
+	<dimen name="dialog_side_margin">120dp</dimen>
+	<dimen name="page_side_margin_half">65dp</dimen>
+    <dimen name="page_side_margin_detail">100dp</dimen>
+    <dimen name="dialog__match_side_margin">40dp</dimen>
+    <dimen name="dialog__match_side_margin_20">20dp</dimen>
+
+    <dimen name="width_profile">200dp</dimen>
+    <dimen name="width_profile_lookup">220dp</dimen>
+
+    <dimen name="height_profile">200dp</dimen>
+	<dimen name="height_ofac_action">400dp</dimen>
+    <dimen name="height_floating_menu_item">40dp</dimen>
+
+    <dimen name="profile_pic_size">320dp</dimen>
+
+    <dimen name="width_button">150dp</dimen>
+	<dimen name="width_button_looks_good">225dp</dimen>
+	<dimen name="width_menu_item">88dp</dimen>
+	<dimen name="width_button_dialog">225dp</dimen>
+    <dimen name="width_floating_menu_button">200dp</dimen>
+	<dimen name="width_different_person_button">362dp</dimen>
+	<dimen name="width_same_person_button">366dp</dimen>
+	<dimen name="width_button_accept">230dp</dimen>
+	<dimen name="width_button_decline">234dp</dimen>
+
+	<dimen name="font_header">20sp</dimen>
+	<dimen name="font_button">22sp</dimen>
+    <dimen name="font_title">40sp</dimen>
+    <dimen name="font_dialog_title">24sp</dimen>
+    <dimen name="font_dialog_message">18sp</dimen>
+    <dimen name="font_dialog_item">18sp</dimen>
+    <dimen name="font_floating_text">18sp</dimen>
+    <dimen name="font_title_small">18sp</dimen>
+	<dimen name="font_title_left_header">18sp</dimen>
+    <dimen name="font_slide_menu">16sp</dimen>
+	<dimen name="font_ofac_sub_title">18sp</dimen>
+    <dimen name="font_counter">12sp</dimen>
+    <dimen name="font_default">13sp</dimen>
+    <dimen name="font_session_timeout">52sp</dimen>
+    <dimen name="font_input">27sp</dimen>
+    <dimen name="font_input_detail">24sp</dimen>
+	<dimen name="font_instruction_desc">22sp</dimen>
+	<dimen name="font_instruction_title">30sp</dimen>
+    <dimen name="font_profile_title">30sp</dimen>
+    <dimen name="font_exception_title">42sp</dimen>
+    <dimen name="font_exception_message">28sp</dimen>
+
+    <dimen name="font_hint">24sp</dimen>
+    <dimen name="font_label">22sp</dimen>
+    <dimen name="font_24">24sp</dimen>
+    <dimen name="font_26">26sp</dimen>
+    <dimen name="font_20">20sp</dimen>
+    <dimen name="font_14">14sp</dimen>
+    <dimen name="font_18">18sp</dimen>
+    <dimen name="font_16">16sp</dimen>
+    <dimen name="font_12">12sp</dimen>
+    <dimen name="font_34">34sp</dimen>
+    <dimen name="font_floating_menu">20sp</dimen>
+    <dimen name="font_list_item_title">26sp</dimen>
+    <dimen name="font_list_item_desc">18sp</dimen>
+    <dimen name="font_privacy_options">18sp</dimen>
+
+    <dimen name="error_label_spacing">8dp</dimen>
+    <dimen name="min_content_height">20dp</dimen>
+    <dimen name="right_left_spinner_padding">1dp</dimen>
+
+    <dimen name="underline_top_spacing">5dp</dimen>
+    <dimen name="underline_bottom_spacing">2dp</dimen>
+
+    <dimen name="floating_label_top_spacing">8dp</dimen>
+    <dimen name="floating_label_bottom_spacing">3dp</dimen>
+    <dimen name="floating_label_inside_spacing">2dp</dimen>
+
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+	<dimen name="nav_header_height">176dp</dimen>
+    <dimen name="nav_header_profile_size">75dp</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
+
+	<dimen name="card_corner_radius">5dp</dimen>
+	<dimen name="card_corner_radius_6">6dp</dimen>
+	<dimen name="card_elevation">4dp</dimen>
+
+	<dimen name="cropiwa_default_border_stroke_width">0dp</dimen>
+	<dimen name="cropiwa_default_corner_stroke_width">4dp</dimen>
+	<dimen name="cropiwa_default_grid_stroke_width">1dp</dimen>
+	<dimen name="cropiwa_default_min_height">30dp</dimen>
+	<dimen name="cropiwa_default_min_width">30dp</dimen>
+
+    <dimen name="height_doc">165dp</dimen>
+    <dimen name="width_doc">135dp</dimen>
+
+    <dimen name="button_stroke_width">1dp</dimen>
+	<dimen name="font_check_value">12sp</dimen>
+    <dimen name="square_photo_height">374dp</dimen>
+    <dimen name="square_photo_width">500dp</dimen>
+    <dimen name="update_lbl_height">37dp</dimen>
+
+    <dimen name="progress_bar_width">150dp</dimen>
+    <dimen name="progress_bar_height">140dp</dimen>
+
+    <dimen name="check_display_height">240dp</dimen>
+</resources>

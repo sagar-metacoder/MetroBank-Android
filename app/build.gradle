@@ -5,28 +5,112 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion project.compileSdkVersion
     defaultConfig {
         applicationId "com.ng.printtag"
-        minSdkVersion 19
-        targetSdkVersion 28
+        minSdkVersion project.coreMinSdk
+        targetSdkVersion project.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+
+        debug {
+            debuggable true
+            jniDebuggable true
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            /*
+               buildConfigField "String", "DOMAIN_URL", '"https://www.treciondigital.com/"'
+               buildConfigField "String", "TERMS_CONDITION_URL", '" http://www.northgatemarket.com/pdp/terms-conditions/"'
+               buildConfigField "String", "OPT_URL", '"http://www.northgatemarket.com/pdp/preferences/"'
+               buildConfigField "String", "PUBLIC_BASE_URL", '"https://storage.googleapis.com/public_stage_ciam_assets/"'*/
+
+            buildConfigField "String", "DOMAIN_URL", '"https://stage.treciondigital.com/"'
+            buildConfigField "String", "TERMS_CONDITION_URL", '"http://35.236.50.225/stage/tnc.php"'
+            buildConfigField "String", "OPT_URL", '"http://35.236.50.225/stage/optInOut.php"'
+            buildConfigField "String", "PUBLIC_BASE_URL", '"https://storage.googleapis.com/public_stage_ciam_assets/"'
+
+
+
+            buildConfigField "String", "API_BASE_MODULE", '"services/webservice/"'
+            buildConfigField "String", "API_GNERAL_FILTER", '"general/filter/"'
+            buildConfigField "String", "API_CUSTOMER_MODULE", '"customer/"'
+            buildConfigField "String", "API_STORE_MODULE", '"store/"'
+            buildConfigField "String", "API_DELETE_COLLECTION_MODULE", '"delete/field/"'
+            buildConfigField "String", "API_GENERAL_MODULE", '"general/"'
+            buildConfigField "String", "API_CHECK_CASHING_MODULE", '"check-cashing/"'
+            buildConfigField "String", "USER_NAME", '"tesb"'
+            buildConfigField "String", "PASSWORD", '"tpdp!Q@A#Z"'
+            buildConfigField "String", "AUTH_ID", '"3d4c92b4-ad70-78e0-16f9-01b2aad1caa3"'
+            buildConfigField "String", "AUTH_TOKEN", '"bVjtB3h5R0qW11ClXgPK"'
         }
+        release {
+
+            signingConfig signingConfigs.debug
+            debuggable false
+            jniDebuggable false
+            minifyEnabled true
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "DOMAIN_URL", '"https://stage.treciondigital.com/"'
+            buildConfigField "String", "TERMS_CONDITION_URL", '"http://35.236.50.225/stage/tnc.php"'
+            buildConfigField "String", "OPT_URL", '"http://35.236.50.225/stage/optInOut.php"'
+            buildConfigField "String", "PUBLIC_BASE_URL", '"https://storage.googleapis.com/public_stage_ciam_assets/"'
+
+
+            buildConfigField "String", "API_BASE_MODULE", '"services/webservice/"'
+            buildConfigField "String", "API_GNERAL_FILTER", '"general/filter/"'
+            buildConfigField "String", "API_CUSTOMER_MODULE", '"customer/"'
+            buildConfigField "String", "API_STORE_MODULE", '"store/"'
+            buildConfigField "String", "API_DELETE_COLLECTION_MODULE", '"delete/field/"'
+            buildConfigField "String", "API_GENERAL_MODULE", '"general/"'
+            buildConfigField "String", "API_CHECK_CASHING_MODULE", '"check-cashing/"'
+            buildConfigField "String", "USER_NAME", '"tesb"'
+            buildConfigField "String", "PASSWORD", '"tpdp!Q@A#Z"'
+            buildConfigField "String", "AUTH_ID", '"3d4c92b4-ad70-78e0-16f9-01b2aad1caa3"'
+            buildConfigField "String", "AUTH_TOKEN", '"bVjtB3h5R0qW11ClXgPK"'
+
+        }
+
+
+    }
+
+    lintOptions {
+        disable 'MissingTranslation'
+        checkReleaseBuilds false
+
+        abortOnError false
+    }
+    dataBinding {
+        enabled = true
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:28.0.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    // AppNavigation
+    implementation "android.arch.navigation:navigation-fragment:$navigation_version"
+    implementation "android.arch.navigation:navigation-ui:$navigation_version"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "android.arch.navigation:navigation-ui-ktx:$navigation_version"
+
+    implementation libraries.legacy_support_v4
+    implementation 'com.google.android.material:material:1.1.0-alpha10'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    annotationProcessor libraries.glide_compiler
+
+    implementation libraries.kotlin
+    //retrofit
+    implementation libraries.gson_core
+    // material design for custom input layout
+    implementation libraries.support_design
+    implementation libraries.app_compat
+    implementation libraries.glide_glide
+    implementation libraries.logging_interceptor
 }

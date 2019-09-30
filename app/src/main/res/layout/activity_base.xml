@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+            android:id="@+id/rl_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_app">
+        <com.ng.printtag.base.HeaderToolBar
+                android:id="@+id/header_tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <FrameLayout
+                android:id="@+id/frm_base_container"
+                android:layout_below="@+id/header_tool_bar"
+                android:layout_width="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_height="match_parent"/>
+        <FrameLayout
+                android:id="@+id/frm_exception_container"
+                android:layout_below="@+id/header_tool_bar"
+                android:layout_width="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
+    </RelativeLayout>
+</layout>

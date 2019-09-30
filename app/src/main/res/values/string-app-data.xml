@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="instruction_action">instruction_action</string>
+    <string name="instruction_action_from">instruction_action_from</string>
+    <string name="instruction_action_data">instruction_action_data</string>
+    <string name="instruction_action_message">instruction_action_message</string>
+    <string name="action_menu_logout">action_menu_logout</string>
+    <string name="input_act_email">input_act_email</string>
+    <string name="input_act_password">input_password</string>
+    <string name="pref_language">pref_language</string>
+    <string name="pref_user_data">pref_user_data</string>
+    <string name="pref_config_data">pref_config_data</string>
+    <string name="pref_auth_token">Auth Token</string>
+
+</resources>

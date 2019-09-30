@@ -1,11 +1,415 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
     </style>
+
+    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/push_in_from_left</item>
+        <item name="android:activityOpenExitAnimation">@anim/push_out_to_right</item>
+        <item name="android:activityCloseEnterAnimation">@anim/push_in_from_right</item>
+        <item name="android:activityCloseExitAnimation">@anim/push_out_to_left</item>
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ErrorLogInText" parent="android:Widget">
+        <item name="android:textSize">@dimen/font_default</item>
+        <item name="android:textColor">@color/color_FA70B4</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+    <!-- <style name="ErrorLogInText" parent="android:Widget">
+         <item name="android:textSize">@dimen/font_default</item>
+         <item name="android:textColor">@color/color_FA70B4</item>
+         <item name="android:fontFamily">@font/roboto_regular</item>
+     </style>-->
+    <style name="AppButton.Colored" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:layout_gravity">end</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="colorControlHighlight">@color/colorWhite</item>
+        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/font_button</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">4dp</item>
+        <item name="android:minEms">5</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="AppButton.Colored.Borderless" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_gravity">end</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="colorControlHighlight">@color/colorWhite</item>
+        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/colorTransparent</item>
+        <item name="android:textSize">@dimen/font_button</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">4dp</item>
+        <item name="android:minEms">5</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="ButtonInActive">
+        <item name="android:layout_gravity">end</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/font_button</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="AppButton.Outlined" parent="Widget.AppCompat.Button">
+        <item name="android:layout_width">@dimen/width_different_person_button</item>
+        <item name="android:background">@drawable/btn_outlined</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/font_button</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="AppButton.Rectangle.Colored" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorControlHighlight">@android:color/white</item>
+        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/font_floating_menu</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/color_B0000000</item>
+        <item name="cornerRadius">6dp</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="AppButton.Colored.Disable" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorControlHighlight">@android:color/white</item>
+        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/color_1AFF007F</item>
+        <item name="android:textSize">@dimen/font_button</item>
+        <item name="android:enabled">false</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">4dp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="AppButton.Normal" parent="Widget.AppCompat.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@drawable/sel_button_text</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/font_button</item>
+        <item name="android:background">@drawable/sel_button</item>
+        <item name="android:paddingStart">@dimen/margin_40</item>
+        <item name="android:paddingEnd">@dimen/margin_40</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <!--Floating label text style-->
+    <style name="AppEditText.HintText" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/color_00A9E0</item>
+        <item name="android:textSize">@dimen/font_floating_text</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <!--Input field style-->
+    <style name="AppEditText.Text" parent="Theme.AppCompat.Light">
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:maxLength">50</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColorHint">@color/color_00A9E0</item>
+        <item name="theme">@style/AppEditText.InputText</item>
+        <item name="hintTextAppearance">@style/AppEditText.HintText</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:layout_marginStart">@dimen/margin_minus_3</item>
+        <item name="android:layout_marginEnd">@dimen/margin_minus_3</item>
+        <item name="errorEnabled">true</item>
+    </style>
+
+    <style name="AppEditText.Text.Password" parent="Theme.AppCompat.Light">
+        <item name="hintTextAppearance">@style/AppEditText.HintText</item>
+        <item name="theme">@style/AppEditText.InputText</item>
+        <item name="passwordToggleEnabled">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:maxLength">10</item>
+        <item name="passwordToggleTint">@color/colorWhite</item>
+        <item name="android:textColorHint">@color/color_00A9E0</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="errorEnabled">true</item>
+    </style>
+
+    <style name="AppEditText.InputText" parent="Theme.AppCompat.Light">
+        <item name="android:textColorHint">@color/color_00A9E0</item>
+        <item name="colorControlNormal">@color/color_00A9E0</item>
+        <item name="colorControlHighlight">@color/color_00A9E0</item>
+        <item name="colorControlActivated">@color/color_00A9E0</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/font_input</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="AppEditText.EditText" parent="Theme.AppCompat.Light">
+        <item name="android:textCursorDrawable">@drawable/bg_cursor_drawable</item>
+        <item name="android:cursorVisible">true</item>
+        <item name="android:textColorHint">@color/color_00A9E0</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:maxLength">50</item>
+        <item name="android:imeOptions">actionNext</item>
+        <item name="backgroundTint">@color/color_00A9E0</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/font_input</item>
+        <item name="android:paddingBottom">@dimen/margin_20</item>
+        <item name="android:paddingTop">@dimen/margin_20</item>
+        <item name="android:paddingStart">@dimen/margin_5</item>
+        <item name="android:paddingEnd">@dimen/margin_5</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:inputType">textNoSuggestions</item>
+    </style>
+
+    <style name="AppEditText.EditText.Search" parent="Theme.AppCompat.Light">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColorHint">@color/color_B7B7BA</item>
+        <item name="android:textColor">@color/color_0062A1</item>
+        <item name="android:textSize">@dimen/font_hint</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:maxLength">50</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">@color/colorTransparent</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="AppTextView.Header" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/font_header</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="AppTextView.Title" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/font_title</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="AppTextView.Title.Small" parent="Theme.AppCompat.Light">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/font_title_small</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="AppTextView.Title.Medium" parent="Theme.AppCompat.Light">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/font_label</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="AppTextView.Dialog.Title" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">@color/color_B0000000</item>
+        <item name="android:textSize">@dimen/font_dialog_title</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="AppTextView.Dialog.Message" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">@color/color_2D2D2D</item>
+        <item name="android:textSize">@dimen/font_dialog_message</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="AppTextView.Dialog.Item" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">@color/color_B0000000</item>
+        <item name="android:textSize">@dimen/font_dialog_item</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="AppTextView.SideNavMenu" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">@color/color_2D2D2D</item>
+        <item name="android:textSize">@dimen/font_title_small</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="AppSearchBar.Icons" parent="Theme.AppCompat.Light">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/margin_10</item>
+        <item name="android:paddingBottom">@dimen/margin_10</item>
+        <item name="android:paddingStart">@dimen/margin_20</item>
+        <item name="android:paddingEnd">@dimen/margin_20</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="AppInput.Birthday" parent="Theme.AppCompat.Light">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@color/colorTransparent</item>
+        <item name="android:textSize">@dimen/font_input</item>
+        <item name="android:inputType">number|textNoSuggestions</item>
+        <item name="android:digits">1234567890</item>
+        <item name="android:maxLength">2</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ems">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+    <style name="StyleBaseDialog" parent="android:Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:fitsSystemWindows">false</item>
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+    </style>
+
+    <style name="AppTextView.List.Item" parent="Theme.AppCompat.Light">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_2D2D2D</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="AppTextView.MenuItem" parent="Theme.AppCompat.Light">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_2D2D2D</item>
+        <item name="android:textSize">@dimen/font_slide_menu</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="AppImageView.MenuItem" parent="Theme.AppCompat.Light">
+        <item name="android:layout_width">@dimen/width_menu_item</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="AppImageView.MenuItem.Text" parent="AppTextView.MenuItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/margin_15</item>
+        <item name="android:paddingBottom">@dimen/margin_15</item>
+        <item name="android:paddingStart">@dimen/margin_35</item>
+        <item name="android:paddingEnd">@dimen/margin_35</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="progressBarTheme" parent="@style/Theme.AppCompat">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+    <!--
+        &lt;!&ndash; Base application theme is the default theme. &ndash;&gt;
+        <style name="Theme" parent="Theme.MaterialComponents">
+        </style>
+        <style name="Theme.ButtonDisable">
+            <item name="buttonStyle">@style/AppButton.Colored.Disable</item>
+        </style>
+        <style name="Theme.Button">
+            <item name="buttonStyle">@style/AppButton.Colored</item>
+        </style>-->
+
+    <!-- WHITE THEME FOR IDENTIFICATION SCREEN -->
+    <style name="AppEditText.EditText.White" parent="Theme.AppCompat.Light">
+        <item name="android:textCursorDrawable">@drawable/bg_cursor_drawable</item>
+        <item name="android:cursorVisible">true</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:maxLength">50</item>
+        <item name="backgroundTint">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/font_input_detail</item>
+        <item name="android:paddingBottom">@dimen/margin_15</item>
+        <item name="android:paddingTop">@dimen/margin_20</item>
+        <item name="android:paddingStart">@dimen/margin_5</item>
+        <item name="android:paddingEnd">@dimen/margin_5</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:inputType">textNoSuggestions</item>
+
+    </style>
+
+    <!-- WHITE THEME FOR IDENTIFICATION SCREEN -->
+    <style name="AppEditText.Text.White" parent="Theme.AppCompat.Light">
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:maxLength">50</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
+        <item name="theme">@style/AppEditText.InputText.White</item>
+        <item name="hintTextAppearance">@style/AppEditText.HintText.White</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:layout_marginStart">@dimen/margin_minus_3</item>
+        <item name="android:layout_marginEnd">@dimen/margin_minus_3</item>
+        <item name="errorEnabled">true</item>
+    </style>
+
+    <!-- WHITE THEME FOR IDENTIFICATION SCREEN -->
+    <style name="AppEditText.InputText.White" parent="Theme.AppCompat.Light">
+        <item name="android:textColorHint">@color/colorWhite</item>
+        <item name="colorControlNormal">@color/colorWhite</item>
+        <item name="colorControlHighlight">@color/colorWhite</item>
+        <item name="colorControlActivated">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/font_input_detail</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <!-- WHITE THEME FOR IDENTIFICATION SCREEN -->
+    <style name="AppEditText.HintText.White" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/font_floating_text</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="MyPopupMenu" parent="@style/Widget.AppCompat.PopupMenu">
+        <item name="android:overlapAnchor" tools:targetApi="lollipop">true</item>
+        <item name="android:dropDownHorizontalOffset">-40dp</item>
+        <item name="android:dropDownVerticalOffset">20dp</item>
+    </style>
+
+    <style name="MyEditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/color_00A9E0</item>
+        <item name="colorControlActivated">@color/color_00A9E0</item>
+        <item name="colorControlHighlight">@color/color_00A9E0</item>
+        <item name="backgroundTint">@color/color_00A9E0</item>
+    </style>
+    <style name="TextAppearance.App.TextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/color_00A9E0</item>
+        <item name="backgroundTint">@color/color_00A9E0</item>
+    </style>
+
+    <style name="AppTextView.Spinner" parent="Theme.AppCompat.Light">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_B0000000</item>
+        <item name="android:textSize">@dimen/font_20</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
 
 </resources>

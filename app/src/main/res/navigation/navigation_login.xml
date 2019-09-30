@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+			xmlns:app="http://schemas.android.com/apk/res-auto"
+			xmlns:tools="http://schemas.android.com/tools"
+			app:startDestination="@id/actionUserName">
+	<fragment
+			android:id="@+id/actionUserName"
+			android:name="com.ng.printtag.login.FragmentUsername"
+			tools:layout="@layout/fragment_sign_in_username">
+		<action
+				android:id="@+id/actionPassword"
+				app:destination="@id/actionPassword"
+				app:enterAnim="@anim/push_in_from_left"
+				app:exitAnim="@anim/push_out_to_left"
+				app:popEnterAnim="@anim/push_in_from_left"
+				app:popExitAnim="@anim/push_out_to_left"/>
+	</fragment>
+	<fragment
+			android:id="@+id/actionPassword"
+			android:name="com.ng.printtag.login.FragmentPassword"
+			tools:layout="@layout/fragment_sign_in_password">
+
+
+	</fragment>
+</navigation>
