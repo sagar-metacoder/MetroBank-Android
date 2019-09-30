@@ -200,9 +200,9 @@ class ErrorActions {
             tvHint: AppCompatTextView?,
             errorTextView: AppCompatTextView?
         ) {
-            view?.setBackgroundColor(ContextCompat.getColor(view.context, color_00A9E0))
+            view?.setBackgroundColor(ContextCompat.getColor(view.context, colorWhite))
             errorTextView?.visibility = INVISIBLE
-            tvHint?.setTextColor(ContextCompat.getColor(tvHint.context, color_00A9E0))
+            tvHint?.setTextColor(ContextCompat.getColor(tvHint.context, colorWhite))
         }
 
         fun setPhoneErrorInvisible(
@@ -238,7 +238,7 @@ class ErrorActions {
             materialButton: MaterialButton, view: View?,
             errorTextView: AppCompatTextView?
         ) {
-            view?.setBackgroundColor(ContextCompat.getColor(view.context, color_00A9E0))
+            view?.setBackgroundColor(ContextCompat.getColor(view.context, colorWhite))
             errorTextView?.visibility = INVISIBLE
             validateButton(materialButton, true)
         }

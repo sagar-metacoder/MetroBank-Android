@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/margin_20"
+            android:paddingEnd="@dimen/margin_20"
+            android:paddingTop="@dimen/margin_20"
+            android:background="@color/app_background">
+
+        <com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout
+                android:id="@+id/inputDate"
+                style="@style/AppEditText.Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_below_title"
+                android:hint="@string/a_hint_price_effective_date"
+                android:textSize="@dimen/font_20"
+        >
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_effective_date"
+                    android:layout_width="match_parent"
+                    style="@style/AppEditText.EditText"
+                    android:imeOptions="actionDone"
+                    android:layout_height="wrap_content"
+            >
+                <requestFocus/>
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout>
+
+        <com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout
+                android:id="@+id/inputTag"
+                style="@style/AppEditText.Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/a_hint_tag_type"
+                android:textSize="@dimen/font_20"
+                android:layout_below="@+id/inputDate"
+        >
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_tag_type"
+                    android:layout_width="match_parent"
+                    style="@style/AppEditText.EditText"
+                    android:imeOptions="actionDone"
+                    android:layout_height="wrap_content"
+            >
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout>
+
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/margin_20">
+
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSubmit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/AppButton.Colored"
+                    android:layout_gravity="end"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    android:text="@string/a_btn_select_template"
+                    android:layout_alignParentEnd="true" tools:ignore="RelativeOverlap"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

@@ -3,17 +3,13 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#FFFFFF</color>
     <color name="colorPrimary">#00574B</color>
+    <color name="app_background">#015C44</color>
 
     <color name="colorWhite">@android:color/white</color>
     <color name="colorBlack">@android:color/black</color>
     <color name="colorTransparent">@android:color/transparent</color>
     <color name="colorWhite50">#80FFFFFF</color>
 
-    <color name="color_00A9E0">#00A9E0</color>
-    <color name="color_0082BD">#0082BD</color>
-    <color name="color_0062A1">#0062A1</color>
-    <color name="color_005182">#005182</color>
-    <color name="color_005C8F">#005C8F</color>
     <color name="color_1AFF007F">#1AFF007F</color>
     <color name="color_BFBEC4">#BFBEC4</color>
     <color name="color_2D2D2D">#2D2D2D</color>
@@ -33,6 +29,7 @@
     <color name="color_7EC356">#7EC356</color>
     <color name="color_808080">#808080</color>
     <color name="color_EAEAEA">#EAEAEA</color>
+    <color name="color_4A4A4A">#4A4A4A</color>
 
     <!--#59ffffff-->
     <color name="cropiwa_default_overlay_color">#af000000</color>
