@@ -1,13 +1,9 @@
 package com.ng.printtag.api
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Build
 import android.util.Base64
-import androidx.appcompat.app.AppCompatActivity
 import com.ng.printtag.BuildConfig
 import com.ng.printtag.R
 import com.ng.printtag.apputils.BaseSharedPreference
@@ -15,18 +11,13 @@ import com.ng.printtag.apputils.Constant
 import com.ng.printtag.interfaces.CallBackInterfaces
 import ng.pdp.api.ApiResponseListener
 import ng.pdp.api.RestClientModel
-import ng.pdplib.models.generic.GenericRootResponse
 import okhttp3.RequestBody
-import okhttp3.ResponseBody
-import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Response
-import java.io.ByteArrayOutputStream
 import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 object RequestMethods {

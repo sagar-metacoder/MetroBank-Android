@@ -3,6 +3,9 @@ package com.ng.printtag.base
 import android.view.View
 import android.widget.RelativeLayout
 import com.ng.printtag.R
+import com.ng.printtag.login.FragmentPassword
+import com.ng.printtag.login.FragmentUsername
+import com.ng.printtag.splash.ActivitySplash
 import ng.pdp.base.BaseFragment
 
 
@@ -29,6 +32,11 @@ class HeaderModel {
     fun setHeaderValues() {
         setDefaultHeader()
         when (baseFragment) {
+
+            is FragmentUsername, is FragmentPassword -> {
+                setLeftIcon(backIcon)
+                baseActivity!!.actBaseBinding.headerToolBar.binding.ivBack.text = ""
+            }
            /* is FragmentUsername, is FragmentPassword, is FragmentStoreNumber, is FragmentLookUpByName, is FragmentLookUpResult, is FragmentLookUpByProspera -> {
                 setLeftIcon(backIcon)
                 baseActivity!!.actBaseBinding.headerToolBar.binding.ivBack.text = ""
@@ -53,11 +61,10 @@ class HeaderModel {
 
         }
         when (baseActivity) {
-        /*    is ActivitySplash -> {
+            is ActivitySplash -> {
                 baseActivity!!.setNoStatusBar()
                 baseActivity!!.setHeaderVisibility(View.GONE)
             }
-            */
            /* is ActivityCheckTutorial -> {
                 setLeftIconText(Utils.getLabel(baseActivity!!.getString(R.string.a_lbl_check_cashing)))
                 backVisibility = true

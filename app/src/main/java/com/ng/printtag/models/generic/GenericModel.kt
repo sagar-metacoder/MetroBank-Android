@@ -1,4 +1,6 @@
-package com.ng.printtag.models
+package com.ng.printtag.models.generic
+
+import com.ng.printtag.models.UserDetailsModel
 
 
 class GenericModel {

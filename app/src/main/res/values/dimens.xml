@@ -49,8 +49,8 @@
     <dimen name="margin_below_title">40dp</dimen>
     <dimen name="margin_button_top_vertical">20dp</dimen>
 
-    <dimen name="page_side_margin">120dp</dimen>
-	<dimen name="dialog_side_margin">120dp</dimen>
+    <dimen name="page_side_margin">20dp</dimen>
+	<dimen name="dialog_side_margin">20dp</dimen>
 	<dimen name="page_side_margin_half">65dp</dimen>
     <dimen name="page_side_margin_detail">100dp</dimen>
     <dimen name="dialog__match_side_margin">40dp</dimen>

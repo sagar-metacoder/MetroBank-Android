@@ -16,9 +16,10 @@ class ActivitySplash : BaseActivity<ActivitySplashBinding>() {
     override fun getLayoutId(): Int = R.layout.activity_splash
 
     override fun initMethod() {
-        AppUtils.setStatusBar(window, this)
+
         AppUtils.noStatusBar(window)
         binding = getViewDataBinding()
+
 
         Handler().postDelayed({
             Intent(this@ActivitySplash, ActivityLogin::class.java)

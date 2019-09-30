@@ -4,8 +4,8 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application android:label="@string/app_tag_print"
-                 android:icon="@mipmap/ic_launcher"
-                 android:roundIcon="@mipmap/ic_launcher_round"
+                 android:icon="@mipmap/ic_app_icon"
+                 android:roundIcon="@mipmap/ic_app_icon"
                  android:supportsRtl="true"
                  android:theme="@style/AppTheme"
                  android:allowBackup="false"
@@ -26,6 +26,11 @@
             android:name="com.ng.printtag.api.ActivityAppSessionTimeout"
             android:exported="false"
             android:screenOrientation="portrait"/>
+
+        <activity
+                android:name=".login.ActivityLogin"
+                android:exported="false"
+                android:screenOrientation="portrait"/>
 
     </application>
 </manifest>

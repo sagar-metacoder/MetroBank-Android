@@ -1,4 +1,4 @@
-package com.ng.printtag.models
+package com.ng.printtag.models.generic
 
 import com.google.gson.annotations.SerializedName
 

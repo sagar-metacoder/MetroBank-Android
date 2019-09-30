@@ -29,7 +29,6 @@ import com.ng.printtag.interfaces.SkipPostSerialisation
 import ng.pdp.api.ApiResponseListener
 import ng.pdp.api.HeaderInterceptor
 import ng.pdp.api.RestClientModel
-import ng.pdplib.models.generic.GenericRootResponse
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
