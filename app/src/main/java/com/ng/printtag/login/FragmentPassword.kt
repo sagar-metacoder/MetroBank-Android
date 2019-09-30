@@ -1,54 +1,43 @@
 package com.ng.printtag.login
 
-import ng.pdp.R
-import ng.pdp.api.RequestMethods
-import ng.pdp.api.RestClient
-import ng.pdp.api.RestClientModel
+
+import com.ng.printtag.R
+import com.ng.printtag.apputils.BaseSharedPreference
+import com.ng.printtag.apputils.CallDialog
+import com.ng.printtag.apputils.ErrorActions
+import com.ng.printtag.apputils.Utils
+import com.ng.printtag.databinding.FragmentSignInPasswordBinding
 import ng.pdp.base.BaseFragment
-import ng.pdp.databinding.FragmentSignInPasswordBinding
-import ng.pdp.dialog.DialogForgotPassword
-import ng.pdp.utils.CallDialog
-import ng.pdp.utils.ErrorActions
-import ng.pdp.utils.Utils
-import ng.pdplib.models.generic.GenericRootResponse
-import ng.pdplib.models.login.AzurToken
-import ng.pdplib.models.login.LoginModel
-import ng.pdplib.utils.BaseSharedPreference
-import ng.pdplib.utils.Constant
-import ng.pdplib.utils.Constant.CALL_ASSOCIATE_DETAILS_REQUEST_CODE
-import ng.pdplib.utils.Constant.CALL_AZURE_DETAIL
-import ng.pdplib.utils.Constant.CALL_AZURE_TOKEN
-import ng.pdplib.utils.ProgressDialog
 import retrofit2.Response
 
 
 class FragmentPassword : BaseFragment<FragmentSignInPasswordBinding>() {
 
-    private lateinit var binding: FragmentSignInPasswordBinding
+    //private lateinit var binding: FragmentSignInPasswordBinding
     private lateinit var accessToken: String
 
     override fun initFragment() {
-        binding = getFragmentDataBinding()
-        binding.emailId = (activity as ActivityLogin).loginModel.mail
-        binding.edtPassword.setText((activity as ActivityLogin).loginModel.password)
+      //  binding = getFragmentDataBinding()
+       // binding.emailId = (activity as ActivityLogin).loginModel.mail
+      //  binding.edtPassword.setText((activity as ActivityLogin).loginModel.password)
         BaseSharedPreference.getInstance(activity!!).putValue(getString(R.string.pref_auth_token), "")
         handelClick()
     }
 
     private fun handelClick() {
-        binding.btnLoginPassword.setOnClickListener { view ->
+      /*  binding.btnLoginPassword.setOnClickListener { view ->
             super.onClick(view)
             //getToken()
-            validateUser()
+            //validateUser()
 
         }
         binding.tvForgotPassword.setOnClickListener {
-            CallDialog.openDialog(activity!!, DialogForgotPassword())
-        }
+          //  CallDialog.openDialog(activity!!, DialogForgotPassword())
+        }*/
     }
 
 
-    private fun getToken() {
+ /*   private fun getToken() {
         val restClientModel = RestClientModel()
         restClientModel.isProgressDialogShow = true
         restClientModel.isErrorScreenShow = true
@@ -118,7 +107,7 @@ class FragmentPassword : BaseFragment<FragmentSignInPasswordBinding>() {
                     true -> {
                         if (rootResponse.accessToken != null) {
                             accessToken = rootResponse.accessToken.toString()
-                            /* call graph */
+                            *//* call graph *//*
                             BaseSharedPreference.getInstance(activity!!)
                                 .putValue(getString(R.string.pref_auth_token), accessToken)
                             callGraphAPI()
@@ -139,36 +128,6 @@ class FragmentPassword : BaseFragment<FragmentSignInPasswordBinding>() {
                             Utils.getLabel(getString(R.string.a_msg_server_error))
                         )
 
-                    }
-                }
-            }
-            CALL_AZURE_DETAIL -> {
-                val rootResponse = response.body() as LoginModel
-                when (true) {
-                    true -> {
-                        if (rootResponse.id != null) {
-                            BaseSharedPreference.getInstance(activity!!)
-                                .putValue(getString(R.string.pref_auth_token), "")
-                            BaseSharedPreference.getInstance(activity!!)
-                                .putValue(getString(R.string.pref_auth_token), RequestMethods.getAuthToken(activity!!))
-                            (activity as ActivityLogin).loginModel.userName = rootResponse.getFullProfileName()
-
-                            validateUser()
-                        } else {
-                            ProgressDialog.displayProgressDialog(activity!!, false, "")
-                            val message =
-                                Utils.getLabel(getString(R.string.a_lbl_auth_error)) + "\n\n" + Utils.getLabel(
-                                    getString(R.string.a_lbl_auth_reason)
-                                ) + "\n\n" + rootResponse.error!!.message + "\n\n" + Utils.getLabel(getString(R.string.a_lbl_contact_admin))
-                            showError(Utils.getLabel(getString(R.string.a_auth_fail)), message)
-
-                        }
-                    }
-                    false -> {
-                        showError(
-                            Utils.getLabel(getString(R.string.a_lbl_warning_title)),
-                            Utils.getLabel(getString(R.string.a_msg_server_error))
-                        )
                     }
                 }
             }
@@ -240,7 +199,7 @@ class FragmentPassword : BaseFragment<FragmentSignInPasswordBinding>() {
         binding.tvHint.text = Utils.getLabel(getString(R.string.a_hint_employee_password))
         binding.tvForgotPassword.text = Utils.getLabel(getString(R.string.a_lbl_forgot_password))
 
-    }
+    }*/
 
     override fun getLayoutId(): Int = R.layout.fragment_sign_in_password
 }

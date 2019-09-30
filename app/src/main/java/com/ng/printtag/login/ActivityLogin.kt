@@ -4,17 +4,51 @@ import android.annotation.SuppressLint
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.ng.printtag.R
 import com.ng.printtag.base.BaseActivity
+import com.ng.printtag.databinding.ActivityLoginBinding
 import com.ng.printtag.interfaces.HeaderInterface
 import ng.pdp.api.ApiResponseListener
-import ng.pdp.login.FragmentPassword
-import ng.pdp.login.FragmentUsername
 
-class ActivityLogin : BaseActivity<ActivityLoginBinding>(), ApiResponseListener, HeaderInterface,
+
+class ActivityLogin : BaseActivity<ActivityLoginBinding>(), ApiResponseListener, HeaderInterface
    {
+       override fun onLeftImageClick() {
+           TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       }
 
+       override fun onMenuImageClick(item: String) {
+           TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       }
+
+       override fun onHeaderMenuItemClick(view: View) {
+           TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       }
+
+       override fun onRightImageClick() {
+           TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       }
+
+       /**
+       * Init components
+       */
+   override fun initMethod() {
+       binding = getViewDataBinding()
+       actBaseBinding.headerToolBar.setHeaderInterface(this)
+     //  localUserData()
+   }
+
+      /* private fun localUserData(): LoginModel {
+           loginModel = LoginModel()
+           return loginModel
+       }
+*/
+       /**
+       * Init layout genericModel id
+       */
+   override fun getLayoutId(): Int = R.layout.activity_login
     private lateinit var binding: ActivityLoginBinding
-    var loginModel: LoginModel = LoginModel()
+    /*var loginModel: LoginModel = LoginModel()
     private lateinit var mLocationProvider: LocationProvider
     var latitude: Double = 0.0
     var longitude: Double = 0.0
@@ -24,24 +58,7 @@ class ActivityLogin : BaseActivity<ActivityLoginBinding>(), ApiResponseListener,
     private var authenticationContext: AuthenticationContext? = null
     private lateinit var accessToken: String
     var storeModel: StoreModels? = null
-    /**
-     * Init components
-     */
-    override fun initMethod() {
-        binding = getViewDataBinding()
-        actBaseBinding.headerToolBar.setHeaderInterface(this)
-        localUserData()
-    }
 
-    private fun localUserData(): LoginModel {
-        loginModel = LoginModel()
-        return loginModel
-    }
-
-    /**
-     * Init layout genericModel id
-     */
-    override fun getLayoutId(): Int = R.layout.activity_login
 
     override fun onRightImageClick() {
     }
@@ -85,7 +102,7 @@ class ActivityLogin : BaseActivity<ActivityLoginBinding>(), ApiResponseListener,
             "", null
         )
 
-    }
+    }*/
 
 
 }
