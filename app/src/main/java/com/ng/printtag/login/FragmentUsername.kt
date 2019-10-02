@@ -15,62 +15,52 @@ class FragmentUsername : BaseFragment<FragmentSignInUsernameBinding>() {
 
     override fun initFragment() {
         binding = getFragmentDataBinding()
-//        binding.edtEmailAddress.requestFocus()
         handelClick()
-        binding.edtEmailAddress.requestFocus()
+
+        binding.edtUserName.requestFocus()
     }
+
+    override fun getLayoutId(): Int = R.layout.fragment_sign_in_username
+
 
     private fun handelClick() {
         binding.btnLoginName.setOnClickListener { view ->
             super.onClick(view)
             goToNext()
         }
-        binding.tvBackHome.setOnClickListener { view ->
-            super.onClick(view)
-            PdpUtils.navigateToOtherScreen(activity!!, ActivityAssocPhoto::class.java, false)
-        }
-        binding.btnAzureLogin.setOnClickListener { view ->
-            super.onClick(view)
-            (activity as ActivityLogin).getAzureToken()
-        }
+
     }
 
     private fun goToNext() {
-        val fieldValue = binding.edtEmailAddress.text.toString().trim()
-        if (!(activity as ActivityLogin).loginModel.mail.isNullOrEmpty()) {
-            if ((activity as ActivityLogin).loginModel.mail != fieldValue)
+        val fieldValue = binding.edtUserName.text.toString().trim()
+        if (!(activity as ActivityLogin).loginModel.userName.isNullOrEmpty()) {
+            if ((activity as ActivityLogin).loginModel.userName != fieldValue)
                 (activity as ActivityLogin).loginModel.password = ""
         }
-        (activity as ActivityLogin).loginModel.mail = fieldValue
+        (activity as ActivityLogin).loginModel.userName = fieldValue
         Utils.navigateTo(binding.btnLoginName, R.id.actionPassword, null)
     }
 
     override fun onResume() {
         super.onResume()
-        val fieldValue = binding.edtEmailAddress.text.toString()
-        if (fieldValue.isNotEmpty())
-            (activity as ActivityLogin).loginModel.mail = fieldValue
-        if (Pattern.matches(Constant.emailPattern, fieldValue)) {
-            ErrorActions.validateButton(binding.btnLoginName, true)
-            binding.edtEmailAddress.setText((activity as ActivityLogin).loginModel.mail)
-            binding.edtEmailAddress.setSelection(fieldValue.length)
-        } else
-            ErrorActions.validateButton(binding.btnLoginName, false)
+        val fieldValue = binding.edtUserName.text.toString()
+        if (fieldValue.isNotEmpty()){
+            (activity as ActivityLogin).loginModel.userName = fieldValue
+        (activity as ActivityLogin).loginModel.userName = (activity as ActivityLogin).loginModel.userName
 
-        if (BaseSharedPreference.getInstance(activity!!).getPrefBoolean(getString(R.string.pref_session_out))) {
-            binding.tvLoggedOut.visibility = VISIBLE
-        } else {
-            binding.tvLoggedOut.visibility = INVISIBLE
-        }
+        ErrorActions.validateButton(binding.btnLoginName, true)
+        binding.edtUserName.setText((activity as ActivityLogin).loginModel.userName)
+        binding.edtUserName.setSelection(fieldValue.length)
+    } else
+    ErrorActions.validateButton(binding.btnLoginName, false)
+
         setLabel()
     }
 
-    override fun getLayoutId(): Int = R.layout.fragment_sign_in_username
     fun setLabel() {
-        binding.tvSignIn.text = Utils.getLabel(getString(R.string.a_title_sign_in))
-        binding.inputEmail.hint = Utils.getLabel(getString(R.string.a_hint_email))
-        binding.btnLoginName.text = Utils.getLabel(getString(R.string.a_btn_next))
-        binding.tvLoggedOut.text = Utils.getLabel(getString(R.string.a_lbl_logged_out_automatically))
+        binding.tvSignIn.text = getString(R.string.a_title_sign_in)
+        binding.inputUser.hint = getString(R.string.a_hint_username)
+        binding.btnLoginName.text = getString(R.string.a_btn_next)
 
     }
 }

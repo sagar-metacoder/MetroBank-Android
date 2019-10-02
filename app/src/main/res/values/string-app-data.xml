@@ -4,12 +4,19 @@
     <string name="instruction_action_from">instruction_action_from</string>
     <string name="instruction_action_data">instruction_action_data</string>
     <string name="instruction_action_message">instruction_action_message</string>
-    <string name="action_menu_logout">action_menu_logout</string>
-    <string name="input_act_email">input_act_email</string>
+    <string name="input_act_user">input_act_user</string>
     <string name="input_act_password">input_password</string>
     <string name="pref_language">pref_language</string>
     <string name="pref_user_data">pref_user_data</string>
     <string name="pref_config_data">pref_config_data</string>
     <string name="pref_auth_token">Auth Token</string>
+    <string name="slide_menu_value">slide_menu_value</string>
+    <string name="slide_menu_title">slide_menu_title</string>
+    <string name="slide_menu_action">slide_menu_action</string>
+    <string name="action_sign_out">action_sign_out</string>
+    <string name="action_menu_language">action_menu_language</string>
+    <string name="action_menu_logout">action_menu_logout</string>
+    <string name="language_en">en</string>
+    <string name="language_es">es</string>
 
 </resources>

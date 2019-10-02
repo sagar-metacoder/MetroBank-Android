@@ -66,7 +66,7 @@ class HeaderToolBar : Toolbar, PopupMenu.OnMenuItemClickListener {
         binding = DataBindingUtil.inflate(from(context), getLayoutId(), this, true)
         setContentInsetsAbsolute(0, 0)
         setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
-        //binding.instance  = this
+        binding.instance  = this
     }
 
 

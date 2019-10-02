@@ -3,10 +3,12 @@ package com.ng.printtag.base
 import android.view.View
 import android.widget.RelativeLayout
 import com.ng.printtag.R
+import com.ng.printtag.dashboard.FragmentDashboard
 import com.ng.printtag.login.FragmentPassword
 import com.ng.printtag.login.FragmentUsername
 import com.ng.printtag.splash.ActivitySplash
 import ng.pdp.base.BaseFragment
+import kotlin.contracts.contract
 
 
 class HeaderModel {
@@ -34,8 +36,26 @@ class HeaderModel {
         when (baseFragment) {
 
             is FragmentUsername, is FragmentPassword -> {
-                setLeftIcon(backIcon)
-                baseActivity!!.actBaseBinding.headerToolBar.binding.ivBack.text = ""
+                setLeftIcon(R.mipmap.ic_back)
+                setLeftIconText(baseFragment!!.getString(R.string.a_title_sign_in))
+                backVisibility = true
+            }
+            is FragmentDashboard -> {
+                title =
+                   baseFragment!!.getString(R.string.a_title_dashboard)
+
+                setLeftIcon(hamburgerIcon)
+                val param = RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT
+                )
+                param.addRule(
+                    RelativeLayout.RIGHT_OF,
+                    baseActivity!!.actBaseBinding.headerToolBar.binding.ivBack.id
+                )
+                param.addRule(RelativeLayout.CENTER_VERTICAL)
+                param.setMargins(baseActivity!!.resources.getDimension(R.dimen.margin_5).toInt(), 0, 0, 0)
+                baseActivity!!.actBaseBinding.headerToolBar.binding.tvHeaderTitle.layoutParams = param
             }
            /* is FragmentUsername, is FragmentPassword, is FragmentStoreNumber, is FragmentLookUpByName, is FragmentLookUpResult, is FragmentLookUpByProspera -> {
                 setLeftIcon(backIcon)

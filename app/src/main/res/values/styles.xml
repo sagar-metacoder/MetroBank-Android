@@ -31,9 +31,10 @@
          <item name="android:fontFamily">@font/roboto_regular</item>
      </style>-->
     <style name="AppButton.Colored" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:theme">@style/Theme.MaterialComponents.Light</item>
         <item name="android:layout_gravity">end</item>
         <item name="android:textColor">@color/color_4A4A4A</item>
-        <item name="colorControlHighlight">@color/colorWhite</item>
+        <item name="android:colorControlHighlight">@color/colorWhite</item>
         <item name="android:backgroundTint" tools:targetApi="lollipop">@color/colorAccent</item>
         <item name="android:textSize">@dimen/font_button</item>
         <item name="android:textAllCaps">false</item>
@@ -109,6 +110,7 @@
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">@dimen/font_floating_text</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:alpha">128</item>
     </style>
 
     <!--Input field style-->
@@ -152,11 +154,11 @@
     <style name="AppEditText.EditText" parent="Theme.AppCompat.Light">
         <item name="android:textCursorDrawable">@drawable/bg_cursor_drawable</item>
         <item name="android:cursorVisible">true</item>
-        <item name="android:textColorHint">@color/colorWhite</item>
+        <item name="android:textColorHint">@color/color_1AFF007F</item>
         <item name="android:maxLines">1</item>
         <item name="android:maxLength">50</item>
         <item name="android:imeOptions">actionNext</item>
-        <item name="backgroundTint">@color/colorWhite</item>
+        <item name="backgroundTint">@color/colorWhite50</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">@dimen/font_input</item>
         <item name="android:paddingBottom">@dimen/margin_20</item>

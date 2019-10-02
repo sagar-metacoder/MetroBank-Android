@@ -44,8 +44,8 @@ class ErrorActions {
                 override fun afterTextChanged(p0: Editable?) {
                     if (p0!!.isNotEmpty()) {
                         when (action) {
-                            edtText.context.getString(string.input_act_email) -> {
-                                checkEmail(edtText, textInputLayout, materialButton)
+                            edtText.context.getString(string.input_act_user) -> {
+                                checkUsername(edtText, textInputLayout, materialButton)
                             }
                             edtText.context.getString(string.input_act_password) -> {
                                 checkLoginPassword(edtText, textInputLayout, materialButton)
@@ -72,6 +72,21 @@ class ErrorActions {
             }
             textInputLayout.error = null
         }
+
+        private fun checkUsername(
+            edtText: TextInputEditText,
+            textInputLayout: CollapsedHintTextInputLayout,
+            materialButton: MaterialButton
+        ) {
+            if (edtText.text.toString().length < 4) {
+                validateButton(materialButton, false)
+            } else {
+                validateButton(materialButton, true)
+            }
+            textInputLayout.error = null
+        }
+
+
 
         fun checkEmail(
             edtText: TextInputEditText,
@@ -114,23 +129,6 @@ class ErrorActions {
         }
 
 
-
-
-
-        private fun verifyCheckAmount(
-            edtText: TextInputEditText,
-            textInputLayout: CollapsedHintTextInputLayout,
-            materialButton: MaterialButton
-        ) {
-            val checkAmount = edtText.text.toString().trim()
-            if (checkAmount.isEmpty() || checkAmount.contains("..") || checkAmount.lastIndexOf(".").equals(".")) {
-                validateButton(materialButton, false)
-            } else {
-                validateButton(materialButton, true)
-            }
-            textInputLayout.error = null
-        }
-
         @JvmStatic
         @BindingAdapter(
             value = ["binding:lookupButton", "binding:isEnable"], requireAll = false
@@ -159,20 +157,19 @@ class ErrorActions {
             })
         }
 
-        @Suppress("DEPRECATION")
         fun validateButton(materialButton: MaterialButton, isEnable: Boolean) {
             materialButton.isEnabled = isEnable
             when (isEnable) {
                 true -> {
 
                     materialButton.background.setColorFilter(
-                        materialButton.context.resources.getColor(colorAccent),
+                        materialButton.context.resources.getColor(colorWhite),
                         PorterDuff.Mode.MULTIPLY
                     )
                     materialButton.setTextColor(
                         ContextCompat.getColorStateList(
                             materialButton.context,
-                            colorWhite
+                            color_4A4A4A
                         )
                     )
 
@@ -185,7 +182,7 @@ class ErrorActions {
                     materialButton.setTextColor(
                         ContextCompat.getColorStateList(
                             materialButton.context,
-                            colorWhite50
+                            color_4A4A4A
                         )
                     )
 

@@ -38,7 +38,7 @@ abstract class BaseActivity<out T : ViewDataBinding> : AppCompatActivity(), OnCl
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        actBaseBinding = DataBindingUtil.setContentView(this, R.layout.activity_base)!!
+        actBaseBinding = DataBindingUtil.setContentView(this, R.layout.activity_base)
         setHeader()
         setHeaderBaseActivity()
         performDataBinding()

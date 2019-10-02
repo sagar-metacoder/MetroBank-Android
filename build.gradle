@@ -19,7 +19,7 @@ buildscript {
 
     ext.libraries = [
 
-            kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            kotlin                : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
 
             //  api call
             gson_core             : "com.squareup.retrofit2:converter-gson:$rectrofit_version",

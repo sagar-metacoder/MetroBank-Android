@@ -16,6 +16,8 @@ import com.ng.printtag.R
 import com.ng.printtag.apputils.AppUtils
 import com.ng.printtag.apputils.ErrorActions
 import com.ng.printtag.base.BaseActivity
+import com.ng.printtag.login.FragmentPassword
+import com.ng.printtag.login.FragmentUsername
 import ng.pdp.api.ApiResponseListener
 
 import retrofit2.Response
@@ -54,11 +56,11 @@ abstract class BaseFragment<out T : ViewDataBinding> : Fragment(), View.OnClickL
             mRootView = fragmentChildBinding.root
             initFragment()
             when (this) {
-               /* is FragmentUsername ->
-                    PdpUtils.openKeyboardForceFully(activity!!)
+                is FragmentUsername ->
+                    AppUtils.openKeyboardForceFully(activity!!)
                 is FragmentPassword ->
-                    PdpUtils.openKeyboardForceFully(activity!!)
-                is FragmentStoreNumber ->
+                    AppUtils.openKeyboardForceFully(activity!!)
+               /* is FragmentStoreNumber ->
                     PdpUtils.openKeyboardForceFully(activity!!)
                 is FragmentLookUpPhoneLandLine ->
                     PdpUtils.openKeyboardForceFully(activity!!)

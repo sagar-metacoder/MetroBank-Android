@@ -25,7 +25,6 @@
                 android:drawablePadding="@dimen/margin_10"
                 android:paddingStart="@dimen/margin_20"
                 android:paddingEnd="0dp"
-                android:layout_marginStart="@dimen/margin_20"
                 android:layout_centerVertical="true"
                 android:onClick="@{instance::onBackEvent}"
                 android:clickable="true"
@@ -82,6 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_14"
+                    android:visibility="gone"
                     android:layout_gravity="center_vertical"
                     android:text="@{Utils.getAppVersion(true)}"/>
         </LinearLayout>
