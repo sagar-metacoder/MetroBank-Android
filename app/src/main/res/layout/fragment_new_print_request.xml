@@ -65,7 +65,6 @@
                     android:layout_height="wrap_content"
                     style="@style/AppButton.Colored"
                     android:layout_gravity="end"
-                    android:theme="@style/Theme.MaterialComponents.Light"
                     android:text="@string/a_btn_select_template"
                     android:layout_alignParentEnd="true" tools:ignore="RelativeOverlap"/>
         </RelativeLayout>
