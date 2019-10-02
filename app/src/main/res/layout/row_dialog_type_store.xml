@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="model" type="String"/>
+    </data>
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/margin_10"
+                    android:paddingBottom="@dimen/margin_10"
+                    android:paddingStart="@dimen/margin_10" tools:ignore="RtlSymmetry">
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppTextView.Dialog.Message"
+                android:textColor="@color/color_B0000000"
+                tools:ignore="RelativeOverlap"
+                android:text="@{model}"/>
+
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/rb_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppTextView.Dialog.Message"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:layout_alignParentEnd="true"
+                android:focusable="true"
+                android:layoutDirection="rtl"
+                android:textDirection="ltr"
+                android:layout_marginStart="@dimen/margin_10"
+                android:button="@drawable/radio_button_selector"
+        />
+    </RelativeLayout>
+
+
+</layout>

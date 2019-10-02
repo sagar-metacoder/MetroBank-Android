@@ -2,6 +2,6 @@
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
        xmlns:tools="http://schemas.android.com/tools"
        android:drawable="@color/colorWhite"
-       android:insetLeft="@dimen/dialog_side_margin"
-       android:insetRight="@dimen/dialog_side_margin"
+       android:insetLeft="@dimen/margin_40"
+       android:insetRight="@dimen/margin_40"
        tools:keep="@drawable/dialog_common_margin"/>

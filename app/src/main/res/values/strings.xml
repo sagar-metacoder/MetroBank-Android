@@ -10,7 +10,6 @@
     <string name="a_btn_no">No</string>
     <string name="a_btn_yes">Yes</string>
     <string name="a_msg_server_error">There is some server error. Please try again later.</string>
-    <string name="a_msg_no_internet_error">Check your internet connection.</string>
     <string name="a_msg_time_out_error">The request timed out.</string>
     <string name="a_lbl_net_title">Network</string>
     <string name="a_lbl_sign_back_in">Sign Back In</string>
@@ -18,20 +17,6 @@
     <string name="a_hint_price_effective_date">PRICE EFFECTIVE DATE</string>
     <string name="a_hint_tag_type">TAG TYPE</string>
     <string name="a_btn_select_template">Select Template</string>
-    <string name="a_title_sign_in">Sign In</string>
-
-    <string name="a_lbl_server_title">Error</string>
-    <string name="a_lbl_information">Information</string>
-    <string name="a_lbl_exit_message">Are you sure you want to exit from this application?</string>
-    <string name="a_lbl_sign_out_message">Are you sure you want to LogoutLog Out from this application?</string>
-    <string name="a_menu_change_language">Select Language</string>
-    <string name="a_app_menu_english">English</string>
-    <string name="a_app_menu_spanish">Español</string>
-    <string name="a_lbl_logout">Logout</string>
-    <string name="a_btn_login">Login</string>
-    <string name="a_hint_password">PASSWORD</string>
-    <string name="a_hint_username">USER NAME</string>
-
     <string name="a_title_dashboard">Dashboard</string>
     <string name="a_lbl_new_print_request">New Print Request</string>
     <string name="a_lbl_pending_requests">Pending Requests</string>
@@ -72,6 +57,11 @@
     <string name="a_menu_select_language">Select Language</string>
     <string name="a_menu_logout">Logout</string>
     <string name="a_lbl_sign_in">Sign In</string>
+    <string name="a_hint_password">PASSWORD</string>
+    <string name="a_hint_username">USER NAME</string>
+    <string name="a_btn_login">Login</string>
+    <string name="a_lbl_sign_out_message">Are you sure you want to Logout from this application?</string>
+    <string name="a_lbl_information">Information</string>
     <string name="a_lbl_error_username_required">Username is required.</string>
     <string name="a_lbl_error_incorrect_password">Incorrect password.</string>
     <string name="a_lbl_error_select_tag_type">Please select tag type.</string>
@@ -80,7 +70,9 @@
     <string name="a_lbl_error_upc_digit">UPC must be 13 digit.</string>
     <string name="a_lbl_scanning">Scanning…</string>
     <string name="a_lbl_error_occured">An error has occurred.</string>
-    <string name="a_lbl_error_scanning">Failed to get the specified scanner device! Please close and restart the application.</string>
+    <string name="a_lbl_error_scanning">Failed to get the specified scanner device! Please close and restart the
+        application.
+    </string>
     <string name="a_lbl_error_failed_to_initialize">Failed to initialize the scanner device.</string>
     <string name="a_lbl_error_upc_required">UPC is required</string>
 </resources>

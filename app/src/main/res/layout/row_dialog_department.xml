@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="model" type="String"/>
+    </data>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/margin_30"
+            android:paddingEnd="@dimen/margin_30"
+            android:orientation="vertical">
+
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="@dimen/margin_10"
+                        android:paddingBottom="@dimen/margin_10">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/AppTextView.Dialog.Message"
+                    android:textColor="@color/color_B0000000"
+                    android:text="@{model}"
+            />
+
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/chk_department"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/AppTextView.Dialog.Message"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:layout_toEndOf="@id/tv_name"
+                    android:focusable="true"
+                    android:button="@drawable/checkbox_selection"
+                    android:layoutDirection="rtl"
+                    android:textDirection="ltr"
+                    android:layout_marginStart="@dimen/margin_10"
+            />
+        </RelativeLayout>
+    </LinearLayout>
+</layout>
