@@ -56,7 +56,6 @@
     <string name="a_lbl_pending">Pending</string>
     <string name="a_menu_select_language">Select Language</string>
     <string name="a_menu_logout">Logout</string>
-    <string name="a_lbl_sign_in">Sign In</string>
     <string name="a_hint_password">PASSWORD</string>
     <string name="a_hint_username">USER NAME</string>
     <string name="a_btn_login">Login</string>
@@ -75,4 +74,13 @@
     </string>
     <string name="a_lbl_error_failed_to_initialize">Failed to initialize the scanner device.</string>
     <string name="a_lbl_error_upc_required">UPC is required</string>
+    <string name="a_menu_change_language">Change Language</string>
+    <string name="a_app_menu_english">English</string>
+    <string name="a_app_menu_spanish">Español</string>
+    <string name="a_lbl_exit_message">Are you sure you want to exit from this application?</string>
+    <string name="a_title_sign_in">Sign In</string>
+    <string name="a_lbl_server_title">Error</string>
+    <string name="a_lbl_unknown">Unknown</string>
+
+
 </resources>

@@ -38,6 +38,10 @@
             </intent-filter>
 
         </activity>
+        <activity
+                android:name="com.ng.printtag.allrequest.AllRequests"
+                android:exported="false"
+                android:screenOrientation="portrait"/>
 
 
 

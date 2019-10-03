@@ -100,7 +100,7 @@
     <dimen name="font_exception_message">28sp</dimen>
 
     <dimen name="font_hint">24sp</dimen>
-    <dimen name="font_label">20sp</dimen>
+    <dimen name="font_label">15sp</dimen>
     <dimen name="font_24">24sp</dimen>
     <dimen name="font_26">26sp</dimen>
     <dimen name="font_20">20sp</dimen>

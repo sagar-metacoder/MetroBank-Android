@@ -79,7 +79,7 @@ class LayoutSlideMenu : LinearLayout {
         if (tag == context.getString(R.string.action_menu_logout)) {
             CallDialog.errorDialog(
                 context,
-                context.getString(R.string.a_lbl_logout),
+                context.getString(R.string.a_menu_logout),
                 context.getString(R.string.a_lbl_sign_out_message),
                 context.getString(R.string.a_btn_yes),
                 context.getString(R.string.a_btn_no),

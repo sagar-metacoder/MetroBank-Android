@@ -166,8 +166,8 @@
                     style="@style/AppTextView.MenuItem"
                     android:visibility="visible"
                     android:layout_gravity="start"
-                    android:onClick="@{() -> instance.onMenuItemClicks(@string/a_lbl_logout, @string/action_menu_logout)}"
-                    android:text="@string/a_lbl_logout"/>
+                    android:onClick="@{() -> instance.onMenuItemClicks(@string/a_menu_logout, @string/action_menu_logout)}"
+                    android:text="@string/a_menu_logout"/>
             </LinearLayout>
                 <View
                         android:layout_width="match_parent"
