@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+>
+    <data>
+        <import type="com.ng.printtag.apputils.Utils"/>
+        <variable name="titleString" type="String"/>
+        <variable
+                name="instance"
+                type="com.ng.printtag.layout.LayoutSlideMenu"/>
+    </data>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:background="@color/colorWhite">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/color_BFBEC4">
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/activity_vertical_margin"
+                            android:gravity="start">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="@dimen/nav_header_profile_size"
+                                android:layout_height="@dimen/nav_header_profile_size"
+                                android:src="@mipmap/ic_user"
+                                android:contentDescription="@string/app_name"
+                                android:id="@+id/imageView"/>
+
+                        <LinearLayout android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:orientation="vertical"
+                                      android:layout_marginStart="@dimen/margin_10"
+                                      android:layout_gravity="center">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tv_associate_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/AppTextView.SideNavMenu"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:paddingTop="@dimen/nav_header_vertical_spacing"
+                                    android:text="@string/app_name"
+                                    android:ems="10"/>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tv_associate_store"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/AppTextView.SideNavMenu"
+                                    android:text="store 2"
+                            />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!--
+                                        <androidx.appcompat.widget.AppCompatImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:src="@mipmap/ic_side_nav_logo"
+                                                android:layout_alignParentEnd="true"
+                                                android:layout_marginTop="-25dp"
+                                                android:layout_marginEnd="-20dp"
+                                                android:scaleType="fitCenter"/>
+                    -->
+                </RelativeLayout>
+
+
+                <LinearLayout
+                        android:id="@+id/li_block1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="@dimen/margin_15">
+
+
+                    <!--    <androidx.appcompat.widget.AppCompatImageView
+                                style="@style/AppImageView.MenuItem"
+                                android:src="@mipmap/ic_language_change"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/AppTextView.MenuItem"
+                                android:text="@{Utils.getLabel(@string/a_menu_change_language)}"/>-->
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatImageView
+                                style="@style/AppImageView.MenuItem"
+                                android:src="@mipmap/ic_language_change"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/AppTextView.MenuItem"
+                                android:text="@string/a_menu_change_language"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatImageView
+                                style="@style/AppImageView.MenuItem"
+                                android:visibility="invisible"
+                                android:src="@mipmap/ic_language_change"/>
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_language"
+                                style="@style/AppTextView.MenuItem"
+                                android:text="English"
+                                android:paddingTop="@dimen/margin_10"
+                                android:onClick="@{() -> instance.onMenuItemClicks(@string/action_menu_language, @string/action_menu_language)}"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatImageView
+                                style="@style/AppImageView.MenuItem"
+                                android:visibility="invisible"
+                                android:src="@mipmap/ic_language_change"/>
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_spanish"
+                                style="@style/AppTextView.MenuItem"
+                                android:text="@string/a_app_menu_spanish"
+                                android:paddingTop="@dimen/margin_10"
+                                android:onClick="@{() -> instance.onMenuItemClicks(@string/action_menu_language, @string/action_menu_language)}"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:background="@color/color_D9D9DA"/>
+
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_10">
+                    <androidx.appcompat.widget.AppCompatImageView
+                            style="@style/AppImageView.MenuItem"
+                            android:src="@mipmap/ic_language_change"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_logout"
+                            style="@style/AppTextView.MenuItem"
+                            android:visibility="visible"
+                            android:layout_gravity="start"
+                            android:onClick="@{() -> instance.onMenuItemClicks(@string/a_menu_logout, @string/action_menu_logout)}"
+                            android:text="@string/a_menu_logout"/>
+                </LinearLayout>
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:background="@color/color_D9D9DA"/>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </ScrollView>
+</layout>

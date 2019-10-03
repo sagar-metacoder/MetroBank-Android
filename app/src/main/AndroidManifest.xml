@@ -4,8 +4,8 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application android:label="@string/app_tag_print"
-                 android:icon="@mipmap/ic_launcher"
-                 android:roundIcon="@mipmap/ic_launcher_round"
+                 android:icon="@mipmap/ic_app_icon"
+                 android:roundIcon="@mipmap/ic_app_icon"
                  android:supportsRtl="true"
                  android:theme="@style/AppTheme"
                  android:allowBackup="false"
@@ -16,10 +16,6 @@
         <activity android:name=".splash.ActivitySplash"
                   android:launchMode="singleTask"
                   android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
 
         <activity
@@ -35,5 +31,27 @@
                   android:screenOrientation="portrait">
 
         </activity>
+
+        <activity
+                android:name=".dashboard.ActivityDashboard"
+                android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+
+        </activity>
+        <activity
+                android:name="com.ng.printtag.allrequest.AllRequests"
+                android:exported="false"
+                android:screenOrientation="portrait"/>
+
+
+        <activity
+                android:name=".login.ActivityLogin"
+                android:exported="false"
+                android:screenOrientation="portrait"/>
+
     </application>
 </manifest>

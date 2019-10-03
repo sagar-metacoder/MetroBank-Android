@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            tools:openDrawer="end">
+
+        <RelativeLayout
+                android:id="@+id/rl_sliding_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <LinearLayout
+                    android:id="@+id/li_tool_bar"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <fragment
+                    android:id="@+id/navigation_dash_board"
+                    android:name="androidx.navigation.fragment.NavHostFragment"
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/li_tool_bar"
+                    android:layout_height="match_parent"
+                    app:defaultNavHost="true"
+                    app:navGraph="@navigation/navigation_dash_board"/>
+
+        </RelativeLayout>
+        <com.ng.printtag.layout.LayoutSlideMenu
+                android:id="@+id/manage_slide_menu"
+                android:layout_gravity="start"
+                android:layout_width="@dimen/margin_250"
+                android:layout_height="match_parent"/>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>

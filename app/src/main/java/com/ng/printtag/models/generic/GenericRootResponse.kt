@@ -1,8 +1,7 @@
-package ng.pdplib.models.generic
+package com.ng.printtag.models.generic
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import com.ng.printtag.models.GenericResultModel
 
 class GenericRootResponse {
     @SerializedName("success")
