@@ -19,6 +19,7 @@ class AllRequests : BaseActivity<ActivityAllRequestsBinding>() {
         binding = getViewDataBinding()
         actBaseBinding.rlMain.removeView(actBaseBinding.headerToolBar)
         allRequest = ArrayList()
+        setData()
 
 
         // (binding.liToolBar.getChildAt(il) as HeaderToolBar).setHeaderInterface(this)
@@ -37,6 +38,23 @@ class AllRequests : BaseActivity<ActivityAllRequestsBinding>() {
                 }
             })
         binding.rvAllRequests.adapter = adapterDisburse
+
+    }
+
+    private fun setData() {
+        val allRequestModel = AllRequestModel()
+        allRequestModel.printType = "Fresh Tag"
+        allRequestModel.templateName = "Schematic Tag"
+        allRequestModel.store = "Store No.2"
+        allRequestModel.department = "Beverage,Bakery"
+        allRequestModel.expectedDate = "Sep 27,2019"
+        allRequestModel.effectiveDate = "Sep 27,2019"
+        allRequestModel.reqDate = "Sep 27,2019"
+        allRequestModel.status = "Completed"
+
+        for (i in 0 until 5) {
+            allRequest.add(allRequestModel)
+        }
 
     }
 
