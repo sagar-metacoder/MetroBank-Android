@@ -54,9 +54,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_toStartOf="@id/btn_ok"
-                            style="@style/AppButton.Colored"
+                            style="@style/AppButton.dialog.Colored"
                             android:minEms="4"
                             android:layout_gravity="end"
+                            android:padding="@dimen/margin_5"
+
                     />
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -72,8 +74,8 @@
                             android:layout_alignParentEnd="true"
                             android:layout_gravity="end"
                             android:textAllCaps="false"
-                            android:textSize="@dimen/font_button"
-                            android:layout_marginStart="@dimen/margin_20"
+                            android:textSize="@dimen/font_16"
+                            android:layout_marginStart="@dimen/margin_10"
                     />
                 </RelativeLayout>
             </LinearLayout>

@@ -3,12 +3,12 @@ package com.ng.printtag.login
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.ng.printtag.R
+import com.ng.printtag.api.ApiResponseListener
 import com.ng.printtag.base.BaseActivity
 import com.ng.printtag.databinding.ActivityLoginBinding
 import com.ng.printtag.interfaces.HeaderInterface
 import com.ng.printtag.models.login.LoginModel
 import kotlinx.android.synthetic.main.activity_login.*
-import ng.pdp.api.ApiResponseListener
 
 
 class ActivityLogin : BaseActivity<ActivityLoginBinding>(), ApiResponseListener, HeaderInterface {
@@ -47,9 +47,8 @@ class ActivityLogin : BaseActivity<ActivityLoginBinding>(), ApiResponseListener,
         fragment.onDetach()
         fragment.onAttach(this)
         when (fragment) {
-            is FragmentUsername ->
-                fragment.setLabel()
-            is FragmentPassword ->
+
+            is FragmentLogin ->
                 fragment.setLabel()
 
         }

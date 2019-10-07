@@ -2,8 +2,8 @@ package com.ng.printtag.dashboard
 
 import android.view.View
 import com.ng.printtag.R
+import com.ng.printtag.base.BaseFragment
 import com.ng.printtag.databinding.FragmentDashboardBinding
-import ng.pdp.base.BaseFragment
 
 
 class FragmentDashboard : BaseFragment<FragmentDashboardBinding>() {

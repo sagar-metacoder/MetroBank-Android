@@ -1,4 +1,4 @@
-package ng.pdp.api
+package com.ng.printtag.api
 
 /**
  * Class containing flags used while calling api and passed to api service class of specific module.

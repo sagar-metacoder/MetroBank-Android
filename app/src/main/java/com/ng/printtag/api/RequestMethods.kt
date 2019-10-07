@@ -10,8 +10,6 @@ import com.ng.printtag.apputils.BaseSharedPreference
 import com.ng.printtag.apputils.Constant
 import com.ng.printtag.interfaces.CallBackInterfaces
 import com.ng.printtag.models.generic.GenericRootResponse
-import ng.pdp.api.ApiResponseListener
-import ng.pdp.api.RestClientModel
 import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Response
@@ -48,18 +46,26 @@ object RequestMethods {
         return RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json.toString())
     }
 
-
-  /*
-    fun getCommunicationPref(context: Context, preferenceValue: String, isFromSetting: Boolean): UserServerRootReq {
-        val serverReq = UserServerRootReq()
-        serverReq.prosperaId =
-            BaseSharedPreference.getInstance(context).getProsperaId(context)
-        serverReq.communicationPreference = preferenceValue
-        if (!isFromSetting)
-            serverReq.registrationStage = USER_STATUS_UPDATE_PREFERENCE
-        return serverReq
+    fun getLogin(context: Context, userName: String?, password: String?): RequestBody {
+        val rootJson = JSONObject()
+        rootJson.put(context.getString(R.string.key_userName), userName)
+        rootJson.put(context.getString(R.string.key_password), password)
+        return getRequestBody(rootJson)
     }
-*/
+
+
+
+    /*
+      fun getCommunicationPref(context: Context, preferenceValue: String, isFromSetting: Boolean): UserServerRootReq {
+          val serverReq = UserServerRootReq()
+          serverReq.prosperaId =
+              BaseSharedPreference.getInstance(context).getProsperaId(context)
+          serverReq.communicationPreference = preferenceValue
+          if (!isFromSetting)
+              serverReq.registrationStage = USER_STATUS_UPDATE_PREFERENCE
+          return serverReq
+      }
+  */
 
 
 

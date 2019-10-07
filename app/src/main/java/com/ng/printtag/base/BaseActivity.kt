@@ -12,11 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.ng.printtag.R
+import com.ng.printtag.api.ApiResponseListener
 import com.ng.printtag.apputils.AppUtils
 import com.ng.printtag.apputils.AppUtils.Companion.noStatusBar
 import com.ng.printtag.databinding.ActivityBaseBinding
-import ng.pdp.api.ApiResponseListener
-import ng.pdp.base.BaseFragment
 
 import retrofit2.Response
 

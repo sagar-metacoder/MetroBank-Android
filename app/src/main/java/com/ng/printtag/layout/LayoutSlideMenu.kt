@@ -47,6 +47,19 @@ class LayoutSlideMenu : LinearLayout {
                 it
             )
         }
+        binding.tvAssociateName.text =
+           AppUtils.getUserModel(context).data!!.firstName
+
+        if(BaseSharedPreference.getInstance(context).getLanguage(
+                context.getString(R.string.pref_language)).equals("es"))
+        {
+            binding.tvSpanish.setTextColor(resources.getColor(R.color.colorPrimary))
+        }
+        else
+        {
+            binding.tvLanguage.setTextColor(resources.getColor(R.color.colorPrimary))
+
+        }
        /* binding.tvAssociateName.text =
             BaseSharedPreference.getInstance(context).getPrefValue(context.getString(R.string.pref_user_name))!!
 
@@ -86,13 +99,23 @@ class LayoutSlideMenu : LinearLayout {
                 context.getString(R.string.action_menu_logout),
                 null
             )
-        } else if (tag == context.getString(R.string.action_menu_language)) {
-            langCode = if (langCode == context.getString(R.string.language_es)) {
+        } else if (tag == context.getString(R.string.action_menu_lan_spanish)) {
+            BaseSharedPreference.getInstance(context).putValue(
+                context.getString(R.string.pref_language), "es"
+            )
+            callAppTextApi()
+
+        }else if (tag == context.getString(R.string.action_menu_lan_english)) {
+            BaseSharedPreference.getInstance(context).putValue(
+                context.getString(R.string.pref_language), "en"
+            )
+            callAppTextApi()
+
+           /* langCode = if (langCode == context.getString(R.string.language_es)) {
                 context.getString(R.string.language_en)
             } else {
                 context.getString(R.string.language_es)
-            }
-            callAppTextApi()
+            }*/
         }
 //        if (::callBackInterfaces.isInitialized)
 //            callBackInterfaces.onCallBack(title, tag)

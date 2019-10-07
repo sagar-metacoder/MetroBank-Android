@@ -29,14 +29,11 @@ android {
                buildConfigField "String", "OPT_URL", '"http://www.northgatemarket.com/pdp/preferences/"'
                buildConfigField "String", "PUBLIC_BASE_URL", '"https://storage.googleapis.com/public_stage_ciam_assets/"'*/
 
-            buildConfigField "String", "DOMAIN_URL", '"https://stage.treciondigital.com/"'
-            buildConfigField "String", "TERMS_CONDITION_URL", '"http://35.236.50.225/stage/tnc.php"'
-            buildConfigField "String", "OPT_URL", '"http://35.236.50.225/stage/optInOut.php"'
-            buildConfigField "String", "PUBLIC_BASE_URL", '"https://storage.googleapis.com/public_stage_ciam_assets/"'
+            buildConfigField "String", "DOMAIN_URL", '"http://ngprinttag.local/"'
 
 
 
-            buildConfigField "String", "API_BASE_MODULE", '"services/webservice/"'
+            buildConfigField "String", "API_BASE_MODULE", '"webserviceCustom/"'
             buildConfigField "String", "API_GNERAL_FILTER", '"general/filter/"'
             buildConfigField "String", "API_CUSTOMER_MODULE", '"customer/"'
             buildConfigField "String", "API_STORE_MODULE", '"store/"'
@@ -56,14 +53,10 @@ android {
             minifyEnabled true
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
-            buildConfigField "String", "DOMAIN_URL", '"https://stage.treciondigital.com/"'
-            buildConfigField "String", "TERMS_CONDITION_URL", '"http://35.236.50.225/stage/tnc.php"'
-            buildConfigField "String", "OPT_URL", '"http://35.236.50.225/stage/optInOut.php"'
-            buildConfigField "String", "PUBLIC_BASE_URL", '"https://storage.googleapis.com/public_stage_ciam_assets/"'
+            buildConfigField "String", "DOMAIN_URL", '"http://ngprinttag.local/"'
 
 
-            buildConfigField "String", "API_BASE_MODULE", '"services/webservice/"'
+            buildConfigField "String", "API_BASE_MODULE", '"webserviceCustom/"'
             buildConfigField "String", "API_GNERAL_FILTER", '"general/filter/"'
             buildConfigField "String", "API_CUSTOMER_MODULE", '"customer/"'
             buildConfigField "String", "API_STORE_MODULE", '"store/"'

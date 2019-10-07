@@ -8,6 +8,7 @@
     <variable name="userName" type="String"/>
   </data>
 
+
   <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
@@ -15,48 +16,47 @@
           android:paddingStart="@dimen/page_side_margin"
           android:paddingEnd="@dimen/page_side_margin"
           android:paddingTop="@dimen/margin_20"
+          android:layout_marginTop="@dimen/margin_20"
           android:background="@color/app_background">
 
     <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_sign_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             style="@style/AppTextView.Title"
+
     />
 
-    <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_marginTop="@dimen/margin_10"
-            android:gravity="center"
-            android:layout_height="wrap_content">
+    <com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout
+            android:id="@+id/inputUser"
+            style="@style/AppEditText.Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_30"
+    >
 
-      <androidx.appcompat.widget.AppCompatImageView
-              android:id="@+id/iv_user"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:scaleType="center"
-              android:layout_centerVertical="true"
-              android:paddingStart="0dp"
-              android:paddingEnd="@dimen/margin_10"
-              android:src="@mipmap/ic_user"/>
+      <com.google.android.material.textfield.TextInputEditText
+              android:id="@+id/edt_user_name"
+              android:layout_width="match_parent"
+              style="@style/AppEditText.EditText"
+              binding:materialButton="@{btnLoginPassword}"
+              binding:action="@{@string/input_act_user}"
+              binding:textInputLayout="@{inputUser}"
+              android:imeOptions="actionNext"
+              android:inputType="textNoSuggestions"
+              android:layout_height="wrap_content">
+      </com.google.android.material.textfield.TextInputEditText>
+    </com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout>
+    <requestFocus/>
 
-      <androidx.appcompat.widget.AppCompatTextView
-              style="@style/AppTextView.Title.Small"
-              android:layout_toEndOf="@+id/iv_user"
-              android:layout_width="wrap_content"
-              android:layout_centerVertical="true"
-              android:layout_height="wrap_content"
-
-              android:text="@{userName}"/>
-    </RelativeLayout>
 
     <com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout
             android:id="@+id/inputPassword"
             style="@style/AppEditText.Text.Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_below_title"
+            android:layout_marginTop="@dimen/margin_30"
             app:passwordToggleDrawable="@drawable/sel_password_toggle">
 
       <com.google.android.material.textfield.TextInputEditText
@@ -69,7 +69,7 @@
               style="@style/AppEditText.EditText"
               android:imeOptions="actionDone"
               android:layout_height="wrap_content">
-        <requestFocus/>
+
       </com.google.android.material.textfield.TextInputEditText>
     </com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout>
 

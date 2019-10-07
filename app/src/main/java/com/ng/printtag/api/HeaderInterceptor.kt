@@ -1,4 +1,4 @@
-package ng.pdp.api
+package com.ng.printtag.api
 
 import android.content.Context
 import com.ng.printtag.R
@@ -21,8 +21,9 @@ class HeaderInterceptor(var context: Context) : Interceptor {
         val original = chain.request()
 
         val request = original.newBuilder()
-            .header("Accept", "application/json ; charset=UTF-8")
-            .header("Authorization", RequestMethods.getAuthToken(context))
+            .header("Content-Type", "application/json; charset=UTF-8")
+            .header("x-api-key","92ced52b5531d458ee3d69df3f57002c984dd5bb744e4d2cfd68eb97cb6179a9")
+            //.header("Authorization", RequestMethods.getAuthToken(context))
             .addHeader(
                 "languageCode", BaseSharedPreference.getInstance(context).getLanguage(
                     context.getString(R.string.pref_language)

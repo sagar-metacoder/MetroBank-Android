@@ -3,6 +3,8 @@
 package com.ng.printtag.api
 
 
+import com.ng.printtag.BuildConfig.API_BASE_MODULE
+import com.ng.printtag.models.login.LoginModel
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -12,6 +14,9 @@ import retrofit2.http.*
  * This class for RestClient api interface
  */
 interface ApiInteface {
+
+    @POST(API_BASE_MODULE + "login")
+    fun callLogin(@Body model: RequestBody): Call<LoginModel>
 
     // Language Section
    /* @GET(API_BASE_MODULE + "applanguage")

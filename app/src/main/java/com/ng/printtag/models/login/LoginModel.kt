@@ -5,73 +5,60 @@ import com.google.gson.annotations.SerializedName
 
 class LoginModel {
 
-    @SerializedName("@odata.context")
+    @SerializedName("success")
     @Expose
-    var odataContext: String? = null
-    @SerializedName("businessPhones")
+    var success: Boolean = false
+
+    @SerializedName("msg")
     @Expose
-    var businessPhones: List<Any>? = null
-    @SerializedName("displayName")
+    var msg : String?= null
+
+    @SerializedName("data")
     @Expose
-    var displayName: String? = null
-    @SerializedName("givenName")
-    @Expose
-    var givenName: String? = null
-    @SerializedName("jobTitle")
-    @Expose
-    var jobTitle: Any? = null
-    @SerializedName("email")
-    @Expose
-    var mail: String? = null
-    @SerializedName("mobilePhone")
-    @Expose
-    var mobilePhone: String? = null
-    @SerializedName("officeLocation")
-    @Expose
-    var officeLocation: String? = null
-    @SerializedName("preferredLanguage")
-    @Expose
-    var preferredLanguage: String? = null
-    @SerializedName("surname")
-    @Expose
-    var surname: String? = null
-    @SerializedName("userPrincipalName")
-    @Expose
-    var userPrincipalName: String? = null
-    @SerializedName("id")
-    @Expose
-    var id: String? = null
+    var data: Data? = null
 
     var userName: String? = null
 
     var password: String? = null
 //    var storeList: MutableList<StoreModels>? = null
 
-    @SerializedName("error")
-    @Expose
-    var error : MSGraphError?= null
 
-    inner class MSGraphError {
 
-        @SerializedName("code")
+
+
+    inner class Data {
+        @SerializedName("o_id")
         @Expose
-        var code: String? = null
-        @SerializedName("message")
+        var oId: Int = 0
+        @SerializedName("username")
         @Expose
-        var message: String? = null
-    }
+        var username: String? = null
+        @SerializedName("firstName")
+        @Expose
+        var firstName: String? = null
+        @SerializedName("lastName")
+        @Expose
+        var lastName: Any? = null
+        @SerializedName("password")
+        @Expose
+        var password: String? = null
+        @SerializedName("roles")
+        @Expose
+        var roles: ArrayList<String>? = null
 
-    fun getFullProfileName(): String {
-        val stringBuilder = StringBuilder()
 
-        if (displayName != null) {
-            stringBuilder.append(displayName)
+        fun getFullProfileName(): String {
+            val stringBuilder = StringBuilder()
+
+            if (firstName != null) {
+                stringBuilder.append(firstName)
+            }
+            if (lastName != null) {
+                stringBuilder.append(" ")
+                stringBuilder.append(lastName)
+            }
+            return stringBuilder.toString()
         }
-        if (surname != null) {
-            stringBuilder.append(" ")
-            stringBuilder.append(surname)
-        }
-        return stringBuilder.toString()
     }
 }
 

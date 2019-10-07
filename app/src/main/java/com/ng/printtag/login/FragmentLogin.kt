@@ -2,53 +2,60 @@ package com.ng.printtag.login
 
 
 import com.ng.printtag.R
+import com.ng.printtag.api.ApiResponseListener
+import com.ng.printtag.api.RequestMethods
 import com.ng.printtag.api.RestClient
+import com.ng.printtag.api.RestClientModel
 import com.ng.printtag.apputils.*
 import com.ng.printtag.apputils.Constant.CALL_SIGN_URL
-import com.ng.printtag.databinding.FragmentSignInPasswordBinding
-import com.ng.printtag.models.generic.GenericRootResponse
-import ng.pdp.api.RestClientModel
-import ng.pdp.base.BaseFragment
+import com.ng.printtag.base.BaseFragment
+import com.ng.printtag.databinding.FragmentLoginBinding
+import com.ng.printtag.models.login.LoginModel
+import org.json.JSONObject
 import retrofit2.Response
 
 
-class FragmentPassword : BaseFragment<FragmentSignInPasswordBinding>() {
+class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
 
-    private lateinit var binding: FragmentSignInPasswordBinding
+    private lateinit var binding: FragmentLoginBinding
     private lateinit var accessToken: String
 
     override fun initFragment() {
         binding = getFragmentDataBinding()
         binding.userName = (activity as ActivityLogin).loginModel.userName
         binding.edtPassword.setText((activity as ActivityLogin).loginModel.password)
-        binding.edtPassword.requestFocus()
+        binding.edtUserName.setText((activity as ActivityLogin).loginModel.userName)
+
+        binding.edtUserName.requestFocus()
 
         handelClick()
     }
-    override fun getLayoutId(): Int = R.layout.fragment_sign_in_password
+    override fun getLayoutId(): Int = R.layout.fragment_login
 
 
     private fun handelClick() {
         binding.btnLoginPassword.setOnClickListener { view ->
             super.onClick(view)
 
-            Utils.gotoHomeScreen(activity!!)
-            //validateUser()
+
+            validateUser()
 
         }
     }
 
 
-
-
-
-
     private fun validateUser() {
         val restClientModel = RestClientModel()
         restClientModel.isProgressDialogShow = true
+
+        val rootJson = JSONObject()
+        rootJson.put("userName",binding.edtUserName.text.toString())
+        rootJson.put("password",binding.edtPassword.text.toString())
+        val body = RequestMethods.getRequestBody(rootJson)
+
         RestClient().apiRequest(
             activity!!,
-            (activity!! as ActivityLogin).loginModel,
+            body,
             CALL_SIGN_URL,
             this,
             restClientModel
@@ -61,10 +68,14 @@ class FragmentPassword : BaseFragment<FragmentSignInPasswordBinding>() {
         super.onApiResponse(response, reqCode)
         when(reqCode) {
             CALL_SIGN_URL -> {
-                val rootResponse = response.body() as GenericRootResponse
+                val rootResponse = response.body() as LoginModel
                 when (rootResponse.success) {
                     true -> {
-                        goToNext()
+                        AppUtils.setUserData(
+                            activity!!,
+                            rootResponse
+                        )
+                        Utils.gotoHomeScreen(activity!!)
                     }
                     else -> {
                         showError(getString(R.string.a_lbl_server_title), rootResponse.msg!!)
@@ -93,20 +104,21 @@ class FragmentPassword : BaseFragment<FragmentSignInPasswordBinding>() {
     }
 
 
-    private fun goToNext() {
-        (activity as ActivityLogin).loginModel.password = binding.edtPassword.text.toString().trim()
-    }
+
 
     override fun onResume() {
         super.onResume()
-        val fieldValue = binding.edtPassword.text.toString()
-        if (fieldValue.isNotEmpty()) {
-            (activity as ActivityLogin).loginModel.password = fieldValue
-            (activity as ActivityLogin).loginModel.userName = (activity as ActivityLogin).loginModel.userName
+        val edtPassword = binding.edtPassword.text.toString()
+        val edtUsername =binding.edtUserName.text.toString()
+        if (edtPassword.isNotEmpty() && edtUsername.isNotEmpty()) {
+            (activity as ActivityLogin).loginModel.password = edtPassword
+            (activity as ActivityLogin).loginModel.userName = edtUsername
 
             ErrorActions.validateButton(binding.btnLoginPassword, true)
             binding.edtPassword.setText((activity as ActivityLogin).loginModel.password)
-            binding.edtPassword.setSelection(fieldValue.length)
+            binding.edtPassword.setSelection(edtPassword.length)
+            binding.edtUserName.setText((activity as ActivityLogin).loginModel.userName)
+            binding.edtUserName.setSelection(edtUsername.length)
         } else
             ErrorActions.validateButton(binding.btnLoginPassword, false)
         setLabel()
@@ -115,6 +127,7 @@ class FragmentPassword : BaseFragment<FragmentSignInPasswordBinding>() {
     fun setLabel() {
         binding.tvSignIn.text = getString(R.string.a_title_sign_in)
         binding.inputPassword.hint = getString(R.string.a_hint_password)
+        binding.inputUser.hint = getString(R.string.a_hint_username)
         binding.btnLoginPassword.text = getString(R.string.a_btn_login)
 
 

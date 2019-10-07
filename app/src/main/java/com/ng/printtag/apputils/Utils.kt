@@ -20,6 +20,7 @@ import com.ng.printtag.common.ActivityInstructions
 import com.ng.printtag.dashboard.ActivityDashboard
 import com.ng.printtag.login.ActivityLogin
 import com.ng.printtag.models.UserDetailsModel
+import com.ng.printtag.models.login.LoginModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -61,7 +62,7 @@ class Utils {
          */
         @JvmStatic
         fun gotoLoginScreen(activity: Activity) {
-            AppUtils.setUserData(activity, UserDetailsModel())
+            AppUtils.setUserData(activity, LoginModel())
             AppUtils.navigateToOtherScreen(activity, ActivityLogin::class.java, true)
         }
 

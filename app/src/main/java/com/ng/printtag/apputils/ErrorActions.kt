@@ -65,7 +65,7 @@ class ErrorActions {
             textInputLayout: CollapsedHintTextInputLayout,
             materialButton: MaterialButton
         ) {
-            if (edtText.text.toString().length < 4) {
+            if (edtText.text.toString().length <= 1) {
                 validateButton(materialButton, false)
             } else {
                 validateButton(materialButton, true)
@@ -78,7 +78,7 @@ class ErrorActions {
             textInputLayout: CollapsedHintTextInputLayout,
             materialButton: MaterialButton
         ) {
-            if (edtText.text.toString().length < 4) {
+            if (edtText.text.toString().length <= 1) {
                 validateButton(materialButton, false)
             } else {
                 validateButton(materialButton, true)
@@ -157,6 +157,7 @@ class ErrorActions {
             })
         }
 
+        @Suppress("DEPRECATION")
         fun validateButton(materialButton: MaterialButton, isEnable: Boolean) {
             materialButton.isEnabled = isEnable
             when (isEnable) {
@@ -172,6 +173,7 @@ class ErrorActions {
                             color_4A4A4A
                         )
                     )
+
 
                 }
                 false -> {

@@ -3,11 +3,11 @@ package com.ng.printtag.printrequest
 import android.util.Log
 import com.ng.printtag.R
 import com.ng.printtag.apputils.CallDialog
+import com.ng.printtag.base.BaseFragment
 import com.ng.printtag.databinding.FragmentNewPrintRequestBinding
 import com.ng.printtag.dialog.DialogDepartment
 import com.ng.printtag.dialog.DialogTypeStore
 import com.ng.printtag.interfaces.CallBackInterfaces
-import ng.pdp.base.BaseFragment
 
 class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
     private lateinit var binding: FragmentNewPrintRequestBinding
