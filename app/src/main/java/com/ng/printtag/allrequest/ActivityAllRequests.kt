@@ -19,10 +19,7 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>() {
         binding = getViewDataBinding()
         actBaseBinding.rlMain.removeView(actBaseBinding.headerToolBar)
         allRequest = ArrayList()
-        binding.ivSearch.isActivated = false
-        binding.ivSearch.onActionViewExpanded()
-        binding.ivSearch.isIconified = false
-        binding.ivSearch.clearFocus()
+
         setData()
 
 

@@ -3,7 +3,7 @@ package com.ng.printtag.printrequest
 import android.app.DatePickerDialog
 import android.text.Editable
 import android.util.Log
-import android.widget.TextView
+import com.google.gson.JsonObject
 import com.ng.printtag.R
 import com.ng.printtag.api.RequestMethods
 import com.ng.printtag.api.RestClient
@@ -16,12 +16,12 @@ import com.ng.printtag.databinding.FragmentNewPrintRequestBinding
 import com.ng.printtag.dialog.DialogDepartment
 import com.ng.printtag.dialog.DialogTypeStore
 import com.ng.printtag.interfaces.CallBackInterfaces
-import com.ng.printtag.models.login.LoginModel
 import com.ng.printtag.models.newrequests.StoreListModel
-import okhttp3.internal.Util
 import org.json.JSONObject
 import retrofit2.Response
 import java.util.*
+
+
 
 
 
@@ -36,12 +36,19 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
     var mDay: Int = 0
     private lateinit var arrayStoreKey : ArrayList<String>
     private lateinit var arrayStoreValue : ArrayList<String>
+    private lateinit var arrayDeptKey : ArrayList<String>
+    private lateinit var arrayDeptValue : ArrayList<String>
+    var storeKey : String = ""
     override fun initFragment() {
         binding = getFragmentDataBinding()
         arrayStoreKey = ArrayList()
         arrayStoreValue = ArrayList()
+        arrayDeptKey = ArrayList()
+        arrayDeptValue = ArrayList()
         binding.edtEffectiveDate.text = Editable.Factory.getInstance().newEditable(AppUtils.currentDate())
         handleClick()
+        callStoreApi()
+
     }
 
 
@@ -55,8 +62,9 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
         dialog.callBackListener = object : CallBackInterfaces {
             override fun onCallBack(item: Any, fromWhere: Any) {
-                binding.edtTagType.text = Editable.Factory.getInstance().newEditable( item.toString())
-
+                if (fromWhere == Constant.TAG_TYPE) {
+                    binding.edtTagType.text = Editable.Factory.getInstance().newEditable(tagType.get(item as Int))
+                }
                 Log.d("selected", item.toString())
 
             }
@@ -66,14 +74,17 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
     private fun callStoreTypeDialog() {
         val dialog = DialogTypeStore()
-        dialog.fromWhere = Constant.TAG_TYPE
+        dialog.fromWhere = Constant.TAG_STORE
 
         dialog.stringList = arrayStoreKey
 
         dialog.callBackListener = object : CallBackInterfaces {
             override fun onCallBack(item: Any, fromWhere: Any) {
-                binding.edtTagType.text = Editable.Factory.getInstance().newEditable(item.toString())
-
+                if (fromWhere == Constant.TAG_STORE)
+                {
+                    binding.edtStoreNo.text = Editable.Factory.getInstance().newEditable(arrayStoreValue.get(item as Int))
+                    storeKey = arrayStoreKey.get(item as Int)
+            }
                 Log.d("selected", item.toString())
 
             }
@@ -88,6 +99,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
         dialog.callBackListener = object : CallBackInterfaces {
             override fun onCallBack(item: Any, fromWhere: Any) {
+                binding.edtDepartment.text =Editable.Factory.getInstance().newEditable(item.toString())
                 Log.d("selected", item.toString())
 
             }
@@ -102,7 +114,21 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             callTagTypeDialog()
         }
         binding.edtStoreNo.setOnClickListener {
-            callStoreApi()
+
+            if(!arrayStoreKey.isNullOrEmpty())
+            {
+                if(arrayStoreKey.size >1) {
+                    callStoreTypeDialog()
+                }
+            }
+
+            //callStoreApi()
+        }
+        binding.edtDepartment.setOnClickListener{
+            if(storeKey.isNotEmpty() && !binding.edtTagType.text.isNullOrBlank())
+            {
+                //callDepartmentApi()
+            }
         }
         binding.edtEffectiveDate.setOnClickListener {
             openDatePicker()
@@ -126,6 +152,27 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
         )
     }
 
+    private fun callDepartmentApi() {
+        val restClientModel = RestClientModel()
+        restClientModel.isProgressDialogShow = true
+
+        val rootJson = JSONObject()
+        rootJson.put(resources.getString(R.string.userId), AppUtils.getUserModel(activity!!).data!!.userId)
+        rootJson.put(resources.getString(R.string.tagType),binding.edtTagType.text.toString())
+        rootJson.put(resources.getString(R.string.storeNumber),storeKey)
+
+        val body = RequestMethods.getRequestBody(rootJson)
+
+        RestClient().apiRequest(
+            activity!!,
+            body,
+            Constant.CALL_DEPARTMENT_URL,
+            this,
+            restClientModel
+        )
+    }
+
+
     private fun openDatePicker() {
         val c = Calendar.getInstance()
         mYear = c.get(Calendar.YEAR)
@@ -134,7 +181,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
 
         val datePickerDialog = DatePickerDialog(
-            activity,
+            activity!!,
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 binding.edtEffectiveDate.text = Editable.Factory.getInstance()
                     .newEditable((monthOfYear + 1).toString() + "/" + dayOfMonth.toString() + "/" + year)
@@ -143,21 +190,6 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             mMonth,
             mDay
         )
-        val tv = TextView(activity)
-
-        /* // Create a TextView programmatically
-         val lp = RelativeLayout.LayoutParams(
-             ActionBar.LayoutParams.WRAP_CONTENT, // Width of TextView
-             ActionBar.LayoutParams.WRAP_CONTENT
-         ) // Height of TextView
-         tv.layoutParams = lp
-         tv.setPadding(10, 10, 10, 10)
-         tv.gravity = Gravity.CENTER
-         tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20f)
-         tv.text = "This is a custom title."
-         tv.setTextColor(Color.parseColor("#FFD2DAA7"))
-         tv.setBackgroundColor(Color.parseColor("#FFD2DAA7"))*/
-
         datePickerDialog.show()
     }
 
@@ -170,26 +202,69 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                 when (rootResponse.success) {
                     true -> {
 
-                        val jsonObjectStore = rootResponse.data!!.stores as String
-                        val jsonObj = JSONObject(jsonObjectStore)
-                        for (i in 0 until jsonObj.length()) {
+                        Log.e("data ---> ", rootResponse.data!!.stores)
+                        val jsonObjectStore = rootResponse.data!!.stores as JSONObject
 
-                            arrayStoreKey.add(jsonObj.names().getString(i))
+                       // val jsonObj = JSONObject(jsonObjectStore)
+                        for (i in 0 until jsonObjectStore.length()) {
+
+                            arrayStoreKey.add(jsonObjectStore.names().getString(i))
                             arrayStoreValue.add(
-                                jsonObj.get(jsonObj.names().getString(i)) as String
+                                jsonObjectStore.get(jsonObjectStore.names().getString(i)).toString()
 
                             )
                         }
-                        callStoreTypeDialog()
+                        if(!arrayStoreKey.isNullOrEmpty())
+                            if(arrayStoreKey.size == 1)
+                            {
+                                binding.edtStoreNo.text = Editable.Factory.getInstance().newEditable(arrayStoreValue[0])
+                            }
+                        else
+                            {
+                                callStoreTypeDialog()
+                            }
                     }else->
                     {
                         showError(getString(R.string.a_lbl_server_title), rootResponse.msg!!)
                     }
                 }
             }
+/*
+            Constant.CALL_DEPARTMENT_URL -> {
+                val rootResponse = response.body() as StoreListModel
+                when (rootResponse.success) {
+                    true -> {
+
+                        val jsonObjectStore = rootResponse.data!!.stores
+                        val jsonObj = JSONObject(jsonObjectStore)
+                        for (i in 0 until jsonObj.length()) {
+
+                            arrayDeptKey.add(jsonObj.names().getString(i))
+                            arrayDeptKey.add(
+                                jsonObj.get(jsonObj.names().getString(i)) as String
+
+                            )
+                        }
+                        if(!arrayDeptKey.isNullOrEmpty())
+                            if(arrayDeptKey.size == 1)
+                            {
+                                binding.edtDepartment.text = Editable.Factory.getInstance().newEditable(arrayDeptValue[0])
+                            }
+                        else
+                            {
+                                callDepartmentDialog()
+                            }
+                    }else->
+                {
+                    showError(getString(R.string.a_lbl_server_title), rootResponse.msg!!)
+                }
+                }
+            }
+*/
+
+
         }
     }
-
     private fun showError(title: String, message: String) {
         CallDialog.errorDialog(
             activity!!,

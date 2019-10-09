@@ -5,6 +5,7 @@ package com.ng.printtag.api
 
 import com.ng.printtag.BuildConfig.API_BASE_MODULE
 import com.ng.printtag.models.login.LoginModel
+import com.ng.printtag.models.newrequests.DepartmentModel
 import com.ng.printtag.models.newrequests.StoreListModel
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -21,6 +22,10 @@ interface ApiInteface {
 
     @POST(API_BASE_MODULE + "storeDept")
     fun callStoreList(@Body model: RequestBody): Call<StoreListModel>
+
+    @POST(API_BASE_MODULE + "deptTemp")
+    fun callDepartmentList(@Body model: RequestBody): Call<DepartmentModel>
+
 
     // Language Section
    /* @GET(API_BASE_MODULE + "applanguage")

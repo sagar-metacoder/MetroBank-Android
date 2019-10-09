@@ -26,6 +26,7 @@ import com.ng.printtag.databinding.ManageExceptionsBinding
 import com.ng.printtag.interfaces.SkipGetSerialisation
 import com.ng.printtag.interfaces.SkipPostSerialisation
 import com.ng.printtag.models.login.LoginModel
+import com.ng.printtag.models.newrequests.DepartmentModel
 import com.ng.printtag.models.newrequests.StoreListModel
 
 import okhttp3.OkHttpClient
@@ -489,6 +490,12 @@ open class RestClient {
 
             Constant.CALL_STORE_URL -> {
                 val callApi: Call<StoreListModel> = getApiClient()!!.callStoreList(requestObject as RequestBody)
+                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
+                return
+            }
+
+            Constant.CALL_DEPARTMENT_URL -> {
+                val callApi: Call<DepartmentModel> = getApiClient()!!.callDepartmentList(requestObject as RequestBody)
                 makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
                 return
             }
