@@ -4,10 +4,9 @@ import android.view.View
 import android.widget.RelativeLayout
 import com.ng.printtag.R
 import com.ng.printtag.dashboard.FragmentDashboard
-import com.ng.printtag.login.FragmentPassword
-import com.ng.printtag.login.FragmentUsername
+import com.ng.printtag.login.FragmentLogin
+import com.ng.printtag.printrequest.FragmentNewPrintRequest
 import com.ng.printtag.splash.ActivitySplash
-import ng.pdp.base.BaseFragment
 
 
 class HeaderModel {
@@ -34,9 +33,18 @@ class HeaderModel {
         setDefaultHeader()
         when (baseFragment) {
 
-            is FragmentUsername, is FragmentPassword -> {
-                setLeftIcon(R.mipmap.ic_back)
+            is FragmentLogin -> {
+                baseActivity!!.setNoStatusBar()
+                baseActivity!!.setHeaderVisibility(View.GONE)
+                /*setLeftIcon(R.mipmap.ic_back)
                 setLeftIconText(baseFragment!!.getString(R.string.a_title_sign_in))
+                backVisibility = false*/
+            }
+
+            is FragmentNewPrintRequest -> {
+
+                setLeftIcon(R.mipmap.ic_back)
+                setLeftIconText(baseFragment!!.getString(R.string.a_lbl_new_print_request))
                 backVisibility = true
             }
             is FragmentDashboard -> {
@@ -56,10 +64,10 @@ class HeaderModel {
                 param.setMargins(baseActivity!!.resources.getDimension(R.dimen.margin_5).toInt(), 0, 0, 0)
                 baseActivity!!.actBaseBinding.headerToolBar.binding.tvHeaderTitle.layoutParams = param
             }
-           /* is FragmentUsername, is FragmentPassword, is FragmentStoreNumber, is FragmentLookUpByName, is FragmentLookUpResult, is FragmentLookUpByProspera -> {
-                setLeftIcon(backIcon)
-                baseActivity!!.actBaseBinding.headerToolBar.binding.ivBack.text = ""
-            }*/
+            /* is FragmentUsername, is FragmentLogin, is FragmentStoreNumber, is FragmentLookUpByName, is FragmentLookUpResult, is FragmentLookUpByProspera -> {
+                 setLeftIcon(backIcon)
+                 baseActivity!!.actBaseBinding.headerToolBar.binding.ivBack.text = ""
+             }*/
 /*
             is FragmentIdTypeSelection, is FragmentIdPreview, is FragmentPhotoTutorial -> {
                 baseActivity!!.setStatusBar()

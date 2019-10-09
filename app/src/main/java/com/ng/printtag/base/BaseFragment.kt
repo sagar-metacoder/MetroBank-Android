@@ -1,4 +1,4 @@
-package ng.pdp.base
+package com.ng.printtag.base
 
 import android.app.Activity
 import android.content.Context
@@ -12,12 +12,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
+import com.ng.printtag.api.ApiResponseListener
 import com.ng.printtag.apputils.AppUtils
 import com.ng.printtag.apputils.ErrorActions
-import com.ng.printtag.base.BaseActivity
-import com.ng.printtag.login.FragmentPassword
-import com.ng.printtag.login.FragmentUsername
-import ng.pdp.api.ApiResponseListener
+import com.ng.printtag.login.FragmentLogin
+
 import retrofit2.Response
 
 /**
@@ -53,9 +52,7 @@ abstract class BaseFragment<out T : ViewDataBinding> : Fragment(), View.OnClickL
             mRootView = fragmentChildBinding.root
             initFragment()
             when (this) {
-                is FragmentUsername ->
-                    AppUtils.openKeyboardForceFully(activity!!)
-                is FragmentPassword ->
+                is FragmentLogin ->
                     AppUtils.openKeyboardForceFully(activity!!)
                 /* is FragmentStoreNumber ->
                      PdpUtils.openKeyboardForceFully(activity!!)
@@ -140,7 +137,7 @@ abstract class BaseFragment<out T : ViewDataBinding> : Fragment(), View.OnClickL
         /*when (this) {
             is FragmentInstructions ->
                 (this.activity as BaseActivity<*>).setHeaderTitle(VISIBLE, R.mipmap.ic_back, "", VISIBLE, GONE)
-            is FragmentPassword ->
+            is FragmentLogin ->
                 (this.activity as BaseActivity<*>).setHeaderTitle(VISIBLE, 0, "", VISIBLE, GONE)
             is FragmentStoreNumber ->
                 (this.activity as BaseActivity<*>).setHeaderTitle(VISIBLE, 0, "", VISIBLE, GONE)

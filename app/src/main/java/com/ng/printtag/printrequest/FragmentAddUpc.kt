@@ -2,8 +2,8 @@ package com.ng.printtag.printrequest
 
 import android.widget.SeekBar
 import com.ng.printtag.R
+import com.ng.printtag.base.BaseFragment
 import com.ng.printtag.databinding.FragmentAddUpcBinding
-import ng.pdp.base.BaseFragment
 
 
 class FragmentAddUpc : BaseFragment<FragmentAddUpcBinding>() {

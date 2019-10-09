@@ -1,8 +1,11 @@
 package com.ng.printtag.dashboard
 
 import com.ng.printtag.R
+import com.ng.printtag.allrequest.ActivityAllRequests
+import com.ng.printtag.apputils.AppUtils
+import com.ng.printtag.base.BaseFragment
 import com.ng.printtag.databinding.FragmentDashboardBinding
-import ng.pdp.base.BaseFragment
+import com.ng.printtag.printrequest.ActivityNewPrintRequest
 
 
 class FragmentDashboard : BaseFragment<FragmentDashboardBinding>() {
@@ -23,10 +26,15 @@ class FragmentDashboard : BaseFragment<FragmentDashboardBinding>() {
      */
     private fun handleClick() {
 
-        binding.consAllRequest.setOnClickListener({
+        binding.consAllRequest.setOnClickListener {
+            AppUtils.navigateToOtherScreen(activity!!, ActivityAllRequests::class.java, false)
+        }
 
 
-        })
+        binding.consNewRequest.setOnClickListener {
+            AppUtils.navigateToOtherScreen(activity!!, ActivityNewPrintRequest::class.java, false)
+
+        }
         /* binding.tvSearchClick.setOnClickListener { view ->
              super.onClick(view)
              ALREADY_EXIST_USER = 0

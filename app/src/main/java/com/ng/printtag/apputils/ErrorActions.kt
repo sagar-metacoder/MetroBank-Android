@@ -9,6 +9,7 @@ import android.view.View.INVISIBLE
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
@@ -65,7 +66,7 @@ class ErrorActions {
             textInputLayout: CollapsedHintTextInputLayout,
             materialButton: MaterialButton
         ) {
-            if (edtText.text.toString().length < 4) {
+            if (edtText.text.toString().length <= 1) {
                 validateButton(materialButton, false)
             } else {
                 validateButton(materialButton, true)
@@ -78,7 +79,7 @@ class ErrorActions {
             textInputLayout: CollapsedHintTextInputLayout,
             materialButton: MaterialButton
         ) {
-            if (edtText.text.toString().length < 4) {
+            if (edtText.text.toString().length <= 1) {
                 validateButton(materialButton, false)
             } else {
                 validateButton(materialButton, true)
@@ -161,9 +162,10 @@ class ErrorActions {
             materialButton.isEnabled = isEnable
             when (isEnable) {
                 true -> {
+                    val color = ResourcesCompat.getColor(materialButton.context.resources, colorWhite, null)
 
                     materialButton.background.setColorFilter(
-                        materialButton.context.resources.getColor(colorWhite),
+                        color,
                         PorterDuff.Mode.MULTIPLY
                     )
                     materialButton.setTextColor(
@@ -173,10 +175,12 @@ class ErrorActions {
                         )
                     )
 
+
                 }
                 false -> {
+                    val color = ResourcesCompat.getColor(materialButton.context.resources, colorWhite50, null)
                     materialButton.background.setColorFilter(
-                        materialButton.context.resources.getColor(color_1AFF007F),
+                        color,
                         PorterDuff.Mode.MULTIPLY
                     )
                     materialButton.setTextColor(

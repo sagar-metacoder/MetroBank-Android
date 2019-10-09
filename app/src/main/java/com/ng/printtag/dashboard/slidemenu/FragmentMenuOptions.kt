@@ -4,9 +4,9 @@ import android.view.View
 import com.ng.printtag.R
 import com.ng.printtag.apputils.custom.CustomWebViewClient
 import com.ng.printtag.base.BaseActivity
+import com.ng.printtag.base.BaseFragment
 import com.ng.printtag.databinding.FragmentSlideMenuOptionsBinding
 import com.ng.printtag.interfaces.CallBackInterfaces
-import ng.pdp.base.BaseFragment
 
 class FragmentMenuOptions : BaseFragment<FragmentSlideMenuOptionsBinding>() {
     private var htmlData: String = ""

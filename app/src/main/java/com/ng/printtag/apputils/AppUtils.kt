@@ -27,8 +27,7 @@ import com.google.gson.Gson
 import com.ng.printtag.R
 import com.ng.printtag.apputils.Constant.PREFIX_IMAGE_DATA_TYPE
 import com.ng.printtag.models.SystemSettingsModel
-import com.ng.printtag.models.UserDetailsModel
-
+import com.ng.printtag.models.login.LoginModel
 import org.json.JSONObject
 import java.io.*
 import java.text.DecimalFormat
@@ -389,20 +388,20 @@ class AppUtils {
         /**
          * Used to data store in session
          */
-        fun setUserData(context: Context, model: UserDetailsModel) {
+        fun setUserData(context: Context, model: LoginModel) {
             val userData = Gson().toJson(model)
             BaseSharedPreference.getInstance(context).putValue(context.getString(R.string.pref_user_data), userData)
         }
 
-        fun getUserModel(context: Context): UserDetailsModel {
+        fun getUserModel(context: Context): LoginModel {
             val userData =
                 BaseSharedPreference.getInstance(context).getPrefValue(context.getString(R.string.pref_user_data))
             return if (userData.isNullOrEmpty()) {
-                val model = UserDetailsModel()
+                val model = LoginModel()
                 model
 
             } else {
-                Gson().fromJson(userData, UserDetailsModel::class.java) as UserDetailsModel
+                Gson().fromJson(userData, LoginModel::class.java) as LoginModel
             }
         }
 
@@ -757,8 +756,9 @@ class AppUtils {
          * This method will use to get current date and time
          */
         fun currentDate(): String {
-            return SimpleDateFormat("yyyyMMddhhmm", Locale.getDefault()).format(Date())
+            return SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()).format(Date())
         }
+
 
         /**
          * This method will use to get current date

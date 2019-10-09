@@ -25,8 +25,8 @@
     <string name="a_lbl_fresh_tag">Fresh Tag</string>
     <string name="a_lbl_inventory_tag">Inventory Tag</string>
     <string name="a_title_template">Template</string>
-    <string name="a_lbl_store_no">Store No.</string>
-    <string name="a_lbl_department">Department</string>
+    <string name="a_lbl_store_no">STORE NO.</string>
+    <string name="a_lbl_department">DEPARTMENT</string>
     <string name="a_btn_continue">Continue</string>
     <string name="a_title_select_department">Select Department</string>
     <string name="a_title_select_store_no">Select Store No.</string>

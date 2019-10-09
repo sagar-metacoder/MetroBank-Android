@@ -14,9 +14,13 @@
     <string name="slide_menu_title">slide_menu_title</string>
     <string name="slide_menu_action">slide_menu_action</string>
     <string name="action_sign_out">action_sign_out</string>
-    <string name="action_menu_language">action_menu_language</string>
+    <string name="action_menu_lan_english">action_menu_lan_english</string>
+    <string name="action_menu_lan_spanish">action_menu_lan_spanish</string>
     <string name="action_menu_logout">action_menu_logout</string>
     <string name="language_en">en</string>
     <string name="language_es">es</string>
+    <string name="key_userName">userName</string>
+    <string name="key_password">password</string>
+    <string name="pref_session_out">pref_session_out</string>
 
 </resources>

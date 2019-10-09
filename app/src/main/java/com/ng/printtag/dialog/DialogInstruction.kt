@@ -1,12 +1,10 @@
 package com.ng.printtag.dialog
 
 import android.view.View.GONE
-import android.view.View.VISIBLE
 import com.ng.printtag.R
 import com.ng.printtag.apputils.AppUtils
 import com.ng.printtag.apputils.BaseSharedPreference
 import com.ng.printtag.apputils.Utils
-import com.ng.printtag.dashboard.ActivityDashboard
 import com.ng.printtag.databinding.DialogInstructionBinding
 import com.ng.printtag.interfaces.OnItemClickListener
 import ng.pdp.base.BaseDialog
@@ -46,8 +44,12 @@ class DialogInstruction : BaseDialog<DialogInstructionBinding>(), OnItemClickLis
                 when (type) {
                     getString(R.string.action_menu_logout) ->
                         Utils.gotoLoginScreen(activity!!)
-
-                   /* getString(R.string.action_sign_out) -> {
+                    getString(R.string.action_sign_out) -> {
+                        BaseSharedPreference.getInstance(activity!!)
+                            .putValue(getString(R.string.pref_session_out), false)
+                        AppUtils.finishActivity(activity!!)
+                    }
+                    /* getString(R.string.action_sign_out) -> {
                         BaseSharedPreference.getInstance(activity!!)
                             .putValue(getString(R.string.pref_session_out), false)
                         AppUtils.finishActivity(activity!!)

@@ -1,4 +1,3 @@
-@file:Suppress("SpellCheckingInspection", "DEPRECATION")
 
 package com.ng.printtag.api
 
@@ -20,17 +19,17 @@ import com.ng.printtag.BuildConfig
 import com.ng.printtag.R
 import com.ng.printtag.apputils.AppUtils
 import com.ng.printtag.apputils.CallDialog
+import com.ng.printtag.apputils.Constant
 import com.ng.printtag.apputils.TLSSocketFactory
 import com.ng.printtag.base.BaseActivity
 import com.ng.printtag.databinding.ManageExceptionsBinding
 import com.ng.printtag.interfaces.SkipGetSerialisation
 import com.ng.printtag.interfaces.SkipPostSerialisation
-
-import ng.pdp.api.ApiResponseListener
-import ng.pdp.api.HeaderInterceptor
-import ng.pdp.api.RestClientModel
+import com.ng.printtag.models.login.LoginModel
+import com.ng.printtag.models.newrequests.StoreListModel
 
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
@@ -482,6 +481,17 @@ open class RestClient {
         restClientModel: RestClientModel
     ) {
         when (reqCode) {
+            Constant.CALL_SIGN_URL -> {
+                val callApi: Call<LoginModel> = getApiClient()!!.callLogin(requestObject as RequestBody)
+                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
+                return
+            }
+
+            Constant.CALL_STORE_URL -> {
+                val callApi: Call<StoreListModel> = getApiClient()!!.callStoreList(requestObject as RequestBody)
+                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
+                return
+            }
             /*Constant.CALL_SEND_PRIVACY_DETAILS -> {
                 val callApi: Call<GenericRootResponse> =
                     getApiClient()!!.sendPrivacyDetails(requestObject as RequestBody)
