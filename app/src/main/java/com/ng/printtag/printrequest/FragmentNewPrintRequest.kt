@@ -3,7 +3,8 @@ package com.ng.printtag.printrequest
 import android.app.DatePickerDialog
 import android.text.Editable
 import android.util.Log
-import com.google.gson.JsonObject
+import android.util.TypedValue
+import androidx.recyclerview.widget.GridLayoutManager
 import com.ng.printtag.R
 import com.ng.printtag.api.RequestMethods
 import com.ng.printtag.api.RestClient
@@ -11,6 +12,7 @@ import com.ng.printtag.api.RestClientModel
 import com.ng.printtag.apputils.AppUtils
 import com.ng.printtag.apputils.CallDialog
 import com.ng.printtag.apputils.Constant
+import com.ng.printtag.apputils.custom.GridItemDecoration
 import com.ng.printtag.base.BaseFragment
 import com.ng.printtag.databinding.FragmentNewPrintRequestBinding
 import com.ng.printtag.dialog.DialogDepartment
@@ -20,13 +22,6 @@ import com.ng.printtag.models.newrequests.StoreListModel
 import org.json.JSONObject
 import retrofit2.Response
 import java.util.*
-
-
-
-
-
-
-
 
 
 class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
@@ -45,6 +40,11 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
         arrayStoreValue = ArrayList()
         arrayDeptKey = ArrayList()
         arrayDeptValue = ArrayList()
+
+        binding.layoutManager = GridLayoutManager(activity, Constant.DOC_LIST_COLUMN)
+        val spacing = (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30f, resources.displayMetrics)).toInt()
+        binding.rvTemplateList.addItemDecoration(GridItemDecoration(Constant.DOC_LIST_COLUMN, spacing, false))
+
         binding.edtEffectiveDate.text = Editable.Factory.getInstance().newEditable(AppUtils.currentDate())
         handleClick()
         callStoreApi()

@@ -22,4 +22,5 @@ object Constant {
 
     const val TAG_TYPE =20
     const val TAG_STORE =21
+    const val DOC_LIST_COLUMN = 2
 }
