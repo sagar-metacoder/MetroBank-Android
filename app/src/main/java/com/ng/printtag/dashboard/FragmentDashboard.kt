@@ -1,9 +1,12 @@
 package com.ng.printtag.dashboard
 
-import android.view.View
 import com.ng.printtag.R
+import com.ng.printtag.apputils.AppUtils
+import com.ng.printtag.apputils.Utils
 import com.ng.printtag.base.BaseFragment
+import com.ng.printtag.databinding.ActivityNewPrintRequestBinding
 import com.ng.printtag.databinding.FragmentDashboardBinding
+import com.ng.printtag.printrequest.ActivityNewPrintRequest
 
 
 class FragmentDashboard : BaseFragment<FragmentDashboardBinding>() {
@@ -28,17 +31,25 @@ class FragmentDashboard : BaseFragment<FragmentDashboardBinding>() {
 
 
         })
-       /* binding.tvSearchClick.setOnClickListener { view ->
-            super.onClick(view)
-            ALREADY_EXIST_USER = 0
-            CHECK_ALREADY_EXIST_USER = false
-            (activity as ActivityDashboard).addressModels = null
-            (activity as ActivityDashboard).countryList = null
-            Utils.navigateTo(binding.tvSearchClick, R.id.actionLookUpPhoneLandLine, null)
-        }
-        binding.ivWellCome.setOnClickListener {
-            //            PdpUtils.navigateToOtherScreen(activity!!, ActivityUnderWritingRules::class.java, false)
-        }*/
+
+
+        binding.consNewRequest.setOnClickListener({
+
+            AppUtils.navigateToOtherScreen(activity!!, ActivityNewPrintRequest::class.java, false)
+
+
+        })
+        /* binding.tvSearchClick.setOnClickListener { view ->
+             super.onClick(view)
+             ALREADY_EXIST_USER = 0
+             CHECK_ALREADY_EXIST_USER = false
+             (activity as ActivityDashboard).addressModels = null
+             (activity as ActivityDashboard).countryList = null
+             Utils.navigateTo(binding.tvSearchClick, R.id.actionLookUpPhoneLandLine, null)
+         }
+         binding.ivWellCome.setOnClickListener {
+             //            PdpUtils.navigateToOtherScreen(activity!!, ActivityUnderWritingRules::class.java, false)
+         }*/
     }
 
 

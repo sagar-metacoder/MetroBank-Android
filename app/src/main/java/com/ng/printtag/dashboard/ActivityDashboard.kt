@@ -10,7 +10,6 @@ import com.ng.printtag.base.HeaderToolBar
 import com.ng.printtag.databinding.ActivityDashboardBinding
 import com.ng.printtag.interfaces.CallBackInterfaces
 import com.ng.printtag.interfaces.HeaderInterface
-import com.ng.printtag.models.UserDetailsModel
 import kotlinx.android.synthetic.main.activity_dashboard.*
 
 class ActivityDashboard : BaseActivity<ActivityDashboardBinding>(), HeaderInterface, CallBackInterfaces {
@@ -32,13 +31,13 @@ class ActivityDashboard : BaseActivity<ActivityDashboardBinding>(), HeaderInterf
         handleClick()
 
     }
+
     /**
      * @see CallBackInterfaces
      */
     override fun onCallBack(item: Any, fromWhere: Any) {
         closeDrawer()
     }
-
 
 
     private fun handleClick() {
@@ -58,6 +57,7 @@ class ActivityDashboard : BaseActivity<ActivityDashboardBinding>(), HeaderInterf
     override fun onRightImageClick() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
     /**
      * @see HeaderInterface
      */
@@ -104,7 +104,6 @@ class ActivityDashboard : BaseActivity<ActivityDashboardBinding>(), HeaderInterf
     }
 
 
-
     /**
      * Init layout genericModel id
      */
@@ -125,7 +124,6 @@ class ActivityDashboard : BaseActivity<ActivityDashboardBinding>(), HeaderInterf
     private fun getCurrentFragment(): Fragment {
         return navigation_dash_board.childFragmentManager.findFragmentById(R.id.navigation_dash_board)!!
     }
-
 
 
 }

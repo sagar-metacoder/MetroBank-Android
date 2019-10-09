@@ -16,6 +16,11 @@ import com.ng.printtag.R.color.*
 import com.ng.printtag.R.string
 import com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout
 import java.util.regex.Pattern
+import androidx.core.content.res.ResourcesCompat
+
+
+
+
 
 
 /**
@@ -157,14 +162,14 @@ class ErrorActions {
             })
         }
 
-        @Suppress("DEPRECATION")
         fun validateButton(materialButton: MaterialButton, isEnable: Boolean) {
             materialButton.isEnabled = isEnable
             when (isEnable) {
                 true -> {
+                    val color = ResourcesCompat.getColor(materialButton.context.resources, colorWhite, null)
 
                     materialButton.background.setColorFilter(
-                        materialButton.context.resources.getColor(colorWhite),
+                        color,
                         PorterDuff.Mode.MULTIPLY
                     )
                     materialButton.setTextColor(
@@ -177,8 +182,9 @@ class ErrorActions {
 
                 }
                 false -> {
+                    val color = ResourcesCompat.getColor(materialButton.context.resources, colorWhite50, null)
                     materialButton.background.setColorFilter(
-                        materialButton.context.resources.getColor(color_1AFF007F),
+                        color,
                         PorterDuff.Mode.MULTIPLY
                     )
                     materialButton.setTextColor(

@@ -23,7 +23,7 @@
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/margin_20"
+                    android:padding="@dimen/margin_15"
                     android:orientation="vertical">
                 <RelativeLayout
                         android:layout_width="match_parent"

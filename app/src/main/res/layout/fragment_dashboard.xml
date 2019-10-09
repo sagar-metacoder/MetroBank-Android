@@ -3,7 +3,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -18,7 +17,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="@dimen/margin_10"
-                >
+        >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cons_new_request"
@@ -127,7 +126,6 @@
                     android:layout_height="@dimen/margin_1"
                     android:layout_width="match_parent"
                     android:background="@color/colorWhite50"/>
-
 
 
         </LinearLayout>

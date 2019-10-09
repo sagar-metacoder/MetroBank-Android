@@ -5,6 +5,7 @@ import android.widget.RelativeLayout
 import com.ng.printtag.R
 import com.ng.printtag.dashboard.FragmentDashboard
 import com.ng.printtag.login.FragmentLogin
+import com.ng.printtag.printrequest.FragmentNewPrintRequest
 import com.ng.printtag.splash.ActivitySplash
 
 
@@ -38,6 +39,13 @@ class HeaderModel {
                  /*setLeftIcon(R.mipmap.ic_back)
                  setLeftIconText(baseFragment!!.getString(R.string.a_title_sign_in))
                  backVisibility = false*/
+            }
+
+            is FragmentNewPrintRequest -> {
+
+                setLeftIcon(R.mipmap.ic_back)
+                setLeftIconText(baseFragment!!.getString(R.string.a_lbl_new_print_request))
+                backVisibility = true
             }
             is FragmentDashboard -> {
                 title =

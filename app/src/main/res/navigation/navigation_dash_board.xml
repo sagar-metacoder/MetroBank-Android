@@ -8,47 +8,45 @@
             android:id="@+id/actionDashboard"
             android:name="com.ng.printtag.dashboard.FragmentDashboard"
             tools:layout="@layout/fragment_dashboard">
-      <!--  <action
-                android:id="@+id/actionAllRequests"
-                app:destination="@id/actionAllRequests"
-                app:exitAnim="@anim/push_out_to_left"
-                app:popEnterAnim="@anim/push_in_from_left"
-                app:enterAnim="@anim/push_in_from_left"
-                app:popExitAnim="@anim/push_out_to_left"/>
-	    <action
-		    android:id="@+id/actionSlideMenuOptions"
-		    app:destination="@id/actionSlideMenuOptions"
-		    app:popExitAnim="@anim/push_out_to_left"
-		    app:enterAnim="@anim/push_in_from_left"/>
+        <!--  <action
+                  android:id="@+id/actionAllRequests"
+                  app:destination="@id/actionAllRequests"
+                  app:exitAnim="@anim/push_out_to_left"
+                  app:popEnterAnim="@anim/push_in_from_left"
+                  app:enterAnim="@anim/push_in_from_left"
+                  app:popExitAnim="@anim/push_out_to_left"/>
+          <action
+              android:id="@+id/actionSlideMenuOptions"
+              app:destination="@id/actionSlideMenuOptions"
+              app:popExitAnim="@anim/push_out_to_left"
+              app:enterAnim="@anim/push_in_from_left"/>
 
-        <action
-                android:id="@+id/actionLookUpResults"
-                app:destination="@id/actionLookUpResults"
-                app:exitAnim="@anim/push_out_to_left"
-                app:popEnterAnim="@anim/push_in_from_left"
-                app:enterAnim="@anim/push_in_from_left"
-                app:popExitAnim="@anim/push_out_to_left"/>-->
+          <action
+                  android:id="@+id/actionLookUpResults"
+                  app:destination="@id/actionLookUpResults"
+                  app:exitAnim="@anim/push_out_to_left"
+                  app:popEnterAnim="@anim/push_in_from_left"
+                  app:enterAnim="@anim/push_in_from_left"
+                  app:popExitAnim="@anim/push_out_to_left"/>-->
     </fragment>
 
 
-
-
     <fragment
-	    android:id="@+id/actionSlideMenuOptions"
-	    android:name="com.ng.printtag.dashboard.slidemenu.FragmentMenuOptions"
-	    tools:layout="@layout/fragment_slide_menu_options">
+            android:id="@+id/actionSlideMenuOptions"
+            android:name="com.ng.printtag.dashboard.slidemenu.FragmentMenuOptions"
+            tools:layout="@layout/fragment_slide_menu_options">
         <argument
-	        android:name="@string/slide_menu_title"
-	        android:defaultValue="title"
-	        app:argType="string"/>
+                android:name="@string/slide_menu_title"
+                android:defaultValue="title"
+                app:argType="string"/>
         <argument
-	        android:name="@string/slide_menu_value"
-	        android:defaultValue="html"
-	        app:argType="string"/>
+                android:name="@string/slide_menu_value"
+                android:defaultValue="html"
+                app:argType="string"/>
 
-	    <argument
-		    android:name="@string/slide_menu_action"
-		    android:defaultValue="action"
+        <argument
+                android:name="@string/slide_menu_action"
+                android:defaultValue="action"
                 app:argType="string"/>
     </fragment>
 </navigation>

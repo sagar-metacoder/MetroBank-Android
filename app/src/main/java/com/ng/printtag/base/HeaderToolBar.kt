@@ -3,16 +3,10 @@ package com.ng.printtag.base
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.LayoutInflater.*
+import android.view.LayoutInflater.from
 import android.view.MenuItem
 import android.view.View
-import android.view.View.inflate
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
@@ -20,11 +14,8 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.ng.printtag.R
 import com.ng.printtag.apputils.AppUtils
-import com.ng.printtag.apputils.BaseSharedPreference
 import com.ng.printtag.databinding.HeaderToolBarBinding
-import com.ng.printtag.interfaces.CallBackInterfaces
 import com.ng.printtag.interfaces.HeaderInterface
-
 import androidx.databinding.DataBindingUtil.inflate as inflate1
 
 
@@ -66,7 +57,7 @@ class HeaderToolBar : Toolbar, PopupMenu.OnMenuItemClickListener {
         binding = DataBindingUtil.inflate(from(context), getLayoutId(), this, true)
         setContentInsetsAbsolute(0, 0)
         setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
-        binding.instance  = this
+        binding.instance = this
     }
 
 

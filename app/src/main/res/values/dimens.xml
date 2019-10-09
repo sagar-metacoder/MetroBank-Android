@@ -52,7 +52,7 @@
     <dimen name="margin_button_top_vertical">20dp</dimen>
 
     <dimen name="page_side_margin">20dp</dimen>
-	<dimen name="dialog_side_margin">20dp</dimen>
+    <dimen name="dialog_side_margin">20dp</dimen>
 	<dimen name="page_side_margin_half">65dp</dimen>
     <dimen name="page_side_margin_detail">100dp</dimen>
     <dimen name="dialog__match_side_margin">40dp</dimen>
@@ -80,7 +80,7 @@
 	<dimen name="font_header">20sp</dimen>
 	<dimen name="font_button">22sp</dimen>
     <dimen name="font_title">25sp</dimen>
-    <dimen name="font_dialog_title">24sp</dimen>
+    <dimen name="font_dialog_title">22sp</dimen>
     <dimen name="font_dialog_message">16sp</dimen>
     <dimen name="font_dialog_item">18sp</dimen>
     <dimen name="font_floating_text">16sp</dimen>

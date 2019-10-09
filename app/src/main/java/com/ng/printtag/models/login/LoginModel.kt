@@ -27,9 +27,9 @@ class LoginModel {
 
 
     inner class Data {
-        @SerializedName("o_id")
+        @SerializedName("userId")
         @Expose
-        var oId: Int = 0
+        var userId: Int = 0
         @SerializedName("username")
         @Expose
         var username: String? = null
@@ -42,6 +42,9 @@ class LoginModel {
         @SerializedName("password")
         @Expose
         var password: String? = null
+        @SerializedName("session")
+        @Expose
+        var session: String? = null
         @SerializedName("roles")
         @Expose
         var roles: ArrayList<String>? = null

@@ -64,7 +64,7 @@
                                 android:layout_height="wrap_content"
                                 style="@style/AppTextView.SideNavMenu"
                                 android:text="store 2"
-                                android:visibility="invisible"
+                                android:visibility="gone"
                         />
                         </LinearLayout>
                     </LinearLayout>

@@ -6,7 +6,6 @@
     <color name="app_background">#015C44</color>
 
 
-
     <color name="colorWhite">@android:color/white</color>
     <color name="colorBlack">@android:color/black</color>
     <color name="colorTransparent">@android:color/transparent</color>

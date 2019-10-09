@@ -1,14 +1,11 @@
 package com.ng.printtag.splash
 
-import android.content.Intent
 import android.os.Handler
-import android.view.View
 import com.ng.printtag.R
 import com.ng.printtag.apputils.AppUtils
 import com.ng.printtag.apputils.Utils
 import com.ng.printtag.base.BaseActivity
 import com.ng.printtag.databinding.ActivitySplashBinding
-import com.ng.printtag.login.ActivityLogin
 
 class ActivitySplash : BaseActivity<ActivitySplashBinding>() {
 

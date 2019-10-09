@@ -15,6 +15,8 @@ object Constant {
 
 
     const val  CALL_SIGN_URL = 1
+    const val CALL_STORE_URL = 2
+    const val CALL_DEPARTMENT_URL = 3
 
 
 }

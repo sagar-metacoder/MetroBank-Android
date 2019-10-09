@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        >
+>
 
     <data>
         <import type="com.ng.printtag.apputils.Constant"/>
@@ -28,16 +28,16 @@
                 app:cardElevation="@dimen/card_elevation"
                 app:cardUseCompatPadding="true">
             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
-            android:orientation="vertical">
+                          android:orientation="vertical">
 
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="@dimen/margin_5"
-                    android:paddingStart="@dimen/margin_5"
-                    android:paddingTop="@dimen/margin_5"
-                    android:orientation="horizontal"
-                    android:paddingBottom="@dimen/margin_5">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/margin_5"
+                        android:paddingStart="@dimen/margin_5"
+                        android:paddingTop="@dimen/margin_5"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/margin_5">
 
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -50,71 +50,71 @@
                             android:layout_weight="1"
                             android:layout_height="match_parent"
                             android:text='@{model.store.length() !=0?model.store:@string/a_lbl_unknown}'
-                           />
+                    />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/AppTextView.List.Item"
-                        android:textSize="@dimen/font_label"
-                        android:singleLine="false"
-                        android:layout_marginEnd="@dimen/margin_2"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.7"
-                        android:gravity="end"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorPrimary"
-                        android:textColor="@color/colorWhite"
-                        android:text='@{model.status.length() !=0?model.status:@string/a_lbl_unknown}'
-                />
-            </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/AppTextView.List.Item"
+                            android:textSize="@dimen/font_label"
+                            android:singleLine="false"
+                            android:layout_marginEnd="@dimen/margin_2"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.7"
+                            android:gravity="end"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorPrimary"
+                            android:textColor="@color/colorWhite"
+                            android:text='@{model.status.length() !=0?model.status:@string/a_lbl_unknown}'
+                    />
+                </LinearLayout>
 
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="@dimen/margin_2"
-                    android:paddingStart="@dimen/margin_2"
-                    android:paddingTop="@dimen/margin_2"
-                    android:paddingBottom="@dimen/margin_2">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/margin_2"
+                        android:paddingStart="@dimen/margin_2"
+                        android:paddingTop="@dimen/margin_2"
+                        android:paddingBottom="@dimen/margin_2">
 
 
-                <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/TextAppearance.AppCompat.Small"
-                        android:textSize="@dimen/font_label"
-                        android:singleLine="false"
-                        android:maxLines="2"
-                        android:layout_marginEnd="@dimen/margin_2"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent"
-                        android:text='@string/a_lbl_print_type'
-                        android:textAllCaps="true"
-                />
+                    <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/TextAppearance.AppCompat.Small"
+                            android:textSize="@dimen/font_label"
+                            android:singleLine="false"
+                            android:maxLines="2"
+                            android:layout_marginEnd="@dimen/margin_2"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:text='@string/a_lbl_print_type'
+                            android:textAllCaps="true"
+                    />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/TextAppearance.AppCompat.Small"
-                        android:textSize="@dimen/font_label"
-                        android:singleLine="false"
-                        android:layout_marginEnd="@dimen/margin_2"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:layout_height="match_parent"
-                        android:text='@string/a_lbl_template_name'
-                        android:textAllCaps="true"
-                />
-                <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/TextAppearance.AppCompat.Small"
-                        android:textSize="@dimen/font_label"
-                        android:singleLine="false"
-                        android:layout_marginEnd="@dimen/margin_2"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:layout_height="match_parent"
-                        android:text='@string/a_lbl_department'
-                        android:textAllCaps="true"
-                />
+                    <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/TextAppearance.AppCompat.Small"
+                            android:textSize="@dimen/font_label"
+                            android:singleLine="false"
+                            android:layout_marginEnd="@dimen/margin_2"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:layout_height="match_parent"
+                            android:text='@string/a_lbl_template_name'
+                            android:textAllCaps="true"
+                    />
+                    <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/TextAppearance.AppCompat.Small"
+                            android:textSize="@dimen/font_label"
+                            android:singleLine="false"
+                            android:layout_marginEnd="@dimen/margin_2"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:layout_height="match_parent"
+                            android:text='@string/a_lbl_department'
+                            android:textAllCaps="true"
+                    />
 
-            </LinearLayout>
+                </LinearLayout>
 
                 <LinearLayout
                         android:layout_width="match_parent"
@@ -159,7 +159,6 @@
                             android:layout_height="match_parent"
                             android:text='@{model.department.length() !=0?model.department:@string/a_lbl_unknown}'
                     />
-
 
 
                 </LinearLayout>
@@ -256,7 +255,6 @@
                             android:layout_height="match_parent"
                             android:text='@{model.expectedDate.length() !=0?model.expectedDate:@string/a_lbl_unknown}'
                     />
-
 
 
                 </LinearLayout>

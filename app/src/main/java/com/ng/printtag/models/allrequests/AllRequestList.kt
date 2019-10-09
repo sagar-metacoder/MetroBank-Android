@@ -3,8 +3,7 @@ package com.ng.printtag.models.allrequests
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class AllRequestList
-{
+class AllRequestList {
 
     @SerializedName("status")
     @Expose

@@ -758,8 +758,10 @@ class AppUtils {
          * This method will use to get current date and time
          */
         fun currentDate(): String {
-            return SimpleDateFormat("yyyyMMddhhmm", Locale.getDefault()).format(Date())
+            return SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()).format(Date())
         }
+
+
 
         /**
          * This method will use to get current date
