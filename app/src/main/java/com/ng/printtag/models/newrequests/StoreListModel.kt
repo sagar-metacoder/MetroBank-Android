@@ -19,10 +19,10 @@ class StoreListModel {
     inner class Data {
         @SerializedName("stores")
         @Expose
-        var stores: String? = null
+        var stores: ArrayList<Store>? = null
         @SerializedName("departments")
         @Expose
-        var departments: Any? = null
+        var departments: ArrayList<Department>? = null
         @SerializedName("msg")
         @Expose
         var msg: String? = null
@@ -30,8 +30,24 @@ class StoreListModel {
 
     }
 
-    inner class StoreValue {
-        var hashMap: HashMap<String, String>? = null
+    inner class Department {
+        @SerializedName("key")
+        @Expose
+        var key: String? = null
+        @SerializedName("value")
+        @Expose
+        var value: String? = null
+    }
+
+    inner class Store {
+
+        @SerializedName("key")
+        @Expose
+        var key: String? = null
+        @SerializedName("value")
+        @Expose
+        var value: String? = null
+
 
     }
 
