@@ -13,6 +13,9 @@ class DialogTypeStore : BaseDialog<DialogTypeStoreBinding>() {
         binding = getDialogDataBinding()
         if(fromWhere == Constant.TAG_TYPE) {
             binding.tvTitle.text = getString(R.string.a_title_select_tag_type)
+        } else if (fromWhere == Constant.TAG_STORE) {
+            binding.tvTitle.text = getString(R.string.a_title_select_store_no)
+
         }
 
         adapter.setData(activity!!, stringList)
@@ -24,7 +27,12 @@ class DialogTypeStore : BaseDialog<DialogTypeStoreBinding>() {
     private fun handleClick() {
         binding.btnDone.setOnClickListener {
             dismiss()
-            callBackListener!!.onCallBack(adapter.selPosValue, "")
+            if (fromWhere == Constant.TAG_TYPE) {
+                callBackListener!!.onCallBack(adapter.selPosValue, Constant.TAG_TYPE)
+            } else {
+                callBackListener!!.onCallBack(adapter.selPosValue, Constant.TAG_STORE)
+
+            }
         }
     }
 

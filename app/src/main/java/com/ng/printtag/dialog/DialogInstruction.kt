@@ -5,9 +5,9 @@ import com.ng.printtag.R
 import com.ng.printtag.apputils.AppUtils
 import com.ng.printtag.apputils.BaseSharedPreference
 import com.ng.printtag.apputils.Utils
+import com.ng.printtag.base.BaseDialog
 import com.ng.printtag.databinding.DialogInstructionBinding
 import com.ng.printtag.interfaces.OnItemClickListener
-import ng.pdp.base.BaseDialog
 
 class DialogInstruction : BaseDialog<DialogInstructionBinding>(), OnItemClickListener {
 

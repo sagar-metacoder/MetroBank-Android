@@ -2,9 +2,9 @@ package com.ng.printtag.apputils
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
+import com.ng.printtag.base.BaseDialog
 import com.ng.printtag.dialog.DialogInstruction
 import com.ng.printtag.interfaces.CallBackInterfaces
-import ng.pdp.base.BaseDialog
 
 
 /**

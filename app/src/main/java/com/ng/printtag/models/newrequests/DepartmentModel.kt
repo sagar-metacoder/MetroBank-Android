@@ -4,14 +4,14 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-class StoreListModel {
+class DepartmentModel {
 
     @SerializedName("success")
     @Expose
     var success: Boolean = false
     @SerializedName("msg")
     @Expose
-    var msg : String?= null
+    var msg: String? = null
     @SerializedName("data")
     @Expose
     var data: Data? = null
@@ -19,7 +19,7 @@ class StoreListModel {
     inner class Data {
         @SerializedName("stores")
         @Expose
-        var stores: String? = null
+        var stores: Any? = null
         @SerializedName("departments")
         @Expose
         var departments: Any? = null
@@ -29,11 +29,5 @@ class StoreListModel {
 
 
     }
-
-    inner class StoreValue {
-        var hashMap: HashMap<String, String>? = null
-
-    }
-
 
 }

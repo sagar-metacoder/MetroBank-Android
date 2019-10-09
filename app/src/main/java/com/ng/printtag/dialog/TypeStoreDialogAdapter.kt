@@ -14,7 +14,7 @@ class TypeStoreDialogAdapter : RecyclerView.Adapter<TypeStoreDialogAdapter.ViewH
     private var mInflater: LayoutInflater? = null
     private lateinit var context: Context
     private lateinit var storeList: ArrayList<String>
-    var selPosValue: String = ""
+    var selPosValue: Int = 0
     var selected: AppCompatRadioButton? = null
 
 
@@ -57,7 +57,7 @@ class TypeStoreDialogAdapter : RecyclerView.Adapter<TypeStoreDialogAdapter.ViewH
                 dataBinding.rbType.isChecked = true
                 selected = dataBinding.rbType
                 if (dataBinding.rbType.isChecked) {
-                    selPosValue = storeList[position]
+                    selPosValue = position
                 }
             }
         }
