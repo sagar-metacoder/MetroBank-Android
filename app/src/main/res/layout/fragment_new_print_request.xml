@@ -8,20 +8,25 @@
                 name="layoutManager"
                 type="androidx.recyclerview.widget.GridLayoutManager"/>
     </data>
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/margin_20"
-            android:paddingEnd="@dimen/margin_20"
-            android:background="@color/app_background">
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/margin_20"
+                android:paddingEnd="@dimen/margin_20"
+                android:background="@color/app_background">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+            >
 
         <com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout
                 android:id="@+id/inputDate"
                 style="@style/AppEditText.Text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_10"
                 android:hint="@string/a_hint_price_effective_date"
         >
 
@@ -101,36 +106,51 @@
             >
             </com.google.android.material.textfield.TextInputEditText>
         </com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_templateList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                app:layoutManager="@{layoutManager}"
-                android:layout_marginTop="@dimen/margin_10"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical">
 
 
-        <!--
-                <RelativeLayout
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_templateList"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="@dimen/margin_20">
+                        android:layout_gravity="center_horizontal"
+                        app:layoutManager="@{layoutManager}"
+                        android:layout_marginTop="@dimen/margin_10"/>
+
+                <View
+                        android:layout_marginTop="@dimen/margin_20"
+                        android:layout_marginBottom="@dimen/margin_20"
+                        android:layout_height="@dimen/margin_1"
+                        android:layout_width="match_parent"
+                        android:background="@color/color_CDE0EC"/>
+            </LinearLayout>
 
 
-                    <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnSubmit"
-                            android:layout_width="wrap_content"
+            <!--
+                    <RelativeLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            style="@style/AppButton.Colored"
-                            android:layout_gravity="end"
-                            android:text="@string/a_btn_next"
-                            android:padding="@dimen/margin_10"
-                            android:layout_alignParentEnd="true" tools:ignore="RelativeOverlap"/>
-                </RelativeLayout>
-        -->
+                            android:orientation="horizontal"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="@dimen/margin_20">
+
+
+                        <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnSubmit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/AppButton.Colored"
+                                android:layout_gravity="end"
+                                android:text="@string/a_btn_next"
+                                android:padding="@dimen/margin_10"
+                                android:layout_alignParentEnd="true" tools:ignore="RelativeOverlap"/>
+                    </RelativeLayout>
+            -->
 
     </LinearLayout>
+    </ScrollView>
+
 </layout>

@@ -1,10 +1,7 @@
 package com.ng.printtag.models.newrequests
 
-import com.google.gson.JsonObject
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import org.json.JSONObject
-
 
 class StoreListModel {
 
@@ -21,19 +18,36 @@ class StoreListModel {
     inner class Data {
         @SerializedName("stores")
         @Expose
-         var stores: String?=null
+        var stores: ArrayList<Store>? = null
         @SerializedName("departments")
         @Expose
-        var departments: Any? = null
+        var departments: ArrayList<Department>? = null
         @SerializedName("msg")
         @Expose
         var msg: String? = null
 
 
     }
-    inner class StoreValue
+
+    inner class Department
     {
-        var hashMap: HashMap<String,String>? =null
+        @SerializedName("key")
+        @Expose
+        var key: String? = null
+        @SerializedName("value")
+        @Expose
+        var value: String? = null
+    }
+
+    inner class Store {
+
+        @SerializedName("key")
+        @Expose
+        var key: String? = null
+        @SerializedName("value")
+        @Expose
+        var value: String? = null
+
 
     }
 

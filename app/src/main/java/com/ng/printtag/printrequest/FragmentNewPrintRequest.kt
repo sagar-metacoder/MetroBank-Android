@@ -202,27 +202,19 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                 when (rootResponse.success) {
                     true -> {
 
-                        Log.e("data ---> ", rootResponse.data!!.stores)
-                        val jsonObjectStore = rootResponse.data!!.stores as JSONObject
 
                        // val jsonObj = JSONObject(jsonObjectStore)
-                        for (i in 0 until jsonObjectStore.length()) {
+                        for (i in 0 until rootResponse.data!!.stores!!.size) {
 
-                            arrayStoreKey.add(jsonObjectStore.names().getString(i))
-                            arrayStoreValue.add(
-                                jsonObjectStore.get(jsonObjectStore.names().getString(i)).toString()
-
-                            )
+                            arrayStoreKey.add(rootResponse.data!!.stores?.get(i)?.key!!)
+                            arrayStoreValue.add(rootResponse.data!!.stores?.get(i)?.key!!)
                         }
                         if(!arrayStoreKey.isNullOrEmpty())
                             if(arrayStoreKey.size == 1)
                             {
                                 binding.edtStoreNo.text = Editable.Factory.getInstance().newEditable(arrayStoreValue[0])
                             }
-                        else
-                            {
-                                callStoreTypeDialog()
-                            }
+
                     }else->
                     {
                         showError(getString(R.string.a_lbl_server_title), rootResponse.msg!!)
@@ -283,10 +275,6 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
 
     }
-
-
-
-
 
     override fun getLayoutId(): Int = R.layout.fragment_new_print_request
 }
