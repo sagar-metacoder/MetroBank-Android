@@ -9,22 +9,25 @@ class StoreListModel {
 
     @SerializedName("success")
     @Expose
-    private val success: Boolean = false
+    var success: Boolean = false
+    @SerializedName("msg")
+    @Expose
+    var msg : String?= null
     @SerializedName("data")
     @Expose
-    private val data: Data? = null
+    var data: Data? = null
 
     inner class Data
     {
         @SerializedName("stores")
         @Expose
-        private val stores: Any? = null
+        var stores: Any? = null
         @SerializedName("departments")
         @Expose
-        private val departments: Any? = null
+        var departments: Any? = null
         @SerializedName("msg")
         @Expose
-        private val msg: String? = null
+        var msg: String? = null
 
 
     }

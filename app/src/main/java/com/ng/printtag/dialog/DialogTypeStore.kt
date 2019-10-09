@@ -1,19 +1,20 @@
 package com.ng.printtag.dialog
 
 import com.ng.printtag.R
+import com.ng.printtag.apputils.Constant
+import com.ng.printtag.base.BaseDialog
 import com.ng.printtag.databinding.DialogTypeStoreBinding
-import ng.pdp.base.BaseDialog
 
 class DialogTypeStore : BaseDialog<DialogTypeStoreBinding>() {
     lateinit var binding: DialogTypeStoreBinding
+    var stringList: ArrayList<String> = ArrayList()
     val adapter = TypeStoreDialogAdapter()
     override fun initDialog() {
         binding = getDialogDataBinding()
-        binding.tvTitle.text = title
+        if(fromWhere == Constant.TAG_TYPE) {
+            binding.tvTitle.text = getString(R.string.a_title_select_tag_type)
+        }
 
-        val stringList: ArrayList<String> = ArrayList()
-        stringList.add("Fresh Tag")
-        stringList.add("Inventory Tag")
         adapter.setData(activity!!, stringList)
         binding.rvList.adapter = adapter
         handleClick()

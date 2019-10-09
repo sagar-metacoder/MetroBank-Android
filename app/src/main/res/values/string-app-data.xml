@@ -21,5 +21,7 @@
     <string name="language_es">es</string>
     <string name="key_userName">userName</string>
     <string name="key_password">password</string>
+    <string name="userId">userId</string>
+    <string name="from_type">from_type</string>
 
 </resources>

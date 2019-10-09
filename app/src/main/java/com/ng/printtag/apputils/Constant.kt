@@ -19,4 +19,6 @@ object Constant {
     const val CALL_DEPARTMENT_URL = 3
 
 
+    const val TAG_TYPE =20
+    const val TAG_STORE =21
 }

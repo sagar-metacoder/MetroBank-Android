@@ -1,4 +1,4 @@
-package ng.pdp.base
+package com.ng.printtag.base
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -20,6 +20,7 @@ import com.ng.printtag.interfaces.CallBackInterfaces
 abstract class BaseDialog<out T : ViewDataBinding> : DialogFragment() {
     private lateinit var dialogChildBinding: T
     var title: String? = null
+
     var callBackListener: CallBackInterfaces? = null
     var fromWhere: Int? = null
 
