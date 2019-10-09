@@ -2,12 +2,14 @@ package com.ng.printtag.login
 
 
 import com.ng.printtag.R
-import com.ng.printtag.api.ApiResponseListener
 import com.ng.printtag.api.RequestMethods
 import com.ng.printtag.api.RestClient
 import com.ng.printtag.api.RestClientModel
-import com.ng.printtag.apputils.*
+import com.ng.printtag.apputils.AppUtils
+import com.ng.printtag.apputils.CallDialog
 import com.ng.printtag.apputils.Constant.CALL_SIGN_URL
+import com.ng.printtag.apputils.ErrorActions
+import com.ng.printtag.apputils.Utils
 import com.ng.printtag.base.BaseFragment
 import com.ng.printtag.databinding.FragmentLoginBinding
 import com.ng.printtag.models.login.LoginModel
@@ -29,7 +31,10 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
         binding.edtUserName.requestFocus()
 
         handelClick()
+
+
     }
+
     override fun getLayoutId(): Int = R.layout.fragment_login
 
 
@@ -49,8 +54,8 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
         restClientModel.isProgressDialogShow = true
 
         val rootJson = JSONObject()
-        rootJson.put("userName",binding.edtUserName.text.toString())
-        rootJson.put("password",binding.edtPassword.text.toString())
+        rootJson.put("userName", binding.edtUserName.text.toString())
+        rootJson.put("password", binding.edtPassword.text.toString())
         val body = RequestMethods.getRequestBody(rootJson)
 
         RestClient().apiRequest(
@@ -66,7 +71,7 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
 
     override fun onApiResponse(response: Response<Any>, reqCode: Int) {
         super.onApiResponse(response, reqCode)
-        when(reqCode) {
+        when (reqCode) {
             CALL_SIGN_URL -> {
                 val rootResponse = response.body() as LoginModel
                 when (rootResponse.success) {
@@ -90,7 +95,7 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
             title,
             message,
             "",
-           getString(R.string.a_btn_ok),
+            getString(R.string.a_btn_ok),
             "", null
         )
 
@@ -109,7 +114,7 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
     override fun onResume() {
         super.onResume()
         val edtPassword = binding.edtPassword.text.toString()
-        val edtUsername =binding.edtUserName.text.toString()
+        val edtUsername = binding.edtUserName.text.toString()
         if (edtPassword.isNotEmpty() && edtUsername.isNotEmpty()) {
             (activity as ActivityLogin).loginModel.password = edtPassword
             (activity as ActivityLogin).loginModel.userName = edtUsername

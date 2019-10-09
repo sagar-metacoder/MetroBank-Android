@@ -11,7 +11,7 @@ class LoginModel {
 
     @SerializedName("msg")
     @Expose
-    var msg : String?= null
+    var msg: String? = null
 
     @SerializedName("data")
     @Expose
@@ -21,9 +21,6 @@ class LoginModel {
 
     var password: String? = null
 //    var storeList: MutableList<StoreModels>? = null
-
-
-
 
 
     inner class Data {

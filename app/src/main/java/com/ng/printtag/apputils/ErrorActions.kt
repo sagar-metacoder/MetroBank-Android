@@ -9,6 +9,7 @@ import android.view.View.INVISIBLE
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
@@ -16,11 +17,6 @@ import com.ng.printtag.R.color.*
 import com.ng.printtag.R.string
 import com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout
 import java.util.regex.Pattern
-import androidx.core.content.res.ResourcesCompat
-
-
-
-
 
 
 /**

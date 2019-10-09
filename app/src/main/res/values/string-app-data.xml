@@ -23,5 +23,6 @@
     <string name="key_password">password</string>
     <string name="userId">userId</string>
     <string name="from_type">from_type</string>
+    <string name="pref_session_out">pref_session_out</string>
 
 </resources>

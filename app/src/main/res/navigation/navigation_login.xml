@@ -8,19 +8,19 @@
             android:name="com.ng.printtag.login.FragmentLogin"
             tools:layout="@layout/fragment_login">
     </fragment>
-        <!--<action
-                android:id="@+id/actionPassword"
-                app:destination="@id/actionPassword"
-                app:enterAnim="@anim/push_in_from_left"
-                app:exitAnim="@anim/push_out_to_left"
-                app:popEnterAnim="@anim/push_in_from_left"
-                app:popExitAnim="@anim/push_out_to_left"/>
-    </fragment>
-    <fragment
+    <!--<action
             android:id="@+id/actionPassword"
-            android:name="com.ng.printtag.login.FragmentLogin"
-            tools:layout="@layout/fragment_login">
+            app:destination="@id/actionPassword"
+            app:enterAnim="@anim/push_in_from_left"
+            app:exitAnim="@anim/push_out_to_left"
+            app:popEnterAnim="@anim/push_in_from_left"
+            app:popExitAnim="@anim/push_out_to_left"/>
+</fragment>
+<fragment
+        android:id="@+id/actionPassword"
+        android:name="com.ng.printtag.login.FragmentLogin"
+        tools:layout="@layout/fragment_login">
 
 
-    </fragment>-->
+</fragment>-->
 </navigation>

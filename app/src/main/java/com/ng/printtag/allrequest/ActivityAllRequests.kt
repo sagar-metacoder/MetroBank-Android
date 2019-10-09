@@ -6,7 +6,7 @@ import com.ng.printtag.databinding.ActivityAllRequestsBinding
 import com.ng.printtag.interfaces.OnItemClickListener
 import com.ng.printtag.models.allrequests.AllRequestModel
 
-class AllRequests : BaseActivity<ActivityAllRequestsBinding>() {
+class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>() {
 
 
     private lateinit var binding: ActivityAllRequestsBinding
@@ -19,15 +19,19 @@ class AllRequests : BaseActivity<ActivityAllRequestsBinding>() {
         binding = getViewDataBinding()
         actBaseBinding.rlMain.removeView(actBaseBinding.headerToolBar)
         allRequest = ArrayList()
+        binding.ivSearch.isActivated = false
+        binding.ivSearch.onActionViewExpanded()
+        binding.ivSearch.isIconified = false
+        binding.ivSearch.clearFocus()
         setData()
 
 
         // (binding.liToolBar.getChildAt(il) as HeaderToolBar).setHeaderInterface(this)
-        //binding.manageSlideMenu.setCallBackInterfaces(this@AllRequests)
+        //binding.manageSlideMenu.setCallBackInterfaces(this@ActivityAllRequests)
 
 
         val adapterDisburse = AllRequestsAdapter(
-            this@AllRequests,
+            this@ActivityAllRequests,
             allRequest,
             object : OnItemClickListener {
                 override fun onItemClick(item: Any, position: Int) {

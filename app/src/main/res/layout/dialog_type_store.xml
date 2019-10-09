@@ -21,7 +21,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/margin_20"
-                    android:paddingBottom="@dimen/margin_10"
+                    android:paddingStart="@dimen/margin_10"
+                    android:paddingEnd="@dimen/margin_10"
                     android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -30,15 +31,13 @@
                         android:layout_height="wrap_content"
                         style="@style/AppTextView.Dialog.Title"
                         android:paddingStart="@dimen/margin_10"
-
-
                 />
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_list"
                         android:paddingEnd="@dimen/margin_10"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/margin_200"
-                        android:layout_marginTop="@dimen/margin_20"
+                        android:layout_marginTop="@dimen/margin_15"
                         bind:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:ignore="RtlSymmetry"/>
                 <RelativeLayout

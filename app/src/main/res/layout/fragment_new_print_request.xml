@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:binding="http://schemas.android.com/tools"
-       >
+>
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -45,7 +44,7 @@
                     android:imeOptions="actionNext"
                     android:layout_height="wrap_content"
                     android:focusable="false"
-
+                    android:drawablePadding="@dimen/margin_10"
                     android:drawableEnd="@mipmap/ic_dropdown_arrow"
             >
             </com.google.android.material.textfield.TextInputEditText>
@@ -67,6 +66,7 @@
                     android:imeOptions="actionNext"
                     android:layout_height="wrap_content"
                     android:focusable="false"
+                    android:drawablePadding="@dimen/margin_10"
                     android:drawableEnd="@mipmap/ic_dropdown_arrow"
             >
             </com.google.android.material.textfield.TextInputEditText>
@@ -90,31 +90,32 @@
                     android:layout_height="wrap_content"
                     android:focusable="false"
                     android:drawableEnd="@mipmap/ic_dropdown_arrow"
+                    android:drawablePadding="@dimen/margin_10"
             >
             </com.google.android.material.textfield.TextInputEditText>
         </com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout>
 
 
-<!--
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="@dimen/margin_20">
+        <!--
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="@dimen/margin_20">
 
 
-            <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSubmit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/AppButton.Colored"
-                    android:layout_gravity="end"
-                    android:text="@string/a_btn_next"
-                    android:padding="@dimen/margin_10"
-                    android:layout_alignParentEnd="true" tools:ignore="RelativeOverlap"/>
-        </RelativeLayout>
--->
+                    <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSubmit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/AppButton.Colored"
+                            android:layout_gravity="end"
+                            android:text="@string/a_btn_next"
+                            android:padding="@dimen/margin_10"
+                            android:layout_alignParentEnd="true" tools:ignore="RelativeOverlap"/>
+                </RelativeLayout>
+        -->
 
     </LinearLayout>
 </layout>

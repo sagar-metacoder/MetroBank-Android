@@ -19,9 +19,7 @@ import com.ng.printtag.R
 import com.ng.printtag.common.ActivityInstructions
 import com.ng.printtag.dashboard.ActivityDashboard
 import com.ng.printtag.login.ActivityLogin
-import com.ng.printtag.models.UserDetailsModel
 import com.ng.printtag.models.login.LoginModel
-import com.ng.printtag.printrequest.ActivityNewPrintRequest
 import java.text.SimpleDateFormat
 import java.util.*
 

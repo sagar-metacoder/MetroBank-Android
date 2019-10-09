@@ -34,6 +34,7 @@
                 android:layoutDirection="rtl"
                 android:textDirection="ltr"
                 android:layout_marginStart="@dimen/margin_10"
+                android:padding="@dimen/margin_5"
                 android:button="@drawable/radio_button_selector"
         />
     </RelativeLayout>

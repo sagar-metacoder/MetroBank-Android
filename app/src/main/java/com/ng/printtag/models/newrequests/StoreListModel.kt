@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-
 class StoreListModel {
 
     @SerializedName("success")
@@ -17,8 +16,7 @@ class StoreListModel {
     @Expose
     var data: Data? = null
 
-    inner class Data
-    {
+    inner class Data {
         @SerializedName("stores")
         @Expose
         var stores: Any? = null

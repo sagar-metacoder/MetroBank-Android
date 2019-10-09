@@ -9,7 +9,10 @@ import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.ng.printtag.R
-import com.ng.printtag.apputils.*
+import com.ng.printtag.apputils.AppUtils
+import com.ng.printtag.apputils.BaseSharedPreference
+import com.ng.printtag.apputils.BindingMethods
+import com.ng.printtag.apputils.CallDialog
 import com.ng.printtag.dashboard.ActivityDashboard
 import com.ng.printtag.databinding.ManageSlideMenuBinding
 import com.ng.printtag.interfaces.CallBackInterfaces
@@ -43,27 +46,29 @@ class LayoutSlideMenu : LinearLayout {
         binding = DataBindingUtil.inflate(LayoutInflater.from(context), getLayoutId(), this, true)
         binding.instance = this
         ContextCompat.getDrawable(context, R.mipmap.ic_user)?.let {
-            BindingMethods.setCircleImage(binding.imageView, "",
+            BindingMethods.setCircleImage(
+                binding.imageView, "",
                 it
             )
         }
-        binding.tvAssociateName.text =
-           AppUtils.getUserModel(context).data!!.firstName
+        if (!AppUtils.getUserModel(context).data!!.firstName.isNullOrEmpty())
+            binding.tvAssociateName.text =
+                AppUtils.getUserModel(context).data!!.firstName
 
-        if(BaseSharedPreference.getInstance(context).getLanguage(
-                context.getString(R.string.pref_language)).equals("es"))
-        {
+        if (BaseSharedPreference.getInstance(context).getLanguage(
+                context.getString(R.string.pref_language)
+            ).equals("es")
+        ) {
             binding.tvSpanish.setTextColor(resources.getColor(R.color.colorPrimary))
-        }
-        else
-        {
+
+        } else {
             binding.tvLanguage.setTextColor(resources.getColor(R.color.colorPrimary))
 
         }
-       /* binding.tvAssociateName.text =
-            BaseSharedPreference.getInstance(context).getPrefValue(context.getString(R.string.pref_user_name))!!
+        /* binding.tvAssociateName.text =
+             BaseSharedPreference.getInstance(context).getPrefValue(context.getString(R.string.pref_user_name))!!
 
-       *//* binding.tvAssociateStore.text = Utils.getDynamicLabel(
+        *//* binding.tvAssociateStore.text = Utils.getDynamicLabel(
             context.getString(R.string.a_menu_store_associate),
             BaseSharedPreference.getInstance(context).getPrefValue(context.getString(R.string.pref_store))!!
         )*/
@@ -75,11 +80,11 @@ class LayoutSlideMenu : LinearLayout {
      */
     private fun setLang() {
         langCode = BaseSharedPreference.getInstance(context).getLanguage(context.getString(R.string.pref_language))
-       /* if (langCode == context.getString(R.string.language_en)) {
-            binding.tvLanguage.text = context.getString(R.string.a_app_menu_spanish)
-        } else {
-            binding.tvLanguage.text = context.getString(R.string.a_app_menu_english)
-        }*/
+        /* if (langCode == context.getString(R.string.language_en)) {
+             binding.tvLanguage.text = context.getString(R.string.a_app_menu_spanish)
+         } else {
+             binding.tvLanguage.text = context.getString(R.string.a_app_menu_english)
+         }*/
     }
 
     /**
@@ -105,17 +110,17 @@ class LayoutSlideMenu : LinearLayout {
             )
             callAppTextApi()
 
-        }else if (tag == context.getString(R.string.action_menu_lan_english)) {
+        } else if (tag == context.getString(R.string.action_menu_lan_english)) {
             BaseSharedPreference.getInstance(context).putValue(
                 context.getString(R.string.pref_language), "en"
             )
             callAppTextApi()
 
-           /* langCode = if (langCode == context.getString(R.string.language_es)) {
-                context.getString(R.string.language_en)
-            } else {
-                context.getString(R.string.language_es)
-            }*/
+            /* langCode = if (langCode == context.getString(R.string.language_es)) {
+                 context.getString(R.string.language_en)
+             } else {
+                 context.getString(R.string.language_es)
+             }*/
         }
 //        if (::callBackInterfaces.isInitialized)
 //            callBackInterfaces.onCallBack(title, tag)
@@ -127,7 +132,7 @@ class LayoutSlideMenu : LinearLayout {
      */
     private fun callAppTextApi() {
 
-                AppUtils.navigateToOtherScreen(context as Activity, ActivityDashboard::class.java, true)
+        AppUtils.navigateToOtherScreen(context as Activity, ActivityDashboard::class.java, true)
 
 
 

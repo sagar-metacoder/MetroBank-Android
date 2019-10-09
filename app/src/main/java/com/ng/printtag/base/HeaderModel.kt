@@ -33,12 +33,12 @@ class HeaderModel {
         setDefaultHeader()
         when (baseFragment) {
 
-             is FragmentLogin -> {
-                 baseActivity!!.setNoStatusBar()
-                 baseActivity!!.setHeaderVisibility(View.GONE)
-                 /*setLeftIcon(R.mipmap.ic_back)
-                 setLeftIconText(baseFragment!!.getString(R.string.a_title_sign_in))
-                 backVisibility = false*/
+            is FragmentLogin -> {
+                baseActivity!!.setNoStatusBar()
+                baseActivity!!.setHeaderVisibility(View.GONE)
+                /*setLeftIcon(R.mipmap.ic_back)
+                setLeftIconText(baseFragment!!.getString(R.string.a_title_sign_in))
+                backVisibility = false*/
             }
 
             is FragmentNewPrintRequest -> {
@@ -49,7 +49,7 @@ class HeaderModel {
             }
             is FragmentDashboard -> {
                 title =
-                   baseFragment!!.getString(R.string.a_title_dashboard)
+                    baseFragment!!.getString(R.string.a_title_dashboard)
 
                 setLeftIcon(hamburgerIcon)
                 val param = RelativeLayout.LayoutParams(
@@ -64,10 +64,10 @@ class HeaderModel {
                 param.setMargins(baseActivity!!.resources.getDimension(R.dimen.margin_5).toInt(), 0, 0, 0)
                 baseActivity!!.actBaseBinding.headerToolBar.binding.tvHeaderTitle.layoutParams = param
             }
-           /* is FragmentUsername, is FragmentLogin, is FragmentStoreNumber, is FragmentLookUpByName, is FragmentLookUpResult, is FragmentLookUpByProspera -> {
-                setLeftIcon(backIcon)
-                baseActivity!!.actBaseBinding.headerToolBar.binding.ivBack.text = ""
-            }*/
+            /* is FragmentUsername, is FragmentLogin, is FragmentStoreNumber, is FragmentLookUpByName, is FragmentLookUpResult, is FragmentLookUpByProspera -> {
+                 setLeftIcon(backIcon)
+                 baseActivity!!.actBaseBinding.headerToolBar.binding.ivBack.text = ""
+             }*/
 /*
             is FragmentIdTypeSelection, is FragmentIdPreview, is FragmentPhotoTutorial -> {
                 baseActivity!!.setStatusBar()

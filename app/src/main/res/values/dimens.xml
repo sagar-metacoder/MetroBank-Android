@@ -69,7 +69,7 @@
 
     <dimen name="width_button">150dp</dimen>
 	<dimen name="width_button_looks_good">225dp</dimen>
-	<dimen name="width_menu_item">88dp</dimen>
+    <dimen name="width_menu_item">60dp</dimen>
 	<dimen name="width_button_dialog">225dp</dimen>
     <dimen name="width_floating_menu_button">200dp</dimen>
 	<dimen name="width_different_person_button">362dp</dimen>
@@ -78,12 +78,12 @@
 	<dimen name="width_button_decline">234dp</dimen>
 
 	<dimen name="font_header">20sp</dimen>
-	<dimen name="font_button">22sp</dimen>
+    <dimen name="font_button">20sp</dimen>
     <dimen name="font_title">25sp</dimen>
     <dimen name="font_dialog_title">22sp</dimen>
     <dimen name="font_dialog_message">16sp</dimen>
     <dimen name="font_dialog_item">18sp</dimen>
-    <dimen name="font_floating_text">16sp</dimen>
+    <dimen name="font_floating_text">14sp</dimen>
     <dimen name="font_title_small">18sp</dimen>
 	<dimen name="font_title_left_header">18sp</dimen>
     <dimen name="font_slide_menu">16sp</dimen>
@@ -91,7 +91,7 @@
     <dimen name="font_counter">12sp</dimen>
     <dimen name="font_default">13sp</dimen>
     <dimen name="font_session_timeout">52sp</dimen>
-    <dimen name="font_input">22sp</dimen>
+    <dimen name="font_input">20sp</dimen>
     <dimen name="font_input_detail">24sp</dimen>
 	<dimen name="font_instruction_desc">22sp</dimen>
 	<dimen name="font_instruction_title">30sp</dimen>

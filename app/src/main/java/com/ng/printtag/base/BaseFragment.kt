@@ -54,12 +54,12 @@ abstract class BaseFragment<out T : ViewDataBinding> : Fragment(), View.OnClickL
             when (this) {
                 is FragmentLogin ->
                     AppUtils.openKeyboardForceFully(activity!!)
-               /* is FragmentStoreNumber ->
-                    PdpUtils.openKeyboardForceFully(activity!!)
-                is FragmentLookUpPhoneLandLine ->
-                    PdpUtils.openKeyboardForceFully(activity!!)
-                is FragmentLookUpByProspera ->
-                    PdpUtils.openKeyboardForceFully(activity!!)*/
+                /* is FragmentStoreNumber ->
+                     PdpUtils.openKeyboardForceFully(activity!!)
+                 is FragmentLookUpPhoneLandLine ->
+                     PdpUtils.openKeyboardForceFully(activity!!)
+                 is FragmentLookUpByProspera ->
+                     PdpUtils.openKeyboardForceFully(activity!!)*/
 
 
 

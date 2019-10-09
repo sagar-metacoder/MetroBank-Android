@@ -33,9 +33,10 @@
                         style="@style/AppTextView.Title.Medium"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        android:drawablePadding="@dimen/margin_10"
+                        android:drawablePadding="@dimen/margin_15"
                         android:drawableStart="@mipmap/ic_new_print_request"
-                        android:text="@string/a_lbl_new_print_request"/>
+                        android:text="@string/a_lbl_new_print_request"
+                        android:layout_marginStart="@dimen/margin_5"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
@@ -71,8 +72,9 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         android:drawableStart="@mipmap/ic_all_requests"
-                        android:drawablePadding="@dimen/margin_10"
-                        android:text="@string/a_lbl_all_requests"/>
+                        android:drawablePadding="@dimen/margin_15"
+                        android:text="@string/a_lbl_all_requests"
+                        android:layout_marginStart="@dimen/margin_5"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
@@ -107,8 +109,9 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         android:drawableStart="@mipmap/ic_pending_requests"
-                        android:drawablePadding="@dimen/margin_10"
-                        android:text="@string/a_lbl_pending_requests"/>
+                        android:drawablePadding="@dimen/margin_15"
+                        android:text="@string/a_lbl_pending_requests"
+                        android:layout_marginStart="@dimen/margin_5"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"

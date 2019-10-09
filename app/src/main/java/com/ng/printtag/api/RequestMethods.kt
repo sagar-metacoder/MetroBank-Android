@@ -54,7 +54,6 @@ object RequestMethods {
     }
 
 
-
     /*
       fun getCommunicationPref(context: Context, preferenceValue: String, isFromSetting: Boolean): UserServerRootReq {
           val serverReq = UserServerRootReq()

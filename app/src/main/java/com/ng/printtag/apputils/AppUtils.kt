@@ -27,9 +27,7 @@ import com.google.gson.Gson
 import com.ng.printtag.R
 import com.ng.printtag.apputils.Constant.PREFIX_IMAGE_DATA_TYPE
 import com.ng.printtag.models.SystemSettingsModel
-import com.ng.printtag.models.UserDetailsModel
 import com.ng.printtag.models.login.LoginModel
-
 import org.json.JSONObject
 import java.io.*
 import java.text.DecimalFormat
@@ -760,7 +758,6 @@ class AppUtils {
         fun currentDate(): String {
             return SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()).format(Date())
         }
-
 
 
         /**
