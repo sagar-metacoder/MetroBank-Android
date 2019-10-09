@@ -16,18 +16,10 @@ import com.ng.printtag.databinding.FragmentNewPrintRequestBinding
 import com.ng.printtag.dialog.DialogDepartment
 import com.ng.printtag.dialog.DialogTypeStore
 import com.ng.printtag.interfaces.CallBackInterfaces
-import com.ng.printtag.models.login.LoginModel
 import com.ng.printtag.models.newrequests.StoreListModel
-import okhttp3.internal.Util
 import org.json.JSONObject
 import retrofit2.Response
 import java.util.*
-
-
-
-
-
-
 
 class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
     private lateinit var binding: FragmentNewPrintRequestBinding
