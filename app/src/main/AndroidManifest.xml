@@ -46,8 +46,6 @@
                 android:name=".dashboard.ActivityDashboard"
                 android:screenOrientation="portrait">
 
-
-
         </activity>
         <activity
                 android:name="com.ng.printtag.allrequest.ActivityAllRequests"

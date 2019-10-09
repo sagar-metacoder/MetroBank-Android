@@ -17,6 +17,7 @@ object Constant {
     const val CALL_SIGN_URL = 1
     const val CALL_STORE_URL = 2
     const val CALL_DEPARTMENT_URL = 3
+    const val CALL_ALL_REQUEST = 4
 
 
     const val TAG_TYPE =20

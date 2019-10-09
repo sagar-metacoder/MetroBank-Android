@@ -16,7 +16,7 @@ import com.ng.printtag.models.allrequests.AllRequestModel
  */
 class AllRequestsAdapter(
     private var context: Context,
-    private val results: MutableList<AllRequestModel>,
+    private val results: MutableList<AllRequestModel.Data>,
     private var onItemClickListener: OnItemClickListener
 ) :
     RecyclerView.Adapter<AllRequestsAdapter.CustomViewHolder>() {
@@ -60,7 +60,7 @@ class AllRequestsAdapter(
         /**
          * Bind the txt with xml
          */
-        fun bind(item: AllRequestModel) {
+        fun bind(item: AllRequestModel.Data) {
             binding.model = item
             /* if (binding.model!!.dataType == Constant.TIER3 || binding.model!!.dataType == Constant.POWER_CHECK) {
                  binding.tvProfileFlag.text = Utils.getLabel(context.getString(R.string.a_lbl_legacy_record))

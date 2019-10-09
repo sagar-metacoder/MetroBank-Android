@@ -44,6 +44,7 @@ android {
             buildConfigField "String", "PASSWORD", '"tpdp!Q@A#Z"'
             buildConfigField "String", "AUTH_ID", '"3d4c92b4-ad70-78e0-16f9-01b2aad1caa3"'
             buildConfigField "String", "AUTH_TOKEN", '"bVjtB3h5R0qW11ClXgPK"'
+            buildConfigField "String", "API_WEBSERVICE", '"webservice/request/"'
         }
         release {
 
@@ -67,6 +68,8 @@ android {
             buildConfigField "String", "PASSWORD", '"tpdp!Q@A#Z"'
             buildConfigField "String", "AUTH_ID", '"3d4c92b4-ad70-78e0-16f9-01b2aad1caa3"'
             buildConfigField "String", "AUTH_TOKEN", '"bVjtB3h5R0qW11ClXgPK"'
+            buildConfigField "String", "API_WEBSERVICE", '"webservice/request/"'
+
 
         }
 

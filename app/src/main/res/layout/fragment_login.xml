@@ -6,6 +6,8 @@
     <data>
         <import type="com.ng.printtag.apputils.Utils"/>
         <variable name="userName" type="String"/>
+        <variable name="isEnable" type="androidx.databinding.ObservableBoolean"/>
+
     </data>
 
 
@@ -42,8 +44,8 @@
                     android:layout_width="match_parent"
                     style="@style/AppEditText.EditText"
                     binding:materialButton="@{btnLoginPassword}"
-                    binding:action="@{@string/input_act_user}"
-                    binding:textInputLayout="@{inputUser}"
+                    binding:secondEdtText="@{edtPassword}"
+                    binding:isEnable="@{isEnable}"
                     android:imeOptions="actionNext"
                     android:inputType="textNoSuggestions"
                     android:layout_height="wrap_content">
@@ -65,8 +67,8 @@
                     android:layout_width="match_parent"
                     android:inputType="textPassword|textNoSuggestions"
                     binding:materialButton="@{btnLoginPassword}"
-                    binding:action="@{@string/input_act_user}"
-                    binding:textInputLayout="@{inputPassword}"
+                    binding:secondEdtText="@{edtUserName}"
+                    binding:isEnable="@{isEnable}"
                     style="@style/AppEditText.EditText"
                     android:imeOptions="actionDone"
                     android:layout_height="wrap_content">
