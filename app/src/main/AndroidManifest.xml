@@ -35,17 +35,17 @@
         <activity
                 android:name=".dashboard.ActivityDashboard"
                 android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
 
 
         </activity>
         <activity
-                android:name="com.ng.printtag.allrequest.AllRequests"
-                android:exported="false"
-                android:screenOrientation="portrait"/>
+                android:name="com.ng.printtag.allrequest.ActivityAllRequests"
+                android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
 
 
         <activity

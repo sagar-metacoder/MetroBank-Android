@@ -1,18 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:bind="http://schemas.android.com/apk/res-auto">
+        xmlns:bind="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+>
+
+    <data>
+        <import type="com.ng.printtag.apputils.Utils"/>
+        <import type="android.view.View"/>
+        <variable name="titleString" type="String"/>
+        <variable name="instance" type="com.ng.printtag.base.HeaderToolBar"/>
+        <variable name="headerModel" type="com.ng.printtag.base.HeaderModel"/>
+    </data>
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_marginStart="@dimen/page_side_margin"
-            android:layout_marginEnd="@dimen/page_side_margin"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+    >
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_all_requests"
+        <RelativeLayout
+                android:id="@+id/header_tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                tools:ignore="UselessParent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/iv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:drawableStart="@mipmap/ic_back"
+                    android:drawablePadding="@dimen/margin_10"
+                    android:paddingStart="@dimen/margin_20"
+                    android:paddingEnd="0dp"
+                    android:layout_centerVertical="true"
+                    android:clickable="true"
+                    android:text=""
+                    android:textSize="@dimen/font_18"
+                    android:textColor="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:focusable="true"
+                    android:scaleType="center"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_header_title"
+                    style="@style/AppTextView.Header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_20"
+                    android:layout_toEndOf="@+id/iv_back"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/margin_40"
+                    android:layout_centerVertical="true"
+                    android:text="@string/a_lbl_all_requests"
+                    tools:ignore="RelativeOverlap"
+                    android:singleLine="true"
+                    android:layout_toStartOf="@+id/li_header_regs"
+                    android:ems="15"/>
+
+            <LinearLayout
+                    android:id="@+id/li_header_regs"
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_calendar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/ic_calendar"
+                        android:focusable="true"
+                        android:paddingStart="@dimen/margin_20"
+                        android:paddingEnd="@dimen/margin_20"
+                        android:background="?android:attr/selectableItemBackground"/>
+
+                <androidx.appcompat.widget.SearchView
+                        android:id="@+id/iv_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/ic_search"
+                        android:focusable="true"
+                        android:paddingStart="@dimen/margin_20"
+                        android:paddingEnd="@dimen/margin_20"
+                        android:background="?android:attr/selectableItemBackground"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_version"
+                        style="@style/AppTextView.Header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_14"
+                        android:visibility="gone"
+                        android:layout_gravity="center_vertical"
+                        android:text="@{Utils.getAppVersion(true)}"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/margin_10"
-                bind:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                android:layout_below="@id/header_tool_bar"
+                android:background="@color/colorWhite">
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_all_requests"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/margin_10"
+                    bind:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        </RelativeLayout>
     </RelativeLayout>
 
 </layout>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
 >
 
     <data>
@@ -19,14 +18,7 @@
             android:paddingTop="@dimen/margin_12"
             android:layout_height="wrap_content">
 
-        <androidx.cardview.widget.CardView
-                android:id="@+id/cv_search_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@android:color/white"
-                app:cardCornerRadius="@dimen/card_corner_radius"
-                app:cardElevation="@dimen/card_elevation"
-                app:cardUseCompatPadding="true">
+
             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
                           android:orientation="vertical">
 
@@ -58,8 +50,9 @@
                             android:singleLine="false"
                             android:layout_marginEnd="@dimen/margin_2"
                             android:layout_width="0dp"
-                            android:layout_weight="0.7"
-                            android:gravity="end"
+                            android:layout_weight="0.6"
+                            android:gravity="center"
+                            android:padding="@dimen/margin_2"
                             android:layout_height="match_parent"
                             android:background="@color/colorPrimary"
                             android:textColor="@color/colorWhite"
@@ -261,7 +254,6 @@
 
 
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
         <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
