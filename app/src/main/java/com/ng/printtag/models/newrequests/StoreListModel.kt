@@ -3,6 +3,7 @@ package com.ng.printtag.models.newrequests
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+
 class StoreListModel {
 
     @SerializedName("success")

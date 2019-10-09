@@ -31,9 +31,9 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
     var mDay: Int = 0
     private lateinit var arrayStoreKey : ArrayList<String>
     private lateinit var arrayStoreValue : ArrayList<String>
-    private lateinit var arrayDeptKey : ArrayList<String>
-    private lateinit var arrayDeptValue : ArrayList<String>
-    var storeKey : String = ""
+    private lateinit var arrayDeptKey: ArrayList<String>
+    private lateinit var arrayDeptValue: ArrayList<String>
+    var storeKey: String = ""
     override fun initFragment() {
         binding = getFragmentDataBinding()
         arrayStoreKey = ArrayList()
@@ -80,11 +80,11 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
         dialog.callBackListener = object : CallBackInterfaces {
             override fun onCallBack(item: Any, fromWhere: Any) {
-                if (fromWhere == Constant.TAG_STORE)
-                {
-                    binding.edtStoreNo.text = Editable.Factory.getInstance().newEditable(arrayStoreValue.get(item as Int))
+                if (fromWhere == Constant.TAG_STORE) {
+                    binding.edtStoreNo.text =
+                        Editable.Factory.getInstance().newEditable(arrayStoreValue.get(item as Int))
                     storeKey = arrayStoreKey.get(item as Int)
-            }
+                }
                 Log.d("selected", item.toString())
 
             }
@@ -99,7 +99,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
         dialog.callBackListener = object : CallBackInterfaces {
             override fun onCallBack(item: Any, fromWhere: Any) {
-                binding.edtDepartment.text =Editable.Factory.getInstance().newEditable(item.toString())
+                binding.edtDepartment.text = Editable.Factory.getInstance().newEditable(item.toString())
                 Log.d("selected", item.toString())
 
             }
@@ -115,18 +115,16 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
         }
         binding.edtStoreNo.setOnClickListener {
 
-            if(!arrayStoreKey.isNullOrEmpty())
-            {
-                if(arrayStoreKey.size >1) {
+            if (!arrayStoreKey.isNullOrEmpty()) {
+                if (arrayStoreKey.size > 1) {
                     callStoreTypeDialog()
                 }
             }
 
             //callStoreApi()
         }
-        binding.edtDepartment.setOnClickListener{
-            if(storeKey.isNotEmpty() && !binding.edtTagType.text.isNullOrBlank())
-            {
+        binding.edtDepartment.setOnClickListener {
+            if (storeKey.isNotEmpty() && !binding.edtTagType.text.isNullOrBlank()) {
                 //callDepartmentApi()
             }
         }
@@ -158,8 +156,8 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
         val rootJson = JSONObject()
         rootJson.put(resources.getString(R.string.userId), AppUtils.getUserModel(activity!!).data!!.userId)
-        rootJson.put(resources.getString(R.string.tagType),binding.edtTagType.text.toString())
-        rootJson.put(resources.getString(R.string.storeNumber),storeKey)
+        rootJson.put(resources.getString(R.string.tagType), binding.edtTagType.text.toString())
+        rootJson.put(resources.getString(R.string.storeNumber), storeKey)
 
         val body = RequestMethods.getRequestBody(rootJson)
 

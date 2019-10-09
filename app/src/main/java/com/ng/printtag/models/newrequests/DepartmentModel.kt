@@ -11,7 +11,7 @@ class DepartmentModel {
     var success: Boolean = false
     @SerializedName("msg")
     @Expose
-    var msg : String?= null
+    var msg: String? = null
     @SerializedName("data")
     @Expose
     var data: Data? = null
