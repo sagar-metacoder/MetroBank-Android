@@ -1,8 +1,8 @@
 package com.ng.printtag.dialog
 
 import com.ng.printtag.R
+import com.ng.printtag.base.BaseDialog
 import com.ng.printtag.databinding.DialogDepartmentBinding
-import ng.pdp.base.BaseDialog
 
 class DialogDepartment : BaseDialog<DialogDepartmentBinding>() {
     lateinit var binding: DialogDepartmentBinding

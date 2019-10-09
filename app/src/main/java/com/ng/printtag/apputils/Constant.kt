@@ -20,4 +20,6 @@ object Constant {
     const val CALL_ALL_REQUEST = 4
 
 
+    const val TAG_TYPE =20
+    const val TAG_STORE =21
 }
