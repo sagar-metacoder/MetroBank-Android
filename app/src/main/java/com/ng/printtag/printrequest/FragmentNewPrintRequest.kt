@@ -29,8 +29,8 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
     private var mYear: Int = 0
     var mMonth: Int = 0
     var mDay: Int = 0
-    private lateinit var arrayStoreKey : ArrayList<String>
-    private lateinit var arrayStoreValue : ArrayList<String>
+    private lateinit var arrayStoreKey: ArrayList<String>
+    private lateinit var arrayStoreValue: ArrayList<String>
     private lateinit var arrayDeptKey: ArrayList<String>
     private lateinit var arrayDeptValue: ArrayList<String>
     var storeKey: String = ""
@@ -55,7 +55,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
     private fun callTagTypeDialog() {
         val dialog = DialogTypeStore()
         dialog.fromWhere = Constant.TAG_TYPE
-        val tagType : ArrayList<String> = ArrayList()
+        val tagType: ArrayList<String> = ArrayList()
         tagType.add("Fresh Tag")
         tagType.add("Inventory Tag")
         dialog.stringList = tagType
@@ -260,6 +260,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
         }
     }
+
     private fun showError(title: String, message: String) {
         CallDialog.errorDialog(
             activity!!,
@@ -278,9 +279,6 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
 
     }
-
-
-
 
 
     override fun getLayoutId(): Int = R.layout.fragment_new_print_request

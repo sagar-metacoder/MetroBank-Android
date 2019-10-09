@@ -17,17 +17,37 @@ class DepartmentModel {
     var data: Data? = null
 
     inner class Data {
-        @SerializedName("stores")
+        @SerializedName("templates")
         @Expose
-        var stores: Any? = null
+        var templates: Template? = null
         @SerializedName("departments")
         @Expose
         var departments: Any? = null
-        @SerializedName("msg")
+
+
+
+    }
+
+    inner class Template {
+        @SerializedName("id")
         @Expose
-        var msg: String? = null
+        var id: String? = null
 
+        @SerializedName("name")
+        @Expose
+        var name: String? = null
 
+        @SerializedName("size")
+        @Expose
+        var size: String? = null
+
+        @SerializedName("html")
+        @Expose
+        var html: String? = null
+
+        @SerializedName("image")
+        @Expose
+        var image: String? = null
     }
 
 }
