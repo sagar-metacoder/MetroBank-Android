@@ -84,7 +84,7 @@
     <dimen name="font_dialog_message">16sp</dimen>
     <dimen name="font_dialog_item">18sp</dimen>
     <dimen name="font_floating_text">14sp</dimen>
-    <dimen name="font_title_small">18sp</dimen>
+    <dimen name="font_title_small">12sp</dimen>
 	<dimen name="font_title_left_header">18sp</dimen>
     <dimen name="font_slide_menu">16sp</dimen>
 	<dimen name="font_ofac_sub_title">18sp</dimen>
@@ -100,7 +100,7 @@
     <dimen name="font_exception_message">28sp</dimen>
 
     <dimen name="font_hint">24sp</dimen>
-    <dimen name="font_label">15sp</dimen>
+    <dimen name="font_label">14sp</dimen>
     <dimen name="font_24">24sp</dimen>
     <dimen name="font_26">26sp</dimen>
     <dimen name="font_20">20sp</dimen>

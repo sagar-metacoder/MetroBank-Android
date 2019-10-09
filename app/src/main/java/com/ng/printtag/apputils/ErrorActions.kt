@@ -14,6 +14,7 @@ import androidx.databinding.BindingAdapter
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.ng.printtag.R.color.*
+import com.ng.printtag.R.id
 import com.ng.printtag.R.string
 import com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout
 import java.util.regex.Pattern
@@ -61,6 +62,42 @@ class ErrorActions {
             })
         }
 
+
+        @JvmStatic
+        @BindingAdapter(
+            value = ["binding:secondEdtText", "binding:materialButton", "binding:isEnable"], requireAll = false
+        )
+        fun validateName(
+            edtText: TextInputEditText,
+            secondEdtText: TextInputEditText,
+            materialButton: MaterialButton,
+            isEnable: Boolean
+        ) {
+            validateButton(materialButton, isEnable)
+            edtText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                @RequiresApi(Build.VERSION_CODES.M)
+                override fun afterTextChanged(p0: Editable?) {
+                    if (p0!!.isNotEmpty()) {
+                        if (edtText.id == id.edt_user_name) {
+                            if (secondEdtText.text.toString().isNotEmpty())
+                                validateButton(materialButton, true)
+                        } else {
+                            if (secondEdtText.text.toString().isNotEmpty())
+                                validateButton(materialButton, true)
+                        }
+
+                    } else {
+                        validateButton(materialButton, false)
+                    }
+                }
+            })
+        }
         private fun checkLoginPassword(
             edtText: TextInputEditText,
             textInputLayout: CollapsedHintTextInputLayout,

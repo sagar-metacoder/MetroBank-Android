@@ -50,8 +50,9 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="@dimen/margin_40"
                     android:layout_centerVertical="true"
+                    android:paddingStart="@dimen/margin_10"
                     android:text="@string/a_lbl_all_requests"
-                    tools:ignore="RelativeOverlap"
+                    tools:ignore="RelativeOverlap,RtlSymmetry"
                     android:singleLine="true"
                     android:layout_toStartOf="@+id/li_header_regs"
                     android:ems="15"/>
@@ -73,10 +74,10 @@
                         android:src="@mipmap/ic_calendar"
                         android:focusable="true"
                         android:paddingStart="@dimen/margin_20"
-                        android:paddingEnd="@dimen/margin_20"
+                        android:paddingEnd="@dimen/margin_10"
                         android:background="?android:attr/selectableItemBackground"/>
 
-                <androidx.appcompat.widget.SearchView
+                <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_search"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -84,8 +85,8 @@
                         android:layout_gravity="center_vertical"
                         android:src="@mipmap/ic_search"
                         android:focusable="true"
-                        android:paddingStart="@dimen/margin_20"
-                        android:paddingEnd="@dimen/margin_20"
+                        android:paddingStart="@dimen/margin_10"
+                        android:paddingEnd="@dimen/margin_10"
                         android:background="?android:attr/selectableItemBackground"/>
                 <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_version"

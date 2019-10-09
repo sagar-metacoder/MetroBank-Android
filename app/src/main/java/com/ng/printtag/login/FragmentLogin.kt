@@ -1,6 +1,7 @@
 package com.ng.printtag.login
 
 
+import androidx.databinding.ObservableBoolean
 import com.ng.printtag.R
 import com.ng.printtag.api.RequestMethods
 import com.ng.printtag.api.RestClient
@@ -24,10 +25,10 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
 
     override fun initFragment() {
         binding = getFragmentDataBinding()
+        binding.isEnable = ObservableBoolean(false)
         binding.userName = (activity as ActivityLogin).loginModel.userName
         binding.edtPassword.setText((activity as ActivityLogin).loginModel.password)
         binding.edtUserName.setText((activity as ActivityLogin).loginModel.userName)
-
         binding.edtUserName.requestFocus()
 
         handelClick()
@@ -68,7 +69,6 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
     }
 
 
-
     override fun onApiResponse(response: Response<Any>, reqCode: Int) {
         super.onApiResponse(response, reqCode)
         when (reqCode) {
@@ -89,6 +89,7 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
             }
         }
     }
+
     private fun showError(title: String, message: String) {
         CallDialog.errorDialog(
             activity!!,
@@ -100,15 +101,6 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
         )
 
     }
-
-
-    override fun onApiError(response: Any, reqCode: Int) {
-        super.onApiError(response, reqCode)
-
-
-    }
-
-
 
 
     override fun onResume() {
