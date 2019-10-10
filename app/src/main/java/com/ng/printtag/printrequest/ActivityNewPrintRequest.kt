@@ -114,7 +114,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
                         for (i in 0 until rootResponse.data!!.departments!!.size) {
 
                             arrayDeptKey.add(rootResponse.data!!.departments?.get(i)?.key!!)
-                            arrayDeptValue.add(rootResponse.data!!.departments?.get(i)?.key!!)
+                            arrayDeptValue.add(rootResponse.data!!.departments?.get(i)?.value!!)
                         }
                         val currentFragment = getCurrentFragment()
                         if (currentFragment != null && currentFragment is FragmentNewPrintRequest) {

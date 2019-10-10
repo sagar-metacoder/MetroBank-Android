@@ -16,6 +16,7 @@ import com.ng.printtag.dialog.DialogDepartment
 import com.ng.printtag.dialog.DialogTypeStore
 import com.ng.printtag.interfaces.CallBackInterfaces
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
@@ -88,9 +89,19 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
         dialog.callBackListener = object : CallBackInterfaces {
             override fun onCallBack(item: Any, fromWhere: Any) {
+                val deptPosition: ArrayList<Int> = item as ArrayList<Int>
+                val stringBuilder = StringBuilder()
+                val valueBuilder = StringBuilder()
+                for (i in 0 until deptPosition.size) {
+                    stringBuilder.append(context!!.arrayDeptKey[deptPosition[i]])
+                    stringBuilder.append(",")
+                    valueBuilder.append(context!!.arrayDeptValue[deptPosition[i]])
+                    valueBuilder.append(",")
+                }
                 binding.edtDepartment.text =
-                    Editable.Factory.getInstance().newEditable(context!!.arrayDeptValue.get(item as Int))
-                Log.d("selected", item.toString())
+                    Editable.Factory.getInstance().newEditable(stringBuilder)
+//                con
+//                Log.d("selected", item.toString())
 
             }
         }
