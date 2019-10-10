@@ -14,7 +14,7 @@ import com.ng.printtag.models.newrequests.DepartmentModel
 
 class TemplateListAdapter(
     private var context: Context,
-    private val results: MutableList<DepartmentModel.Template>,
+    private val results: MutableList<DepartmentModel.Data.Template>,
     private var onItemClickListener: OnItemClickListener
 ) :
     RecyclerView.Adapter<TemplateListAdapter.CustomViewHolder>() {
@@ -45,10 +45,12 @@ class TemplateListAdapter(
         View.OnClickListener {
         init {
             binding.liTemplate.setOnClickListener(this)
-
+            binding.root.setOnClickListener(this)
         }
 
+
         override fun onClick(view: View?) {
+            onItemClickListener.onItemClick(adapterPosition, adapterPosition)
             selectedPosition = position
             notifyDataSetChanged()
         }
@@ -60,7 +62,7 @@ class TemplateListAdapter(
         /**
          * Bind the txt with xml
          */
-        fun bind(item: DepartmentModel.Template) {
+        fun bind(item: DepartmentModel.Data.Template) {
             binding.model = item
             BindingMethods.setServerImage(
                 binding.ivTemplate,

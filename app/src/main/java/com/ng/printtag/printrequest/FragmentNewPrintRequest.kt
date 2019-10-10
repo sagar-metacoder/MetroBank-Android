@@ -43,23 +43,27 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
     }
 
-    fun setAdapter(templateList: MutableList<DepartmentModel.Template>?) {
+    fun setAdapter(templateList: MutableList<DepartmentModel.Data.Template>?) {
         val adapterTemplateList = TemplateListAdapter(
             activity!!,
             templateList!!,
             object : OnItemClickListener {
                 override fun onItemClick(item: Any, position: Int) {
 
+                    context!!.callTemplateDetails(position)
+
+                    binding.linearTemplateData.visibility = View.VISIBLE
+                    ErrorActions.validateButton(binding.btnSubmit, true)
                 }
             })
         binding.rvTemplateList.adapter = adapterTemplateList
 
-        context!!.callTemplateDetails()
-        binding.linearTemplateData.visibility = View.VISIBLE
-        ErrorActions.validateButton(binding.btnSubmit, true)
+
     }
 
+    fun getSelectedPosi() {
 
+    }
     private fun callTagTypeDialog() {
         val dialog = DialogTypeStore()
         dialog.fromWhere = Constant.TAG_TYPE
