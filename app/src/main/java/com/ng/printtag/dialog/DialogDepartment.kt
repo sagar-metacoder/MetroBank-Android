@@ -17,11 +17,14 @@ class DialogDepartment : BaseDialog<DialogDepartmentBinding>() {
         binding.rvList.adapter = adapter
         handleClick()
 
+
     }
 
     private fun handleClick() {
         binding.btnDone.setOnClickListener {
             dismiss()
+
+
             callBackListener!!.onCallBack(adapter.selectedDeptList, "")
         }
     }

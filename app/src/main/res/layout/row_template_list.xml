@@ -3,7 +3,7 @@
 >
     <data>
         <variable name="model"
-                  type="com.ng.printtag.models.newrequests.DepartmentModel.Template"/>
+                  type="com.ng.printtag.models.newrequests.DepartmentModel.Data.Template"/>
     </data>
     <androidx.cardview.widget.CardView
             xmlns:android="http://schemas.android.com/apk/res/android"

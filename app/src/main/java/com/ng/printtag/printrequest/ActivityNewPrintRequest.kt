@@ -24,8 +24,11 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
     var arrayStoreValue: ArrayList<String> = ArrayList()
     var arrayDeptKey: ArrayList<String> = ArrayList()
     var arrayDeptValue: ArrayList<String> = ArrayList()
+    lateinit var arrayTemplate: MutableList<DepartmentModel.Data.Template>
     var storeKey: String = ""
     var tagType: String = ""
+    var department_key: String = ""
+    var template_postion: Int = 0
 
 
     override fun initMethod() {
@@ -79,21 +82,22 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
         )
     }
 
-    fun callTemplateDetails() {
+    fun callTemplateDetails(position: Int) {
         val restClientModel = RestClientModel()
         restClientModel.isProgressDialogShow = true
 
+        template_postion = position
         val rootJson = JSONObject()
         rootJson.put(
             resources.getString(R.string.userId),
             AppUtils.getUserModel(this@ActivityNewPrintRequest).data!!.userId
         )
-        rootJson.put(resources.getString(R.string.key_templateId), "531035")
+        rootJson.put(resources.getString(R.string.key_templateId), arrayTemplate.get(position).id)
         rootJson.put(resources.getString(R.string.tagType), tagType)
 
         rootJson.put(resources.getString(R.string.storeNumber), storeKey)
         rootJson.put(
-            resources.getString(R.string.department), "13794"
+            resources.getString(R.string.department), department_key
         )
         val body = RequestMethods.getRequestBody(rootJson)
 
@@ -116,11 +120,11 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
             resources.getString(R.string.userId),
             AppUtils.getUserModel(this@ActivityNewPrintRequest).data!!.userId
         )
-        rootJson.put(resources.getString(R.string.key_templateId), "531035")
+        rootJson.put(resources.getString(R.string.key_templateId), arrayTemplate.get(template_postion).id)
         rootJson.put(resources.getString(R.string.tagType), tagType)
 
         rootJson.put(resources.getString(R.string.storeNumber), storeKey)
-        rootJson.put(resources.getString(R.string.department), "13794")
+        rootJson.put(resources.getString(R.string.department), department_key)
         rootJson.put(resources.getString(R.string.key_effectiveDate), Utils.parseDateToMMddyyyy(date))
         rootJson.put(resources.getString(R.string.key_expectedDate), "")
 
@@ -182,6 +186,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
                     true -> {
                         arrayDeptKey = ArrayList()
                         arrayDeptValue = ArrayList()
+                        arrayTemplate = ArrayList()
 
                         for (i in 0 until rootResponse.data!!.departments!!.size) {
 
@@ -197,6 +202,8 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
                         if (!rootResponse.data!!.templates.isNullOrEmpty()) {
                             if (rootResponse.data!!.templates!!.size >= 1 && currentFragment is FragmentNewPrintRequest) {
                                 currentFragment.setAdapter(rootResponse.data!!.templates)
+                                arrayTemplate =
+                                    rootResponse.data!!.templates as ArrayList<DepartmentModel.Data.Template>
                                 currentFragment.isDeptSelected = false
                             }
                         }
@@ -231,6 +238,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
                 when (rootResponse.success) {
                     true -> {
 
+                        AppUtils.showLongToast(this@ActivityNewPrintRequest, "Product Addded Successfully.")
                         Utils.gotoHomeScreen(this@ActivityNewPrintRequest)
                     }
                     else -> {

@@ -48,12 +48,19 @@ class DepartmentDialogAdapter : RecyclerView.Adapter<DepartmentDialogAdapter.Vie
     inner class ViewHolder(private val dataBinding: RowDialogDepartmentBinding) :
         RecyclerView.ViewHolder(dataBinding.root), CompoundButton.OnCheckedChangeListener {
         init {
+            /* if(BaseSharedPreference.getInstance(context).getPrefValue(context.getString(R.string.department))!!.contains(position.toString()))
+             {
+                 dataBinding.chkDepartment.isChecked = true
+
+             }*/
             dataBinding.chkDepartment.setOnCheckedChangeListener(this)
         }
+
 
         override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
             if (p1) {
                 selectedDeptList.add(position)
+
             }
         }
 

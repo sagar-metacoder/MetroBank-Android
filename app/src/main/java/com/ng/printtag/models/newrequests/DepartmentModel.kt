@@ -31,39 +31,40 @@ class DepartmentModel {
         var departments: MutableList<Departments>? = null
 
 
+        inner class Template {
+            @SerializedName("id")
+            @Expose
+            var id: String? = null
+
+            @SerializedName("name")
+            @Expose
+            var name: String? = null
+
+            @SerializedName("size")
+            @Expose
+            var size: String? = null
+
+            @SerializedName("html")
+            @Expose
+            var html: String? = null
+
+            @SerializedName("image")
+            @Expose
+            var image: String? = null
+
+            var departmentSelected: Boolean? = false
+        }
+
+        inner class Departments {
+            @SerializedName("key")
+            @Expose
+            var key: String? = null
+            @SerializedName("value")
+            @Expose
+            var value: String? = null
+        }
     }
 
-    inner class Template {
-        @SerializedName("id")
-        @Expose
-        var id: String? = null
 
-        @SerializedName("name")
-        @Expose
-        var name: String? = null
-
-        @SerializedName("size")
-        @Expose
-        var size: String? = null
-
-        @SerializedName("html")
-        @Expose
-        var html: String? = null
-
-        @SerializedName("image")
-        @Expose
-        var image: String? = null
-
-        var departmentSelected: Boolean? = false
-    }
-
-    inner class Departments {
-        @SerializedName("key")
-        @Expose
-        var key: String? = null
-        @SerializedName("value")
-        @Expose
-        var value: String? = null
-    }
 
 }
