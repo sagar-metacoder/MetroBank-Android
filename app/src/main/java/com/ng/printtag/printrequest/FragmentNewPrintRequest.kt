@@ -2,7 +2,6 @@ package com.ng.printtag.printrequest
 
 import android.app.DatePickerDialog
 import android.text.Editable
-import android.util.Log
 import android.util.TypedValue
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ng.printtag.R
@@ -15,6 +14,8 @@ import com.ng.printtag.databinding.FragmentNewPrintRequestBinding
 import com.ng.printtag.dialog.DialogDepartment
 import com.ng.printtag.dialog.DialogTypeStore
 import com.ng.printtag.interfaces.CallBackInterfaces
+import com.ng.printtag.interfaces.OnItemClickListener
+import com.ng.printtag.models.newrequests.DepartmentModel
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -25,8 +26,8 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
     var mMonth: Int = 0
     var mDay: Int = 0
     var context: ActivityNewPrintRequest? = null
+    var isDeptSelected: Boolean = false
 
-    var storeKey: String = ""
     override fun initFragment() {
         binding = getFragmentDataBinding()
         context = activity as ActivityNewPrintRequest
@@ -38,6 +39,18 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
         handleClick()
         context!!.callStoreApi()
 
+    }
+
+    fun setAdapter(templateList: MutableList<DepartmentModel.Template>?) {
+        val adapterTemplateList = TemplateListAdapter(
+            activity!!,
+            templateList!!,
+            object : OnItemClickListener {
+                override fun onItemClick(item: Any, position: Int) {
+
+                }
+            })
+        binding.rvTemplateList.adapter = adapterTemplateList
     }
 
 
@@ -53,8 +66,14 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             override fun onCallBack(item: Any, fromWhere: Any) {
                 if (fromWhere == Constant.TAG_TYPE) {
                     binding.edtTagType.text = Editable.Factory.getInstance().newEditable(tagType.get(item as Int))
+
+                    if (item == 0) {
+                        context!!.tagType = "FreshTag"
+                    } else {
+                        context!!.tagType = "InventoryTag"
+
+                    }
                 }
-                Log.d("selected", item.toString())
 
             }
         }
@@ -71,10 +90,9 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             override fun onCallBack(item: Any, fromWhere: Any) {
                 if (fromWhere == Constant.TAG_STORE) {
                     binding.edtStoreNo.text =
-                        Editable.Factory.getInstance().newEditable(context!!.arrayStoreValue.get(item as Int))
-                    storeKey = context!!.arrayStoreKey.get(item as Int)
+                        Editable.Factory.getInstance().newEditable(context!!.arrayStoreKey.get(item as Int))
+                    context!!.storeKey = context!!.arrayStoreValue.get(item as Int)
                 }
-                Log.d("selected", item.toString())
 
             }
         }
@@ -94,13 +112,18 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                 val valueBuilder = StringBuilder()
                 for (i in 0 until deptPosition.size) {
                     stringBuilder.append(context!!.arrayDeptKey[deptPosition[i]])
-                    stringBuilder.append(",")
+                    stringBuilder.append(", ")
                     valueBuilder.append(context!!.arrayDeptValue[deptPosition[i]])
                     valueBuilder.append(",")
                 }
+                isDeptSelected = true
                 binding.edtDepartment.text =
-                    Editable.Factory.getInstance().newEditable(stringBuilder)
-//                con
+                    Editable.Factory.getInstance().newEditable(stringBuilder.substring(0, stringBuilder.length - 2))
+                context!!.callDepartmentApi(
+                    context!!.tagType,
+                    context!!.storeKey,
+                    valueBuilder.substring(0, valueBuilder.length - 1)
+                )
 //                Log.d("selected", item.toString())
 
             }
@@ -125,8 +148,8 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             //callStoreApi()
         }
         binding.edtDepartment.setOnClickListener {
-            if (storeKey.isNotEmpty() && !binding.edtTagType.text.isNullOrBlank()) {
-                context!!.callDepartmentApi(binding.edtTagType.text.toString(), storeKey, "")
+            if (context!!.storeKey.isNotEmpty() && !binding.edtTagType.text.isNullOrBlank()) {
+                context!!.callDepartmentApi(binding.edtTagType.text.toString(), context!!.storeKey, "")
             }
         }
         binding.edtEffectiveDate.setOnClickListener {

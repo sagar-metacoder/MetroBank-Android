@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
 >
     <data>
@@ -8,13 +8,22 @@
                 name="layoutManager"
                 type="androidx.recyclerview.widget.GridLayoutManager"/>
     </data>
-    <ScrollView android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingStart="@dimen/margin_20"
-                android:paddingEnd="@dimen/margin_20"
-                android:background="@color/app_background">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:orientation="vertical">
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/margin_20"
+                    android:paddingEnd="@dimen/margin_20"
+                    android:background="@color/app_background"
+                    android:orientation="vertical">
+        <ScrollView android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="none"
+                    android:layout_above="@+id/btnSubmit"
+        >
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+            >
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -107,10 +116,19 @@
             </com.google.android.material.textfield.TextInputEditText>
         </com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout>
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:orientation="vertical">
+                <LinearLayout android:id="@+id/linearRv"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:orientation="vertical">
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/AppEditText.HintText"
+                            android:text="@string/a_title_template"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorWhite50"
+                    />
 
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_templateList"
@@ -121,13 +139,124 @@
                         android:layout_marginTop="@dimen/margin_10"/>
 
                 <View
-                        android:layout_marginTop="@dimen/margin_20"
-                        android:layout_marginBottom="@dimen/margin_20"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:layout_marginBottom="@dimen/margin_10"
                         android:layout_height="@dimen/margin_1"
                         android:layout_width="match_parent"
                         android:background="@color/color_CDE0EC"/>
             </LinearLayout>
 
+                <LinearLayout android:id="@+id/linearTemplateData"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:orientation="vertical">
+
+                    <RelativeLayout android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/AppTextView.Title.Medium"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:text="@string/a_lbl_cutoff_day"
+                                android:layout_marginStart="@dimen/margin_5"
+                        />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_cutoff"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/AppTextView.Title.Medium"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:text="@string/a_lbl_cutoff_day"
+                                android:layout_marginEnd="@dimen/margin_5"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/colorWhite50"
+                                tools:ignore="RelativeOverlap"/>
+
+
+                    </RelativeLayout>
+
+
+                    <View
+                            android:layout_marginTop="@dimen/margin_10"
+                            android:layout_marginBottom="@dimen/margin_10"
+                            android:layout_height="@dimen/margin_1"
+                            android:layout_width="match_parent"
+                            android:background="@color/color_CDE0EC"/>
+
+                    <RelativeLayout android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/AppTextView.Title.Medium"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:text="@string/a_lbl_printing_day"
+                                android:layout_marginStart="@dimen/margin_5"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_printingDay"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/AppTextView.Title.Medium"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:text="@string/a_lbl_cutoff_day"
+                                android:layout_marginEnd="@dimen/margin_5"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/colorWhite50"
+                                tools:ignore="RelativeOverlap"/>
+
+
+                    </RelativeLayout>
+
+
+                    <View
+                            android:layout_marginTop="@dimen/margin_10"
+                            android:layout_marginBottom="@dimen/margin_10"
+                            android:layout_height="@dimen/margin_1"
+                            android:layout_width="match_parent"
+                            android:background="@color/color_CDE0EC"/>
+
+                    <RelativeLayout android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/AppTextView.Title.Medium"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:text="@string/a_lbl_max_quantity"
+                                android:layout_marginStart="@dimen/margin_5"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_maxQuantinty"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/AppTextView.Title.Medium"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:text="@string/a_lbl_cutoff_day"
+                                android:layout_marginEnd="@dimen/margin_5"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/colorWhite50"
+                                tools:ignore="RelativeOverlap"/>
+
+
+                    </RelativeLayout>
+
+
+                    <View
+                            android:layout_marginTop="@dimen/margin_10"
+                            android:layout_marginBottom="@dimen/margin_10"
+                            android:layout_height="@dimen/margin_1"
+                            android:layout_width="match_parent"
+                            android:background="@color/color_CDE0EC"/>
+                </LinearLayout>
 
             <!--
                     <RelativeLayout
@@ -149,8 +278,19 @@
                                 android:layout_alignParentEnd="true" tools:ignore="RelativeOverlap"/>
                     </RelativeLayout>
             -->
-
-    </LinearLayout>
+            </LinearLayout>
     </ScrollView>
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppButton.Colored"
+                android:layout_gravity="end"
+                android:text="@string/a_btn_next"
+                android:layout_alignParentBottom="true"
+                android:padding="@dimen/margin_8"
+                android:layout_alignParentEnd="true" tools:ignore="RelativeOverlap"/>
+
+    </RelativeLayout>
 
 </layout>

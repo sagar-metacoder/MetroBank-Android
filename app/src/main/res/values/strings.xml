@@ -83,4 +83,9 @@
     <string name="a_lbl_unknown">Unknown</string>
 
 
+    <!--Need to translate-->
+
+    <string name="a_lbl_printing_day">Printing Day</string>
+
+
 </resources>

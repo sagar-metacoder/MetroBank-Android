@@ -28,7 +28,9 @@ import com.ng.printtag.interfaces.SkipPostSerialisation
 import com.ng.printtag.models.allrequests.AllRequestModel
 import com.ng.printtag.models.login.LoginModel
 import com.ng.printtag.models.newrequests.DepartmentModel
+import com.ng.printtag.models.newrequests.NewPrintReqSubmit
 import com.ng.printtag.models.newrequests.StoreListModel
+import com.ng.printtag.models.newrequests.TempletListModel
 
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
@@ -505,6 +507,20 @@ open class RestClient {
                 makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
                 return
             }
+
+            Constant.CALL_TEMPLETS_DETAILS -> {
+                val callApi: Call<TempletListModel> = getApiClient()!!.callTemplateDetails(requestObject as RequestBody)
+                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
+                return
+            }
+
+            Constant.CALL_NEW_REQUEST_SUBMIT -> {
+                val callApi: Call<NewPrintReqSubmit> =
+                    getApiClient()!!.callNewRequestSubmit(requestObject as RequestBody)
+                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
+                return
+            }
+
             /*Constant.CALL_SEND_PRIVACY_DETAILS -> {
                 val callApi: Call<GenericRootResponse> =
                     getApiClient()!!.sendPrivacyDetails(requestObject as RequestBody)
