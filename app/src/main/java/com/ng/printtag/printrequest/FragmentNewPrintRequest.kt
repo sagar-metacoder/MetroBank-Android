@@ -14,7 +14,10 @@ import com.ng.printtag.databinding.FragmentNewPrintRequestBinding
 import com.ng.printtag.dialog.DialogDepartment
 import com.ng.printtag.dialog.DialogTypeStore
 import com.ng.printtag.interfaces.CallBackInterfaces
+import com.ng.printtag.interfaces.OnItemClickListener
+import com.ng.printtag.models.newrequests.DepartmentModel
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
@@ -23,6 +26,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
     var mMonth: Int = 0
     var mDay: Int = 0
     var context: ActivityNewPrintRequest? = null
+    var isDeptSelected: Boolean = false
 
     override fun initFragment() {
         binding = getFragmentDataBinding()
@@ -35,6 +39,18 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
         handleClick()
         context!!.callStoreApi()
 
+    }
+
+    fun setAdapter(templateList: MutableList<DepartmentModel.Template>?) {
+        val adapterTemplateList = TemplateListAdapter(
+            activity!!,
+            templateList!!,
+            object : OnItemClickListener {
+                override fun onItemClick(item: Any, position: Int) {
+
+                }
+            })
+        binding.rvTemplateList.adapter = adapterTemplateList
     }
 
 
@@ -51,7 +67,12 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                 if (fromWhere == Constant.TAG_TYPE) {
                     binding.edtTagType.text = Editable.Factory.getInstance().newEditable(tagType.get(item as Int))
 
-                    context!!.tagType = binding.edtTagType.text.toString().trim()
+                    if (item == 0) {
+                        context!!.tagType = "FreshTag"
+                    } else {
+                        context!!.tagType = "InventoryTag"
+
+                    }
                 }
 
             }
@@ -86,8 +107,24 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
         dialog.callBackListener = object : CallBackInterfaces {
             override fun onCallBack(item: Any, fromWhere: Any) {
+                val deptPosition: ArrayList<Int> = item as ArrayList<Int>
+                val stringBuilder = StringBuilder()
+                val valueBuilder = StringBuilder()
+                for (i in 0 until deptPosition.size) {
+                    stringBuilder.append(context!!.arrayDeptKey[deptPosition[i]])
+                    stringBuilder.append(", ")
+                    valueBuilder.append(context!!.arrayDeptValue[deptPosition[i]])
+                    valueBuilder.append(",")
+                }
+                isDeptSelected = true
                 binding.edtDepartment.text =
-                    Editable.Factory.getInstance().newEditable(context!!.arrayDeptValue.get(item as Int))
+                    Editable.Factory.getInstance().newEditable(stringBuilder.substring(0, stringBuilder.length - 2))
+                context!!.callDepartmentApi(
+                    context!!.tagType,
+                    context!!.storeKey,
+                    valueBuilder.substring(0, valueBuilder.length - 1)
+                )
+//                Log.d("selected", item.toString())
 
             }
         }

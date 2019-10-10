@@ -147,7 +147,6 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
     }
 
 
-
     override fun onApiResponse(response: Response<Any>, reqCode: Int) {
         super.onApiResponse(response, reqCode)
         when (reqCode) {
@@ -190,10 +189,14 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
                         }
                         val currentFragment = getCurrentFragment()
                         if (currentFragment != null && currentFragment is FragmentNewPrintRequest) {
-                            if (!arrayDeptKey.isNullOrEmpty())
-
+                            if (!arrayDeptKey.isNullOrEmpty() && !currentFragment.isDeptSelected)
                                 currentFragment.callDepartmentDialog()
 
+                        }
+                        if (!rootResponse.data!!.templates.isNullOrEmpty()) {
+                            if (rootResponse.data!!.templates!!.size >= 1 && currentFragment is FragmentNewPrintRequest) {
+                                currentFragment.setAdapter(rootResponse.data!!.templates)
+                            }
                         }
                     }
                     else -> {
