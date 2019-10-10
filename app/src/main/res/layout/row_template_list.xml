@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
 >
-
     <data>
         <variable name="model"
                   type="com.ng.printtag.models.newrequests.DepartmentModel.Template"/>
@@ -14,13 +13,15 @@
             app:cardCornerRadius="0dp"
             app:cardElevation="@dimen/card_elevation">
         <LinearLayout
+                android:id="@+id/li_template"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_20">
+                android:padding="@dimen/margin_10"
+                android:gravity="center"
+        >
             <androidx.appcompat.widget.AppCompatTextView
                     style="@style/AppTextView.Title.Small"
-                    android:textSize="@dimen/font_label"
                     android:singleLine="false"
                     android:maxLines="2"
                     android:layout_marginEnd="@dimen/margin_2"
@@ -31,7 +32,6 @@
             />
             <androidx.appcompat.widget.AppCompatTextView
                     style="@style/AppTextView.Title.Small"
-                    android:textSize="@dimen/font_label"
                     android:singleLine="false"
                     android:maxLines="2"
                     android:layout_marginEnd="@dimen/margin_2"

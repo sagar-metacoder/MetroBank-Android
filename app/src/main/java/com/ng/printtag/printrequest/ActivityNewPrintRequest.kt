@@ -157,6 +157,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
                         if (!rootResponse.data!!.templates.isNullOrEmpty()) {
                             if (rootResponse.data!!.templates!!.size >= 1 && currentFragment is FragmentNewPrintRequest) {
                                 currentFragment.setAdapter(rootResponse.data!!.templates)
+                                currentFragment.isDeptSelected = false
                             }
                         }
                     }

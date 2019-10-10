@@ -53,6 +53,8 @@ class DepartmentModel {
         @SerializedName("image")
         @Expose
         var image: String? = null
+
+        var departmentSelected: Boolean? = false
     }
 
     inner class Departments {
