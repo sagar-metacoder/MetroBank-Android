@@ -149,7 +149,12 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
         }
         binding.edtDepartment.setOnClickListener {
             if (context!!.storeKey.isNotEmpty() && !binding.edtTagType.text.isNullOrBlank()) {
-                context!!.callDepartmentApi(binding.edtTagType.text.toString(), context!!.storeKey, "")
+
+                context!!.callDepartmentApi(context!!.tagType, context!!.storeKey, "")
+            }
+            if (context!!.storeKey.isNotEmpty() && !binding.edtTagType.text.isNullOrBlank() && !context!!.arrayDeptKey.isNullOrEmpty()) {
+
+                callDepartmentDialog()
             }
         }
         binding.edtEffectiveDate.setOnClickListener {

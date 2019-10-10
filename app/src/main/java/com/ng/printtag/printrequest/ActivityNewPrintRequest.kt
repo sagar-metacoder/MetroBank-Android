@@ -17,7 +17,6 @@ import com.ng.printtag.models.newrequests.TempletListModel
 import kotlinx.android.synthetic.main.activity_new_print_request.*
 import org.json.JSONObject
 import retrofit2.Response
-import java.util.*
 
 class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
     private lateinit var binding: ActivityNewPrintRequestBinding
@@ -181,6 +180,8 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
                 val rootResponse = response.body() as DepartmentModel
                 when (rootResponse.success) {
                     true -> {
+                        arrayDeptKey = ArrayList()
+                        arrayDeptValue = ArrayList()
 
                         for (i in 0 until rootResponse.data!!.departments!!.size) {
 
@@ -196,6 +197,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
                         if (!rootResponse.data!!.templates.isNullOrEmpty()) {
                             if (rootResponse.data!!.templates!!.size >= 1 && currentFragment is FragmentNewPrintRequest) {
                                 currentFragment.setAdapter(rootResponse.data!!.templates)
+                                currentFragment.isDeptSelected = false
                             }
                         }
                     }
