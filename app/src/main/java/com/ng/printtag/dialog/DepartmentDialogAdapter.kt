@@ -13,7 +13,7 @@ class DepartmentDialogAdapter : RecyclerView.Adapter<DepartmentDialogAdapter.Vie
     private var mInflater: LayoutInflater? = null
     private lateinit var departmentList: ArrayList<String>
     private lateinit var context: Context
-    var selectedDeptList: ArrayList<String> = ArrayList()
+    var selectedDeptList: ArrayList<Int> = ArrayList()
 
 
     fun setData(
@@ -53,7 +53,7 @@ class DepartmentDialogAdapter : RecyclerView.Adapter<DepartmentDialogAdapter.Vie
 
         override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
             if (p1) {
-                selectedDeptList.add(departmentList[position])
+                selectedDeptList.add(position)
             }
         }
 

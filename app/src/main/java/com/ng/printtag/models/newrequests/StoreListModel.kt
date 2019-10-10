@@ -30,8 +30,7 @@ class StoreListModel {
 
     }
 
-    inner class Department
-    {
+    inner class Department {
         @SerializedName("key")
         @Expose
         var key: String? = null
