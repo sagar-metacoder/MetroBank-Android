@@ -82,8 +82,8 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             override fun onCallBack(item: Any, fromWhere: Any) {
                 if (fromWhere == Constant.TAG_STORE) {
                     binding.edtStoreNo.text =
-                        Editable.Factory.getInstance().newEditable(arrayStoreValue.get(item as Int))
-                    storeKey = arrayStoreKey.get(item as Int)
+                        Editable.Factory.getInstance().newEditable(arrayStoreKey.get(item as Int))
+                    storeKey = arrayStoreValue.get(item as Int)
                 }
                 Log.d("selected", item.toString())
 
@@ -205,7 +205,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                         for (i in 0 until rootResponse.data!!.stores!!.size) {
 
                             arrayStoreKey.add(rootResponse.data!!.stores?.get(i)?.key!!)
-                            arrayStoreValue.add(rootResponse.data!!.stores?.get(i)?.key!!)
+                            arrayStoreValue.add(rootResponse.data!!.stores?.get(i)?.value!!)
                         }
                         if(!arrayStoreKey.isNullOrEmpty())
                             if(arrayStoreKey.size == 1)
