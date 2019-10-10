@@ -20,8 +20,10 @@ import com.ng.printtag.common.ActivityInstructions
 import com.ng.printtag.dashboard.ActivityDashboard
 import com.ng.printtag.login.ActivityLogin
 import com.ng.printtag.models.login.LoginModel
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class Utils {
     companion object {
@@ -222,6 +224,25 @@ class Utils {
             return string
         }
 
+        @SuppressLint("SimpleDateFormat")
+        fun parseDateToMMddyyyy(time: String): String? {
+            val inputPattern = "MM/dd/yyyy"
+            val outputPattern = "MM-dd-yyyy"
+            val inputFormat = SimpleDateFormat(inputPattern)
+            val outputFormat = SimpleDateFormat(outputPattern)
+
+            var date: Date? = null
+            var str: String? = null
+
+            try {
+                date = inputFormat.parse(time)
+                str = outputFormat.format(date)
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
+
+            return str
+        }
         
 
     }

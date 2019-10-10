@@ -1,17 +1,17 @@
 package com.ng.printtag.printrequest
 
 import android.text.Editable
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.ng.printtag.R
 import com.ng.printtag.api.RequestMethods
 import com.ng.printtag.api.RestClient
 import com.ng.printtag.api.RestClientModel
-import com.ng.printtag.apputils.AppUtils
-import com.ng.printtag.apputils.CallDialog
-import com.ng.printtag.apputils.Constant
+import com.ng.printtag.apputils.*
 import com.ng.printtag.base.BaseActivity
 import com.ng.printtag.databinding.ActivityNewPrintRequestBinding
 import com.ng.printtag.models.newrequests.DepartmentModel
+import com.ng.printtag.models.newrequests.NewPrintReqSubmit
 import com.ng.printtag.models.newrequests.StoreListModel
 import com.ng.printtag.models.newrequests.TempletListModel
 import kotlinx.android.synthetic.main.activity_new_print_request.*
@@ -101,7 +101,46 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
         RestClient().apiRequest(
             this@ActivityNewPrintRequest,
             body,
-            Constant.CALL_STORE_URL,
+            Constant.CALL_TEMPLETS_DETAILS,
+            this,
+            restClientModel
+        )
+    }
+
+    fun callSubmitApi(date: String, product_info: String) {
+        val restClientModel = RestClientModel()
+        restClientModel.isProgressDialogShow = true
+
+
+        val rootJson = JSONObject()
+        rootJson.put(
+            resources.getString(R.string.userId),
+            AppUtils.getUserModel(this@ActivityNewPrintRequest).data!!.userId
+        )
+        rootJson.put(resources.getString(R.string.key_templateId), "531035")
+        rootJson.put(resources.getString(R.string.tagType), tagType)
+
+        rootJson.put(resources.getString(R.string.storeNumber), storeKey)
+        rootJson.put(resources.getString(R.string.department), "13794")
+        rootJson.put(resources.getString(R.string.key_effectiveDate), Utils.parseDateToMMddyyyy(date))
+        rootJson.put(resources.getString(R.string.key_expectedDate), "")
+
+        rootJson.put(
+            resources.getString(R.string.key_language),
+            BaseSharedPreference.getInstance(this@ActivityNewPrintRequest).getLanguage(
+                resources.getString(R.string.pref_language)
+            )
+        )
+        rootJson.put(resources.getString(R.string.key_action), resources.getString(R.string.action_submit))
+        rootJson.put(resources.getString(R.string.key_aisleInfo), product_info)
+
+
+        val body = RequestMethods.getRequestBody(rootJson)
+
+        RestClient().apiRequest(
+            this@ActivityNewPrintRequest,
+            body,
+            Constant.CALL_NEW_REQUEST_SUBMIT,
             this,
             restClientModel
         )
@@ -122,7 +161,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
                         for (i in 0 until rootResponse.data!!.stores!!.size) {
 
                             arrayStoreKey.add(rootResponse.data!!.stores?.get(i)?.key!!)
-                            arrayStoreValue.add(rootResponse.data!!.stores?.get(i)?.key!!)
+                            arrayStoreValue.add(rootResponse.data!!.stores?.get(i)?.value!!)
                         }
                         if (!arrayStoreKey.isNullOrEmpty())
                             if (arrayStoreKey.size == 1) {
@@ -147,7 +186,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
                         for (i in 0 until rootResponse.data!!.departments!!.size) {
 
                             arrayDeptKey.add(rootResponse.data!!.departments?.get(i)?.key!!)
-                            arrayDeptValue.add(rootResponse.data!!.departments?.get(i)?.key!!)
+                            arrayDeptValue.add(rootResponse.data!!.departments?.get(i)?.value!!)
                         }
                         val currentFragment = getCurrentFragment()
                         if (currentFragment != null && currentFragment is FragmentNewPrintRequest) {
@@ -167,8 +206,27 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
                 val rootResponse = response.body() as TempletListModel
                 when (rootResponse.success) {
                     true -> {
+                        val currentFragment = getCurrentFragment()
+                        if (currentFragment != null && currentFragment is FragmentNewPrintRequest) {
+
+                            currentFragment.binding.linearTemplateData.visibility = View.VISIBLE
+                            currentFragment.binding.model = rootResponse.data!!.templateDetails
 
 
+                        }
+                    }
+                    else -> {
+                        showError(getString(R.string.a_lbl_server_title), rootResponse.data!!.msg!!)
+                    }
+                }
+            }
+
+            Constant.CALL_NEW_REQUEST_SUBMIT -> {
+                val rootResponse = response.body() as NewPrintReqSubmit
+                when (rootResponse.success) {
+                    true -> {
+
+                        Utils.gotoHomeScreen(this@ActivityNewPrintRequest)
                     }
                     else -> {
                         showError(getString(R.string.a_lbl_server_title), rootResponse.data!!.msg!!)

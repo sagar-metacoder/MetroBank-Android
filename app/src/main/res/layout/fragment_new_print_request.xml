@@ -7,6 +7,9 @@
         <variable
                 name="layoutManager"
                 type="androidx.recyclerview.widget.GridLayoutManager"/>
+
+        <variable name="model"
+                  type="com.ng.printtag.models.newrequests.TempletListModel.Data.TemplateDetails"/>
     </data>
     <RelativeLayout android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -170,7 +173,7 @@
                                 style="@style/AppTextView.Title.Medium"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
-                                android:text="@string/a_lbl_cutoff_day"
+                                android:text="@{model.cutOffDay}"
                                 android:layout_marginEnd="@dimen/margin_5"
                                 android:layout_alignParentEnd="true"
                                 android:textColor="@color/colorWhite50"
@@ -205,7 +208,7 @@
                                 style="@style/AppTextView.Title.Medium"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
-                                android:text="@string/a_lbl_cutoff_day"
+                                android:text="@{model.printingDay}"
                                 android:layout_marginEnd="@dimen/margin_5"
                                 android:layout_alignParentEnd="true"
                                 android:textColor="@color/colorWhite50"
@@ -240,7 +243,7 @@
                                 style="@style/AppTextView.Title.Medium"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
-                                android:text="@string/a_lbl_cutoff_day"
+                                android:text="@{model.maximumQuantity}"
                                 android:layout_marginEnd="@dimen/margin_5"
                                 android:layout_alignParentEnd="true"
                                 android:textColor="@color/colorWhite50"
@@ -256,6 +259,33 @@
                             android:layout_height="@dimen/margin_1"
                             android:layout_width="match_parent"
                             android:background="@color/color_CDE0EC"/>
+
+                    <com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout
+                            android:id="@+id/inputInfo"
+                            style="@style/AppEditText.Text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/a_lbl_product_info"
+
+                    >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edt_info"
+                                android:layout_width="match_parent"
+                                style="@style/AppEditText.EditText"
+                                android:imeOptions="actionDone"
+                                android:inputType="textNoSuggestions|text"
+                                android:layout_height="wrap_content"
+                        >
+                        </com.google.android.material.textfield.TextInputEditText>
+                    </com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout>
+                    <View
+                            android:layout_marginTop="@dimen/margin_10"
+                            android:layout_marginBottom="@dimen/margin_10"
+                            android:layout_height="@dimen/margin_1"
+                            android:layout_width="match_parent"
+                            android:background="@color/color_CDE0EC"/>
+
                 </LinearLayout>
 
             <!--
@@ -286,7 +316,7 @@
                 android:layout_height="wrap_content"
                 style="@style/AppButton.Colored"
                 android:layout_gravity="end"
-                android:text="@string/a_btn_next"
+                android:text="@string/a_btn_submit"
                 android:layout_alignParentBottom="true"
                 android:padding="@dimen/margin_8"
                 android:layout_alignParentEnd="true" tools:ignore="RelativeOverlap"/>

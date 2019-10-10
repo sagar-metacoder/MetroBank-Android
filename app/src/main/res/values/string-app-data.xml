@@ -28,5 +28,11 @@
     <string name="userId">userId</string>
     <string name="department">department</string>
     <string name="key_templateId">templateId</string>
+    <string name="key_effectiveDate">effectiveDate</string>
+    <string name="key_language">language</string>
+    <string name="key_action">action</string>
+    <string name="action_submit">submit</string>
+    <string name="key_expectedDate">expectedDate</string>
+    <string name="key_aisleInfo">aisleInfo</string>
 
 </resources>

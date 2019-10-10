@@ -20,21 +20,22 @@ class TempletListModel {
         @SerializedName("msg")
         @Expose
         var msg: String? = null
-    }
 
-    inner class TemplateDetails {
-        @SerializedName("id")
-        @Expose
-        var id: Int = 0
-        @SerializedName("maximumQuantity")
-        @Expose
-        var maximumQuantity: Int = 0
-        @SerializedName("cutOffDay")
-        @Expose
-        var cutOffDay: String? = null
-        @SerializedName("printingDay")
-        @Expose
-        var printingDay: String? = null
 
+        inner class TemplateDetails {
+            @SerializedName("id")
+            @Expose
+            var id: Int = 0
+            @SerializedName("maximumQuantity")
+            @Expose
+            var maximumQuantity: Int = 0
+            @SerializedName("cutOffDay")
+            @Expose
+            var cutOffDay: String? = null
+            @SerializedName("printingDay")
+            @Expose
+            var printingDay: String? = null
+
+        }
     }
 }

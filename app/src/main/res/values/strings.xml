@@ -86,6 +86,7 @@
     <!--Need to translate-->
 
     <string name="a_lbl_printing_day">Printing Day</string>
+    <string name="a_lbl_product_info">ENTER PRODUCT AISLE INFORMATION</string>
 
 
 </resources>
