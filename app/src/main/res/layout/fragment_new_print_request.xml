@@ -122,7 +122,8 @@
                 <LinearLayout android:id="@+id/linearRv"
                               android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:orientation="vertical">
+                              android:orientation="vertical"
+                >
 
                     <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
@@ -152,7 +153,9 @@
                 <LinearLayout android:id="@+id/linearTemplateData"
                               android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:orientation="vertical">
+                              android:orientation="vertical"
+                              android:visibility="gone"
+                              android:layout_marginTop="@dimen/margin_3">
 
                     <RelativeLayout android:layout_width="match_parent"
                                     android:layout_height="match_parent">
@@ -284,7 +287,8 @@
                             android:layout_marginBottom="@dimen/margin_10"
                             android:layout_height="@dimen/margin_1"
                             android:layout_width="match_parent"
-                            android:background="@color/color_CDE0EC"/>
+                            android:background="@color/color_CDE0EC"
+                            android:visibility="gone"/>
 
                 </LinearLayout>
 

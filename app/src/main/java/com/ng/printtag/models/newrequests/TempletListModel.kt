@@ -28,7 +28,7 @@ class TempletListModel {
             var id: Int = 0
             @SerializedName("maximumQuantity")
             @Expose
-            var maximumQuantity: Int = 0
+            var maximumQuantity: String? = null
             @SerializedName("cutOffDay")
             @Expose
             var cutOffDay: String? = null

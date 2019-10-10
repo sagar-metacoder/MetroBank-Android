@@ -26,6 +26,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
     var arrayDeptValue: ArrayList<String> = ArrayList()
     var storeKey: String = ""
     var tagType: String = ""
+    var department_key: String = ""
 
 
     override fun initMethod() {
@@ -93,7 +94,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
 
         rootJson.put(resources.getString(R.string.storeNumber), storeKey)
         rootJson.put(
-            resources.getString(R.string.department), "13794"
+            resources.getString(R.string.department), department_key
         )
         val body = RequestMethods.getRequestBody(rootJson)
 
@@ -120,7 +121,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
         rootJson.put(resources.getString(R.string.tagType), tagType)
 
         rootJson.put(resources.getString(R.string.storeNumber), storeKey)
-        rootJson.put(resources.getString(R.string.department), "13794")
+        rootJson.put(resources.getString(R.string.department), department_key)
         rootJson.put(resources.getString(R.string.key_effectiveDate), Utils.parseDateToMMddyyyy(date))
         rootJson.put(resources.getString(R.string.key_expectedDate), "")
 
@@ -231,6 +232,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
                 when (rootResponse.success) {
                     true -> {
 
+                        AppUtils.showLongToast(this@ActivityNewPrintRequest, "Product Addded Successfully.")
                         Utils.gotoHomeScreen(this@ActivityNewPrintRequest)
                     }
                     else -> {

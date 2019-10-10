@@ -13,12 +13,15 @@ class DialogTypeStore : BaseDialog<DialogTypeStoreBinding>() {
         binding = getDialogDataBinding()
         if(fromWhere == Constant.TAG_TYPE) {
             binding.tvTitle.text = getString(R.string.a_title_select_tag_type)
+            adapter.setData(activity!!, stringList, Constant.TAG_TYPE)
+
         } else if (fromWhere == Constant.TAG_STORE) {
             binding.tvTitle.text = getString(R.string.a_title_select_store_no)
+            adapter.setData(activity!!, stringList, Constant.TAG_STORE)
+
 
         }
 
-        adapter.setData(activity!!, stringList)
         binding.rvList.adapter = adapter
         handleClick()
 
