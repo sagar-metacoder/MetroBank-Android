@@ -17,13 +17,18 @@ class DepartmentModel {
     var data: Data? = null
 
     inner class Data {
+        @SerializedName("templatesCount")
+        @Expose
+        var templatesCount: String? = null
+        @SerializedName("templatesMsg")
+        @Expose
+        var templatesMsg: String? = null
         @SerializedName("templates")
         @Expose
-        var templates: Template? = null
+        var templates: MutableList<Template>? = null
         @SerializedName("departments")
         @Expose
-        var departments: Any? = null
-
+        var departments: MutableList<Departments>? = null
 
 
     }
@@ -48,6 +53,15 @@ class DepartmentModel {
         @SerializedName("image")
         @Expose
         var image: String? = null
+    }
+
+    inner class Departments {
+        @SerializedName("key")
+        @Expose
+        var key: String? = null
+        @SerializedName("value")
+        @Expose
+        var value: String? = null
     }
 
 }

@@ -28,6 +28,7 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>() {
         actBaseBinding.rlMain.removeView(actBaseBinding.headerToolBar)
         allRequest = ArrayList()
         callAllRequestApi()
+        handleClick()
     }
 
     private fun setAdapter() {
@@ -90,6 +91,12 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>() {
             "", null
         )
 
+    }
+
+    private fun handleClick() {
+        binding.ivBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 
 

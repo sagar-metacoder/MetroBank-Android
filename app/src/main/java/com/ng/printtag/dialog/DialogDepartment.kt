@@ -6,15 +6,13 @@ import com.ng.printtag.databinding.DialogDepartmentBinding
 
 class DialogDepartment : BaseDialog<DialogDepartmentBinding>() {
     lateinit var binding: DialogDepartmentBinding
+    var stringList: ArrayList<String> = ArrayList()
     val adapter = DepartmentDialogAdapter()
 
     override fun initDialog() {
         binding = getDialogDataBinding()
         binding.tvTitle.text = title
 
-        val stringList: ArrayList<String> = ArrayList()
-        stringList.add("Fresh Tag")
-        stringList.add("Inventory Tag")
         adapter.setData(activity!!, stringList)
         binding.rvList.adapter = adapter
         handleClick()
