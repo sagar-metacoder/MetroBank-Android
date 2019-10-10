@@ -8,7 +8,9 @@ import com.ng.printtag.BuildConfig.API_WEBSERVICE
 import com.ng.printtag.models.allrequests.AllRequestModel
 import com.ng.printtag.models.login.LoginModel
 import com.ng.printtag.models.newrequests.DepartmentModel
+import com.ng.printtag.models.newrequests.NewPrintReqSubmit
 import com.ng.printtag.models.newrequests.StoreListModel
+import com.ng.printtag.models.newrequests.TempletListModel
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Body
@@ -27,6 +29,12 @@ interface ApiInteface {
 
     @POST(API_BASE_MODULE + "deptTemp")
     fun callDepartmentList(@Body model: RequestBody): Call<DepartmentModel>
+
+    @POST(API_BASE_MODULE + "tempDetails")
+    fun callTemplateDetails(@Body model: RequestBody): Call<TempletListModel>
+
+    @POST(API_WEBSERVICE + "submit")
+    fun callNewRequestSubmit(@Body model: RequestBody): Call<NewPrintReqSubmit>
 
 
     @POST(API_WEBSERVICE + "records/all")

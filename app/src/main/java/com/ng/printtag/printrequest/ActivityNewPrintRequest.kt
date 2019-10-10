@@ -13,6 +13,7 @@ import com.ng.printtag.base.BaseActivity
 import com.ng.printtag.databinding.ActivityNewPrintRequestBinding
 import com.ng.printtag.models.newrequests.DepartmentModel
 import com.ng.printtag.models.newrequests.StoreListModel
+import com.ng.printtag.models.newrequests.TempletListModel
 import kotlinx.android.synthetic.main.activity_new_print_request.*
 import org.json.JSONObject
 import retrofit2.Response
@@ -24,6 +25,10 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
     var arrayStoreValue: ArrayList<String> = ArrayList()
     var arrayDeptKey: ArrayList<String> = ArrayList()
     var arrayDeptValue: ArrayList<String> = ArrayList()
+    var storeKey: String = ""
+    var tagType: String = ""
+
+
     override fun initMethod() {
         binding = getViewDataBinding()
     }
@@ -74,6 +79,34 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
             restClientModel
         )
     }
+
+    fun callTemplateDetails() {
+        val restClientModel = RestClientModel()
+        restClientModel.isProgressDialogShow = true
+
+        val rootJson = JSONObject()
+        rootJson.put(
+            resources.getString(R.string.userId),
+            AppUtils.getUserModel(this@ActivityNewPrintRequest).data!!.userId
+        )
+        rootJson.put(resources.getString(R.string.key_templateId), "531035")
+        rootJson.put(resources.getString(R.string.tagType), tagType)
+
+        rootJson.put(resources.getString(R.string.storeNumber), storeKey)
+        rootJson.put(
+            resources.getString(R.string.department), "13794"
+        )
+        val body = RequestMethods.getRequestBody(rootJson)
+
+        RestClient().apiRequest(
+            this@ActivityNewPrintRequest,
+            body,
+            Constant.CALL_STORE_URL,
+            this,
+            restClientModel
+        )
+    }
+
 
 
     override fun onApiResponse(response: Response<Any>, reqCode: Int) {
@@ -126,6 +159,19 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
                     }
                     else -> {
                         showError(getString(R.string.a_lbl_server_title), rootResponse.msg!!)
+                    }
+                }
+            }
+
+            Constant.CALL_TEMPLETS_DETAILS -> {
+                val rootResponse = response.body() as TempletListModel
+                when (rootResponse.success) {
+                    true -> {
+
+
+                    }
+                    else -> {
+                        showError(getString(R.string.a_lbl_server_title), rootResponse.data!!.msg!!)
                     }
                 }
             }

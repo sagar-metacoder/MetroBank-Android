@@ -27,5 +27,6 @@
     <string name="storeNumber">storeNumber</string>
     <string name="userId">userId</string>
     <string name="department">department</string>
+    <string name="key_templateId">templateId</string>
 
 </resources>
