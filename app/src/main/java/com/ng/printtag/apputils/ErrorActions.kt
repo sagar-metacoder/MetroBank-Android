@@ -231,6 +231,43 @@ class ErrorActions {
             }
         }
 
+        fun validateButton_dialog(materialButton: MaterialButton, isEnable: Boolean) {
+            materialButton.isEnabled = isEnable
+            when (isEnable) {
+                true -> {
+                    val color = ResourcesCompat.getColor(materialButton.context.resources, colorPrimary, null)
+
+                    materialButton.background.setColorFilter(
+                        color,
+                        PorterDuff.Mode.MULTIPLY
+                    )
+                    materialButton.setTextColor(
+                        ContextCompat.getColorStateList(
+                            materialButton.context,
+                            colorWhite
+                        )
+                    )
+
+
+                }
+                false -> {
+                    val color = ResourcesCompat.getColor(materialButton.context.resources, color_CDE0EC, null)
+                    materialButton.background.setColorFilter(
+                        color,
+                        PorterDuff.Mode.MULTIPLY
+                    )
+                    materialButton.setTextColor(
+                        ContextCompat.getColorStateList(
+                            materialButton.context,
+                            colorWhite
+                        )
+                    )
+
+                }
+            }
+        }
+
+
 
         fun setPhoneErrorInvisible(
             materialButton: MaterialButton,

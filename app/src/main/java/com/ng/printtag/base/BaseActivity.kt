@@ -2,6 +2,7 @@ package com.ng.printtag.base
 
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +12,17 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.ng.printtag.PrintTagApplication
 import com.ng.printtag.R
+import com.ng.printtag.api.ActivityAppSessionTimeout
 import com.ng.printtag.api.ApiResponseListener
 import com.ng.printtag.apputils.AppUtils
 import com.ng.printtag.apputils.AppUtils.Companion.noStatusBar
+import com.ng.printtag.apputils.BaseSharedPreference
 import com.ng.printtag.databinding.ActivityBaseBinding
+import com.ng.printtag.login.ActivityLogin
+import com.ng.printtag.login.FragmentLogin
+import kotlinx.android.synthetic.main.activity_login.*
 
 import retrofit2.Response
 
@@ -153,23 +160,23 @@ abstract class BaseActivity<out T : ViewDataBinding> : AppCompatActivity(), OnCl
     /**
      * Used for display timeout if user not interact with screen
      */
-    /*override fun onUserInteraction() {
+    override fun onUserInteraction() {
         super.onUserInteraction()
         isValidScreen = true
         when (this) {
             is ActivityLogin -> {
                 val fragment = navigation_login.childFragmentManager.findFragmentById(R.id.navigation_login)
-                if (fragment != null && fragment is FragmentUsername) {
+                if (fragment != null && fragment is FragmentLogin) {
                     isValidScreen = false
                 }
             }
             is ActivityAppSessionTimeout -> isValidScreen = false
         }
-        if (PdpApplication.applicationInstance.countDownTimer != null) {
-            PdpApplication.applicationInstance.countDownTimer!!.cancel()
+        if (PrintTagApplication.applicationInstance.countDownTimer != null) {
+            PrintTagApplication.applicationInstance.countDownTimer!!.cancel()
         }
         if (isValidScreen) {
-            PdpApplication.applicationInstance.countDownTimer = object : CountDownTimer(300000, 1000) {
+            PrintTagApplication.applicationInstance.countDownTimer = object : CountDownTimer(300000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
                 }
 
@@ -181,9 +188,9 @@ abstract class BaseActivity<out T : ViewDataBinding> : AppCompatActivity(), OnCl
                     AppUtils.navigateToOtherScreen(this@BaseActivity, ActivityAppSessionTimeout::class.java, true)
                 }
             }
-            PdpApplication.applicationInstance.countDownTimer!!.start()
+            PrintTagApplication.applicationInstance.countDownTimer!!.start()
         }
-    }*/
+    }
 
     /**
      * @return layout genericModel id

@@ -7,11 +7,8 @@ import android.view.View
 import android.view.View.GONE
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.HtmlCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-
 import com.google.gson.ExclusionStrategy
 import com.google.gson.FieldAttributes
 import com.google.gson.GsonBuilder
@@ -22,7 +19,6 @@ import com.ng.printtag.apputils.CallDialog
 import com.ng.printtag.apputils.Constant
 import com.ng.printtag.apputils.TLSSocketFactory
 import com.ng.printtag.base.BaseActivity
-import com.ng.printtag.databinding.ManageExceptionsBinding
 import com.ng.printtag.interfaces.SkipGetSerialisation
 import com.ng.printtag.interfaces.SkipPostSerialisation
 import com.ng.printtag.models.allrequests.AllRequestModel
@@ -31,7 +27,6 @@ import com.ng.printtag.models.newrequests.DepartmentModel
 import com.ng.printtag.models.newrequests.NewPrintReqSubmit
 import com.ng.printtag.models.newrequests.StoreListModel
 import com.ng.printtag.models.newrequests.TempletListModel
-
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
@@ -429,26 +424,35 @@ open class RestClient {
             apiResponseListener: ApiResponseListener,
             restClientModel: RestClientModel
         ) {
-            val frmBaseContainer: FrameLayout = (activity as BaseActivity<*>).actBaseBinding.frmBaseContainer
-            val frmExceptionContainer: FrameLayout = activity.actBaseBinding.frmExceptionContainer
-            frmBaseContainer.visibility = GONE
-            frmExceptionContainer.visibility = View.VISIBLE
-            frmExceptionContainer.removeAllViews()
-            val binding: ManageExceptionsBinding =
-                setExceptionView(activity, frmExceptionContainer, R.layout.manage_exceptions) as ManageExceptionsBinding
-            binding.tvExceptionTitle.text = title
-            binding.tvExceptionMessage.text = HtmlCompat.fromHtml(message, HtmlCompat.FROM_HTML_MODE_LEGACY)
-//            binding.tvCancel.visibility=GONE
-            AppUtils.hideKeyBoard(activity as AppCompatActivity, binding.btnRetry)
-            binding.tvCancel.setOnClickListener {
-                frmBaseContainer.visibility = View.VISIBLE
-                frmExceptionContainer.visibility = GONE
-                frmBaseContainer.invalidate()
-                frmExceptionContainer.invalidate()
-            }
-            binding.btnRetry.setOnClickListener {
-                makeApiRequest(activity, requestObject, requestObject, reqCode, restClientModel, apiResponseListener)
-            }
+
+            CallDialog.errorDialog(
+                activity,
+                title,
+                message,
+                "",
+                activity.getString(R.string.a_btn_ok),
+                "", null
+            )
+            /* val frmBaseContainer: FrameLayout = (activity as BaseActivity<*>).actBaseBinding.frmBaseContainer
+             val frmExceptionContainer: FrameLayout = activity.actBaseBinding.frmExceptionContainer
+             frmBaseContainer.visibility = GONE
+             frmExceptionContainer.visibility = View.VISIBLE
+             frmExceptionContainer.removeAllViews()
+             val binding: ManageExceptionsBinding =
+                 setExceptionView(activity, frmExceptionContainer, R.layout.manage_exceptions) as ManageExceptionsBinding
+             binding.tvExceptionTitle.text = title
+             binding.tvExceptionMessage.text = HtmlCompat.fromHtml(message, HtmlCompat.FROM_HTML_MODE_LEGACY)
+ //            binding.tvCancel.visibility=GONE
+             AppUtils.hideKeyBoard(activity as AppCompatActivity, binding.btnRetry)
+             binding.tvCancel.setOnClickListener {
+                 frmBaseContainer.visibility = View.VISIBLE
+                 frmExceptionContainer.visibility = GONE
+                 frmBaseContainer.invalidate()
+                 frmExceptionContainer.invalidate()
+             }
+             binding.btnRetry.setOnClickListener {
+                 makeApiRequest(activity, requestObject, requestObject, reqCode, restClientModel, apiResponseListener)
+             }*/
         }
 
         private fun setExceptionView(activity: Context, container: FrameLayout, layout: Int): ViewDataBinding {

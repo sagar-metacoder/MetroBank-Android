@@ -90,7 +90,7 @@
 	<dimen name="font_ofac_sub_title">18sp</dimen>
     <dimen name="font_counter">12sp</dimen>
     <dimen name="font_default">13sp</dimen>
-    <dimen name="font_session_timeout">52sp</dimen>
+    <dimen name="font_session_timeout">30sp</dimen>
     <dimen name="font_input">20sp</dimen>
     <dimen name="font_input_detail">24sp</dimen>
 	<dimen name="font_instruction_desc">22sp</dimen>

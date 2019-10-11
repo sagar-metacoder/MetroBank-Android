@@ -52,6 +52,7 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>() {
             resources.getString(R.string.userId),
             AppUtils.getUserModel(this@ActivityAllRequests).data!!.userId
         )
+        rootJson.put(resources.getString(R.string.key_status), resources.getString(R.string.value_all))
         val body = RequestMethods.getRequestBody(rootJson)
 
         RestClient().apiRequest(

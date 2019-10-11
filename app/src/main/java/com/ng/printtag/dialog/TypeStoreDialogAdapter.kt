@@ -8,28 +8,33 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ng.printtag.R
 import com.ng.printtag.databinding.RowDialogTypeStoreBinding
+import com.ng.printtag.interfaces.OnItemClickListener
 
 class TypeStoreDialogAdapter : RecyclerView.Adapter<TypeStoreDialogAdapter.ViewHolder>() {
 
     private var mInflater: LayoutInflater? = null
     private lateinit var context: Context
     private var fromWhere: Int = 0
+    private lateinit var onItemClickListener: OnItemClickListener
 
     private lateinit var storeList: ArrayList<String>
     var selPosValue: Int = 0
     var selected: AppCompatRadioButton? = null
-    var position1: Int = 0
 
 
     fun setData(
         context: Context,
         storeList: ArrayList<String>,
-        fromWhere: Int
+        fromWhere: Int,
+        onItemClickListener: OnItemClickListener
+
     ) {
         this.context = context
         this.storeList = storeList
         mInflater = LayoutInflater.from(context)
         this.fromWhere = fromWhere
+        this.onItemClickListener = onItemClickListener
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -50,7 +55,6 @@ class TypeStoreDialogAdapter : RecyclerView.Adapter<TypeStoreDialogAdapter.ViewH
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(storeList[position])
-        position1 = position
     }
 
     inner class ViewHolder(private val dataBinding: RowDialogTypeStoreBinding) :
@@ -88,6 +92,8 @@ class TypeStoreDialogAdapter : RecyclerView.Adapter<TypeStoreDialogAdapter.ViewH
                 dataBinding.rbType.isChecked = true
                 selected = dataBinding.rbType
                 if (dataBinding.rbType.isChecked) {
+                    onItemClickListener.onItemClick(storeList[position], adapterPosition)
+
                     selPosValue = position
                 }
             }

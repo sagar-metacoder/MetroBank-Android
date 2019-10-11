@@ -34,5 +34,6 @@
     <string name="action_submit">submit</string>
     <string name="key_expectedDate">expectedDate</string>
     <string name="key_aisleInfo">aisleInfo</string>
-
+    <string name="key_status">status</string>
+    <string name="value_all">all</string>
 </resources>

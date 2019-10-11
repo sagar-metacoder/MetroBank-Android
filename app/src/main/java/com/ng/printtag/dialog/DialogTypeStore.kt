@@ -2,10 +2,13 @@ package com.ng.printtag.dialog
 
 import com.ng.printtag.R
 import com.ng.printtag.apputils.Constant
+import com.ng.printtag.apputils.ErrorActions
 import com.ng.printtag.base.BaseDialog
 import com.ng.printtag.databinding.DialogTypeStoreBinding
+import com.ng.printtag.interfaces.OnItemClickListener
 
-class DialogTypeStore : BaseDialog<DialogTypeStoreBinding>() {
+class DialogTypeStore : BaseDialog<DialogTypeStoreBinding>(), OnItemClickListener {
+
     lateinit var binding: DialogTypeStoreBinding
     var stringList: ArrayList<String> = ArrayList()
     val adapter = TypeStoreDialogAdapter()
@@ -13,14 +16,15 @@ class DialogTypeStore : BaseDialog<DialogTypeStoreBinding>() {
         binding = getDialogDataBinding()
         if(fromWhere == Constant.TAG_TYPE) {
             binding.tvTitle.text = getString(R.string.a_title_select_tag_type)
-            adapter.setData(activity!!, stringList, Constant.TAG_TYPE)
+            adapter.setData(activity!!, stringList, Constant.TAG_TYPE, this)
 
         } else if (fromWhere == Constant.TAG_STORE) {
             binding.tvTitle.text = getString(R.string.a_title_select_store_no)
-            adapter.setData(activity!!, stringList, Constant.TAG_STORE)
+            adapter.setData(activity!!, stringList, Constant.TAG_STORE, this)
 
 
         }
+        ErrorActions.validateButton_dialog(binding.btnDone, false)
 
         binding.rvList.adapter = adapter
         handleClick()
@@ -34,6 +38,15 @@ class DialogTypeStore : BaseDialog<DialogTypeStoreBinding>() {
                 callBackListener!!.onCallBack(adapter.selPosValue, Constant.TAG_TYPE)
             } else {
                 callBackListener!!.onCallBack(adapter.selPosValue, Constant.TAG_STORE)
+
+            }
+        }
+    }
+
+    override fun onItemClick(item: Any, position: Int) {
+        if (callBackListener != null) {
+            if (!(item as String).isEmpty()) {
+                ErrorActions.validateButton_dialog(binding.btnDone, true)
 
             }
         }
