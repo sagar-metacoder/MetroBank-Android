@@ -8,7 +8,7 @@
         <import type="com.ng.printtag.apputils.AppUtils"/>
         <import type="android.view.View"/>
         <variable name="model"
-                  type="com.ng.printtag.models.allrequests.AllRequestModel.Data"/>
+                  type="com.ng.printtag.models.allrequests.AllRequestModel.Data.Records"/>
     </data>
 
     <LinearLayout
@@ -20,8 +20,8 @@
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:orientation="vertical"
-                      android:paddingEnd="@dimen/margin_10"
-                      android:paddingStart="@dimen/margin_10"
+                      android:paddingEnd="@dimen/margin_5"
+                      android:paddingStart="@dimen/margin_5"
                       android:paddingTop="@dimen/margin_5"
                       android:paddingBottom="@dimen/margin_5">
 
@@ -40,7 +40,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:text="@{model.getStoreNo()}"
+                        android:text="@{model.storeName}"
                 />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -113,8 +113,9 @@
                         android:layout_marginEnd="@dimen/margin_2"
                         android:layout_width="match_parent"
                         android:layout_weight="1"
+                        android:gravity="top"
                         android:layout_height="match_parent"
-                        android:text='@{model.printType.length() !=0?model.printType:@string/a_lbl_unknown}'
+                        android:text='@{model.tagType.length() !=0?model.tagType:@string/a_lbl_unknown}'
                         tools:ignore="RtlHardcoded"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -124,6 +125,7 @@
                         android:layout_marginEnd="@dimen/margin_2"
                         android:layout_width="match_parent"
                         android:layout_weight="1"
+                        android:gravity="top"
                         android:layout_height="match_parent"
                         android:text='@{model.templateName.length() !=0?model.templateName:@string/a_lbl_unknown}'
                 />
@@ -135,6 +137,7 @@
                         android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:gravity="top"
                         android:text='@{model.department.length() !=0?model.department:@string/a_lbl_unknown}'
                 />
 

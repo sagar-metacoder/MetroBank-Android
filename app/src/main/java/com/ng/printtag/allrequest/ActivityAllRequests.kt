@@ -8,17 +8,18 @@ import com.ng.printtag.apputils.AppUtils
 import com.ng.printtag.apputils.CallDialog
 import com.ng.printtag.apputils.Constant
 import com.ng.printtag.base.BaseActivity
+import com.ng.printtag.common.DateRangePickerFragment
 import com.ng.printtag.databinding.ActivityAllRequestsBinding
 import com.ng.printtag.interfaces.OnItemClickListener
 import com.ng.printtag.models.allrequests.AllRequestModel
 import org.json.JSONObject
 import retrofit2.Response
 
-class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>() {
-
+class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
+    DateRangePickerFragment.OnDateRangeSelectedListener {
 
     private lateinit var binding: ActivityAllRequestsBinding
-    lateinit var allRequest: MutableList<AllRequestModel.Data>
+    lateinit var allRequest: MutableList<AllRequestModel.Data.Records>
 
     /**
      * @see BaseActivity#initMethod()
@@ -46,13 +47,15 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>() {
     private fun callAllRequestApi() {
         val restClientModel = RestClientModel()
         restClientModel.isProgressDialogShow = true
-
         val rootJson = JSONObject()
         rootJson.put(
             resources.getString(R.string.userId),
             AppUtils.getUserModel(this@ActivityAllRequests).data!!.userId
         )
         rootJson.put(resources.getString(R.string.key_status), resources.getString(R.string.value_all))
+        rootJson.put(resources.getString(R.string.key_page), "1")
+        rootJson.put(resources.getString(R.string.key_searchkey), "")
+        rootJson.put(resources.getString(R.string.key_date_range), "")
         val body = RequestMethods.getRequestBody(rootJson)
 
         RestClient().apiRequest(
@@ -71,7 +74,7 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>() {
                 val rootResponse = response.body() as AllRequestModel
                 when (rootResponse.success) {
                     true -> {
-                        allRequest = rootResponse.data!!
+                        allRequest = rootResponse.data!!.records!! as ArrayList<AllRequestModel.Data.Records>
                         setAdapter()
                     }
                     else -> {
@@ -98,8 +101,23 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>() {
         binding.ivBack.setOnClickListener {
             onBackPressed()
         }
+        binding.ivCalendar.setOnClickListener {
+            val dateRangePickerFragment = DateRangePickerFragment()
+            dateRangePickerFragment.newInstance(this@ActivityAllRequests, false)
+            dateRangePickerFragment.show(supportFragmentManager, "datePicker")
+        }
     }
 
+    override fun onDateRangeSelected(
+        startDay: Int,
+        startMonth: Int,
+        startYear: Int,
+        endDay: Int,
+        endMonth: Int,
+        endYear: Int
+    ) {
+
+    }
 
     /**
      * Init layout genericModel id
