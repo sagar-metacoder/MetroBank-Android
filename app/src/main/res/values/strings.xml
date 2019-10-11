@@ -87,6 +87,7 @@
 
     <string name="a_lbl_printing_day">Printing Day</string>
     <string name="a_lbl_product_info">ENTER PRODUCT AISLE INFORMATION</string>
-
+    <string name="title_tab_start_date">Start Date</string>
+    <string name="ttile_tab_end_date">End Date</string>
 
 </resources>

@@ -15,42 +15,45 @@ class AllRequestModel {
 
     @SerializedName("data")
     @Expose
-    var data: MutableList<Data>? = null
-
+    var data: Data? = null
 
     inner class Data {
-        @SerializedName("printType")
+        @SerializedName("records")
         @Expose
-        var printType: String? = null
-        @SerializedName("templateName")
-        @Expose
-        var templateName: String? = null
-        @SerializedName("store")
-        @Expose
-        var store: String? = null
-        @SerializedName("department")
-        @Expose
-        var department: String? = null
-        @SerializedName("effectiveDate")
-        @Expose
-        var effectiveDate: String? = null
-        @SerializedName("requestedDate")
-        @Expose
-        var reqDate: String? = null
-        @SerializedName("expectedDate")
-        @Expose
-        var expectedDate: String? = null
-        @SerializedName("status")
-        @Expose
-        var status: String? = null
+        var records: MutableList<Records>? = null
 
-        fun getStoreNo(): String {
-            return if (store!!.isEmpty()) {
-                "Unknown"
-            } else
-                "STORE NO. $store"
+
+        inner class Records {
+            @SerializedName("reqId")
+            @Expose
+            var reqId: String? = null
+            @SerializedName("tagType")
+            @Expose
+            var tagType: String? = null
+            @SerializedName("templateName")
+            @Expose
+            var templateName: String? = null
+            @SerializedName("storeName")
+            @Expose
+            var storeName: String? = null
+            @SerializedName("departmentName")
+            @Expose
+            var department: String? = null
+            @SerializedName("effectiveDate")
+            @Expose
+            var effectiveDate: String? = null
+            @SerializedName("requestedDate")
+            @Expose
+            var reqDate: String? = null
+            @SerializedName("expectedDate")
+            @Expose
+            var expectedDate: String? = null
+            @SerializedName("status")
+            @Expose
+            var status: String? = null
+
+
         }
     }
-
 
 }
