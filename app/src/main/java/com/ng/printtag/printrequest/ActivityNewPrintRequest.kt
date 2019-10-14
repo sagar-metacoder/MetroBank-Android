@@ -126,7 +126,6 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
         rootJson.put(resources.getString(R.string.storeNumber), storeKey)
         rootJson.put(resources.getString(R.string.department), department_key)
         rootJson.put(resources.getString(R.string.key_effectiveDate), Utils.parseDateToMMddyyyy(date))
-        rootJson.put(resources.getString(R.string.key_expectedDate), "")
 
         rootJson.put(
             resources.getString(R.string.key_language),

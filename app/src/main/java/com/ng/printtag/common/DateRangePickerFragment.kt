@@ -9,6 +9,7 @@ import android.widget.TabHost
 import androidx.fragment.app.DialogFragment
 import com.ng.printtag.R
 
+
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class DateRangePickerFragment : DialogFragment(), View.OnClickListener {
 
@@ -59,7 +60,6 @@ class DateRangePickerFragment : DialogFragment(), View.OnClickListener {
         return root
 
     }
-
     override fun onStart() {
         super.onStart()
         if (dialog == null)
@@ -76,8 +76,8 @@ class DateRangePickerFragment : DialogFragment(), View.OnClickListener {
     override fun onClick(v: View) {
         dismiss()
         onDateRangeSelectedListener!!.onDateRangeSelected(
-            startDatePicker!!.dayOfMonth, startDatePicker!!.month, startDatePicker!!.year,
-            endDatePicker!!.dayOfMonth, endDatePicker!!.month, endDatePicker!!.year
+            startDatePicker!!.dayOfMonth, startDatePicker!!.month + 1, startDatePicker!!.year,
+            endDatePicker!!.dayOfMonth, endDatePicker!!.month + 1, endDatePicker!!.year
         )
     }
 

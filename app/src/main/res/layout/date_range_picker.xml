@@ -31,7 +31,7 @@
                         android:orientation="vertical">
 
                     <DatePicker
-                            style="@style/MyDatePickerDialogTheme"
+                            android:theme="@style/MyDatePickerDialogTheme"
                             android:id="@+id/start_date_picker"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"/>
@@ -46,7 +46,7 @@
                         android:orientation="vertical">
 
                     <DatePicker
-                            style="@style/MyDatePickerDialogTheme"
+                            android:theme="@style/MyDatePickerDialogTheme"
                             android:id="@+id/end_date_picker"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"/>
