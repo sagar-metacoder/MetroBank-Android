@@ -1,5 +1,6 @@
 package com.ng.printtag.dashboard
 
+import android.view.Gravity
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.ng.printtag.R
@@ -36,6 +37,7 @@ class ActivityDashboard : BaseActivity<ActivityDashboardBinding>(), HeaderInterf
      * @see CallBackInterfaces
      */
     override fun onCallBack(item: Any, fromWhere: Any) {
+
         closeDrawer()
     }
 
@@ -65,9 +67,13 @@ class ActivityDashboard : BaseActivity<ActivityDashboardBinding>(), HeaderInterf
         AppUtils.hideKeyBoard(this)
         val currentFragment: Fragment = getCurrentFragment()
         if (currentFragment is FragmentDashboard) {
+            //AppUtils.noStatusBar(window)
+
             openDrawer()
         } else {
-            onBackPressed()
+
+            closeDrawer()
+            //  onBackPressed()
         }
     }
 
@@ -83,15 +89,22 @@ class ActivityDashboard : BaseActivity<ActivityDashboardBinding>(), HeaderInterf
      */
     override fun onBackPressed() {
         if (getCurrentFragment() is FragmentDashboard) {
-            CallDialog.errorDialog(
-                this,
-                getString(R.string.a_lbl_information),
-                getString(R.string.a_lbl_exit_message),
-                getString(R.string.a_btn_yes),
-                getString(R.string.a_btn_no),
-                getString(R.string.action_sign_out),
-                null
-            )
+
+            if (drawer_layout.isDrawerVisible(Gravity.LEFT)) {
+                closeDrawer()
+            } else {
+                // AppUtils.setStatusBar(window,this)
+
+                CallDialog.errorDialog(
+                    this,
+                    getString(R.string.a_lbl_information),
+                    getString(R.string.a_lbl_exit_message),
+                    getString(R.string.a_btn_yes),
+                    getString(R.string.a_btn_no),
+                    getString(R.string.action_sign_out),
+                    null
+                )
+            }
         } else {
             super.onBackPressed()
         }
@@ -115,6 +128,8 @@ class ActivityDashboard : BaseActivity<ActivityDashboardBinding>(), HeaderInterf
 
     private fun closeDrawer() {
         this.drawer_layout.closeDrawer(manage_slide_menu)
+        //  AppUtils.setStatusBar(window,this)
+
     }
 
 

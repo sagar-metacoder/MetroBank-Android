@@ -3,6 +3,7 @@ package com.ng.printtag.base
 import android.view.View
 import android.widget.RelativeLayout
 import com.ng.printtag.R
+import com.ng.printtag.api.ActivityAppSessionTimeout
 import com.ng.printtag.dashboard.FragmentDashboard
 import com.ng.printtag.login.FragmentLogin
 import com.ng.printtag.printrequest.FragmentNewPrintRequest
@@ -20,12 +21,10 @@ class HeaderModel {
     var exportVisibility = false
     var printVisibility = false
     var filterVisibility = false
-    var checkVisibility = false
     var generateNewPinVisibility = false
     var printReceiptVisibility = false
     var closeVisibility = false
     var transactionHistoryVisibility = false
-    var helpVisibility = false
     var baseFragment: BaseFragment<*>? = null
     var baseActivity: BaseActivity<*>? = null
 
@@ -64,27 +63,6 @@ class HeaderModel {
                 param.setMargins(baseActivity!!.resources.getDimension(R.dimen.margin_5).toInt(), 0, 0, 0)
                 baseActivity!!.actBaseBinding.headerToolBar.binding.tvHeaderTitle.layoutParams = param
             }
-            /* is FragmentUsername, is FragmentLogin, is FragmentStoreNumber, is FragmentLookUpByName, is FragmentLookUpResult, is FragmentLookUpByProspera -> {
-                 setLeftIcon(backIcon)
-                 baseActivity!!.actBaseBinding.headerToolBar.binding.ivBack.text = ""
-             }*/
-/*
-            is FragmentIdTypeSelection, is FragmentIdPreview, is FragmentPhotoTutorial -> {
-                baseActivity!!.setStatusBar()
-            }
-*/
-
-/*
-            is FragmentExeVerifyCheck -> {
-                setLeftIcon(R.mipmap.ic_back)
-                setLeftIconText(Utils.getLabel(baseActivity!!.getString(R.string.a_title_check_verfication)))
-                backVisibility = true
-                closeVisibility = true
-                helpVisibility = true
-                settingsVisibility = false
-            }
-*/
-
 
         }
         when (baseActivity) {
@@ -92,21 +70,11 @@ class HeaderModel {
                 baseActivity!!.setNoStatusBar()
                 baseActivity!!.setHeaderVisibility(View.GONE)
             }
-           /* is ActivityCheckTutorial -> {
-                setLeftIconText(Utils.getLabel(baseActivity!!.getString(R.string.a_lbl_check_cashing)))
-                backVisibility = true
-                closeVisibility = true
-                settingsVisibility = false
-            }
-            is ActivityUploadedPhotoPreview -> {
-                backVisibility = true
-                closeVisibility = true
-                settingsVisibility = false
-                helpVisibility = true
-                setLeftIconText(Utils.getLabel(baseActivity!!.getString(R.string.a_lbl_edit_customer_photo)))
-                baseActivity!!.setStatusBar()
-            }*/
 
+            is ActivityAppSessionTimeout -> {
+                backVisibility = false
+
+            }
 
         }
         baseActivity!!.actBaseBinding.headerToolBar.binding.headerModel = this

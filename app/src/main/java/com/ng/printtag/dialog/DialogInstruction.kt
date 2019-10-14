@@ -42,8 +42,10 @@ class DialogInstruction : BaseDialog<DialogInstructionBinding>(), OnItemClickLis
                 callBackListener!!.onCallBack("", "ok")
             } else {
                 when (type) {
-                    getString(R.string.action_menu_logout) ->
+                    getString(R.string.action_menu_logout) -> {
+                        AppUtils.showLongToast(activity!!, activity!!.resources.getString(R.string.a_msg_loggedout))
                         Utils.gotoLoginScreen(activity!!)
+                    }
                     getString(R.string.action_sign_out) -> {
                         BaseSharedPreference.getInstance(activity!!)
                             .putValue(getString(R.string.pref_session_out), false)

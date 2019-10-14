@@ -6,7 +6,6 @@
     <string name="a_btn_cancel">Cancel</string>
     <string name="a_lbl_warning_title">Warning</string>
     <string name="a_lbl_network_error">Network Error</string>
-    <string name="a_net_message">Please check internet connection</string>
     <string name="a_btn_no">No</string>
     <string name="a_btn_yes">Yes</string>
     <string name="a_msg_server_error">There is some server error. Please try again later.</string>
@@ -89,5 +88,14 @@
     <string name="a_lbl_product_info">ENTER PRODUCT AISLE INFORMATION</string>
     <string name="title_tab_start_date">Start Date</string>
     <string name="ttile_tab_end_date">End Date</string>
+    <string name="a_msg_loggedout">Logged out successfully!</string>
+    <string name="a_msg_product_added">Product Addded Successfully.</string>
+
+
+    <!-- Update -->
+    <string name="a_net_message">Internet connection is not available. Please try again!</string>
+    <string name="item_freshtag">Fresh Tag</string>
+    <string name="item_inventorytag">Inventory Tag</string>
+    <string name="a_lbl_desk">-</string>
 
 </resources>

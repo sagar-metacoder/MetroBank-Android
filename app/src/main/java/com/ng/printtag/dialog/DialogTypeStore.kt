@@ -10,7 +10,8 @@ import com.ng.printtag.interfaces.OnItemClickListener
 class DialogTypeStore : BaseDialog<DialogTypeStoreBinding>(), OnItemClickListener {
 
     lateinit var binding: DialogTypeStoreBinding
-    var stringList: ArrayList<String> = ArrayList()
+    lateinit var stringList: ArrayList<String>
+    var status: Boolean = false
     val adapter = TypeStoreDialogAdapter()
     override fun initDialog() {
         binding = getDialogDataBinding()
@@ -24,7 +25,11 @@ class DialogTypeStore : BaseDialog<DialogTypeStoreBinding>(), OnItemClickListene
 
 
         }
+
+
         ErrorActions.validateButton_dialog(binding.btnDone, false)
+
+
 
         binding.rvList.adapter = adapter
         handleClick()
@@ -45,10 +50,9 @@ class DialogTypeStore : BaseDialog<DialogTypeStoreBinding>(), OnItemClickListene
 
     override fun onItemClick(item: Any, position: Int) {
         if (callBackListener != null) {
-            if (!(item as String).isEmpty()) {
                 ErrorActions.validateButton_dialog(binding.btnDone, true)
 
-            }
+
         }
     }
 

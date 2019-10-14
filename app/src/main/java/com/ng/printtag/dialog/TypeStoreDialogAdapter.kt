@@ -55,34 +55,15 @@ class TypeStoreDialogAdapter : RecyclerView.Adapter<TypeStoreDialogAdapter.ViewH
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(storeList[position])
+
+
     }
 
     inner class ViewHolder(private val dataBinding: RowDialogTypeStoreBinding) :
         RecyclerView.ViewHolder(dataBinding.root) {
         init {
-            /*   if(fromWhere == Constant.TAG_TYPE) {
-                   Log.e("dfdf",BaseSharedPreference.getInstance(context).getPrefValue(context.getString(R.string.tagType)))
-                   if (!(BaseSharedPreference.getInstance(context).getPrefValue(context.getString(R.string.tagType))).isNullOrBlank()) {
-                       if( (BaseSharedPreference.getInstance(context).getPrefValue(context.getString(R.string.tagType)))!!.toInt() == position1)
-                       {
-                           dataBinding.rbType.isChecked = true
 
-                       }
-                   }
-               }
 
-               if(fromWhere == Constant.TAG_STORE)
-               {
-                   if (!(BaseSharedPreference.getInstance(context).getPrefValue(context.getString(R.string.storeNumber))).isNullOrBlank()) {
-
-                       if ((BaseSharedPreference.getInstance(context).getPrefValue(context.getString(R.string.storeNumber)))!!.toInt() == position1) {
-                           if (selected != null) {
-                               selected!!.isChecked = true
-                           }
-
-                       }
-                   }
-               }*/
             dataBinding.rbType.setOnClickListener {
 
 
@@ -90,10 +71,10 @@ class TypeStoreDialogAdapter : RecyclerView.Adapter<TypeStoreDialogAdapter.ViewH
                     selected!!.isChecked = false
                 }
                 dataBinding.rbType.isChecked = true
+
                 selected = dataBinding.rbType
                 if (dataBinding.rbType.isChecked) {
                     onItemClickListener.onItemClick(storeList[position], adapterPosition)
-
                     selPosValue = position
                 }
             }

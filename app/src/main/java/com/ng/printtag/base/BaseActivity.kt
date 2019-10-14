@@ -176,7 +176,7 @@ abstract class BaseActivity<out T : ViewDataBinding> : AppCompatActivity(), OnCl
             PrintTagApplication.applicationInstance.countDownTimer!!.cancel()
         }
         if (isValidScreen) {
-            PrintTagApplication.applicationInstance.countDownTimer = object : CountDownTimer(300000, 1000) {
+            PrintTagApplication.applicationInstance.countDownTimer = object : CountDownTimer(3000000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
                 }
 

@@ -54,18 +54,6 @@ object RequestMethods {
     }
 
 
-    /*
-      fun getCommunicationPref(context: Context, preferenceValue: String, isFromSetting: Boolean): UserServerRootReq {
-          val serverReq = UserServerRootReq()
-          serverReq.prosperaId =
-              BaseSharedPreference.getInstance(context).getProsperaId(context)
-          serverReq.communicationPreference = preferenceValue
-          if (!isFromSetting)
-              serverReq.registrationStage = USER_STATUS_UPDATE_PREFERENCE
-          return serverReq
-      }
-  */
-
 
 
 
@@ -136,28 +124,6 @@ object RequestMethods {
 
 
 
-
-    @Suppress("NAME_SHADOWING")
-    fun getRequestDate(date: String): String {
-        try {
-            val array = date.split("/")
-            val intMonth = array[0].toInt()
-            val intDate = array[1].toInt()
-            val year = array[2]
-
-            var date = intDate.toString()
-            var month = intMonth.toString()
-            if (intDate < 10)
-                date = "0$intDate"
-            if (intMonth < 10)
-                month = "0$intMonth"
-
-            return "$year$month$date"
-        } catch (e: Exception) {
-            e.printStackTrace()
-            return date
-        }
-    }
 
 
 

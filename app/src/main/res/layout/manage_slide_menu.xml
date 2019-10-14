@@ -49,7 +49,7 @@
                                       android:layout_marginStart="@dimen/margin_10"
                                       android:layout_gravity="center">
                             <androidx.appcompat.widget.AppCompatTextView
-                                    android:id="@+id/tv_associate_name"
+                                    android:id="@+id/tv_username"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     style="@style/AppTextView.SideNavMenu"
@@ -59,12 +59,12 @@
                                     android:ems="10"/>
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                    android:id="@+id/tv_associate_store"
+                                    android:id="@+id/tv_storename"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     style="@style/AppTextView.SideNavMenu"
                                     android:text="store 2"
-                                    android:visibility="gone"
+                                    android:maxLines="2"
                             />
                         </LinearLayout>
                     </LinearLayout>
@@ -125,6 +125,8 @@
                                 style="@style/AppTextView.MenuItem"
                                 android:text="@string/a_app_menu_english"
                                 android:paddingTop="@dimen/margin_10"
+                                android:layout_marginEnd="@dimen/margin_10"
+
                                 android:onClick="@{() -> instance.onMenuItemClicks(@string/action_menu_lan_english, @string/action_menu_lan_english)}"/>
                     </LinearLayout>
                     <LinearLayout
@@ -140,6 +142,7 @@
                                 style="@style/AppTextView.MenuItem"
                                 android:text="@string/a_app_menu_spanish"
                                 android:paddingTop="@dimen/margin_10"
+                                android:layout_marginEnd="@dimen/margin_10"
                                 android:onClick="@{() -> instance.onMenuItemClicks(@string/action_menu_lan_spanish, @string/action_menu_lan_spanish)}"/>
                     </LinearLayout>
 
@@ -157,7 +160,9 @@
                         android:layout_width="match_parent"
                         android:orientation="horizontal"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_10">
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:onClick="@{() -> instance.onMenuItemClicks(@string/a_menu_logout, @string/action_menu_logout)}"
+                >
                     <androidx.appcompat.widget.AppCompatImageView
                             style="@style/AppImageView.MenuItem"
                             android:src="@mipmap/ic_menu_logout"/>
@@ -167,7 +172,6 @@
                             style="@style/AppTextView.MenuItem"
                             android:visibility="visible"
                             android:layout_gravity="start"
-                            android:onClick="@{() -> instance.onMenuItemClicks(@string/a_menu_logout, @string/action_menu_logout)}"
                             android:text="@string/a_menu_logout"/>
                 </LinearLayout>
                 <View

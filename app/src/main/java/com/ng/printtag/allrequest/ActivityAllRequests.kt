@@ -34,7 +34,7 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
 
     private fun setAdapter() {
         val adapterDisburse = AllRequestsAdapter(
-            this@ActivityAllRequests,
+
             allRequest,
             object : OnItemClickListener {
                 override fun onItemClick(item: Any, position: Int) {
