@@ -10,20 +10,6 @@
             android:paddingEnd="@dimen/margin_30"
             android:orientation="vertical">
 
-        <RelativeLayout android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingTop="@dimen/margin_10"
-                        android:paddingBottom="@dimen/margin_10">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/AppTextView.Dialog.Message"
-                    android:textColor="@color/color_B0000000"
-                    android:text="@{model}"
-            />
 
 
             <androidx.appcompat.widget.AppCompatCheckBox
@@ -33,13 +19,14 @@
                     style="@style/AppTextView.Dialog.Message"
                     android:gravity="center_vertical"
                     android:clickable="true"
-                    android:layout_toEndOf="@id/tv_name"
                     android:focusable="true"
                     android:button="@drawable/checkbox_selection"
                     android:layoutDirection="rtl"
                     android:textDirection="ltr"
-                    android:layout_marginStart="@dimen/margin_10"
+                    android:text="@{model}"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    android:textColor="@color/color_B0000000"
+
             />
-        </RelativeLayout>
     </LinearLayout>
 </layout>

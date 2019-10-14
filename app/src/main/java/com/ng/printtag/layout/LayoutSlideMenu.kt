@@ -51,18 +51,27 @@ class LayoutSlideMenu : LinearLayout {
                 it
             )
         }
-        if (!AppUtils.getUserModel(context).data!!.firstName.isNullOrEmpty())
-            binding.tvAssociateName.text =
-                AppUtils.getUserModel(context).data!!.firstName
+        if (AppUtils.getUserModel(context).data != null) {
+            if (!AppUtils.getUserModel(context).data!!.username.isNullOrEmpty())
+                binding.tvUsername.text =
+                    AppUtils.getUserModel(context).data!!.username
+            if (!AppUtils.getUserModel(context).data!!.firstName.isNullOrEmpty())
+                binding.tvStorename.text =
+                    AppUtils.getUserModel(context).data!!.getFullProfileName()
+
+        }
 
         if (BaseSharedPreference.getInstance(context).getLanguage(
                 context.getString(R.string.pref_language)
             ).equals("es")
         ) {
-            binding.tvSpanish.setTextColor(resources.getColor(R.color.colorPrimary))
 
+            binding.tvSpanish.setTextColor(resources.getColor(R.color.colorPrimary))
+            binding.tvSpanish.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.ic_menu_language_select, 0);
         } else {
             binding.tvLanguage.setTextColor(resources.getColor(R.color.colorPrimary))
+            binding.tvLanguage.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.ic_menu_language_select, 0);
+
 
         }
         /* binding.tvAssociateName.text =
@@ -95,6 +104,9 @@ class LayoutSlideMenu : LinearLayout {
      */
     fun onMenuItemClicks(title: String, tag: String) {
         if (tag == context.getString(R.string.action_menu_logout)) {
+            callBackInterfaces.onCallBack(title, tag)
+
+
             CallDialog.errorDialog(
                 context,
                 context.getString(R.string.a_menu_logout),
@@ -122,8 +134,8 @@ class LayoutSlideMenu : LinearLayout {
                  context.getString(R.string.language_es)
              }*/
         }
-//        if (::callBackInterfaces.isInitialized)
-//            callBackInterfaces.onCallBack(title, tag)
+        if (::callBackInterfaces.isInitialized)
+            callBackInterfaces.onCallBack(title, tag)
 
     }
 

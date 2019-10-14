@@ -34,7 +34,7 @@ abstract class BaseDialog<out T : ViewDataBinding> : DialogFragment() {
      */
     private fun setMatchParent() {
         val dialog = dialog
-        dialog?.setCanceledOnTouchOutside(true)
+        dialog?.setCanceledOnTouchOutside(false)
         if (dialog != null) {
             val width = ViewGroup.LayoutParams.MATCH_PARENT
             val height = ViewGroup.LayoutParams.MATCH_PARENT
@@ -56,7 +56,7 @@ abstract class BaseDialog<out T : ViewDataBinding> : DialogFragment() {
         )
         val contentView = dialogChildBinding.root
         dialog.setContentView(contentView)
-        dialog.setCanceledOnTouchOutside(true)
+        dialog.setCanceledOnTouchOutside(false)
         dialog.setCancelable(true)
         (contentView.parent as View).setBackgroundColor(
             ContextCompat.getColor(

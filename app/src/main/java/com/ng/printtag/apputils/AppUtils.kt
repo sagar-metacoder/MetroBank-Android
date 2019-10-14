@@ -533,26 +533,6 @@ class AppUtils {
          * This method will use to convert date into specific format
          */
         @JvmStatic
-        fun convertedDateForTier3(dateTime: String): String {
-            return when (dateTime.isNotEmpty()) {
-                true -> {
-                    return try {
-                        val inputPattern = "yyyy-MM-dd HH:mm:ss"
-                        val outputPattern = "MM/dd/yyyy"
-                        val inputDateFormat = SimpleDateFormat(inputPattern, Locale.getDefault())
-                        val outputDateFormat = SimpleDateFormat(outputPattern, Locale.getDefault())
-                        outputDateFormat.format(inputDateFormat.parse(dateTime))
-                    } catch (e: java.lang.Exception) {
-                        "N/A"
-                    }
-                }
-                false -> "N/A"
-            }
-        }
-        /**
-         * This method will use to convert date into specific format
-         */
-        @JvmStatic
         fun getDate(dateTime: String): String {
             return try {
                 when (dateTime.isNotEmpty()) {
@@ -570,114 +550,6 @@ class AppUtils {
             }
         }
 
-        /**
-         * This method will use to convert date into specific format
-         */
-        @JvmStatic
-        fun getUpdateDate(dateTime: String): String {
-            return try {
-                //2019-06-07 10:40
-                when (!dateTime.isNullOrEmpty()) {
-                    true -> {
-                        val outputPattern = "MM/dd/yyyy"
-                        val inputPattern = "yyyy-MM-dd hh:mm"
-                        val inputDateFormat = SimpleDateFormat(inputPattern, Locale.getDefault())
-                        val outputDateFormat = SimpleDateFormat(outputPattern, Locale.getDefault())
-                        outputDateFormat.format(inputDateFormat.parse(dateTime))
-                    }
-                    false -> "--"
-                }
-            } catch (e: java.lang.Exception) {
-                "--"
-            }
-        }
-
-        /**
-         * This method will use to validate date of birth
-         */
-        @Suppress("NAME_SHADOWING")
-        fun validateDOB(date: String?): Boolean {
-            if (date != null) {
-                var enterYear = 0
-                var enterDate = ""
-                var enterMonth = ""
-                val calendar = Calendar.getInstance()
-                val currentYear = calendar.get(Calendar.YEAR)
-                if (date.contains("/")) {
-                    val array = date.split("/")
-                    enterDate = array[1]
-                    enterMonth = array[0]
-                    enterYear = array[2].toInt()
-                }
-                if (enterYear > currentYear) {
-                    return false
-                } else {
-                    val value = currentYear - enterYear
-                    if (value < 15) {
-                        return false
-                    } else {
-                        return if (value == 15) {
-                            val date = calendar.get(Calendar.DATE)
-                            val month = calendar.get(Calendar.MONTH)
-                            if (!enterDate.contains("0") && enterDate.toInt() <= 9)
-                                enterDate = "0$enterDate"
-                            if (!enterMonth.contains("0") && enterMonth.toInt() <= 9)
-                                enterMonth = "0$enterMonth"
-                            enterDate.toInt() <= date && enterMonth.toInt() <= month + 1
-
-                        } else {
-                            true
-                        }
-                    }
-                }
-            } else {
-                return false
-            }
-        }
-
-        /**
-         * This method will use to check expiry date
-         */
-        @Suppress("NAME_SHADOWING")
-        fun validateExpiry(date: String?): Boolean {
-            if (date != null) {
-                var enterYear = 0
-                var enterDate = ""
-                var enterMonth = ""
-                val calendar = Calendar.getInstance()
-                val currentYear = calendar.get(Calendar.YEAR)
-                if (date.contains("/")) {
-                    val array = date.split("/")
-                    enterDate = array[1]
-                    enterMonth = array[0]
-                    enterYear = array[2].toInt()
-                }
-                val totalMonth = 12
-                when {
-                    enterMonth.isNotEmpty() && enterMonth.toInt() > totalMonth -> return false
-                    enterYear < currentYear -> return false
-                    enterYear > currentYear -> return true
-                    else -> {
-                        var enterDate = enterDate
-                        var enterMonth = enterMonth
-                        val date = calendar.get(Calendar.DATE)
-                        val month = calendar.get(Calendar.MONTH)
-                        if (!enterDate.contains("0") && enterDate.toInt() <= 9)
-                            enterDate = "0$enterDate"
-                        if (!enterMonth.contains("0") && enterMonth.toInt() <= 9)
-                            enterMonth = "0$enterMonth"
-                        if (enterMonth.toInt() == (month + 1)) {
-                            return enterDate.toInt() >= date
-                        } else if (enterMonth.toInt() > month + 1) {
-                            return true
-                        }
-                    }
-                }
-            } else {
-                return false
-            }
-            return false
-        }
 
         /**
          * This method will use to convert date into specific format
@@ -705,52 +577,7 @@ class AppUtils {
             return "N/A"
         }
 
-        /**
-         * This method will use to convert date and time into specific format
-         */
-        @JvmStatic
-        fun getDateTimeValue(dob: String?): String {
-            try {
-                return if (!dob.isNullOrEmpty()) {
-                    //19750508
-                    val month = dob.substring(4, 6)
-                    val date = dob.substring(6, 8)
-                    val year = dob.substring(0, 4)
-                    val hour = dob.substring(8, 10)
-                    val minute = dob.substring(10, 12)
 
-
-                    "$month/$date/$year $hour:$minute"
-                } else {
-                    "N/A"
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                if (dob != null) {
-                    return dob
-                }
-            }
-
-            return "N/A"
-        }
-
-        fun getLastTransactionDate(dateTime: String): String {
-            return try {
-                when (dateTime.isNotEmpty()) {
-                    true -> {
-//                        2013-05-30 05:55:00
-                        val inputPattern = "yyyy-MM-dd hh:mm:ss"
-                        val outputPattern = "MM/dd/yyyy hh:mm:ss"
-                        val inputDateFormat = SimpleDateFormat(inputPattern, Locale.getDefault())
-                        val outputDateFormat = SimpleDateFormat(outputPattern, Locale.getDefault())
-                        outputDateFormat.format(inputDateFormat.parse(dateTime))
-                    }
-                    false -> "N/A"
-                }
-            } catch (e: java.lang.Exception) {
-                "N/A"
-            }
-        }
 
         /**
          * This method will use to get current date and time
@@ -760,32 +587,14 @@ class AppUtils {
         }
 
 
-        /**
-         * This method will use to get current date
-         */
-        fun getCurrentDateValue(): String {
-            return SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
-        }
+        fun formattedDate(date: Int): String {
 
-        /**
-         * This method will use to convert date into specific format
-         */
-        @JvmStatic
-        fun getCheckSubmissionDate(dateTime: String): String {
-            return try {
-                when (dateTime.isNotEmpty()) {
-                    true -> {
-                        val inputPattern = "yyyy-MM-dd hh:mm:ss"
-                        val outputPattern = "MMMM dd, yyyy"
-                        val inputDateFormat = SimpleDateFormat(inputPattern, Locale.getDefault())
-                        val outputDateFormat = SimpleDateFormat(outputPattern, Locale.getDefault())
-                        outputDateFormat.format(inputDateFormat.parse(dateTime))
-                    }
-                    false -> "--"
-                }
-            } catch (e: java.lang.Exception) {
-                "--"
+            if (date < 10) {
+
+                return ("0" + date)
             }
+            return date.toString()
+
         }
 
         /**

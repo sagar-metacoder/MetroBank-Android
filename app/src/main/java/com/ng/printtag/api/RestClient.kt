@@ -2,16 +2,8 @@
 package com.ng.printtag.api
 
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
-import android.widget.FrameLayout
-import android.widget.RelativeLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.HtmlCompat
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
-
 import com.google.gson.ExclusionStrategy
 import com.google.gson.FieldAttributes
 import com.google.gson.GsonBuilder
@@ -22,7 +14,6 @@ import com.ng.printtag.apputils.CallDialog
 import com.ng.printtag.apputils.Constant
 import com.ng.printtag.apputils.TLSSocketFactory
 import com.ng.printtag.base.BaseActivity
-import com.ng.printtag.databinding.ManageExceptionsBinding
 import com.ng.printtag.interfaces.SkipGetSerialisation
 import com.ng.printtag.interfaces.SkipPostSerialisation
 import com.ng.printtag.models.allrequests.AllRequestModel
@@ -31,7 +22,6 @@ import com.ng.printtag.models.newrequests.DepartmentModel
 import com.ng.printtag.models.newrequests.NewPrintReqSubmit
 import com.ng.printtag.models.newrequests.StoreListModel
 import com.ng.printtag.models.newrequests.TempletListModel
-
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
@@ -174,9 +164,6 @@ open class RestClient {
                                         activity,
                                         activity.getString(R.string.a_lbl_net_title),
                                         activity.getString(R.string.a_msg_time_out_error),
-                                        callApi,
-                                        reqCode,
-                                        apiResponseListener,
                                         restClientModel
                                     )
                                 }
@@ -283,9 +270,6 @@ open class RestClient {
                         activity,
                         activity.getString(R.string.a_lbl_network_error),
                         activity.getString(R.string.a_net_message),
-                        call,
-                        reqCode,
-                        apiResponseListener,
                         restClientModel
                     )
                     /* setNetworkError(
@@ -342,50 +326,17 @@ open class RestClient {
                     activity,
                    activity.getString(R.string.a_lbl_warning_title),
                     message,
-                    call,
-                    reqCode,
-                    apiResponseListener,
                     restClientModel
                 )
             }
 
-            /* try {
-                 ProgressDialog.displayProgressDialog(activity, false, "")
-                 if (restClientModel.isErrorScreenShow)
-                     apiResponseListener.onApiError(message, reqCode)
-                 else {
-                     callErrorDialog(activity, message, Utils.getLabel(activity.getString(R.string.a_lbl_warning_title)))
-                 }
-             } catch (e: Exception) {
-                 e.printStackTrace()
-             }*/
         }
 
-        /* private fun setNetworkError(
-             activity: Context,
-             message: String,
-             restClientModel: RestClientModel,
-             reqCode: Int,
-             apiResponseListener: ApiResponseListener
-         ) {
-             try {
-                 ProgressDialog.displayProgressDialog(activity, false, "")
-                 if (restClientModel.isNetWorkScreenShow)
-                     apiResponseListener.onApiNetwork(message, reqCode)
-                 else {
-                     callErrorDialog(activity, message, Utils.getLabel(activity.getString(R.string.a_lbl_net_title)))
-                 }
-             } catch (e: Exception) {
-                 e.printStackTrace()
-             }
-         }*/
+
 
 
         private fun handleException(
             activity: Context, title: String, message: String,
-            requestObject: Any,
-            reqCode: Int,
-            apiResponseListener: ApiResponseListener,
             restClientModel: RestClientModel
         ) {
             try {
@@ -405,11 +356,8 @@ open class RestClient {
                     else -> throwException(
                         activity,
                         title,
-                        message,
-                        requestObject,
-                        reqCode,
-                        apiResponseListener,
-                        restClientModel
+                        message
+
                     )
                     /*else -> callErrorDialog(
                         activity,
@@ -423,47 +371,21 @@ open class RestClient {
         }
 
         private fun throwException(
-            activity: Context, title: String, message: String,
-            requestObject: Any,
-            reqCode: Int,
-            apiResponseListener: ApiResponseListener,
-            restClientModel: RestClientModel
+            activity: Context, title: String, message: String
+
         ) {
-            val frmBaseContainer: FrameLayout = (activity as BaseActivity<*>).actBaseBinding.frmBaseContainer
-            val frmExceptionContainer: FrameLayout = activity.actBaseBinding.frmExceptionContainer
-            frmBaseContainer.visibility = GONE
-            frmExceptionContainer.visibility = View.VISIBLE
-            frmExceptionContainer.removeAllViews()
-            val binding: ManageExceptionsBinding =
-                setExceptionView(activity, frmExceptionContainer, R.layout.manage_exceptions) as ManageExceptionsBinding
-            binding.tvExceptionTitle.text = title
-            binding.tvExceptionMessage.text = HtmlCompat.fromHtml(message, HtmlCompat.FROM_HTML_MODE_LEGACY)
-//            binding.tvCancel.visibility=GONE
-            AppUtils.hideKeyBoard(activity as AppCompatActivity, binding.btnRetry)
-            binding.tvCancel.setOnClickListener {
-                frmBaseContainer.visibility = View.VISIBLE
-                frmExceptionContainer.visibility = GONE
-                frmBaseContainer.invalidate()
-                frmExceptionContainer.invalidate()
-            }
-            binding.btnRetry.setOnClickListener {
-                makeApiRequest(activity, requestObject, requestObject, reqCode, restClientModel, apiResponseListener)
-            }
+
+            CallDialog.errorDialog(
+                activity,
+                title,
+                message,
+                "",
+                activity.getString(R.string.a_btn_ok),
+                "", null
+            )
+
         }
 
-        private fun setExceptionView(activity: Context, container: FrameLayout, layout: Int): ViewDataBinding {
-            val binding: ViewDataBinding =
-                DataBindingUtil.inflate(LayoutInflater.from(activity), layout, container, false)
-            val params: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.MATCH_PARENT
-            )
-            params.addRule(RelativeLayout.BELOW, R.id.header_tool_bar)
-            container.layoutParams = params
-            container.addView(binding.root)
-            container.visibility = View.VISIBLE
-            return binding
-        }
     }
 
     private fun getApiClient(): ApiInteface? {
@@ -521,67 +443,6 @@ open class RestClient {
                 return
             }
 
-            /*Constant.CALL_SEND_PRIVACY_DETAILS -> {
-                val callApi: Call<GenericRootResponse> =
-                    getApiClient()!!.sendPrivacyDetails(requestObject as RequestBody)
-                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
-                return
-            }
-            Constant.CALL_SIGN_URL -> {
-                val callApi: Call<GenericRootResponse> = getApiClient()!!.getSingUrl(requestObject as RequestBody)
-                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
-                return
-            }
-            *//* Constant.CALL_LOGIN_STORE_REQ_CODE -> {
-                 val callApi: Call<StoreRootModel> = getApiClient()!!.callValidateUser(requestObject as String)
-                 makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
-                 return
-             }*//*
-            Constant.CALL_VALIDATE_STORE_REQ_CODE -> {
-                val callApi: Call<GenericRootResponse> = getApiClient()!!.callValidStores(requestObject as String)
-                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
-                return
-            }
-            Constant.CALL_GET_LANGUAGE_REQ_CODE -> {
-                val callApi: Call<GenericRootResponse> = getApiClient()!!.callLanguageApi()
-                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
-                return
-            }
-            Constant.CALL_APP_TEXT_LANGUAGE_REQ_CODE -> {
-                val callApi: Call<ResponseBody> = getApiClient()!!.getAppText(requestObject as RequestBody)
-                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
-                return
-            }
-            Constant.CALL_TERMS_CONDITIONS_REQ_CODE -> {
-                val callApi: Call<TermConditionsResponse> =
-                    getApiClient()!!.callTermsConditionApi(requestObject as RequestBody)
-                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
-                return
-            }
-            Constant.CALL_TERMS_CONDITIONS_OLD_REQ_CODE -> {
-                val callApi: Call<TermConditionsResponse> =
-                    getApiClient()!!.callTermsConditionOldApi(requestObject as String)
-                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
-                return
-            }
-            Constant.CALL_COUNTRY_REQ_CODE -> {
-                val callApi: Call<AddressResponse> = getApiClient()!!.callCountryApi()
-                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
-                return
-            }
-            Constant.CALL_COUNTRY_CODE_REQ_CODE -> {
-                val callApi: Call<AddressResponse> = getApiClient()!!.callCodeCountryApi()
-                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
-                return
-            }
-            Constant.CALL_US_STREET_REQ -> {
-                val queryMap: HashMap<String, String> = requestObject as HashMap<String, String>
-                queryMap["auth-id"] = Constant.SMARTY_STREET_AUTH_KEY
-                queryMap["auth-token"] = Constant.SMARTY_STREET_AUTH_TOKEN
-                val callApi: Call<List<StreetResponse>> = getApiClient()!!.getStreet(queryMap)
-                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
-                return
-            }*/
         }
     }
 }

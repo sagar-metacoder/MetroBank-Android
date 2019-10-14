@@ -43,5 +43,7 @@
     <string name="action_from_pending">action_from_pending</string>
     <string name="action_from_all">action_from_all</string>
     <string name="value_pending">pending</string>
+    <string name="key_freshtag">FreshTag</string>
+    <string name="key_inventorytag">InventoryTag</string>
 
 </resources>

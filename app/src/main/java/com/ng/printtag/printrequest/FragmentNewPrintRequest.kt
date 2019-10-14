@@ -15,8 +15,7 @@ import com.ng.printtag.dialog.DialogTypeStore
 import com.ng.printtag.interfaces.CallBackInterfaces
 import com.ng.printtag.interfaces.OnItemClickListener
 import com.ng.printtag.models.newrequests.DepartmentModel
-import java.util.*
-import kotlin.collections.ArrayList
+import com.ng.printtag.models.newrequests.StoreDepartmentListModel
 
 
 class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
@@ -26,11 +25,15 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
     var mDay: Int = 0
     var context: ActivityNewPrintRequest? = null
     var isDeptSelected: Boolean = false
-    var valueBuilder = ""
+    lateinit var departmentValue: String
+    var tagTypeExist: Boolean = false
+    lateinit var tagTypeArrayList: ArrayList<StoreDepartmentListModel>
+
 
     override fun initFragment() {
         binding = getFragmentDataBinding()
         context = activity as ActivityNewPrintRequest
+        tagTypeArrayList = ArrayList()
         binding.layoutManager = GridLayoutManager(activity, Constant.DOC_LIST_COLUMN)
         val spacing = (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30f, resources.displayMetrics)).toInt()
         binding.rvTemplateList.addItemDecoration(GridItemDecoration(Constant.DOC_LIST_COLUMN, spacing, false))
@@ -61,30 +64,49 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
     }
 
-    fun getSelectedPosi() {
 
-    }
     private fun callTagTypeDialog() {
         val dialog = DialogTypeStore()
         dialog.fromWhere = Constant.TAG_TYPE
+
+
         val tagType: ArrayList<String> = ArrayList()
-        tagType.add("Fresh Tag")
-        tagType.add("Inventory Tag")
+        tagType.add(getString(R.string.item_freshtag))
+        tagType.add(getString(R.string.item_inventorytag))
+
+
         dialog.stringList = tagType
 
         dialog.callBackListener = object : CallBackInterfaces {
             override fun onCallBack(item: Any, fromWhere: Any) {
+
                 if (fromWhere == Constant.TAG_TYPE) {
+
+
+                    if (!binding.edtTagType.text.isNullOrBlank()) {
+                        tagTypeExist = true
+                    }
+
                     binding.edtTagType.text = Editable.Factory.getInstance().newEditable(tagType.get(item as Int))
 
-                    if (item == 0) {
-                        context!!.tagType = "FreshTag"
+                    if (binding.edtTagType.text!!.equals(getString(R.string.item_freshtag))) {
+                        context!!.tagType = getString(R.string.key_freshtag)
                     } else {
-                        context!!.tagType = "InventoryTag"
+                        context!!.tagType = getString(R.string.key_inventorytag)
 
                     }
-                    BaseSharedPreference.getInstance(activity!!).putValue(getString(R.string.tagType), item.toString())
 
+                    if (tagTypeExist) {
+                        if (!binding.edtDepartment.text.isNullOrBlank() && !binding.edtStoreNo.text.isNullOrBlank() && !binding.edtTagType.text.isNullOrBlank()) {
+                            binding.linearRv.visibility = View.GONE
+                            isDeptSelected = true
+                            context!!.callDepartmentApi(
+                                context!!.tagType,
+                                context!!.storeKey,
+                                departmentValue
+                            )
+                        }
+                    }
                 }
 
             }
@@ -101,11 +123,15 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
         dialog.callBackListener = object : CallBackInterfaces {
             override fun onCallBack(item: Any, fromWhere: Any) {
                 if (fromWhere == Constant.TAG_STORE) {
+
+                    binding.edtDepartment.text = Editable.Factory.getInstance().newEditable("")
+                    binding.linearRv.visibility = View.GONE
+
                     binding.edtStoreNo.text =
                         Editable.Factory.getInstance().newEditable(context!!.arrayStoreKey.get(item as Int))
 
 
-                    context!!.storeKey = context!!.arrayStoreValue.get(item as Int)
+                    context!!.storeKey = context!!.arrayStoreValue.get(item)
                     BaseSharedPreference.getInstance(activity!!)
                         .putValue(getString(R.string.storeNumber), item.toString())
 
@@ -124,22 +150,24 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
         dialog.callBackListener = object : CallBackInterfaces {
             override fun onCallBack(item: Any, fromWhere: Any) {
-                val deptPosition: ArrayList<Int> = item as ArrayList<Int>
+                val deptPosition: ArrayList<*> = item as ArrayList<*>
                 val stringBuilder = StringBuilder()
                 val valueBuilder = StringBuilder()
                 for (i in 0 until deptPosition.size) {
-                    stringBuilder.append(context!!.arrayDeptKey[deptPosition[i]])
+                    stringBuilder.append(context!!.arrayDeptKey[deptPosition[i] as Int])
                     stringBuilder.append(", ")
-                    valueBuilder.append(context!!.arrayDeptValue[deptPosition[i]])
+                    valueBuilder.append(context!!.arrayDeptValue[deptPosition[i] as Int])
                     valueBuilder.append(",")
                 }
                 isDeptSelected = true
                 binding.edtDepartment.text =
                     Editable.Factory.getInstance().newEditable(stringBuilder.substring(0, stringBuilder.length - 2))
+
+                departmentValue = valueBuilder.substring(0, valueBuilder.length - 1)
+
                 context!!.callDepartmentApi(
                     context!!.tagType,
-                    context!!.storeKey,
-                    valueBuilder.substring(0, valueBuilder.length - 1)
+                    context!!.storeKey, departmentValue
                 )
                 context!!.department_key = valueBuilder.substring(0, valueBuilder.length - 1)
                 BaseSharedPreference.getInstance(activity!!)
@@ -162,6 +190,8 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
             if (context!!.arrayStoreKey.isNotEmpty()) {
                 if (context!!.arrayStoreKey.size > 1) {
+                    binding.linearRv.visibility = View.GONE
+
                     callStoreTypeDialog()
                 }
             }
@@ -179,6 +209,8 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             if (!context!!.arrayDeptKey.isNullOrEmpty()) {
 
                 callDepartmentDialog()
+                binding.linearRv.visibility = View.GONE
+
             }
         }
         binding.edtEffectiveDate.setOnClickListener {
@@ -188,17 +220,20 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
 
     private fun openDatePicker() {
-        val c = Calendar.getInstance()
-        mYear = c.get(Calendar.YEAR)
-        mMonth = c.get(Calendar.MONTH)
-        mDay = c.get(Calendar.DAY_OF_MONTH)
+
+        val array = binding.edtEffectiveDate.text!!.split("/")
+        mYear = array[2].toInt()
+        mMonth = array[0].toInt() - 1
+        mDay = array[1].toInt()
 
 
         val datePickerDialog = DatePickerDialog(
             activity!!,
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+
+
                 binding.edtEffectiveDate.text = Editable.Factory.getInstance()
-                    .newEditable((monthOfYear + 1).toString() + "/" + dayOfMonth.toString() + "/" + year)
+                    .newEditable(AppUtils.formattedDate(monthOfYear + 1) + "/" + AppUtils.formattedDate(dayOfMonth) + "/" + year)
             },
             mYear,
             mMonth,

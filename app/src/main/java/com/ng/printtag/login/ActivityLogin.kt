@@ -4,6 +4,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.ng.printtag.R
 import com.ng.printtag.api.ApiResponseListener
+import com.ng.printtag.apputils.AppUtils
 import com.ng.printtag.base.BaseActivity
 import com.ng.printtag.databinding.ActivityLoginBinding
 import com.ng.printtag.interfaces.HeaderInterface
@@ -54,6 +55,17 @@ class ActivityLogin : BaseActivity<ActivityLoginBinding>(), ApiResponseListener,
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        AppUtils.hideKeyBoard(this@ActivityLogin)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        AppUtils.hideKeyBoard(this@ActivityLogin)
+
+    }
     override fun onHeaderMenuItemClick(view: View) {
 
     }

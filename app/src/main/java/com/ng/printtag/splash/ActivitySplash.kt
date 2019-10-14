@@ -22,7 +22,7 @@ class ActivitySplash : BaseActivity<ActivitySplashBinding>() {
         Handler().postDelayed({
             Utils.gotoLoginScreen(this@ActivitySplash)
 
-        }, 1000)
+        }, 1500)
     }
 
 

@@ -1,7 +1,6 @@
 package com.ng.printtag.allrequest
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import com.ng.printtag.models.allrequests.AllRequestModel
  * View Items of search customer and click for view profile and re-registration
  */
 class AllRequestsAdapter(
-    private var context: Context,
     private val results: MutableList<AllRequestModel.Data.Records>,
     private var onItemClickListener: OnItemClickListener
 ) :

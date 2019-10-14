@@ -123,6 +123,7 @@
                               android:layout_width="match_parent"
                               android:layout_height="wrap_content"
                               android:orientation="vertical"
+                              android:visibility="gone"
                 >
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -176,7 +177,7 @@
                                 style="@style/AppTextView.Title.Medium"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
-                                android:text="@{model.cutOffDay}"
+                                android:text='@{model.cutOffDay.length() !=0?model.cutOffDay:@string/a_lbl_desk}'
                                 android:layout_marginEnd="@dimen/margin_5"
                                 android:layout_alignParentEnd="true"
                                 android:textColor="@color/colorWhite50"
@@ -211,7 +212,7 @@
                                 style="@style/AppTextView.Title.Medium"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
-                                android:text="@{model.printingDay}"
+                                android:text='@{model.printingDay.length() !=0?model.printingDay:@string/a_lbl_desk}'
                                 android:layout_marginEnd="@dimen/margin_5"
                                 android:layout_alignParentEnd="true"
                                 android:textColor="@color/colorWhite50"
@@ -246,7 +247,7 @@
                                 style="@style/AppTextView.Title.Medium"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
-                                android:text="@{model.maximumQuantity}"
+                                android:text='@{model.maximumQuantity.length() !=0?model.maximumQuantity:@string/a_lbl_desk}'
                                 android:layout_marginEnd="@dimen/margin_5"
                                 android:layout_alignParentEnd="true"
                                 android:textColor="@color/colorWhite50"

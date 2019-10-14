@@ -125,7 +125,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
 
         rootJson.put(resources.getString(R.string.storeNumber), storeKey)
         rootJson.put(resources.getString(R.string.department), department_key)
-        rootJson.put(resources.getString(R.string.key_effectiveDate), Utils.parseDateToMMddyyyy(date))
+        rootJson.put(resources.getString(R.string.key_effectiveDate), date)
 
         rootJson.put(
             resources.getString(R.string.key_language),
@@ -156,8 +156,6 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
                 val rootResponse = response.body() as StoreListModel
                 when (rootResponse.success) {
                     true -> {
-
-
                         // val jsonObj = JSONObject(jsonObjectStore)
                         for (i in 0 until rootResponse.data!!.stores!!.size) {
 
@@ -168,8 +166,16 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
                             if (arrayStoreKey.size == 1) {
                                 val currentFragment = getCurrentFragment()
                                 //                                    binding.edtStoreNo.text = Editable.Factory.getInstance().newEditable(arrayStoreValue[0])
-                                if (currentFragment != null && currentFragment is FragmentNewPrintRequest) currentFragment.binding.edtStoreNo.text =
-                                    Editable.Factory.getInstance().newEditable(arrayStoreValue[0])
+                                if (currentFragment != null && currentFragment is FragmentNewPrintRequest)
+                                    currentFragment.binding.edtStoreNo.text =
+                                        Editable.Factory.getInstance().newEditable(arrayStoreKey[0])
+                                storeKey = arrayStoreValue[0]
+
+                                for (i in 0 until rootResponse.data!!.departments!!.size) {
+
+                                    arrayDeptKey.add(rootResponse.data!!.departments?.get(i)?.key!!)
+                                    arrayDeptValue.add(rootResponse.data!!.departments?.get(i)?.value!!)
+                                }
                             }
 
                     }
@@ -200,6 +206,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
                         }
                         if (!rootResponse.data!!.templates.isNullOrEmpty()) {
                             if (rootResponse.data!!.templates!!.size >= 1 && currentFragment is FragmentNewPrintRequest) {
+                                currentFragment.binding.linearRv.visibility = View.VISIBLE
                                 currentFragment.setAdapter(rootResponse.data!!.templates)
                                 arrayTemplate =
                                     rootResponse.data!!.templates as ArrayList<DepartmentModel.Data.Template>
@@ -237,7 +244,10 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
                 when (rootResponse.success) {
                     true -> {
 
-                        AppUtils.showLongToast(this@ActivityNewPrintRequest, "Product Addded Successfully.")
+                        AppUtils.showLongToast(
+                            this@ActivityNewPrintRequest,
+                            resources.getString(R.string.a_msg_product_added)
+                        )
                         Utils.gotoHomeScreen(this@ActivityNewPrintRequest)
                     }
                     else -> {

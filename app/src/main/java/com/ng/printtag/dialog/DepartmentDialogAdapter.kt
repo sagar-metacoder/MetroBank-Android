@@ -8,20 +8,26 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ng.printtag.R
 import com.ng.printtag.databinding.RowDialogDepartmentBinding
+import com.ng.printtag.interfaces.OnItemClickListener
 
 class DepartmentDialogAdapter : RecyclerView.Adapter<DepartmentDialogAdapter.ViewHolder>() {
     private var mInflater: LayoutInflater? = null
     private lateinit var departmentList: ArrayList<String>
     private lateinit var context: Context
     var selectedDeptList: ArrayList<Int> = ArrayList()
+    private lateinit var onItemClickListener: OnItemClickListener
 
 
     fun setData(
         context: Context,
-        departmentList: ArrayList<String>
+        departmentList: ArrayList<String>,
+        onItemClickListener: OnItemClickListener
+
     ) {
         this.context = context
         this.departmentList = departmentList
+        this.onItemClickListener = onItemClickListener
+
         mInflater = LayoutInflater.from(context)
     }
 
@@ -60,6 +66,8 @@ class DepartmentDialogAdapter : RecyclerView.Adapter<DepartmentDialogAdapter.Vie
         override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
             if (p1) {
                 selectedDeptList.add(position)
+                onItemClickListener.onItemClick(departmentList[position], adapterPosition)
+
 
             }
         }

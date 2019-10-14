@@ -25,15 +25,7 @@ import androidx.databinding.DataBindingUtil.inflate as inflate1
 class HeaderToolBar : Toolbar, PopupMenu.OnMenuItemClickListener {
 
     companion object {
-        const val MENU_HELP = 0
-        const val MENU_LANGUAGE = 1
-        const val MENU_CANCEL = 2
-        const val MENU_SETTINGS = 3
-        const val MENU_DOCUMENTS = 4
-        const val MENU_TRANSACTION = 5
-        const val MENU_CHECK_SCANNED = 6
-        const val MENU_TOTAL = 7
-        const val MENU_TRANSACTION_FINISH = 8
+
 
     }
 

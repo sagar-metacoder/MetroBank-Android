@@ -2,11 +2,11 @@ package com.ng.printtag
 
 import android.app.Application
 import android.os.CountDownTimer
-import androidx.appcompat.app.AppCompatActivity
 import com.ng.printtag.api.RestClient
 
 
 class PrintTagApplication : Application() {
+    var countDownTimer: CountDownTimer? = null
 
     companion object {
         lateinit var applicationInstance: PrintTagApplication
