@@ -11,23 +11,29 @@ class DialogTypeStore : BaseDialog<DialogTypeStoreBinding>(), OnItemClickListene
 
     lateinit var binding: DialogTypeStoreBinding
     lateinit var stringList: ArrayList<String>
-    var status: Boolean = false
+    var selectedTag: Int = -1
     val adapter = TypeStoreDialogAdapter()
     override fun initDialog() {
         binding = getDialogDataBinding()
         if(fromWhere == Constant.TAG_TYPE) {
             binding.tvTitle.text = getString(R.string.a_title_select_tag_type)
-            adapter.setData(activity!!, stringList, Constant.TAG_TYPE, this)
+            adapter.setData(activity!!, stringList, Constant.TAG_TYPE, selectedTag, this)
 
         } else if (fromWhere == Constant.TAG_STORE) {
             binding.tvTitle.text = getString(R.string.a_title_select_store_no)
-            adapter.setData(activity!!, stringList, Constant.TAG_STORE, this)
+            adapter.setData(activity!!, stringList, Constant.TAG_STORE, selectedTag, this)
 
 
         }
 
+        if (selectedTag == -1) {
+            ErrorActions.validateButton_dialog(binding.btnDone, false)
 
-        ErrorActions.validateButton_dialog(binding.btnDone, false)
+        } else {
+            ErrorActions.validateButton_dialog(binding.btnDone, true)
+
+        }
+
 
 
 

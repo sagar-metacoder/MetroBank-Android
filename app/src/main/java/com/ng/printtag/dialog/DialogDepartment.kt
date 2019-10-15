@@ -11,16 +11,23 @@ class DialogDepartment : BaseDialog<DialogDepartmentBinding>(), OnItemClickListe
 
     lateinit var binding: DialogDepartmentBinding
     var stringList: ArrayList<String> = ArrayList()
+    lateinit var deptPosition: ArrayList<Int>
+
     val adapter = DepartmentDialogAdapter()
 
     override fun initDialog() {
         binding = getDialogDataBinding()
         binding.tvTitle.text = title
 
-        adapter.setData(activity!!, stringList, this)
+        adapter.setData(activity!!, stringList, deptPosition, this)
         binding.rvList.adapter = adapter
         handleClick()
-        ErrorActions.validateButton_dialog(binding.btnDone, false)
+        if (deptPosition.isNullOrEmpty()) {
+            ErrorActions.validateButton_dialog(binding.btnDone, false)
+        } else {
+            ErrorActions.validateButton_dialog(binding.btnDone, true)
+
+        }
 
 
     }
@@ -35,8 +42,11 @@ class DialogDepartment : BaseDialog<DialogDepartmentBinding>(), OnItemClickListe
 
     override fun onItemClick(item: Any, position: Int) {
         if (callBackListener != null) {
-            if (!(item as String).isEmpty()) {
+            if (!(item as ArrayList<Int>).isNullOrEmpty()) {
                 ErrorActions.validateButton_dialog(binding.btnDone, true)
+
+            } else {
+                ErrorActions.validateButton_dialog(binding.btnDone, false)
 
             }
         }

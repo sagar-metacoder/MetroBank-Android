@@ -2,6 +2,7 @@ package com.ng.printtag.dialog
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.databinding.DataBindingUtil
@@ -18,7 +19,8 @@ class TypeStoreDialogAdapter : RecyclerView.Adapter<TypeStoreDialogAdapter.ViewH
     private lateinit var onItemClickListener: OnItemClickListener
 
     private lateinit var storeList: ArrayList<String>
-    var selPosValue: Int = 0
+    var selPosValue: Int = -1
+
     var selected: AppCompatRadioButton? = null
 
 
@@ -26,6 +28,7 @@ class TypeStoreDialogAdapter : RecyclerView.Adapter<TypeStoreDialogAdapter.ViewH
         context: Context,
         storeList: ArrayList<String>,
         fromWhere: Int,
+        selPosValue: Int,
         onItemClickListener: OnItemClickListener
 
     ) {
@@ -33,6 +36,7 @@ class TypeStoreDialogAdapter : RecyclerView.Adapter<TypeStoreDialogAdapter.ViewH
         this.storeList = storeList
         mInflater = LayoutInflater.from(context)
         this.fromWhere = fromWhere
+        this.selPosValue = selPosValue
         this.onItemClickListener = onItemClickListener
 
     }
@@ -54,16 +58,37 @@ class TypeStoreDialogAdapter : RecyclerView.Adapter<TypeStoreDialogAdapter.ViewH
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.dataBinding.rbType.isChecked = position == selPosValue
         holder.bind(storeList[position])
 
 
     }
 
-    inner class ViewHolder(private val dataBinding: RowDialogTypeStoreBinding) :
+    inner class ViewHolder(val dataBinding: RowDialogTypeStoreBinding) :
         RecyclerView.ViewHolder(dataBinding.root) {
+
+
+        private val clickHandler: (View) -> Unit = {
+
+            selPosValue = adapterPosition
+
+
+            if (selPosValue != -1) {
+                onItemClickListener.onItemClick(storeList[adapterPosition], adapterPosition)
+            }
+            notifyDataSetChanged()
+
+        }
+
+
         init {
+            dataBinding.apply {
+                root.setOnClickListener(clickHandler)
+                dataBinding.rbType.setOnClickListener(clickHandler)
+            }
 
 
+/*
             dataBinding.rbType.setOnClickListener {
 
 
@@ -78,6 +103,7 @@ class TypeStoreDialogAdapter : RecyclerView.Adapter<TypeStoreDialogAdapter.ViewH
                     selPosValue = position
                 }
             }
+*/
         }
 
         fun bind(obj: String?) {
