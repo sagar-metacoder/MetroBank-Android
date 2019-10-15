@@ -132,6 +132,9 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                     selectedStore = item as Int
 
                     binding.edtDepartment.text = Editable.Factory.getInstance().newEditable("")
+                    deptPositionValue.clear()
+
+
                     binding.linearRv.visibility = View.GONE
 
                     binding.edtStoreNo.text =
