@@ -15,17 +15,21 @@ class DepartmentDialogAdapter : RecyclerView.Adapter<DepartmentDialogAdapter.Vie
     private lateinit var departmentList: ArrayList<String>
     private lateinit var context: Context
     var selectedDeptList: ArrayList<Int> = ArrayList()
+    var selectedDept: ArrayList<Int> = ArrayList()
+
     private lateinit var onItemClickListener: OnItemClickListener
 
 
     fun setData(
         context: Context,
         departmentList: ArrayList<String>,
+        selectedDept: ArrayList<Int>,
         onItemClickListener: OnItemClickListener
 
     ) {
         this.context = context
         this.departmentList = departmentList
+        this.selectedDept = selectedDept
         this.onItemClickListener = onItemClickListener
 
         mInflater = LayoutInflater.from(context)
@@ -36,6 +40,9 @@ class DepartmentDialogAdapter : RecyclerView.Adapter<DepartmentDialogAdapter.Vie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if (selectedDept.contains(position)) {
+            holder.dataBinding.chkDepartment.isChecked = true
+        }
         holder.bind(departmentList[position])
     }
 
@@ -51,24 +58,26 @@ class DepartmentDialogAdapter : RecyclerView.Adapter<DepartmentDialogAdapter.Vie
         return R.layout.row_dialog_department
     }
 
-    inner class ViewHolder(private val dataBinding: RowDialogDepartmentBinding) :
+    inner class ViewHolder(val dataBinding: RowDialogDepartmentBinding) :
         RecyclerView.ViewHolder(dataBinding.root), CompoundButton.OnCheckedChangeListener {
         init {
-            /* if(BaseSharedPreference.getInstance(context).getPrefValue(context.getString(R.string.department))!!.contains(position.toString()))
-             {
-                 dataBinding.chkDepartment.isChecked = true
 
-             }*/
             dataBinding.chkDepartment.setOnCheckedChangeListener(this)
         }
 
 
+
         override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
             if (p1) {
-                selectedDeptList.add(position)
-                onItemClickListener.onItemClick(departmentList[position], adapterPosition)
+                selectedDeptList.add(adapterPosition)
+                onItemClickListener.onItemClick(selectedDeptList, adapterPosition)
 
+            } else {
+                if (selectedDeptList.contains(adapterPosition)) {
+                    selectedDeptList.remove(adapterPosition)
+                    onItemClickListener.onItemClick(selectedDeptList, adapterPosition)
 
+                }
             }
         }
 
@@ -77,7 +86,6 @@ class DepartmentDialogAdapter : RecyclerView.Adapter<DepartmentDialogAdapter.Vie
          */
         fun bind(obj: String?) {
             dataBinding.model = obj
-
             dataBinding.executePendingBindings()
 
 

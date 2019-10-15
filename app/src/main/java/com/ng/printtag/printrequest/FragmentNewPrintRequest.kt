@@ -28,6 +28,9 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
     lateinit var departmentValue: String
     var tagTypeExist: Boolean = false
     lateinit var tagTypeArrayList: ArrayList<StoreDepartmentListModel>
+    var selectedTag: Int = -1
+    var selectedStore: Int = -1
+    var deptPositionValue: ArrayList<Int> = ArrayList()
 
 
     override fun initFragment() {
@@ -76,6 +79,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
 
         dialog.stringList = tagType
+        dialog.selectedTag = selectedTag
 
         dialog.callBackListener = object : CallBackInterfaces {
             override fun onCallBack(item: Any, fromWhere: Any) {
@@ -83,6 +87,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                 if (fromWhere == Constant.TAG_TYPE) {
 
 
+                    selectedTag = item as Int
                     if (!binding.edtTagType.text.isNullOrBlank()) {
                         tagTypeExist = true
                     }
@@ -119,10 +124,12 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
         dialog.fromWhere = Constant.TAG_STORE
 
         dialog.stringList = context!!.arrayStoreKey
+        dialog.selectedTag = selectedStore
 
         dialog.callBackListener = object : CallBackInterfaces {
             override fun onCallBack(item: Any, fromWhere: Any) {
                 if (fromWhere == Constant.TAG_STORE) {
+                    selectedStore = item as Int
 
                     binding.edtDepartment.text = Editable.Factory.getInstance().newEditable("")
                     binding.linearRv.visibility = View.GONE
@@ -147,10 +154,13 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
         val dialog = DialogDepartment()
         dialog.title = getString(R.string.a_title_select_department)
         dialog.stringList = context!!.arrayDeptKey
+        dialog.deptPosition = deptPositionValue
 
         dialog.callBackListener = object : CallBackInterfaces {
             override fun onCallBack(item: Any, fromWhere: Any) {
-                val deptPosition: ArrayList<*> = item as ArrayList<*>
+                val deptPosition: ArrayList<Int> = item as ArrayList<Int>
+                deptPositionValue = deptPosition
+
                 val stringBuilder = StringBuilder()
                 val valueBuilder = StringBuilder()
                 for (i in 0 until deptPosition.size) {
