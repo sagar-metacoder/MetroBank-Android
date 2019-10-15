@@ -46,7 +46,7 @@
                     style="@style/AppTextView.Header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/font_20"
+                    android:textSize="@dimen/font_18"
                     android:layout_toEndOf="@+id/iv_back"
                     android:layout_marginStart="@dimen/margin_20"
                     android:layout_centerVertical="true"
