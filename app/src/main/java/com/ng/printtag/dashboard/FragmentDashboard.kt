@@ -1,5 +1,6 @@
 package com.ng.printtag.dashboard
 
+import android.content.Intent
 import com.ng.printtag.R
 import com.ng.printtag.allrequest.ActivityAllRequests
 import com.ng.printtag.apputils.AppUtils
@@ -20,32 +21,23 @@ class FragmentDashboard : BaseFragment<FragmentDashboardBinding>() {
         handleClick()
     }
 
-    /**
-     * Upon click on tvSearchClick FragmentLookUpPhoneLandLine will be open
-     * Upon click on ivWellCome ActivityCheckWaiver will be open
-     */
     private fun handleClick() {
-
-        binding.consAllRequest.setOnClickListener {
-            AppUtils.navigateToOtherScreen(activity!!, ActivityAllRequests::class.java, false)
-        }
-
-
         binding.consNewRequest.setOnClickListener {
             AppUtils.navigateToOtherScreen(activity!!, ActivityNewPrintRequest::class.java, false)
 
         }
-        /* binding.tvSearchClick.setOnClickListener { view ->
-             super.onClick(view)
-             ALREADY_EXIST_USER = 0
-             CHECK_ALREADY_EXIST_USER = false
-             (activity as ActivityDashboard).addressModels = null
-             (activity as ActivityDashboard).countryList = null
-             Utils.navigateTo(binding.tvSearchClick, R.id.actionLookUpPhoneLandLine, null)
-         }
-         binding.ivWellCome.setOnClickListener {
-             //            PdpUtils.navigateToOtherScreen(activity!!, ActivityUnderWritingRules::class.java, false)
-         }*/
+
+        binding.consAllRequest.setOnClickListener {
+            val intent = Intent(activity!!, ActivityAllRequests::class.java)
+            intent.putExtra(getString(R.string.action_from), getString(R.string.action_from_all))
+            AppUtils.navigateToOtherScreen(activity!!, intent, false)
+        }
+
+        binding.consPendingRequest.setOnClickListener {
+            val intent = Intent(activity!!, ActivityAllRequests::class.java)
+            intent.putExtra(getString(R.string.action_from), getString(R.string.action_from_pending))
+            AppUtils.navigateToOtherScreen(activity!!, intent, false)
+        }
     }
 
 

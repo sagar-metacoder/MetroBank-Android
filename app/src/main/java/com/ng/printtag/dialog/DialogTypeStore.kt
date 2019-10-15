@@ -56,7 +56,7 @@ class DialogTypeStore : BaseDialog<DialogTypeStoreBinding>(), OnItemClickListene
 
     override fun onItemClick(item: Any, position: Int) {
         if (callBackListener != null) {
-                ErrorActions.validateButton_dialog(binding.btnDone, true)
+            ErrorActions.validateButton_dialog(binding.btnDone, true)
 
 
         }

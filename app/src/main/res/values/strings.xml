@@ -88,6 +88,7 @@
     <string name="a_lbl_product_info">ENTER PRODUCT AISLE INFORMATION</string>
     <string name="title_tab_start_date">Start Date</string>
     <string name="ttile_tab_end_date">End Date</string>
+    <string name="a_hint_search">Search</string>
     <string name="a_msg_loggedout">Logged out successfully!</string>
     <string name="a_msg_product_added">Product Addded Successfully.</string>
 

@@ -20,8 +20,8 @@
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:orientation="vertical"
-                      android:paddingEnd="@dimen/margin_5"
-                      android:paddingStart="@dimen/margin_5"
+                      android:paddingEnd="@dimen/margin_10"
+                      android:paddingStart="@dimen/margin_10"
                       android:paddingTop="@dimen/margin_5"
                       android:paddingBottom="@dimen/margin_5">
 
@@ -69,10 +69,9 @@
                         style="@style/AppTextView.Title.Small"
                         android:singleLine="false"
                         android:maxLines="2"
-                        android:layout_marginEnd="@dimen/margin_2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text='@string/a_lbl_print_type'
                         android:textAllCaps="true"
                 />
@@ -80,20 +79,18 @@
                 <androidx.appcompat.widget.AppCompatTextView
                         style="@style/AppTextView.Title.Small"
                         android:singleLine="false"
-                        android:layout_marginEnd="@dimen/margin_2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text='@string/a_lbl_template_name'
                         android:textAllCaps="true"
                 />
                 <androidx.appcompat.widget.AppCompatTextView
                         style="@style/AppTextView.Title.Small"
                         android:singleLine="false"
-                        android:layout_marginEnd="@dimen/margin_2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text='@string/a_lbl_department'
                         android:textAllCaps="true"
                 />
@@ -110,11 +107,10 @@
                         android:textSize="@dimen/font_label"
                         android:singleLine="false"
                         android:maxLines="2"
-                        android:layout_marginEnd="@dimen/margin_2"
                         android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:gravity="top"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text='@{model.tagType.length() !=0?model.tagType:@string/a_lbl_unknown}'
                         tools:ignore="RtlHardcoded"/>
 
@@ -122,21 +118,19 @@
                         style="@style/AppTextView.List.Item"
                         android:textSize="@dimen/font_label"
                         android:singleLine="false"
-                        android:layout_marginEnd="@dimen/margin_2"
                         android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:gravity="top"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text='@{model.templateName.length() !=0?model.templateName:@string/a_lbl_unknown}'
                 />
                 <androidx.appcompat.widget.AppCompatTextView
                         style="@style/AppTextView.List.Item"
                         android:textSize="@dimen/font_label"
                         android:singleLine="false"
-                        android:layout_marginEnd="@dimen/margin_2"
                         android:layout_width="match_parent"
                         android:layout_weight="1"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="top"
                         android:text='@{model.department.length() !=0?model.department:@string/a_lbl_unknown}'
                 />
@@ -155,10 +149,9 @@
                         style="@style/AppTextView.Title.Small"
                         android:singleLine="false"
                         android:maxLines="2"
-                        android:layout_marginEnd="@dimen/margin_2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text='@string/a_lbl_effective_date'
                         android:textAllCaps="true"
                 />
@@ -166,20 +159,18 @@
                 <androidx.appcompat.widget.AppCompatTextView
                         style="@style/AppTextView.Title.Small"
                         android:singleLine="false"
-                        android:layout_marginEnd="@dimen/margin_2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text='@string/a_lbl_req_date'
                         android:textAllCaps="true"
                 />
                 <androidx.appcompat.widget.AppCompatTextView
                         style="@style/AppTextView.Title.Small"
                         android:singleLine="false"
-                        android:layout_marginEnd="@dimen/margin_2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text='@string/a_lbl_expected_date'
                         android:textAllCaps="true"
                 />
@@ -188,40 +179,34 @@
 
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-            >
-
+                    android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
                         style="@style/AppTextView.List.Item"
                         android:textSize="@dimen/font_label"
                         android:singleLine="false"
                         android:maxLines="2"
-                        android:layout_marginEnd="@dimen/margin_2"
                         android:layout_width="match_parent"
                         android:layout_weight="1"
-                        android:layout_height="match_parent"
-                        android:text='@{model.effectiveDate.length() !=0?model.effectiveDate:@string/a_lbl_unknown}'
-                />
+                        android:layout_height="wrap_content"
+                        android:text='@{model.effectiveDate.length() !=0?model.effectiveDate:@string/a_lbl_unknown}'/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                         style="@style/AppTextView.List.Item"
                         android:textSize="@dimen/font_label"
                         android:singleLine="false"
-                        android:layout_marginEnd="@dimen/margin_2"
                         android:layout_width="match_parent"
                         android:layout_weight="1"
-                        android:layout_height="match_parent"
-                        android:text='@{model.reqDate.length() !=0?model.reqDate:@string/a_lbl_unknown}'
-                />
+                        android:layout_height="wrap_content"
+                        android:text='@{model.reqDate.length() !=0?model.reqDate:@string/a_lbl_unknown}'/>
+
                 <androidx.appcompat.widget.AppCompatTextView
                         style="@style/AppTextView.List.Item"
                         android:textSize="@dimen/font_label"
                         android:singleLine="false"
-                        android:layout_marginEnd="@dimen/margin_2"
                         android:layout_width="match_parent"
                         android:layout_weight="1"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text='@{model.expectedDate.length() !=0?model.expectedDate:@string/a_lbl_unknown}'
                 />
 

@@ -551,8 +551,6 @@ class AppUtils {
         }
 
 
-
-
         /**
          * This method will use to convert date into specific format
          */

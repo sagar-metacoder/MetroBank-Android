@@ -39,6 +39,10 @@
     <string name="key_page">page</string>
     <string name="key_searchkey">searchKey</string>
     <string name="key_date_range">dateRange</string>
+    <string name="action_from">action_from</string>
+    <string name="action_from_pending">action_from_pending</string>
+    <string name="action_from_all">action_from_all</string>
+    <string name="value_pending">pending</string>
     <string name="key_freshtag">FreshTag</string>
     <string name="key_inventorytag">InventoryTag</string>
 

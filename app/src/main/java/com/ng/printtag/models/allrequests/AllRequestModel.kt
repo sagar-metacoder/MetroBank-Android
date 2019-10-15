@@ -21,7 +21,9 @@ class AllRequestModel {
         @SerializedName("records")
         @Expose
         var records: MutableList<Records>? = null
-
+        @SerializedName("recordsMsg")
+        @Expose
+        var recordsMsg: String? = null
 
         inner class Records {
             @SerializedName("reqId")
