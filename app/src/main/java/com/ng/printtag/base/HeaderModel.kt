@@ -6,6 +6,7 @@ import com.ng.printtag.R
 import com.ng.printtag.api.ActivityAppSessionTimeout
 import com.ng.printtag.dashboard.FragmentDashboard
 import com.ng.printtag.login.FragmentLogin
+import com.ng.printtag.printrequest.FragmentAddProduct
 import com.ng.printtag.printrequest.FragmentNewPrintRequest
 import com.ng.printtag.splash.ActivitySplash
 
@@ -45,7 +46,17 @@ class HeaderModel {
                 setLeftIcon(R.mipmap.ic_back)
                 setLeftIconText(baseFragment!!.getString(R.string.a_lbl_new_print_request))
                 backVisibility = true
+                barcodeVisibility = false
             }
+
+            is FragmentAddProduct -> {
+
+                setLeftIcon(R.mipmap.ic_back)
+                setLeftIconText(baseFragment!!.getString(R.string.a_lbl_new_print_request))
+                backVisibility = true
+                barcodeVisibility = true
+            }
+
             is FragmentDashboard -> {
                 title =
                     baseFragment!!.getString(R.string.a_title_dashboard)

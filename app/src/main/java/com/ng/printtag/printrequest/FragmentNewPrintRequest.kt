@@ -37,15 +37,21 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
         binding = getFragmentDataBinding()
         context = activity as ActivityNewPrintRequest
         tagTypeArrayList = ArrayList()
-        binding.layoutManager = GridLayoutManager(activity, Constant.DOC_LIST_COLUMN)
-        val spacing = (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30f, resources.displayMetrics)).toInt()
-        binding.rvTemplateList.addItemDecoration(GridItemDecoration(Constant.DOC_LIST_COLUMN, spacing, false))
 
-        binding.edtEffectiveDate.text = Editable.Factory.getInstance().newEditable(AppUtils.currentDate())
+        init()
         handleClick()
+
         context!!.callStoreApi()
         ErrorActions.validateButton(binding.btnSubmit, false)
 
+
+    }
+
+    private fun init() {
+        binding.layoutManager = GridLayoutManager(activity, Constant.DOC_LIST_COLUMN)
+        val spacing = (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30f, resources.displayMetrics)).toInt()
+        binding.rvTemplateList.addItemDecoration(GridItemDecoration(Constant.DOC_LIST_COLUMN, spacing, false))
+        binding.edtEffectiveDate.text = Editable.Factory.getInstance().newEditable(AppUtils.currentDate())
 
     }
 
@@ -167,9 +173,9 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                 val stringBuilder = StringBuilder()
                 val valueBuilder = StringBuilder()
                 for (i in 0 until deptPosition.size) {
-                    stringBuilder.append(context!!.arrayDeptKey[deptPosition[i] as Int])
+                    stringBuilder.append(context!!.arrayDeptKey[deptPosition[i]])
                     stringBuilder.append(", ")
-                    valueBuilder.append(context!!.arrayDeptValue[deptPosition[i] as Int])
+                    valueBuilder.append(context!!.arrayDeptValue[deptPosition[i]])
                     valueBuilder.append(",")
                 }
                 isDeptSelected = true
@@ -212,7 +218,10 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             //callStoreApi()
         }
         binding.btnSubmit.setOnClickListener {
-            context!!.callSubmitApi(binding.edtEffectiveDate.text.toString(), binding.edtInfo.text.toString())
+            Utils.navigateTo(binding.btnSubmit, R.id.actionAddProducts, null)
+
+            //  context!!.callSubmitApi(binding.edtEffectiveDate.text.toString(), binding.edtInfo.text.toString())
+
         }
         binding.edtDepartment.setOnClickListener {
             if (context!!.storeKey.isNotEmpty() && !binding.edtTagType.text.isNullOrBlank() && context!!.arrayDeptKey.isNullOrEmpty()) {

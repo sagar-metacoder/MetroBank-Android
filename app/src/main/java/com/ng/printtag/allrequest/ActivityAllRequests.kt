@@ -16,6 +16,7 @@ import com.ng.printtag.api.RestClientModel
 import com.ng.printtag.apputils.AppUtils
 import com.ng.printtag.apputils.CallDialog
 import com.ng.printtag.apputils.Constant
+import com.ng.printtag.apputils.ProgressDialog
 import com.ng.printtag.base.BaseActivity
 import com.ng.printtag.common.DateRangePickerFragment
 import com.ng.printtag.databinding.ActivityAllRequestsBinding
@@ -179,6 +180,8 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
     private fun callAllRequestApi(status: String, page: String, searchKey: String, dateRange: String) {
         val restClientModel = RestClientModel()
         restClientModel.isProgressDialogShow = true
+        ProgressDialog.displayProgressDialog(this@ActivityAllRequests, true, "")
+
         val rootJson = JSONObject()
         rootJson.put(
             resources.getString(R.string.userId),
@@ -203,6 +206,8 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
         super.onApiResponse(response, reqCode)
         when (reqCode) {
             Constant.CALL_ALL_REQUEST -> {
+                ProgressDialog.displayProgressDialog(this@ActivityAllRequests, false, "")
+
                 val rootResponse = response.body() as AllRequestModel
                 when (rootResponse.success) {
                     true -> {

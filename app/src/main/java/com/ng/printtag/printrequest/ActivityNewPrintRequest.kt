@@ -1,6 +1,7 @@
 package com.ng.printtag.printrequest
 
 import android.text.Editable
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.ng.printtag.R
@@ -10,6 +11,7 @@ import com.ng.printtag.api.RestClientModel
 import com.ng.printtag.apputils.*
 import com.ng.printtag.base.BaseActivity
 import com.ng.printtag.databinding.ActivityNewPrintRequestBinding
+import com.ng.printtag.interfaces.HeaderInterface
 import com.ng.printtag.models.newrequests.DepartmentModel
 import com.ng.printtag.models.newrequests.NewPrintReqSubmit
 import com.ng.printtag.models.newrequests.StoreListModel
@@ -18,7 +20,9 @@ import kotlinx.android.synthetic.main.activity_new_print_request.*
 import org.json.JSONObject
 import retrofit2.Response
 
-class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
+class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), HeaderInterface {
+
+
     private lateinit var binding: ActivityNewPrintRequestBinding
     var arrayStoreKey: ArrayList<String> = ArrayList()
     var arrayStoreValue: ArrayList<String> = ArrayList()
@@ -33,12 +37,15 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
 
     override fun initMethod() {
         binding = getViewDataBinding()
+        actBaseBinding.headerToolBar.setHeaderInterface(this)
+
     }
 
 
     fun callStoreApi() {
         val restClientModel = RestClientModel()
         restClientModel.isProgressDialogShow = true
+        ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, true, "")
 
         val rootJson = JSONObject()
         rootJson.put(
@@ -59,6 +66,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
     fun callDepartmentApi(tagType: String, storeKey: String, department: String) {
         val restClientModel = RestClientModel()
         restClientModel.isProgressDialogShow = true
+        ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, true, "")
 
         val rootJson = JSONObject()
         rootJson.put(
@@ -85,6 +93,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
     fun callTemplateDetails(position: Int) {
         val restClientModel = RestClientModel()
         restClientModel.isProgressDialogShow = true
+        ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, true, "")
 
         template_postion = position
         val rootJson = JSONObject()
@@ -153,6 +162,8 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
         super.onApiResponse(response, reqCode)
         when (reqCode) {
             Constant.CALL_STORE_URL -> {
+                ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, false, "")
+
                 val rootResponse = response.body() as StoreListModel
                 when (rootResponse.success) {
                     true -> {
@@ -186,6 +197,8 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
             }
 
             Constant.CALL_DEPARTMENT_URL -> {
+                ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, false, "")
+
                 val rootResponse = response.body() as DepartmentModel
                 when (rootResponse.success) {
                     true -> {
@@ -221,6 +234,9 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
             }
 
             Constant.CALL_TEMPLETS_DETAILS -> {
+                ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, false, "")
+
+
                 val rootResponse = response.body() as TempletListModel
                 when (rootResponse.success) {
                     true -> {
@@ -240,6 +256,8 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
             }
 
             Constant.CALL_NEW_REQUEST_SUBMIT -> {
+                ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, false, "")
+
                 val rootResponse = response.body() as NewPrintReqSubmit
                 when (rootResponse.success) {
                     true -> {
@@ -258,6 +276,12 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
 
 
         }
+    }
+
+    override fun onApiError(response: Any, reqCode: Int) {
+        super.onApiError(response, reqCode)
+        ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, false, "")
+
     }
 
     fun getCurrentFragment(): Fragment? {
@@ -281,6 +305,23 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>() {
 
     }
 
+    override fun onRightImageClick() {
+
+    }
+
+    override fun onLeftImageClick() {
+        super.onBackPressed()
+    }
+
+    override fun onMenuImageClick(item: String) {
+    }
+
+    override fun onHeaderMenuItemClick(view: View) {
+
+        if (view.id == R.id.iv_bar_code) {
+            Log.v("barcode", "barcode click")
+        }
+    }
 
     override fun getLayoutId(): Int = R.layout.activity_new_print_request
 }

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
+>
+    <data>
+        <import type="com.ng.printtag.apputils.Utils"/>
+    </data>
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/margin_20"
+                    android:background="@color/colorWhite"
+    >
+
+        <RelativeLayout android:id="@+id/rel_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorWhite"
+                        android:layout_above="@id/rel_save"
+                        android:layout_marginBottom="@dimen/margin_10">
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/AppTextView.Title.Medium"
+                    android:visibility="gone"
+                    android:gravity="center"
+                    android:textColor="@color/color_B7B7BA"
+                    android:layout_centerInParent="true"/>
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_all_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/margin_10"
+                    bind:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        </RelativeLayout>
+        <RelativeLayout android:id="@+id/rel_save"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+
+        >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btn_submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/AppTextView.Button"
+                    android:text="@string/a_btn_submit"
+                    android:layout_centerVertical="true"
+
+            />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btn_draft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/AppTextView.Button"
+                    android:text="@string/a_btn_draft"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/btn_submit"
+                    android:layout_marginStart="@dimen/margin_20"
+
+            />
+
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_print_now"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/AppButton.Colored.Green"
+                    android:layout_gravity="end"
+                    android:text="@string/a_btn_print_now"
+                    android:padding="@dimen/margin_8"
+                    android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>
