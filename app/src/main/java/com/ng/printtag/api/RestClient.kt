@@ -9,10 +9,7 @@ import com.google.gson.FieldAttributes
 import com.google.gson.GsonBuilder
 import com.ng.printtag.BuildConfig
 import com.ng.printtag.R
-import com.ng.printtag.apputils.AppUtils
-import com.ng.printtag.apputils.CallDialog
-import com.ng.printtag.apputils.Constant
-import com.ng.printtag.apputils.TLSSocketFactory
+import com.ng.printtag.apputils.*
 import com.ng.printtag.base.BaseActivity
 import com.ng.printtag.interfaces.SkipGetSerialisation
 import com.ng.printtag.interfaces.SkipPostSerialisation
@@ -340,6 +337,8 @@ open class RestClient {
             restClientModel: RestClientModel
         ) {
             try {
+                ProgressDialog.displayProgressDialog(activity, false, "")
+
                 when {
                     restClientModel.isNetWorkScreenShow -> {
                         CallDialog.errorDialog(
@@ -374,6 +373,7 @@ open class RestClient {
             activity: Context, title: String, message: String
 
         ) {
+            ProgressDialog.displayProgressDialog(activity, false, "")
 
             CallDialog.errorDialog(
                 activity,
