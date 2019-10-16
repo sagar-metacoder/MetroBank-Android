@@ -14,7 +14,7 @@ import com.ng.printtag.models.allrequests.AllRequestModel
  * View Items of search customer and click for view profile and re-registration
  */
 class AllRequestsAdapter(
-    private val results: MutableList<AllRequestModel.Data.Records>,
+    private var results: MutableList<AllRequestModel.Data.Records>,
     private var onItemClickListener: OnItemClickListener
 ) :
     RecyclerView.Adapter<AllRequestsAdapter.CustomViewHolder>() {
@@ -68,5 +68,15 @@ class AllRequestsAdapter(
             binding.executePendingBindings()
         }
 
+    }
+
+    fun setItems(items: ArrayList<AllRequestModel.Data.Records>) {
+        results = items
+        notifyDataSetChanged()
+    }
+
+    fun addItems(items: List<AllRequestModel.Data.Records>) {
+        results.addAll(items)
+        notifyDataSetChanged()
     }
 }

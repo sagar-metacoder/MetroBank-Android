@@ -24,6 +24,12 @@ class AllRequestModel {
         @SerializedName("recordsMsg")
         @Expose
         var recordsMsg: String? = null
+        @SerializedName("totalPages")
+        @Expose
+        var totalPages: String? = null
+        @SerializedName("totalRecords")
+        @Expose
+        var totalRecords: String? = null
 
         inner class Records {
             @SerializedName("reqId")

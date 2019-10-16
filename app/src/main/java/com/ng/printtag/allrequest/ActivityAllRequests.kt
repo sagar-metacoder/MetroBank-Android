@@ -1,11 +1,14 @@
 package com.ng.printtag.allrequest
 
+import android.annotation.SuppressLint
 import android.graphics.Color
+import android.os.Handler
 import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.EditText
 import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ng.printtag.R
 import com.ng.printtag.api.RequestMethods
 import com.ng.printtag.api.RestClient
@@ -31,11 +34,20 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
     lateinit var allRequest: MutableList<AllRequestModel.Data.Records>
     private val dateRangePickerFragment = DateRangePickerFragment()
     var action: String = ""
+    var searchKey = ""
+    var dateRange = ""
+    private var page = 1
+    var totalPage: Int = 0
 
+    companion object {
+        var isLoading = false
+        var isLastPage = false
+    }
 
     /**
      * @see BaseActivity#initMethod()
      */
+    @SuppressLint("WrongConstant")
     override fun initMethod() {
         binding = getViewDataBinding()
         actBaseBinding.rlMain.removeView(actBaseBinding.headerToolBar)
@@ -45,19 +57,41 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
         dateRangePickerFragment.setOnDateRangeSelectedListener(this@ActivityAllRequests)
         if (action == getString(R.string.action_from_all)) {
             binding.tvHeaderTitle.text = getString(R.string.a_lbl_all_requests)
-            callAllRequestApi(resources.getString(R.string.value_all), "1", "", "")
         } else {
             binding.tvHeaderTitle.text = getString(R.string.a_lbl_pending_requests)
-            callAllRequestApi(resources.getString(R.string.value_pending), "1", "", "")
         }
+        loadData()
+        val linearLayoutManager = LinearLayoutManager(this)
+        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        binding.rvAllRequests.layoutManager = linearLayoutManager
 
 
         handleClick()
         setSearchView()
+        binding.rvAllRequests.addOnScrollListener(object : PaginationScrollListener(linearLayoutManager) {
 
+            override fun loadMoreItems() {
+                isLoading = true
+                if (!isLastPage) {
+                    Handler().postDelayed({
+                        loadData()
+                    }, 200)
+                }
+            }
+        })
     }
 
-    private fun setAdapter() {
+    private fun loadData() {
+
+        if (action == getString(R.string.action_from_all)) {
+            callAllRequestApi(resources.getString(R.string.value_all), page.toString(), searchKey, dateRange)
+        } else {
+            callAllRequestApi(resources.getString(R.string.value_pending), page.toString(), searchKey, dateRange)
+        }
+    }
+
+    private fun resultAction(model: AllRequestModel) {
+        isLoading = false
         val adapter = AllRequestsAdapter(
             allRequest,
             object : OnItemClickListener {
@@ -66,7 +100,25 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
                 }
             })
         binding.rvAllRequests.adapter = adapter
+        adapter.addItems(model.data!!.records!!)
+
+        if (page == model.data!!.totalPages!!.toInt()) {
+            isLastPage = true
+        } else {
+            page += 1
+        }
     }
+
+    /*private fun setAdapter() {
+        val adapter = AllRequestsAdapter(
+            allRequest,
+            object : OnItemClickListener {
+                override fun onItemClick(item: Any, position: Int) {
+
+                }
+            })
+        binding.rvAllRequests.adapter = adapter
+    }*/
 
     private fun setSearchView() {
         val id = binding.searchView.getContext()
@@ -85,13 +137,17 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
+                searchKey = query
+                dateRange = ""
+                page = 1
                 if (action == getString(R.string.action_from_all)) {
                     binding.tvHeaderTitle.text = getString(R.string.a_lbl_all_requests)
-                    callAllRequestApi(resources.getString(R.string.value_all), "1", query, "")
+
                 } else {
                     binding.tvHeaderTitle.text = getString(R.string.a_lbl_pending_requests)
-                    callAllRequestApi(resources.getString(R.string.value_pending), "1", query, "")
                 }
+                loadData()
+
                 return false
             }
 
@@ -107,11 +163,10 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
             override fun onClose(): Boolean {
                 binding.ivCalendar.visibility = VISIBLE
                 binding.tvHeaderTitle.visibility = VISIBLE
-                if (action == getString(R.string.action_from_all)) {
-                    callAllRequestApi(resources.getString(R.string.value_all), "1", "", "")
-                } else {
-                    callAllRequestApi(resources.getString(R.string.value_pending), "1", "", "")
-                }
+                searchKey = ""
+                dateRange = ""
+                page = 1
+                loadData()
 
 
                 return false
@@ -152,14 +207,19 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
                 when (rootResponse.success) {
                     true -> {
                         allRequest = rootResponse.data!!.records!! as ArrayList<AllRequestModel.Data.Records>
-                        if (allRequest.size == 0 || allRequest.isEmpty()) {
+                        totalPage = rootResponse.data!!.totalPages!!.toInt()
+                        if (allRequest.size == 0 && allRequest.isEmpty() && page == 1) {
                             binding.tvMsg.visibility = VISIBLE
                             binding.tvMsg.text = rootResponse.data!!.recordsMsg
                             binding.rvAllRequests.visibility = GONE
                         } else {
                             binding.tvMsg.visibility = GONE
                             binding.rvAllRequests.visibility = VISIBLE
-                            setAdapter()
+//                            setAdapter()
+                            resultAction(rootResponse)
+
+
+
                         }
                     }
                     else -> {
@@ -203,12 +263,10 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
         val selectedDate =
             startMonth.toString() + "/" + startDay + "/" + startYear + "-" + endMonth + "/" + endDay + "/" + endYear
         Log.d("selectedDate", selectedDate)
-
-        if (action == getString(R.string.action_from_all)) {
-            callAllRequestApi(resources.getString(R.string.value_all), "1", "", selectedDate)
-        } else {
-            callAllRequestApi(resources.getString(R.string.value_pending), "1", "", selectedDate)
-        }
+        searchKey = ""
+        dateRange = selectedDate
+        page = 1
+        loadData()
     }
 
 
