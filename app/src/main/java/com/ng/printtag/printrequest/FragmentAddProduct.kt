@@ -3,6 +3,7 @@ package com.ng.printtag.printrequest
 import com.ng.printtag.R
 import com.ng.printtag.allrequest.AllRequestsAdapter
 import com.ng.printtag.base.BaseFragment
+import com.ng.printtag.databinding.FragmentAddProductBinding
 import com.ng.printtag.interfaces.OnItemClickListener
 import com.ng.printtag.models.allrequests.AllRequestModel
 

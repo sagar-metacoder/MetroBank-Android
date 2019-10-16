@@ -220,7 +220,15 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
         binding.btnSubmit.setOnClickListener {
             Utils.navigateTo(binding.btnSubmit, R.id.actionAddProducts, null)
 
-            //  context!!.callSubmitApi(binding.edtEffectiveDate.text.toString(), binding.edtInfo.text.toString())
+            //  context!!.callSubmitApi(binding.edtEffectiveDate.text.toString(), binding.edtInfo.text.toString(),resources.getString(R.string.action_submit))
+
+        }
+        binding.btnDraft.setOnClickListener {
+            context!!.callSubmitApi(
+                binding.edtEffectiveDate.text.toString(),
+                binding.edtInfo.text.toString(),
+                resources.getString(R.string.action_pending)
+            )
 
         }
         binding.edtDepartment.setOnClickListener {

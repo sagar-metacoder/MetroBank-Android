@@ -74,6 +74,7 @@
                         android:layout_height="wrap_content"
                         android:text='@string/a_lbl_print_type'
                         android:textAllCaps="true"
+                        android:textSize="@dimen/font_10"
                 />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -84,6 +85,7 @@
                         android:layout_height="wrap_content"
                         android:text='@string/a_lbl_template_name'
                         android:textAllCaps="true"
+                        android:textSize="@dimen/font_10"
                 />
                 <androidx.appcompat.widget.AppCompatTextView
                         style="@style/AppTextView.Title.Small"
@@ -93,6 +95,7 @@
                         android:layout_height="wrap_content"
                         android:text='@string/a_lbl_department'
                         android:textAllCaps="true"
+                        android:textSize="@dimen/font_10"
                 />
 
             </LinearLayout>
@@ -154,6 +157,7 @@
                         android:layout_height="wrap_content"
                         android:text='@string/a_lbl_effective_date'
                         android:textAllCaps="true"
+                        android:textSize="@dimen/font_10"
                 />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -164,6 +168,7 @@
                         android:layout_height="wrap_content"
                         android:text='@string/a_lbl_req_date'
                         android:textAllCaps="true"
+                        android:textSize="@dimen/font_10"
                 />
                 <androidx.appcompat.widget.AppCompatTextView
                         style="@style/AppTextView.Title.Small"
@@ -173,7 +178,7 @@
                         android:layout_height="wrap_content"
                         android:text='@string/a_lbl_expected_date'
                         android:textAllCaps="true"
-                />
+                        android:textSize="@dimen/font_10"/>
 
             </LinearLayout>
 

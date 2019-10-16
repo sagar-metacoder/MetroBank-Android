@@ -108,6 +108,7 @@
     <dimen name="font_18">18sp</dimen>
     <dimen name="font_16">16sp</dimen>
     <dimen name="font_12">12sp</dimen>
+    <dimen name="font_10">10sp</dimen>
     <dimen name="font_34">34sp</dimen>
     <dimen name="font_floating_menu">20sp</dimen>
     <dimen name="font_list_item_title">26sp</dimen>

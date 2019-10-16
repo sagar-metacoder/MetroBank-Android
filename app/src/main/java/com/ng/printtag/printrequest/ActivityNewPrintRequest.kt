@@ -33,6 +33,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
     var tagType: String = ""
     var department_key: String = ""
     var template_postion: Int = 0
+    var action = ""
 
 
     override fun initMethod() {
@@ -119,7 +120,8 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
         )
     }
 
-    fun callSubmitApi(date: String, product_info: String) {
+    fun callSubmitApi(date: String, product_info: String, action: String) {
+        this.action = action
         val restClientModel = RestClientModel()
         restClientModel.isProgressDialogShow = true
 
@@ -142,7 +144,8 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
                 resources.getString(R.string.pref_language)
             )
         )
-        rootJson.put(resources.getString(R.string.key_action), resources.getString(R.string.action_submit))
+//        rootJson.put(resources.getString(R.string.key_action), resources.getString(R.string.action_submit))
+        rootJson.put(resources.getString(R.string.key_action), action)
         rootJson.put(resources.getString(R.string.key_aisleInfo), product_info)
 
 
@@ -261,11 +264,17 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
                 val rootResponse = response.body() as NewPrintReqSubmit
                 when (rootResponse.success) {
                     true -> {
-
+                        if (action == resources.getString(R.string.action_submit)) {
                         AppUtils.showLongToast(
                             this@ActivityNewPrintRequest,
                             resources.getString(R.string.a_msg_product_added)
                         )
+                        } else {
+                            AppUtils.showLongToast(
+                                this@ActivityNewPrintRequest,
+                                "Product added to draft."
+                            )
+                        }
                         Utils.gotoHomeScreen(this@ActivityNewPrintRequest)
                     }
                     else -> {
