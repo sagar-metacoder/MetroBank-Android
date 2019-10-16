@@ -94,9 +94,11 @@ class HeaderToolBar : Toolbar, PopupMenu.OnMenuItemClickListener {
     }
 
     @SuppressLint
-    fun onBarCodeClick(@Suppress("UNUSED_PARAMETER") view: View) {
+    fun onBarCodeClick(view: View) {
+        AppUtils.hideKeyBoard(context as Activity)
+
         if (::headerInterface.isInitialized)
-            headerInterface.onRightImageClick()
+            headerInterface.onHeaderMenuItemClick(view)
     }
 
     /**

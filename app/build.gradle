@@ -23,23 +23,12 @@ android {
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            /*
-               buildConfigField "String", "DOMAIN_URL", '"https://www.treciondigital.com/"'
-               buildConfigField "String", "TERMS_CONDITION_URL", '" http://www.northgatemarket.com/pdp/terms-conditions/"'
-               buildConfigField "String", "OPT_URL", '"http://www.northgatemarket.com/pdp/preferences/"'
-               buildConfigField "String", "PUBLIC_BASE_URL", '"https://storage.googleapis.com/public_stage_ciam_assets/"'*/
 
             buildConfigField "String", "DOMAIN_URL", '"http://ngprinttag.local/"'
 
 
 
             buildConfigField "String", "API_BASE_MODULE", '"webserviceCustom/"'
-            buildConfigField "String", "API_GNERAL_FILTER", '"general/filter/"'
-            buildConfigField "String", "API_CUSTOMER_MODULE", '"customer/"'
-            buildConfigField "String", "API_STORE_MODULE", '"store/"'
-            buildConfigField "String", "API_DELETE_COLLECTION_MODULE", '"delete/field/"'
-            buildConfigField "String", "API_GENERAL_MODULE", '"general/"'
-            buildConfigField "String", "API_CHECK_CASHING_MODULE", '"check-cashing/"'
             buildConfigField "String", "USER_NAME", '"tesb"'
             buildConfigField "String", "PASSWORD", '"tpdp!Q@A#Z"'
             buildConfigField "String", "AUTH_ID", '"3d4c92b4-ad70-78e0-16f9-01b2aad1caa3"'
@@ -58,12 +47,6 @@ android {
 
 
             buildConfigField "String", "API_BASE_MODULE", '"webserviceCustom/"'
-            buildConfigField "String", "API_GNERAL_FILTER", '"general/filter/"'
-            buildConfigField "String", "API_CUSTOMER_MODULE", '"customer/"'
-            buildConfigField "String", "API_STORE_MODULE", '"store/"'
-            buildConfigField "String", "API_DELETE_COLLECTION_MODULE", '"delete/field/"'
-            buildConfigField "String", "API_GENERAL_MODULE", '"general/"'
-            buildConfigField "String", "API_CHECK_CASHING_MODULE", '"check-cashing/"'
             buildConfigField "String", "USER_NAME", '"tesb"'
             buildConfigField "String", "PASSWORD", '"tpdp!Q@A#Z"'
             buildConfigField "String", "AUTH_ID", '"3d4c92b4-ad70-78e0-16f9-01b2aad1caa3"'
@@ -90,6 +73,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
+
+    compileOnly "com.symbol:emdk:$emdk_version"
 
     // AppNavigation
     implementation "android.arch.navigation:navigation-fragment:$navigation_version"

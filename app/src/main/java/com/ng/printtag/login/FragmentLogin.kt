@@ -6,11 +6,8 @@ import com.ng.printtag.R
 import com.ng.printtag.api.RequestMethods
 import com.ng.printtag.api.RestClient
 import com.ng.printtag.api.RestClientModel
-import com.ng.printtag.apputils.AppUtils
-import com.ng.printtag.apputils.CallDialog
+import com.ng.printtag.apputils.*
 import com.ng.printtag.apputils.Constant.CALL_SIGN_URL
-import com.ng.printtag.apputils.ErrorActions
-import com.ng.printtag.apputils.Utils
 import com.ng.printtag.base.BaseFragment
 import com.ng.printtag.databinding.FragmentLoginBinding
 import com.ng.printtag.models.login.LoginModel
@@ -53,10 +50,11 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
     private fun validateUser() {
         val restClientModel = RestClientModel()
         restClientModel.isProgressDialogShow = true
+        ProgressDialog.displayProgressDialog(activity!!, true, "")
 
         val rootJson = JSONObject()
-        rootJson.put("userName", binding.edtUserName.text.toString())
-        rootJson.put("password", binding.edtPassword.text.toString())
+        rootJson.put(activity!!.resources.getString(R.string.key_userName), binding.edtUserName.text.toString())
+        rootJson.put(activity!!.resources.getString(R.string.key_password), binding.edtPassword.text.toString())
         val body = RequestMethods.getRequestBody(rootJson)
 
         RestClient().apiRequest(
@@ -73,6 +71,8 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
         super.onApiResponse(response, reqCode)
         when (reqCode) {
             CALL_SIGN_URL -> {
+                ProgressDialog.displayProgressDialog(activity!!, false, "")
+
                 val rootResponse = response.body() as LoginModel
                 when (rootResponse.success) {
                     true -> {
@@ -88,6 +88,12 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
                 }
             }
         }
+    }
+
+    override fun onApiError(response: Any, reqCode: Int) {
+        super.onApiError(response, reqCode)
+        ProgressDialog.displayProgressDialog(activity!!, false, "")
+
     }
 
     private fun showError(title: String, message: String) {

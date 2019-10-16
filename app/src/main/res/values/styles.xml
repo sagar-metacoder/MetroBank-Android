@@ -229,6 +229,17 @@
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 
+    <style name="AppTextView.Button" parent="Theme.AppCompat.Light">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/font_18</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+
     <style name="AppTextView.Dialog.Title" parent="Theme.AppCompat.Light">
         <item name="android:textColor">@color/color_B0000000</item>
         <item name="android:textSize">@dimen/font_dialog_title</item>
@@ -268,20 +279,6 @@
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
-    <style name="AppInput.Birthday" parent="Theme.AppCompat.Light">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:background">@color/colorTransparent</item>
-        <item name="android:textSize">@dimen/font_input</item>
-        <item name="android:inputType">number|textNoSuggestions</item>
-        <item name="android:digits">1234567890</item>
-        <item name="android:maxLength">2</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:ems">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-    </style>
     <style name="StyleBaseDialog" parent="android:Theme.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowAnimationStyle">@null</item>

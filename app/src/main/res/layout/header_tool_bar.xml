@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:orientation="horizontal"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_marginEnd="@dimen/margin_10"
                 android:layout_height="match_parent">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -66,24 +66,15 @@
                     android:layout_height="match_parent"
                     android:clickable="true"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_new_print_request"
+                    android:src="@mipmap/ic_add"
                     android:focusable="true"
                     android:visibility="@{headerModel.barcodeVisibility?View.VISIBLE:View.GONE}"
-                    android:paddingStart="@dimen/margin_20"
-                    android:paddingEnd="@dimen/margin_20"
+                    android:paddingStart="@dimen/margin_10"
+                    android:paddingEnd="@dimen/margin_10"
                     android:onClick="@{instance::onBarCodeClick}"
                     android:background="?android:attr/selectableItemBackground"/>
 
 
-            <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_version"
-                    style="@style/AppTextView.Header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/font_14"
-                    android:visibility="gone"
-                    android:layout_gravity="center_vertical"
-                    android:text="@{Utils.getAppVersion(true)}"/>
         </LinearLayout>
 
 
