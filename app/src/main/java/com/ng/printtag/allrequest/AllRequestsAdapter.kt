@@ -14,8 +14,8 @@ import com.ng.printtag.models.allrequests.AllRequestModel
  * View Items of search customer and click for view profile and re-registration
  */
 class AllRequestsAdapter(
-    private var results: MutableList<AllRequestModel.Data.Records>,
-    private var onItemClickListener: OnItemClickListener
+    var results: MutableList<AllRequestModel.Data.Records>,
+    var onItemClickListener: OnItemClickListener
 ) :
     RecyclerView.Adapter<AllRequestsAdapter.CustomViewHolder>() {
 
@@ -45,38 +45,16 @@ class AllRequestsAdapter(
         init {
             binding.root.setOnClickListener(this)
         }
-
         override fun onClick(view: View?) {
             onItemClickListener.onItemClick(adapterPosition, adapterPosition)
         }
-
-        init {
-            //  binding.btnSelect.setOnClickListener(this)
-            //  binding.tvrefresh.setOnClickListener(this)
-        }
-
         /**
          * Bind the txt with xml
          */
         fun bind(item: AllRequestModel.Data.Records) {
             binding.model = item
-            /* if (binding.model!!.dataType == Constant.TIER3 || binding.model!!.dataType == Constant.POWER_CHECK) {
-                 binding.tvProfileFlag.text = Utils.getLabel(context.getString(R.string.a_lbl_legacy_record))
-             } else {
-                 binding.tvProfileFlag.text = ""
-             }*/
             binding.executePendingBindings()
         }
 
-    }
-
-    fun setItems(items: ArrayList<AllRequestModel.Data.Records>) {
-        results = items
-        notifyDataSetChanged()
-    }
-
-    fun addItems(items: List<AllRequestModel.Data.Records>) {
-        results.addAll(items)
-        notifyDataSetChanged()
     }
 }

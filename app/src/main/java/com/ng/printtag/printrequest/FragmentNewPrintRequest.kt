@@ -43,6 +43,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
         context!!.callStoreApi()
         ErrorActions.validateButton(binding.btnSubmit, false)
+        ErrorActions.validateButton(binding.btnDraft, false)
 
 
     }
@@ -66,6 +67,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
                     binding.linearTemplateData.visibility = View.VISIBLE
                     ErrorActions.validateButton(binding.btnSubmit, true)
+                    ErrorActions.validateButton(binding.btnDraft, true)
                 }
             })
         binding.rvTemplateList.adapter = adapterTemplateList
@@ -100,7 +102,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
                     binding.edtTagType.text = Editable.Factory.getInstance().newEditable(tagType.get(item as Int))
 
-                    if (binding.edtTagType.text!!.equals(getString(R.string.item_freshtag))) {
+                    if (item == 0) {
                         context!!.tagType = getString(R.string.key_freshtag)
                     } else {
                         context!!.tagType = getString(R.string.key_inventorytag)
@@ -201,8 +203,6 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
     private fun handleClick() {
         binding.edtTagType.setOnClickListener {
-            //            callTagTypeDialog()
-
             callTagTypeDialog()
         }
         binding.edtStoreNo.setOnClickListener {
@@ -218,16 +218,20 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             //callStoreApi()
         }
         binding.btnSubmit.setOnClickListener {
-            Utils.navigateTo(binding.btnSubmit, R.id.actionAddProducts, null)
+            //Utils.navigateTo(binding.btnSubmit, R.id.actionAddProducts, null)
 
-            //  context!!.callSubmitApi(binding.edtEffectiveDate.text.toString(), binding.edtInfo.text.toString(),resources.getString(R.string.action_submit))
+            context!!.callSubmitApi(
+                binding.edtEffectiveDate.text.toString(),
+                binding.edtInfo.text.toString(),
+                resources.getString(R.string.action_submit)
+            )
 
         }
         binding.btnDraft.setOnClickListener {
             context!!.callSubmitApi(
                 binding.edtEffectiveDate.text.toString(),
                 binding.edtInfo.text.toString(),
-                resources.getString(R.string.action_pending)
+                resources.getString(R.string.action_draft)
             )
 
         }

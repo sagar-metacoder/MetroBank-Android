@@ -28,16 +28,16 @@ import java.util.*
 
 
 class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
-    DateRangePickerFragment.OnDateRangeSelectedListener {
-
+    DateRangePickerFragment.OnDateRangeSelectedListener, OnItemClickListener {
 
     private lateinit var binding: ActivityAllRequestsBinding
-    lateinit var allRequest: MutableList<AllRequestModel.Data.Records>
+    var allRequest: MutableList<AllRequestModel.Data.Records>? = null
     private val dateRangePickerFragment = DateRangePickerFragment()
     var action: String = ""
     var searchKey = ""
     var dateRange = ""
     private var page = 1
+    lateinit var adapter: AllRequestsAdapter
     var totalPage: Int = 0
 
     companion object {
@@ -52,7 +52,6 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
     override fun initMethod() {
         binding = getViewDataBinding()
         actBaseBinding.rlMain.removeView(actBaseBinding.headerToolBar)
-        allRequest = ArrayList()
         action = intent.getStringExtra(getString(R.string.action_from))
         dateRangePickerFragment.newInstance(this@ActivityAllRequests, false)
         dateRangePickerFragment.setOnDateRangeSelectedListener(this@ActivityAllRequests)
@@ -83,43 +82,12 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
     }
 
     private fun loadData() {
-
         if (action == getString(R.string.action_from_all)) {
             callAllRequestApi(resources.getString(R.string.value_all), page.toString(), searchKey, dateRange)
         } else {
             callAllRequestApi(resources.getString(R.string.value_pending), page.toString(), searchKey, dateRange)
         }
     }
-
-    private fun resultAction(model: AllRequestModel) {
-        isLoading = false
-        val adapter = AllRequestsAdapter(
-            allRequest,
-            object : OnItemClickListener {
-                override fun onItemClick(item: Any, position: Int) {
-
-                }
-            })
-        binding.rvAllRequests.adapter = adapter
-        adapter.addItems(model.data!!.records!!)
-
-        if (page == model.data!!.totalPages!!.toInt()) {
-            isLastPage = true
-        } else {
-            page += 1
-        }
-    }
-
-    /*private fun setAdapter() {
-        val adapter = AllRequestsAdapter(
-            allRequest,
-            object : OnItemClickListener {
-                override fun onItemClick(item: Any, position: Int) {
-
-                }
-            })
-        binding.rvAllRequests.adapter = adapter
-    }*/
 
     private fun setSearchView() {
         val id = binding.searchView.getContext()
@@ -129,7 +97,6 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
         textView.setTextColor(Color.WHITE)
         textView.hint = getString(R.string.a_hint_search)
         textView.setHintTextColor(Color.WHITE)
-
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             android.widget.SearchView.OnQueryTextListener {
 
@@ -147,6 +114,7 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
                 } else {
                     binding.tvHeaderTitle.text = getString(R.string.a_lbl_pending_requests)
                 }
+                allRequest!!.clear()
                 loadData()
 
                 return false
@@ -167,6 +135,7 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
                 searchKey = ""
                 dateRange = ""
                 page = 1
+                allRequest!!.clear()
                 loadData()
 
 
@@ -211,19 +180,29 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
                 val rootResponse = response.body() as AllRequestModel
                 when (rootResponse.success) {
                     true -> {
-                        allRequest = rootResponse.data!!.records!! as ArrayList<AllRequestModel.Data.Records>
-                        totalPage = rootResponse.data!!.totalPages!!.toInt()
-                        if (allRequest.size == 0 && allRequest.isEmpty() && page == 1) {
+                        val tempList = rootResponse.data!!.records!! as ArrayList<AllRequestModel.Data.Records>
+                        if (tempList.size == 0 || tempList.isEmpty() && page == 1) {
                             binding.tvMsg.visibility = VISIBLE
                             binding.tvMsg.text = rootResponse.data!!.recordsMsg
                             binding.rvAllRequests.visibility = GONE
                         } else {
+                            totalPage = rootResponse.data!!.totalPages!!.toInt()
+                            if (allRequest.isNullOrEmpty()) {
+                                allRequest = tempList
+                                adapter = AllRequestsAdapter(allRequest!!, this)
+                                binding.rvAllRequests.adapter = adapter
+                            } else {
+                                allRequest!!.addAll(tempList)
+                                isLoading = false
+                                adapter.notifyDataSetChanged()
+                                if (page == totalPage) {
+                                    isLastPage = true
+                                } else {
+                                    page += 1
+                                }
+                            }
                             binding.tvMsg.visibility = GONE
                             binding.rvAllRequests.visibility = VISIBLE
-//                            setAdapter()
-                            resultAction(rootResponse)
-
-
 
                         }
                     }
@@ -249,6 +228,8 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
 
     private fun handleClick() {
         binding.ivBack.setOnClickListener {
+            isLoading = false
+            isLastPage = false
             onBackPressed()
         }
         binding.ivCalendar.setOnClickListener {
@@ -271,7 +252,11 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
         searchKey = ""
         dateRange = selectedDate
         page = 1
+        allRequest!!.clear()
         loadData()
+    }
+
+    override fun onItemClick(item: Any, position: Int) {
     }
 
 

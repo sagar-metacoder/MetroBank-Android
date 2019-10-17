@@ -18,7 +18,7 @@
                 android:layout_height="match_parent"
                 android:padding="@dimen/margin_10"
                 android:gravity="center"
-                android:background="@color/colorWhite"
+                android:background="@color/colorWhite50"
         >
             <androidx.appcompat.widget.AppCompatTextView
                     style="@style/AppTextView.Title.Small"

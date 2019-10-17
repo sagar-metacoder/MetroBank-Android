@@ -1,10 +1,8 @@
 package com.ng.printtag.printrequest
 
 import com.ng.printtag.R
-import com.ng.printtag.allrequest.AllRequestsAdapter
 import com.ng.printtag.base.BaseFragment
 import com.ng.printtag.databinding.FragmentAddProductBinding
-import com.ng.printtag.interfaces.OnItemClickListener
 import com.ng.printtag.models.allrequests.AllRequestModel
 
 class FragmentAddProduct : BaseFragment<FragmentAddProductBinding>() {
@@ -25,14 +23,14 @@ class FragmentAddProduct : BaseFragment<FragmentAddProductBinding>() {
 
 
     private fun setAdapter() {
-        val adapter = AllRequestsAdapter(
-            allRequest,
-            object : OnItemClickListener {
-                override fun onItemClick(item: Any, position: Int) {
+        /*  val adapter = AllRequestsAdapter(
+              allRequest,
+              object : OnItemClickListener {
+                  override fun onItemClick(item: Any, position: Int) {
 
-                }
-            })
-        binding.rvAllProduct.adapter = adapter
+                  }
+              })
+          binding.rvAllProduct.adapter = adapter*/
     }
 
     private fun handleClick() {

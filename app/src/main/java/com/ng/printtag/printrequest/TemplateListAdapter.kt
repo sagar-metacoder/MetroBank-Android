@@ -1,5 +1,7 @@
 package com.ng.printtag.printrequest
 
+import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +20,7 @@ class TemplateListAdapter(
     private var onItemClickListener: OnItemClickListener
 ) :
     RecyclerView.Adapter<TemplateListAdapter.CustomViewHolder>() {
-
+    var objectanimator: ObjectAnimator? = null
     var selectedPosition: Int = -1
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -30,12 +32,14 @@ class TemplateListAdapter(
         return results.size
     }
 
+    @SuppressLint("ObjectAnimatorBinding")
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.bind(results[position])
-        if (selectedPosition == position)
-            holder.binding.liTemplate.setBackgroundColor(context.resources.getColor(R.color.color_2900A9E0))
-        else
+        if (selectedPosition == position) {
             holder.binding.liTemplate.setBackgroundColor(context.resources.getColor(R.color.colorWhite))
+        } else {
+            holder.binding.liTemplate.setBackgroundColor(context.resources.getColor(R.color.colorWhite50))
+        }
 
     }
 

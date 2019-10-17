@@ -45,6 +45,6 @@
     <string name="value_pending">pending</string>
     <string name="key_freshtag">FreshTag</string>
     <string name="key_inventorytag">InventoryTag</string>
-    <string name="action_pending">pending</string>
+    <string name="action_draft">draft</string>
 
 </resources>
