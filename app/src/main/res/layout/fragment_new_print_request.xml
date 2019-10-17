@@ -321,7 +321,7 @@
                 android:layout_height="wrap_content"
                 style="@style/AppButton.Colored"
                 android:layout_gravity="end"
-                android:text="@string/a_btn_next"
+                android:text="@string/a_btn_submit"
                 android:layout_alignParentBottom="true"
                 android:padding="@dimen/margin_8"
                 android:layout_alignParentEnd="true" tools:ignore="RelativeOverlap"/>

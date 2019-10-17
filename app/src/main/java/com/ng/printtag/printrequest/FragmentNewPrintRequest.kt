@@ -100,7 +100,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
                     binding.edtTagType.text = Editable.Factory.getInstance().newEditable(tagType.get(item as Int))
 
-                    if (binding.edtTagType.text!!.equals(getString(R.string.item_freshtag))) {
+                    if (binding.edtTagType.text!!.trim().equals(getString(R.string.item_freshtag))) {
                         context!!.tagType = getString(R.string.key_freshtag)
                     } else {
                         context!!.tagType = getString(R.string.key_inventorytag)
@@ -218,9 +218,9 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             //callStoreApi()
         }
         binding.btnSubmit.setOnClickListener {
-            Utils.navigateTo(binding.btnSubmit, R.id.actionAddProducts, null)
+            //   Utils.navigateTo(binding.btnSubmit, R.id.actionAddProducts, null)
 
-            //  context!!.callSubmitApi(binding.edtEffectiveDate.text.toString(), binding.edtInfo.text.toString())
+            context!!.callSubmitApi(binding.edtEffectiveDate.text.toString(), binding.edtInfo.text.toString())
 
         }
         binding.edtDepartment.setOnClickListener {

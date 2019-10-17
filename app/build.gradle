@@ -24,8 +24,7 @@ android {
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
-            buildConfigField "String", "DOMAIN_URL", '"http://ngprinttag.local/"'
-
+            buildConfigField "String", "DOMAIN_URL", '"http://192.168.11.7/"'
 
 
             buildConfigField "String", "API_BASE_MODULE", '"webserviceCustom/"'
@@ -43,8 +42,7 @@ android {
             minifyEnabled true
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "DOMAIN_URL", '"http://ngprinttag.local/"'
-
+            buildConfigField "String", "DOMAIN_URL", '"http://192.168.11.7/"'
 
             buildConfigField "String", "API_BASE_MODULE", '"webserviceCustom/"'
             buildConfigField "String", "USER_NAME", '"tesb"'
