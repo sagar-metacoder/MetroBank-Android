@@ -203,6 +203,8 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
     private fun handleClick() {
         binding.edtTagType.setOnClickListener {
+            //            callTagTypeDialog()
+
             callTagTypeDialog()
         }
         binding.edtStoreNo.setOnClickListener {
@@ -218,7 +220,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             //callStoreApi()
         }
         binding.btnSubmit.setOnClickListener {
-            //Utils.navigateTo(binding.btnSubmit, R.id.actionAddProducts, null)
+            //   Utils.navigateTo(binding.btnSubmit, R.id.actionAddProducts, null)
 
             context!!.callSubmitApi(
                 binding.edtEffectiveDate.text.toString(),
