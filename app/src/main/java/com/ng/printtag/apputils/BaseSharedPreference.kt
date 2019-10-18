@@ -2,7 +2,6 @@ package com.ng.printtag.apputils
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.ng.printtag.R
 
 /**
  * This class used for data store and receive from local device
@@ -59,6 +58,7 @@ open class BaseSharedPreference private constructor(context: Context) {
     fun getLanguage(key: String): String {
         return sharedPref.getString(key, "en")!!
     }
+
     fun getPrefBoolean(key: String): Boolean {
         return sharedPref.getBoolean(key, false)
     }
@@ -72,21 +72,5 @@ open class BaseSharedPreference private constructor(context: Context) {
     fun getPrefFloat(key: String): Float {
         return sharedPref.getFloat(key, 0f)
     }
-
-    /*fun getProsperaId(context: Context): String {
-        return sharedPref.getString(context.getString(R.string.pref_user_northgate_id), "")
-    }
-
-    fun putProsperaId(context: Context, northGateId: String) {
-        putValue(context.getString(R.string.pref_user_northgate_id), northGateId)
-    }
-
-    fun getAssociateId(context: Context): String {
-        return sharedPref.getString(context.getString(R.string.pref_associate_id), Constant.ASSOCIATE_ID)
-    }
-
-    fun putAssociateId(context: Context, associateId: String) {
-        putValue(context.getString(R.string.pref_associate_id), associateId)
-    }*/
 
 }

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.ng.printtag.login
 
 import android.view.View
@@ -66,6 +68,7 @@ class ActivityLogin : BaseActivity<ActivityLoginBinding>(), ApiResponseListener,
         AppUtils.hideKeyBoard(this@ActivityLogin)
 
     }
+
     override fun onHeaderMenuItemClick(view: View) {
 
     }

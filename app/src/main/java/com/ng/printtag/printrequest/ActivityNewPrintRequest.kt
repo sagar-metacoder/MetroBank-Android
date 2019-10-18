@@ -94,7 +94,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
     fun callTemplateDetails(position: Int) {
         val restClientModel = RestClientModel()
         restClientModel.isProgressDialogShow = true
-        ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, true, "")
+        ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, false, "")
 
         template_postion = position
         val rootJson = JSONObject()

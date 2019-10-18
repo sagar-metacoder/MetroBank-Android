@@ -11,12 +11,9 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.google.android.material.button.MaterialButton
 import com.ng.printtag.api.ApiResponseListener
 import com.ng.printtag.apputils.AppUtils
-import com.ng.printtag.apputils.ErrorActions
 import com.ng.printtag.login.FragmentLogin
-
 import retrofit2.Response
 
 /**
@@ -277,17 +274,5 @@ abstract class BaseFragment<out T : ViewDataBinding> : Fragment(), View.OnClickL
      */
     @Throws(Exception::class)
     override fun onApiNetwork(response: Any, reqCode: Int) {
-    }
-
-    /**
-     * Init layout genericModel button visibility
-     */
-
-    fun validateButton(appButton: MaterialButton, fieldValue: String, action: String, length: Int) {
-        var isEnable = false
-        when (action) {
-           // getString(R.string.input_act_email) -> isEnable = Pattern.matches(Constant.emailPattern, fieldValue)
-        }
-        ErrorActions.validateButton(appButton, isEnable)
     }
 }

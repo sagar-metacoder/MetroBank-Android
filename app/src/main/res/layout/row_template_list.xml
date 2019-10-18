@@ -18,7 +18,7 @@
                 android:layout_height="match_parent"
                 android:padding="@dimen/margin_10"
                 android:gravity="center"
-                android:background="@color/colorWhite50"
+                android:alpha="0.5"
         >
             <androidx.appcompat.widget.AppCompatTextView
                     style="@style/AppTextView.Title.Small"
@@ -47,6 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5"
+                    android:alpha="0.5"
             />
             <ProgressBar
                     android:id="@+id/progressbar"

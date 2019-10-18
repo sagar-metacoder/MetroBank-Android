@@ -4,14 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.net.ConnectivityManager
 import android.os.Build
-import android.os.Environment
-import android.util.Base64
-import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -22,15 +16,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import androidx.core.text.HtmlCompat
 import com.google.gson.Gson
 import com.ng.printtag.R
-import com.ng.printtag.apputils.Constant.PREFIX_IMAGE_DATA_TYPE
 import com.ng.printtag.models.SystemSettingsModel
 import com.ng.printtag.models.login.LoginModel
 import org.json.JSONObject
-import java.io.*
-import java.text.DecimalFormat
+import java.io.IOException
+import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -69,19 +62,6 @@ class AppUtils {
             if (clearStack)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             context.startActivity(intent)
-            context.overridePendingTransition(
-                R.anim.push_in_from_left,
-                R.anim.push_out_to_right
-            )
-        }
-
-        /**
-         * This function is used to show activity using class name
-         * call this method when you don't have any userModel via intent
-         */
-        fun navigateToResultScreen(context: Activity, cls: Class<*>, reqCode: Int) {
-            val intent = Intent(context, cls)
-            context.startActivityForResult(intent, reqCode)
             context.overridePendingTransition(
                 R.anim.push_in_from_left,
                 R.anim.push_out_to_right
@@ -158,48 +138,6 @@ class AppUtils {
 
         }
 
-
-        /**
-         * Show the text in html format
-         *
-         * @param html type of String
-         * @return type of string
-         */
-        fun htmlFormat(html: String): String {
-
-            return "<html><head><body><h1><style type=\"text/css\">body{color: #FFF; }</style></head>" +
-                    "$html</h1></body></html>"
-
-        }
-
-        /**
-         * Show the Email text in html format
-         *
-         * @param name : name display in body format of email
-         * @param title : title of email
-         * @param body : body of email
-         */
-        fun emailHtmlFormat(
-            dear: String,
-            thanks: String,
-            name: String,
-            title: String,
-            body: String,
-            prospera: String
-        ): String {
-            val format = "<html>\n" +
-                    "<head>\n" +
-                    "<title>$title</title>\n" +
-                    "</head>\n" +
-                    "<body>\n" +
-                    "    <div>" + dear + " <b> " + name + "</b>,</div><br/><br/>\n\n" +
-                    "    <div>$body</div><br/><br/>\n\n" +
-                    "    <div>" + thanks + "</br></br><div></div>\n" + prospera + "</div>\n" +
-                    "    </body>\n" +
-                    "</html>"
-
-            return format
-        }
 
         fun hideKeyBoard(context: Context, view: View) {
             val inputMethodManager: InputMethodManager =
@@ -328,64 +266,6 @@ class AppUtils {
         }
 
         /**
-         * Convert base64 image to ByteArray
-         */
-        fun getImageBytes(imagePath: String?): ByteArray {
-
-            val bm = BitmapFactory.decodeFile(imagePath)
-            val outputStream = ByteArrayOutputStream()
-            bm.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-            return outputStream.toByteArray()
-        }
-
-        /**
-         * Convert Data in base64 from drawable image
-         */
-        @JvmStatic
-        fun getImageBase64Data(context: Context, filePath: String, resId: Int): String {
-            val stringBuilder = StringBuilder()
-            stringBuilder.append(PREFIX_IMAGE_DATA_TYPE)
-            when {
-                filePath.trim().isNotEmpty() -> {
-                    stringBuilder.append(encoder(filePath))
-                }
-                resId != 0 -> {
-                    stringBuilder.append(
-                        Base64.encodeToString(
-                            getImageBytes(getImageBitmap(context, resId)),
-                            Base64.DEFAULT
-                        )
-                    )
-                }
-            }
-            return stringBuilder.toString()
-        }
-
-        /**
-         * Convert filepath in base64
-         */
-        private fun encoder(filePath: String): String {
-            val bytes = File(filePath).readBytes()
-            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                java.util.Base64.getEncoder().encodeToString(bytes)
-            } else {
-                val bm = BitmapFactory.decodeFile(filePath)
-                val baos = ByteArrayOutputStream()
-                bm.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                val byteArrayImage = baos.toByteArray()
-                Base64.encodeToString(byteArrayImage, Base64.DEFAULT)
-            }
-        }
-
-        /**
-         * Convert image bitmap
-         */
-        private fun getImageBitmap(context: Context, resId: Int): String? {
-            return (ContextCompat.getDrawable(context, resId) as BitmapDrawable).bitmap.toString()
-        }
-
-
-        /**
          * Used to data store in session
          */
         fun setUserData(context: Context, model: LoginModel) {
@@ -402,48 +282,6 @@ class AppUtils {
 
             } else {
                 Gson().fromJson(userData, LoginModel::class.java) as LoginModel
-            }
-        }
-
-
-
-        /**
-         * This method will use to remove special character from string
-         *
-         *  @return type of string
-         */
-        @JvmStatic
-        fun getNumber(formattedNumber: String): String {
-            var number = formattedNumber
-            val specialChar = "() -+"
-            for (actualNumber in formattedNumber) {
-                for (item in specialChar) {
-                    number = number.replace(item.toString(), "")
-                }
-            }
-            return number
-        }
-
-        /**
-         * This method will use to convert base64 in bitmap format
-         *
-         *  @return type of Bitmap
-         */
-        fun getBitmap(imageBase64: String): Bitmap {
-            val decodedString = Base64.decode(imageBase64, Base64.DEFAULT)
-            return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-        }
-
-        /**
-         * This method will use to convert url in base64 format
-         *
-         *  @return type of string
-         */
-        @JvmStatic
-        fun getFcId(fcId: String): String {
-            return when {
-                fcId.isEmpty() -> System.currentTimeMillis().toString()
-                else -> fcId
             }
         }
 
@@ -495,89 +333,6 @@ class AppUtils {
             }
         }
 
-        /**
-         * This method will use to convert date into specific format
-         */
-        @JvmStatic
-        fun convertedDateForDoc(dateTime: String): String {
-            return when (dateTime.isNotEmpty()) {
-                true -> {
-                    val inputPattern = "yyyy-MM-dd HH:mm:ss"
-                    val outputPattern = "MM/dd/yyyy"
-                    val inputDateFormat = SimpleDateFormat(inputPattern, Locale.getDefault())
-                    val outputDateFormat = SimpleDateFormat(outputPattern, Locale.getDefault())
-                    outputDateFormat.format(inputDateFormat.parse(dateTime))
-                }
-                false -> "--"
-            }
-        }
-
-        /**
-         * This method will use to convert date into specific format
-         */
-        @JvmStatic
-        fun getCompleteDate(dateTime: String?): String {
-            return when (!dateTime.isNullOrEmpty()) {
-                true -> {
-                    val inputPattern = "yyyy-MM-dd HH:mm"
-                    val outputPattern = "MMMM dd, yyyy"
-                    val inputDateFormat = SimpleDateFormat(inputPattern, Locale.getDefault())
-                    val outputDateFormat = SimpleDateFormat(outputPattern, Locale.getDefault())
-                    outputDateFormat.format(inputDateFormat.parse(dateTime))
-                }
-                false -> "--"
-            }
-        }
-
-        /**
-         * This method will use to convert date into specific format
-         */
-        @JvmStatic
-        fun getDate(dateTime: String): String {
-            return try {
-                when (dateTime.isNotEmpty()) {
-                    true -> {
-                        val inputPattern = "MM/dd/yyyy"
-                        val outputPattern = "MMMM dd, yyyy"
-                        val inputDateFormat = SimpleDateFormat(inputPattern, Locale.getDefault())
-                        val outputDateFormat = SimpleDateFormat(outputPattern, Locale.getDefault())
-                        outputDateFormat.format(inputDateFormat.parse(dateTime))
-                    }
-                    false -> "--"
-                }
-            } catch (e: java.lang.Exception) {
-                "--"
-            }
-        }
-
-
-        /**
-         * This method will use to convert date into specific format
-         */
-        @JvmStatic
-        fun getDateValue(dob: String?): String {
-            try {
-                return if (!dob.isNullOrEmpty()) {
-                    //19750508
-                    val month = dob.substring(4, 6)
-                    val date = dob.substring(6, 8)
-                    val year = dob.substring(0, 4)
-
-                    "$month/$date/$year"
-                } else {
-                    "N/A"
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                if (dob != null) {
-                    return dob
-                }
-            }
-
-            return "N/A"
-        }
-
-
 
         /**
          * This method will use to get current date and time
@@ -612,18 +367,6 @@ class AppUtils {
         var isFromProfileInfo = 0
 
 
-        /**
-         * This method will use to convert string into decimal format
-         */
-        @JvmStatic
-        fun getDecimalFormat(amount: String?): String {
-            return if (amount.isNullOrEmpty()) {
-                "0"
-            } else {
-                DecimalFormat("##.##").format(amount.toDouble()).toString()
-            }
-        }
-
         @JvmStatic
         fun getSystemSetting(context: Context): SystemSettingsModel {
             val model = SystemSettingsModel()
@@ -635,52 +378,6 @@ class AppUtils {
             model.deviceSystemName = "Android"
             model.deviceSystemVersion = Build.VERSION.RELEASE
             return model
-        }
-
-        fun writeToFile(data: JSONObject, fileName: String, dirName: String) {
-            // Get the directory for the user's public pictures directory.
-            val path = Environment.getExternalStoragePublicDirectory(
-                //Environment.DIRECTORY_PICTURES
-                Environment.DIRECTORY_DOWNLOADS + "/" + dirName + "/"
-            )
-
-            // Make sure the path directory exists.
-            if (!path.exists()) {
-                // Make it, if it doesn't exit
-                path.mkdirs()
-            }
-
-            val file = File(path, "$fileName.json")
-
-            // Save your stream, don't forget to flush() it before closing it.
-
-            try {
-                file.createNewFile()
-                val fOut = FileOutputStream(file)
-                val myOutWriter = OutputStreamWriter(fOut)
-                myOutWriter.append(data.toString())
-
-                myOutWriter.close()
-
-                fOut.flush()
-                fOut.close()
-            } catch (e: IOException) {
-                Log.e("Exception", "File write failed: $e")
-            }
-        }
-
-        fun setHtml(htmlString: String): String {
-            return HtmlCompat.fromHtml(htmlString, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
-        }
-
-        fun getPhonFormat(phoneFormat: String?): String? {
-            var phoneFormatVal = ""
-            if (phoneFormat.isNullOrEmpty())
-                phoneFormatVal = "(###) ### ##"
-            else
-                phoneFormatVal = phoneFormat
-
-            return phoneFormatVal
         }
     }
 }

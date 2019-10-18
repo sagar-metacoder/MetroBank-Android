@@ -105,6 +105,7 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
+                AppUtils.hideKeyBoard(this@ActivityAllRequests)
                 searchKey = query
                 dateRange = ""
                 page = 1
@@ -116,7 +117,7 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
                 }
                 allRequest!!.clear()
                 loadData()
-
+                binding.searchView.clearFocus()
                 return false
             }
 
@@ -180,6 +181,7 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
                 val rootResponse = response.body() as AllRequestModel
                 when (rootResponse.success) {
                     true -> {
+
                         val tempList = rootResponse.data!!.records!! as ArrayList<AllRequestModel.Data.Records>
                         if (tempList.size == 0 || tempList.isEmpty() && page == 1) {
                             binding.tvMsg.visibility = VISIBLE
@@ -191,15 +193,17 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
                                 allRequest = tempList
                                 adapter = AllRequestsAdapter(allRequest!!, this)
                                 binding.rvAllRequests.adapter = adapter
+
                             } else {
                                 allRequest!!.addAll(tempList)
                                 isLoading = false
                                 adapter.notifyDataSetChanged()
-                                if (page == totalPage) {
-                                    isLastPage = true
-                                } else {
-                                    page += 1
-                                }
+
+                            }
+                            if (page == totalPage) {
+                                isLastPage = true
+                            } else {
+                                page += 1
                             }
                             binding.tvMsg.visibility = GONE
                             binding.rvAllRequests.visibility = VISIBLE

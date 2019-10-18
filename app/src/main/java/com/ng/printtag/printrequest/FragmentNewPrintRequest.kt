@@ -94,7 +94,6 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
                 if (fromWhere == Constant.TAG_TYPE) {
 
-
                     selectedTag = item as Int
                     if (!binding.edtTagType.text.isNullOrBlank()) {
                         tagTypeExist = true
@@ -146,7 +145,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                     binding.linearRv.visibility = View.GONE
 
                     binding.edtStoreNo.text =
-                        Editable.Factory.getInstance().newEditable(context!!.arrayStoreKey.get(item as Int))
+                        Editable.Factory.getInstance().newEditable(context!!.arrayStoreKey.get(index = item as Int))
 
 
                     context!!.storeKey = context!!.arrayStoreValue.get(item)
