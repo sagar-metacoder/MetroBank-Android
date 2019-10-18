@@ -32,7 +32,9 @@ android {
             buildConfigField "String", "PASSWORD", '"tpdp!Q@A#Z"'
             buildConfigField "String", "AUTH_ID", '"3d4c92b4-ad70-78e0-16f9-01b2aad1caa3"'
             buildConfigField "String", "AUTH_TOKEN", '"bVjtB3h5R0qW11ClXgPK"'
-            buildConfigField "String", "API_WEBSERVICE", '"webservice/request/"'
+            buildConfigField "String", "API_WEBSERVICE_REQUEST", '"webservice/request/"'
+            buildConfigField "String", "API_WEBSERVICE", '"webservice/"'
+
         }
         release {
 
@@ -49,7 +51,8 @@ android {
             buildConfigField "String", "PASSWORD", '"tpdp!Q@A#Z"'
             buildConfigField "String", "AUTH_ID", '"3d4c92b4-ad70-78e0-16f9-01b2aad1caa3"'
             buildConfigField "String", "AUTH_TOKEN", '"bVjtB3h5R0qW11ClXgPK"'
-            buildConfigField "String", "API_WEBSERVICE", '"webservice/request/"'
+            buildConfigField "String", "API_WEBSERVICE_REQUEST", '"webservice/request/"'
+            buildConfigField "String", "API_WEBSERVICE", '"webservice/"'
 
 
         }
@@ -65,6 +68,10 @@ android {
     }
     dataBinding {
         enabled = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -93,4 +100,5 @@ dependencies {
     implementation libraries.app_compat
     implementation libraries.glide_glide
     implementation libraries.logging_interceptor
+    implementation files('libs/commons-lang3-3.9.jar')
 }

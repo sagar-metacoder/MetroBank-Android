@@ -21,10 +21,9 @@
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:orientation="horizontal"
-                      android:paddingEnd="@dimen/margin_10"
-                      android:paddingStart="@dimen/margin_10"
+
                       android:paddingTop="@dimen/margin_5"
-                      android:paddingBottom="@dimen/margin_5">
+                      android:paddingBottom="@dimen/margin_5" android:baselineAligned="false">
 
 
             <LinearLayout

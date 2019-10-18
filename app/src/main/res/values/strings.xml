@@ -98,5 +98,11 @@
     <string name="item_freshtag">Fresh Tag</string>
     <string name="item_inventorytag">Inventory Tag</string>
     <string name="a_lbl_desk">-</string>
+    <string name="a_msg_emdk">EMDK closed unexpectedly! Please close and restart the application.</string>
+    <string name="a_msg_scanning">Scanning…</string>
+    <string name="a_msg_scanner_waiting">Scanner is waiting for trigger press…</string>
+    <string name="a_msg_error">An error has occurred.</string>
+    <string name="a_msg_idle">is enabled and idle…</string>
+    <string name="a_msg_disable">is disabled.</string>
 
 </resources>

@@ -92,15 +92,20 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
                 if (fromWhere == Constant.TAG_TYPE) {
 
+                    binding.edtDepartment.text = Editable.Factory.getInstance().newEditable("")
+                    deptPositionValue.clear()
+                    context!!.arrayDeptKey.clear()
+
+
 
                     selectedTag = item as Int
                     if (!binding.edtTagType.text.isNullOrBlank()) {
                         tagTypeExist = true
                     }
 
-                    binding.edtTagType.text = Editable.Factory.getInstance().newEditable(tagType.get(item as Int))
+                    binding.edtTagType.text = Editable.Factory.getInstance().newEditable(tagType.get(item))
 
-                    if (binding.edtTagType.text!!.trim().equals(getString(R.string.item_freshtag))) {
+                    if (item == 0) {
                         context!!.tagType = getString(R.string.key_freshtag)
                     } else {
                         context!!.tagType = getString(R.string.key_inventorytag)
@@ -139,12 +144,12 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
                     binding.edtDepartment.text = Editable.Factory.getInstance().newEditable("")
                     deptPositionValue.clear()
-
+                    context!!.arrayDeptKey.clear()
 
                     binding.linearRv.visibility = View.GONE
 
                     binding.edtStoreNo.text =
-                        Editable.Factory.getInstance().newEditable(context!!.arrayStoreKey.get(item as Int))
+                        Editable.Factory.getInstance().newEditable(context!!.arrayStoreKey.get(item))
 
 
                     context!!.storeKey = context!!.arrayStoreValue.get(item)
@@ -188,9 +193,9 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                     context!!.tagType,
                     context!!.storeKey, departmentValue
                 )
-                context!!.department_key = valueBuilder.substring(0, valueBuilder.length - 1)
+                context!!.departmentKey = valueBuilder.substring(0, valueBuilder.length - 1)
                 BaseSharedPreference.getInstance(activity!!)
-                    .putValue(getString(R.string.department), context!!.department_key)
+                    .putValue(getString(R.string.department), context!!.departmentKey)
 
 //                Log.d("selected", item.toString())
 
@@ -202,6 +207,8 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
     private fun handleClick() {
         binding.edtTagType.setOnClickListener {
             //            callTagTypeDialog()
+            binding.linearRv.visibility = View.GONE
+            binding.linearTemplateData.visibility = View.GONE
 
             callTagTypeDialog()
         }
@@ -210,6 +217,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             if (context!!.arrayStoreKey.isNotEmpty()) {
                 if (context!!.arrayStoreKey.size > 1) {
                     binding.linearRv.visibility = View.GONE
+                    binding.linearTemplateData.visibility = View.GONE
 
                     callStoreTypeDialog()
                 }
@@ -218,9 +226,12 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             //callStoreApi()
         }
         binding.btnSubmit.setOnClickListener {
-            //   Utils.navigateTo(binding.btnSubmit, R.id.actionAddProducts, null)
+            context!!.effectiveDate = binding.edtEffectiveDate.text.toString()
+            context!!.productInfo = binding.edtInfo.text.toString()
+            Utils.navigateTo(binding.btnSubmit, R.id.actionAddProducts, null)
 
-            context!!.callSubmitApi(binding.edtEffectiveDate.text.toString(), binding.edtInfo.text.toString())
+
+            //  context!!.callSubmitApi(binding.edtEffectiveDate.text.toString(), binding.edtInfo.text.toString())
 
         }
         binding.edtDepartment.setOnClickListener {
@@ -232,6 +243,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
                 callDepartmentDialog()
                 binding.linearRv.visibility = View.GONE
+                binding.linearTemplateData.visibility = View.GONE
 
             }
         }

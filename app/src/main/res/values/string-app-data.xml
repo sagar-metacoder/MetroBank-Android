@@ -45,5 +45,7 @@
     <string name="value_pending">pending</string>
     <string name="key_freshtag">FreshTag</string>
     <string name="key_inventorytag">InventoryTag</string>
+    <string name="key_upc">UPC</string>
+    <string name="action_draft">draft</string>
 
 </resources>

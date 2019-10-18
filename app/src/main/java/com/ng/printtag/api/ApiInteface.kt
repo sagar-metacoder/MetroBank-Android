@@ -3,14 +3,10 @@
 package com.ng.printtag.api
 
 
-import com.ng.printtag.BuildConfig.API_BASE_MODULE
-import com.ng.printtag.BuildConfig.API_WEBSERVICE
+import com.ng.printtag.BuildConfig.*
 import com.ng.printtag.models.allrequests.AllRequestModel
 import com.ng.printtag.models.login.LoginModel
-import com.ng.printtag.models.newrequests.DepartmentModel
-import com.ng.printtag.models.newrequests.NewPrintReqSubmit
-import com.ng.printtag.models.newrequests.StoreListModel
-import com.ng.printtag.models.newrequests.TempletListModel
+import com.ng.printtag.models.newrequests.*
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Body
@@ -33,11 +29,14 @@ interface ApiInteface {
     @POST(API_BASE_MODULE + "tempDetails")
     fun callTemplateDetails(@Body model: RequestBody): Call<TempletListModel>
 
-    @POST(API_WEBSERVICE + "submit")
+    @POST(API_WEBSERVICE_REQUEST + "submit")
     fun callNewRequestSubmit(@Body model: RequestBody): Call<NewPrintReqSubmit>
 
 
-    @POST(API_WEBSERVICE + "records/all")
+    @POST(API_WEBSERVICE_REQUEST + "records/all")
     fun callAllRequest(@Body model: RequestBody): Call<AllRequestModel>
+
+    @POST(API_WEBSERVICE + "validateUPC")
+    fun callUpcValidate(@Body model: RequestBody): Call<UpcValidateModel>
 
 }

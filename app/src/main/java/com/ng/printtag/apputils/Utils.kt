@@ -224,6 +224,7 @@ class Utils {
             return string
         }
 
+
         @SuppressLint("SimpleDateFormat")
         fun parseDateToMMddyyyy(time: String): String? {
             val inputPattern = "MM/dd/yyyy"

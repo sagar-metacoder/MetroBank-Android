@@ -15,10 +15,7 @@ import com.ng.printtag.interfaces.SkipGetSerialisation
 import com.ng.printtag.interfaces.SkipPostSerialisation
 import com.ng.printtag.models.allrequests.AllRequestModel
 import com.ng.printtag.models.login.LoginModel
-import com.ng.printtag.models.newrequests.DepartmentModel
-import com.ng.printtag.models.newrequests.NewPrintReqSubmit
-import com.ng.printtag.models.newrequests.StoreListModel
-import com.ng.printtag.models.newrequests.TempletListModel
+import com.ng.printtag.models.newrequests.*
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
@@ -439,6 +436,13 @@ open class RestClient {
             Constant.CALL_NEW_REQUEST_SUBMIT -> {
                 val callApi: Call<NewPrintReqSubmit> =
                     getApiClient()!!.callNewRequestSubmit(requestObject as RequestBody)
+                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
+                return
+            }
+
+            Constant.CALL_UPC_VALIDATE -> {
+                val callApi: Call<UpcValidateModel> =
+                    getApiClient()!!.callUpcValidate(requestObject as RequestBody)
                 makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
                 return
             }
