@@ -4,6 +4,7 @@
     <color name="colorAccent">#FFFFFF</color>
     <color name="colorPrimary">#015C44</color>
     <color name="app_background">#015C44</color>
+    <color name="primary_light">#80ADA1</color>
 
 
     <color name="colorWhite">@android:color/white</color>

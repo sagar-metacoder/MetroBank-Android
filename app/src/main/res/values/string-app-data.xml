@@ -47,5 +47,6 @@
     <string name="key_inventorytag">InventoryTag</string>
     <string name="key_upc">UPC</string>
     <string name="action_draft">draft</string>
+    <string name="action_draft">draft</string>
 
 </resources>

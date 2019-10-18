@@ -59,6 +59,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
     private val lock = Any()
     private val position = 1
 
+    var action = ""
 
 
     override fun initMethod() {
@@ -348,11 +349,17 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
                 val rootResponse = response.body() as NewPrintReqSubmit
                 when (rootResponse.success) {
                     true -> {
-
+                        if (action == resources.getString(R.string.action_submit)) {
                         AppUtils.showLongToast(
                             this@ActivityNewPrintRequest,
                             resources.getString(R.string.a_msg_product_added)
                         )
+                        } else {
+                            AppUtils.showLongToast(
+                                this@ActivityNewPrintRequest,
+                                "Product added to draft."
+                            )
+                        }
                         Utils.gotoHomeScreen(this@ActivityNewPrintRequest)
                     }
                     else -> {

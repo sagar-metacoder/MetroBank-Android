@@ -101,4 +101,12 @@ dependencies {
     implementation libraries.glide_glide
     implementation libraries.logging_interceptor
     implementation files('libs/commons-lang3-3.9.jar')
+
+    //paging library
+    implementation "android.arch.paging:runtime:$paging_version"
+
+    //adding view model
+    implementation "android.arch.lifecycle:extensions:$view_model_version"
+    implementation "android.arch.lifecycle:viewmodel:$view_model_version"
+
 }

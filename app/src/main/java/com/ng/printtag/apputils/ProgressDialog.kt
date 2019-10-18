@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.ng.printtag.apputils
 
 import android.annotation.SuppressLint

@@ -15,8 +15,6 @@ import org.json.JSONObject
 import retrofit2.Response
 import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 object RequestMethods {
@@ -104,28 +102,6 @@ object RequestMethods {
 
         return "$month/$date/$year"
     }
-
-
-    private fun getDateMillis(dateTime: String): Long {
-        try {
-            return when (dateTime.isNotEmpty()) {
-                true -> {
-                    val inputPattern = "yyyy-MM-dd HH:mm"
-                    val inputDateFormat = SimpleDateFormat(inputPattern, Locale.getDefault())
-                    return inputDateFormat.parse(dateTime).time
-                }
-                false -> 0
-            }
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-        }
-        return 0
-    }
-
-
-
-
-
 
 }
 

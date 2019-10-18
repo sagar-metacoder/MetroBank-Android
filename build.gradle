@@ -12,6 +12,8 @@ buildscript {
     ext.legacy_support_version = '1.0.0'
     ext.material_support_version = '1.0.0-beta01'
     ext.emdk_version ='7.4.24'
+    ext.paging_version = "1.0.0"
+    ext.view_model_version = "1.1.0"
 
 
     repositories {

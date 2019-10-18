@@ -446,7 +446,8 @@
         </item> <!-- header date, month color && calendar text highlight color -->
         <item name="android:textColorSecondaryInverse">#000</item> <!-- header year color -->
 
-        <item name="android:colorAccent">@color/colorPrimary</item> <!-- button color -->
+        <item name="android:colorAccent">@color/primary_light</item> <!-- button color -->
+
     </style>
 
     <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">

@@ -1,6 +1,7 @@
 
 package com.ng.printtag.api
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
 import android.view.View.GONE
@@ -60,6 +61,7 @@ open class RestClient {
             try {
                 // Create a trust manager that does not validate certificate chains
                 val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
+                    @SuppressLint("TrustAllX509TrustManager")
                     override fun checkClientTrusted(
                         chain: Array<java.security.cert.X509Certificate>,
                         authType: String

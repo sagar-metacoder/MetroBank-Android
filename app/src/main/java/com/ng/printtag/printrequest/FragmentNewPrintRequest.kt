@@ -43,6 +43,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
         context!!.callStoreApi()
         ErrorActions.validateButton(binding.btnSubmit, false)
+        ErrorActions.validateButton(binding.btnDraft, false)
 
 
     }

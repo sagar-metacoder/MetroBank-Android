@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.ng.printtag.layout
 
 import android.app.Activity
@@ -145,7 +147,6 @@ class LayoutSlideMenu : LinearLayout {
     private fun callAppTextApi() {
 
         AppUtils.navigateToOtherScreen(context as Activity, ActivityDashboard::class.java, true)
-
 
 
     }
