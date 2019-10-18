@@ -181,11 +181,11 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
         )
     }
 
-    fun callSubmitApi(action: String) {
+    fun callSubmitApi(actionFrom: String) {
         val restClientModel = RestClientModel()
         restClientModel.isProgressDialogShow = true
 
-
+        action = actionFrom
         val rootJson = JSONObject()
         rootJson.put(
             resources.getString(R.string.userId),
@@ -204,7 +204,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
                 resources.getString(R.string.pref_language)
             )
         )
-        rootJson.put(resources.getString(R.string.key_action), action)
+        rootJson.put(resources.getString(R.string.key_action), actionFrom)
         rootJson.put(resources.getString(R.string.key_aisleInfo), productInfo)
 
 

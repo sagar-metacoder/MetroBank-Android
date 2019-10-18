@@ -315,18 +315,6 @@
                 -->
             </LinearLayout>
         </ScrollView>
-        <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_draft"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/AppButton.Colored"
-                android:layout_gravity="end"
-                android:text="@string/a_btn_draft"
-                android:layout_alignParentBottom="true"
-                android:padding="@dimen/margin_8"
-                android:layout_toStartOf="@+id/btnSubmit"
-                tools:ignore="RelativeOverlap"
-                android:layout_marginEnd="@dimen/margin_5"/>
 
 
         <com.google.android.material.button.MaterialButton
