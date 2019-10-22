@@ -51,6 +51,9 @@ class DialogInstruction : BaseDialog<DialogInstructionBinding>(), OnItemClickLis
                             .putValue(getString(R.string.pref_session_out), false)
                         AppUtils.finishActivity(activity!!)
                     }
+                    getString(R.string.action_delete) -> {
+                        dismiss()
+                    }
                     /* getString(R.string.action_sign_out) -> {
                         BaseSharedPreference.getInstance(activity!!)
                             .putValue(getString(R.string.pref_session_out), false)

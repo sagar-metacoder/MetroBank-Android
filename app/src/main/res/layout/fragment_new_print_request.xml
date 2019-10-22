@@ -143,12 +143,7 @@
                             app:layoutManager="@{layoutManager}"
                             android:layout_marginTop="@dimen/margin_10"/>
 
-                    <View
-                            android:layout_marginTop="@dimen/margin_10"
-                            android:layout_marginBottom="@dimen/margin_10"
-                            android:layout_height="@dimen/margin_1"
-                            android:layout_width="match_parent"
-                            android:background="@color/color_CDE0EC"/>
+
                 </LinearLayout>
 
                 <LinearLayout android:id="@+id/linearTemplateData"
@@ -157,7 +152,12 @@
                               android:orientation="vertical"
                               android:visibility="gone"
                               android:layout_marginTop="@dimen/margin_3">
-
+                    <View
+                            android:layout_marginTop="@dimen/margin_10"
+                            android:layout_marginBottom="@dimen/margin_10"
+                            android:layout_height="@dimen/margin_1"
+                            android:layout_width="match_parent"
+                            android:background="@color/color_CDE0EC"/>
                     <RelativeLayout android:layout_width="match_parent"
                                     android:layout_height="match_parent">
                         <androidx.appcompat.widget.AppCompatTextView

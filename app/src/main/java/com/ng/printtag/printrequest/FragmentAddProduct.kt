@@ -2,14 +2,15 @@ package com.ng.printtag.printrequest
 
 import android.view.View
 import com.ng.printtag.R
+import com.ng.printtag.apputils.CallDialog
 import com.ng.printtag.base.BaseFragment
 import com.ng.printtag.databinding.FragmentAddProductBinding
+import com.ng.printtag.interfaces.CallBackInterfaces
 import com.ng.printtag.interfaces.OnItemClickListener
-import com.ng.printtag.models.newrequests.AddProductAdapter
 
 class FragmentAddProduct : BaseFragment<FragmentAddProductBinding>() {
 
-    private lateinit var binding: FragmentAddProductBinding
+    lateinit var binding: FragmentAddProductBinding
     var context: ActivityNewPrintRequest? = null
     lateinit var adapter: AddProductAdapter
 
@@ -42,15 +43,39 @@ class FragmentAddProduct : BaseFragment<FragmentAddProductBinding>() {
 
     fun setAdapter() {
 
-        binding.rvAllProduct.visibility = View.VISIBLE
-        binding.linearFound.visibility = View.GONE
-        binding.relSave.visibility = View.VISIBLE
-
         adapter = AddProductAdapter(
             context!!.addProducts,
             object : OnItemClickListener {
                 override fun onItemClick(item: Any, position: Int) {
 
+                    if (item.equals("delete")) {
+
+                        CallDialog.errorDialog(
+                            activity!!,
+                            getString(R.string.a_lbl_warning_title),
+                            getString(R.string.a_msg_delete),
+                            getString(R.string.a_btn_yes),
+                            getString(R.string.a_btn_no),
+                            getString(R.string.action_delete),
+                            object : CallBackInterfaces {
+                                override fun onCallBack(item: Any, fromWhere: Any) {
+
+                                    if (fromWhere.equals("ok")) {
+                                        context!!.addProducts.removeAt(position)
+                                        adapter.notifyDataSetChanged()
+                                    }
+
+                                    if (context!!.addProducts.isNullOrEmpty()) {
+                                        binding.rvAllProduct.visibility = View.GONE
+                                        binding.linearFound.visibility = View.VISIBLE
+                                        binding.relSave.visibility = View.GONE
+                                    }
+                                }
+
+                            })
+
+
+                    }
                 }
             })
         binding.rvAllProduct.adapter = adapter

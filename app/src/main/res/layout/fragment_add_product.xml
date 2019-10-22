@@ -65,12 +65,14 @@
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_all_product"
                     android:layout_width="match_parent"
+                    android:visibility="visible"
                     android:layout_height="match_parent"
                     bind:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
         </RelativeLayout>
         <RelativeLayout android:id="@+id/rel_save"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="visible"
                         android:layout_alignParentBottom="true"
 
         >

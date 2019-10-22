@@ -1,12 +1,14 @@
-package com.ng.printtag.models.newrequests
+package com.ng.printtag.printrequest
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ng.printtag.R
 import com.ng.printtag.databinding.RowAddProductBinding
 import com.ng.printtag.interfaces.OnItemClickListener
+import com.ng.printtag.models.newrequests.AddProductModel
 
 
 /**
@@ -46,10 +48,18 @@ class AddProductAdapter(
         }
 
         override fun onClick(view: View?) {
-            onItemClickListener.onItemClick(adapterPosition, adapterPosition)
+
+            if (view!!.id == R.id.img_delete) {
+                onItemClickListener.onItemClick("delete", adapterPosition)
+
+
+            }
         }
 
         init {
+            binding.imgDelete.setOnClickListener(this)
+
+
             //  binding.btnSelect.setOnClickListener(this)
             //  binding.tvrefresh.setOnClickListener(this)
         }

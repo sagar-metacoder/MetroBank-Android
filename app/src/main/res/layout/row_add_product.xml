@@ -99,8 +99,11 @@
                     android:layout_marginTop="@dimen/margin_10" tools:ignore="RtlHardcoded"
                     android:orientation="vertical">
 
-                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                <ImageView android:id="@+id/img_delete"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
                            android:src="@mipmap/ic_delete"
+                           android:padding="@dimen/margin_5"
                 />
 
             </LinearLayout>

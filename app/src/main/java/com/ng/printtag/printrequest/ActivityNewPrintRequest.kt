@@ -24,6 +24,7 @@ import com.symbol.emdk.barcode.Scanner.*
 import com.symbol.emdk.barcode.StatusData.ScannerStates
 import kotlinx.android.synthetic.main.activity_new_print_request.*
 import org.apache.commons.lang3.StringUtils
+import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Response
 
@@ -38,15 +39,16 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
     var arrayDeptValue: ArrayList<String> = ArrayList()
     lateinit var addProducts: MutableList<AddProductModel>
 
-    lateinit var arrayTemplate: MutableList<DepartmentModel.Data.Template>
+    private lateinit var arrayTemplate: MutableList<DepartmentModel.Data.Template>
     var storeKey: String = ""
     var tagType: String = ""
     var departmentKey: String = ""
     var productInfo: String = ""
     var effectiveDate: String = ""
-    var upcBarcode: String = ""
+    private var upcBarcode: String = ""
+    private var maxQuantity: String = ""
 
-    var template_postion: Int = 0
+    private var templatePosition: Int = 0
     private var emdkManager: EMDKManager? = null
     private var barcodeManager: BarcodeManager? = null
     private var scanner: Scanner? = null
@@ -74,15 +76,14 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
             return
         }
 
-
         addSpinnerScannerDevicesListener()
 
     }
 
-    fun callUpcMatchApi() {
+    private fun callUpcMatchApi() {
         val restClientModel = RestClientModel()
         restClientModel.isProgressDialogShow = true
-        ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, true, "")
+//        ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, true, "")
 
         val rootJson = JSONObject()
         rootJson.put(
@@ -157,13 +158,13 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
         restClientModel.isProgressDialogShow = true
         ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, true, "")
 
-        template_postion = position
+        templatePosition = position
         val rootJson = JSONObject()
         rootJson.put(
             resources.getString(R.string.userId),
             AppUtils.getUserModel(this@ActivityNewPrintRequest).data!!.userId
         )
-        rootJson.put(resources.getString(R.string.key_templateId), arrayTemplate.get(position).id)
+        rootJson.put(resources.getString(R.string.key_templateId), arrayTemplate[position].id)
         rootJson.put(resources.getString(R.string.tagType), tagType)
 
         rootJson.put(resources.getString(R.string.storeNumber), storeKey)
@@ -185,13 +186,15 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
         val restClientModel = RestClientModel()
         restClientModel.isProgressDialogShow = true
 
+
         action = actionFrom
         val rootJson = JSONObject()
+        val jsonArray = JSONArray()
         rootJson.put(
             resources.getString(R.string.userId),
             AppUtils.getUserModel(this@ActivityNewPrintRequest).data!!.userId
         )
-        rootJson.put(resources.getString(R.string.key_templateId), arrayTemplate.get(template_postion).id)
+        rootJson.put(resources.getString(R.string.key_templateId), arrayTemplate[templatePosition].id)
         rootJson.put(resources.getString(R.string.tagType), tagType)
 
         rootJson.put(resources.getString(R.string.storeNumber), storeKey)
@@ -206,6 +209,17 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
         )
         rootJson.put(resources.getString(R.string.key_action), actionFrom)
         rootJson.put(resources.getString(R.string.key_aisleInfo), productInfo)
+
+        for (i in 0 until addProducts.size) {
+            val products = JSONObject()
+            products.put(resources.getString(R.string.upc), addProducts[i].upcNumber)
+            products.put(resources.getString(R.string.key_qty), addProducts[i].qty)
+            jsonArray.put(products)
+
+
+        }
+
+        rootJson.put(resources.getString(R.string.key_products), jsonArray)
 
 
         val body = RequestMethods.getRequestBody(rootJson)
@@ -307,6 +321,9 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
 
                             currentFragment.binding.linearTemplateData.visibility = View.VISIBLE
                             currentFragment.binding.model = rootResponse.data!!.templateDetails
+                            maxQuantity = rootResponse.data!!.templateDetails!!.maximumQuantity.toString()
+
+
 
 
                         }
@@ -331,6 +348,12 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
                             allProducts.upcName = rootResponse.data!!.description
                             allProducts.upcNumber = upcBarcode
                             addProducts.add(allProducts)
+
+                            currentFragment.binding.rvAllProduct.visibility = View.VISIBLE
+                            currentFragment.binding.linearFound.visibility = View.GONE
+                            currentFragment.binding.relSave.visibility = View.VISIBLE
+
+
                             currentFragment.adapter.notifyDataSetChanged()
 
                         }
@@ -378,7 +401,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
 
     }
 
-    fun getCurrentFragment(): Fragment? {
+    private fun getCurrentFragment(): Fragment? {
         return try {
             navigation_new_print_request.childFragmentManager.findFragmentById(R.id.navigation_new_print_request)!!
         } catch (e: Exception) {
@@ -419,7 +442,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
     }
 
     override fun onOpened(emdkManager: EMDKManager) {
-        updateStatus("EMDK open success!")
+        //updateStatus("EMDK open success!")
         this.emdkManager = emdkManager
         // Acquire the barcode manager resources
         initBarcodeManager()
@@ -458,7 +481,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
             emdkManager!!.release()
             emdkManager = null
         }
-        updateStatus(getString(R.string.a_msg_emdk))
+        //  updateStatus(getString(R.string.a_msg_emdk))
     }
 
     override fun onDestroy() {
@@ -490,11 +513,10 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
     }
 
     override fun onStatus(statusData: StatusData) {
-        val state = statusData.state
-        when (state) {
+        when (statusData.state) {
             ScannerStates.IDLE -> {
                 statusString = statusData.friendlyName + getString(R.string.a_msg_idle)
-                updateStatus(statusString)
+                // updateStatus(statusString)
                 // set trigger type
                 if (bSoftTriggerSelected) {
                     scanner!!.triggerType = TriggerType.SOFT_ONCE
@@ -508,30 +530,30 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
                     bDecoderSettingsChanged = false
                 }
                 // submit read
-                if (!scanner!!.isReadPending() && !bExtScannerDisconnected) {
+                if (!scanner!!.isReadPending && !bExtScannerDisconnected) {
                     try {
                         scanner!!.read()
                     } catch (e: ScannerException) {
-                        e.message?.let { updateStatus(it) }
+                        // e.message?.let { updateStatus(it) }
                     }
 
                 }
             }
             ScannerStates.WAITING -> {
                 statusString = getString(R.string.a_msg_scanner_waiting)
-                updateStatus(statusString)
+                // updateStatus(statusString)
             }
             ScannerStates.SCANNING -> {
                 statusString = getString(R.string.a_msg_scanning)
-                updateStatus(statusString)
+                // updateStatus(statusString)
             }
             ScannerStates.DISABLED -> {
                 statusString = statusData.friendlyName + getString(R.string.a_msg_disable)
-                updateStatus(statusString)
+                //updateStatus(statusString)
             }
             ScannerStates.ERROR -> {
                 statusString = getString(R.string.a_msg_error)
-                updateStatus(statusString)
+                // updateStatus(statusString)
             }
             else -> {
             }
@@ -539,12 +561,12 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
     }
 
     override fun onConnectionChange(scannerInfo: ScannerInfo, connectionState: ConnectionState) {
-        val status: String
+        // val status: String
         var scannerName = ""
-        val statusExtScanner = connectionState.toString()
+        // val statusExtScanner = connectionState.toString()
         val scannerNameExtScanner = scannerInfo.friendlyName
-        if (deviceList!!.size != 0) {
-            scannerName = deviceList!!.get(scannerIndex).friendlyName
+        if (deviceList!!.isNotEmpty()) {
+            scannerName = this.deviceList!![scannerIndex].friendlyName
         }
         if (scannerName.equals(scannerNameExtScanner, ignoreCase = true)) {
             when (connectionState) {
@@ -562,20 +584,20 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
                     }
                 }
             }
-            status = "$scannerNameExtScanner:$statusExtScanner"
-            updateStatus(status)
+            //  status = "$scannerNameExtScanner:$statusExtScanner"
+            // updateStatus(status)
         } else {
             bExtScannerDisconnected = false
-            status = "$statusString $scannerNameExtScanner:$statusExtScanner"
-            updateStatus(status)
+            // status = "$statusString $scannerNameExtScanner:$statusExtScanner"
+            // updateStatus(status)
         }
     }
 
     private fun initScanner() {
         if (scanner == null) {
-            if (deviceList != null && deviceList!!.size != 0) {
+            if (deviceList != null && deviceList!!.isNotEmpty()) {
                 if (barcodeManager != null)
-                    scanner = barcodeManager!!.getDevice(deviceList!!.get(scannerIndex))
+                    scanner = barcodeManager!!.getDevice(deviceList!![scannerIndex])
             } else {
                 return
             }
@@ -585,7 +607,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
                 try {
                     scanner!!.enable()
                 } catch (e: ScannerException) {
-                    e.message?.let { updateStatus(it) }
+                    // e.message?.let { updateStatus(it) }
                     deInitScanner()
                 }
 
@@ -599,20 +621,20 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
             try {
                 scanner!!.disable()
             } catch (e: Exception) {
-                e.message?.let { updateStatus(it) }
+                // e.message?.let { updateStatus(it) }
             }
 
             try {
                 scanner!!.removeDataListener(this)
                 scanner!!.removeStatusListener(this)
             } catch (e: Exception) {
-                e.message?.let { updateStatus(it) }
+                //  e.message?.let { updateStatus(it) }
             }
 
             try {
                 scanner!!.release()
             } catch (e: Exception) {
-                e.message?.let { updateStatus(it) }
+                // e.message?.let { updateStatus(it) }
             }
 
             scanner = null
@@ -646,7 +668,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
 
     private fun enumerateScannerDevices() {
         if (barcodeManager != null) {
-            deviceList = barcodeManager!!.getSupportedDevicesInfo()
+            deviceList = barcodeManager!!.supportedDevicesInfo
 
             if (scannerIndex != position || scanner == null) {
                 scannerIndex = position
@@ -661,7 +683,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
     private fun setDecoders() {
         if (scanner != null) {
             try {
-                val config = scanner!!.getConfig()
+                val config = scanner!!.config
                 // Set EAN8
                 config.decoderParams.ean8.enabled = true
                 // Set EAN13
@@ -670,9 +692,9 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
                 config.decoderParams.code39.enabled = true
                 //Set Code128
                 config.decoderParams.code128.enabled = true
-                scanner!!.setConfig(config)
+                scanner!!.config = config
             } catch (e: ScannerException) {
-                e.message?.let { updateStatus(it) }
+                // e.message?.let { updateStatus(it) }
             }
 
         }
@@ -681,20 +703,14 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
 
     private fun cancelRead() {
         if (scanner != null) {
-            if (scanner!!.isReadPending()) {
+            if (scanner!!.isReadPending) {
                 try {
                     scanner!!.cancelRead()
                 } catch (e: ScannerException) {
-                    e.message?.let { updateStatus(it) }
+                    // e.message?.let { updateStatus(it) }
                 }
 
             }
-        }
-    }
-
-    private fun updateStatus(status: String) {
-        runOnUiThread {
-            //textViewStatus.setText("" + status)
         }
     }
 

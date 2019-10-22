@@ -31,22 +31,4 @@
     </fragment>
 
 
-    <fragment
-            android:id="@+id/actionSlideMenuOptions"
-            android:name="com.ng.printtag.dashboard.slidemenu.FragmentMenuOptions"
-            tools:layout="@layout/fragment_slide_menu_options">
-        <argument
-                android:name="@string/slide_menu_title"
-                android:defaultValue="title"
-                app:argType="string"/>
-        <argument
-                android:name="@string/slide_menu_value"
-                android:defaultValue="html"
-                app:argType="string"/>
-
-        <argument
-                android:name="@string/slide_menu_action"
-                android:defaultValue="action"
-                app:argType="string"/>
-    </fragment>
 </navigation>
