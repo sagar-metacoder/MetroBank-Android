@@ -3,6 +3,7 @@ package com.ng.printtag.printrequest
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ng.printtag.R
@@ -49,15 +50,29 @@ class AddProductAdapter(
 
         override fun onClick(view: View?) {
 
-            if (view!!.id == R.id.img_delete) {
+            if (view!!.id == R.id.linear_row) {
+                onItemClickListener.onItemClick("view", adapterPosition)
+
+            } else if (view.id == R.id.img_delete) {
                 onItemClickListener.onItemClick("delete", adapterPosition)
 
 
             }
         }
 
+
         init {
             binding.imgDelete.setOnClickListener(this)
+            binding.linearRow.setOnClickListener(this)
+            binding.edtQty.onFocusChangeListener = object : OnFocusChangeListener {
+                override fun onFocusChange(v: View, hasFocus: Boolean) {
+                    if (hasFocus) {
+                        //got focus
+                    } else {
+                        onItemClickListener.onItemClick(binding.edtQty.text.toString(), adapterPosition)
+                    }
+                }
+            }
 
 
             //  binding.btnSelect.setOnClickListener(this)
@@ -78,4 +93,6 @@ class AddProductAdapter(
         }
 
     }
+
+
 }

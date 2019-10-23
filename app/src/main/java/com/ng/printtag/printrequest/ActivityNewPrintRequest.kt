@@ -46,7 +46,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
     var productInfo: String = ""
     var effectiveDate: String = ""
     private var upcBarcode: String = ""
-    private var maxQuantity: String = ""
+    var maxQuantity: String = ""
 
     private var templatePosition: Int = 0
     private var emdkManager: EMDKManager? = null
@@ -380,13 +380,13 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
                         } else {
                             AppUtils.showLongToast(
                                 this@ActivityNewPrintRequest,
-                                "Product added to draft."
+                                getString(R.string.a_msg_product_added_draft)
                             )
                         }
                         Utils.gotoHomeScreen(this@ActivityNewPrintRequest)
                     }
                     else -> {
-                        showError(getString(R.string.a_lbl_server_title), rootResponse.data!!.msg!!)
+                        showError(getString(R.string.a_lbl_server_title), rootResponse.msg!!)
                     }
                 }
             }

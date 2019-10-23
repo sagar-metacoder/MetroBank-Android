@@ -9,13 +9,8 @@ class NewPrintReqSubmit {
     @SerializedName("success")
     @Expose
     var success: Boolean = false
-    @SerializedName("data")
+    @SerializedName("msg")
     @Expose
-    var data: Data? = null
+    var msg: String? = null
 
-    inner class Data {
-        @SerializedName("msg")
-        @Expose
-        var msg: String? = null
-    }
 }

@@ -7,6 +7,7 @@ import com.ng.printtag.base.BaseFragment
 import com.ng.printtag.databinding.FragmentAddProductBinding
 import com.ng.printtag.interfaces.CallBackInterfaces
 import com.ng.printtag.interfaces.OnItemClickListener
+import com.ng.printtag.models.newrequests.AddProductModel
 
 class FragmentAddProduct : BaseFragment<FragmentAddProductBinding>() {
 
@@ -26,13 +27,7 @@ class FragmentAddProduct : BaseFragment<FragmentAddProductBinding>() {
             binding.relSave.visibility = View.GONE
         }
 
-        /*  for (i in 0 until 5) {
-              val allProducts = AddProductModel()
-              allProducts.qty = "5"
-              allProducts.upcName = "Food Cans"
-              allProducts.upcNumber = "00000023443"
-              allRequest.add(allProducts)
-          }*/
+
         handleClick()
         setAdapter()
 
@@ -48,7 +43,26 @@ class FragmentAddProduct : BaseFragment<FragmentAddProductBinding>() {
             object : OnItemClickListener {
                 override fun onItemClick(item: Any, position: Int) {
 
-                    if (item.equals("delete")) {
+                    if (item.equals("view")) {
+                        /*  val mBottomSheetDialog = Dialog(activity!!, R.style.MaterialDialogSheet)
+
+                          val binding = DataBindingUtil.inflate<ViewDataBinding>(
+                              LayoutInflater.from(getContext()),
+                              R.layout.dialog_product_view,
+                              null,
+                              false
+                          )
+                          mBottomSheetDialog.setContentView(binding.getRoot())
+                          binding.se
+                         // mBottomSheetDialog.setContentView(R.layout.dialog_product_view)
+                          mBottomSheetDialog.setCancelable(true)
+                          mBottomSheetDialog.window!!
+                              .setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                          mBottomSheetDialog.window!!.setGravity(Gravity.BOTTOM)
+                          val upcNumber = mBottomSheetDialog.findViewById<View>(R.id.upcNumber)
+                          upcNumber
+                          mBottomSheetDialog.show()*/
+                    } else if (item.equals("delete")) {
 
                         CallDialog.errorDialog(
                             activity!!,
@@ -75,6 +89,25 @@ class FragmentAddProduct : BaseFragment<FragmentAddProductBinding>() {
                             })
 
 
+                    } else {
+
+                        if (context!!.maxQuantity.toInt() < (item as String).toInt()) {
+                            CallDialog.errorDialog(
+                                activity!!,
+                                getString(R.string.a_lbl_warning_title),
+                                getString(R.string.a_msg_delete),
+                                getString(R.string.a_btn_yes),
+                                getString(R.string.a_btn_no),
+                                getString(R.string.action_delete), null
+                            )
+                        } else {
+                            val allProducts = AddProductModel()
+                            allProducts.qty = item
+                            allProducts.upcName = context!!.addProducts[position].upcName
+                            allProducts.upcNumber = context!!.addProducts[position].upcNumber
+                            context!!.addProducts.set(position, allProducts)
+                            adapter.notifyDataSetChanged()
+                        }
                     }
                 }
             })

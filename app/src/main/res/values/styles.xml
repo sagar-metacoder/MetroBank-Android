@@ -297,6 +297,7 @@
         <item name="android:singleLine">true</item>
         <item name="android:textSize">@dimen/font_12</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textCursorDrawable">@drawable/bg_cursor_green</item>
     </style>
     <style name="AppTextView.List.Item.Medium" parent="Theme.AppCompat.Light">
         <item name="android:layout_width">wrap_content</item>
@@ -452,5 +453,21 @@
 
     <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
         <item name="android:headerBackground">#fff</item> <!-- header background color -->
+    </style>
+
+    <style name="MaterialDialogSheet" parent="@android:style/Theme.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowAnimationStyle">@style/MaterialDialogSheetAnimation</item>
+    </style>
+
+
+    <style name="MaterialDialogSheetAnimation">
+        <item name="android:windowEnterAnimation">@anim/popup_show</item>
+        <item name="android:windowExitAnimation">@anim/popup_hide</item>
     </style>
 </resources>

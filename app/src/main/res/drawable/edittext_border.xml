@@ -2,6 +2,6 @@
     <stroke android:width="2dp" android:color="#D0CFCC"/>
     <solid android:color="@color/colorWhite"/>
     <corners android:radius="3dp"/>
-    <padding android:left="@dimen/margin_3" android:top="@dimen/margin_3"
-             android:right="@dimen/margin_3" android:bottom="@dimen/margin_3"/>
+    <padding android:left="@dimen/margin_4" android:top="@dimen/margin_4"
+             android:right="@dimen/margin_4" android:bottom="@dimen/margin_4"/>
 </shape>

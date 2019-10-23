@@ -105,6 +105,8 @@
     <string name="a_msg_idle">is enabled and idle…</string>
     <string name="a_msg_disable">is disabled.</string>
     <string name="a_msg_delete">Are you sure you want to delete?</string>
+    <string name="a_lbl_description">DESCRIPTION</string>
+    <string name="a_msg_product_added_draft">Product added to draft.</string>
 
 
 </resources>
