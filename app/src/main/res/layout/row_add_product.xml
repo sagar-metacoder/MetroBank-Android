@@ -110,7 +110,7 @@
                            android:layout_height="wrap_content"
                            android:src="@mipmap/ic_delete"
                            android:padding="@dimen/margin_5"
-                />
+                           tools:ignore="ContentDescription"/>
 
             </LinearLayout>
 

@@ -19,11 +19,11 @@ import com.ng.printtag.api.ApiResponseListener
 import com.ng.printtag.apputils.AppUtils
 import com.ng.printtag.apputils.AppUtils.Companion.noStatusBar
 import com.ng.printtag.apputils.BaseSharedPreference
+import com.ng.printtag.apputils.Utils
 import com.ng.printtag.databinding.ActivityBaseBinding
 import com.ng.printtag.login.ActivityLogin
 import com.ng.printtag.login.FragmentLogin
 import kotlinx.android.synthetic.main.activity_login.*
-
 import retrofit2.Response
 
 /**
@@ -44,6 +44,11 @@ abstract class BaseActivity<out T : ViewDataBinding> : AppCompatActivity(), OnCl
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Utils.setLocalForTheApp(
+            this,
+            BaseSharedPreference.getInstance(this).getLanguage(getString(R.string.pref_language))
+        )
+
         actBaseBinding = DataBindingUtil.setContentView(this, R.layout.activity_base)
         setHeader()
         setHeaderBaseActivity()

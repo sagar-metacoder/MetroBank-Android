@@ -51,5 +51,10 @@
     <string name="action_draft">draft</string>
     <string name="key_products">products</string>
     <string name="action_delete">action_delete</string>
+    <string name="action_new_print_request">action_new_print_request</string>
+    <string name="records">records</string>
+    <string name="reqId">reqId</string>
+    <string name="status_en_draft">Draft</string>
+    <string name="status_en_sent">Sent</string>
 
 </resources>

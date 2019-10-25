@@ -23,11 +23,24 @@ class StoreListModel {
         @SerializedName("departments")
         @Expose
         var departments: ArrayList<Department>? = null
+        @SerializedName("tagType")
+        @Expose
+        var tagTypes: ArrayList<TagType>? = null
         @SerializedName("msg")
         @Expose
         var msg: String? = null
 
 
+    }
+
+    inner class TagType {
+
+        @SerializedName("key")
+        @Expose
+        var key: String? = null
+        @SerializedName("value")
+        @Expose
+        var value: String? = null
     }
 
     inner class Department {

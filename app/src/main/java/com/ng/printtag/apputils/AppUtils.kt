@@ -323,7 +323,7 @@ class AppUtils {
         fun convertedDate(dateTime: String): String {
             return when (dateTime.isNotEmpty()) {
                 true -> {
-                    val inputPattern = "yyyy-MM-dd HH:mm"
+                    val inputPattern = "MMM dd, yyyy"
                     val outputPattern = "MM/dd/yyyy"
                     val inputDateFormat = SimpleDateFormat(inputPattern, Locale.getDefault())
                     val outputDateFormat = SimpleDateFormat(outputPattern, Locale.getDefault())

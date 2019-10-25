@@ -1,9 +1,12 @@
 package com.ng.printtag.printrequest
 
 import android.text.Editable
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
+import com.google.gson.Gson
 import com.ng.printtag.R
 import com.ng.printtag.api.RequestMethods
 import com.ng.printtag.api.RestClient
@@ -12,6 +15,7 @@ import com.ng.printtag.apputils.*
 import com.ng.printtag.base.BaseActivity
 import com.ng.printtag.databinding.ActivityNewPrintRequestBinding
 import com.ng.printtag.interfaces.HeaderInterface
+import com.ng.printtag.models.allrequests.AllRequestModel
 import com.ng.printtag.models.newrequests.*
 import com.symbol.emdk.EMDKManager
 import com.symbol.emdk.EMDKManager.EMDKListener
@@ -31,15 +35,16 @@ import retrofit2.Response
 class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), HeaderInterface,
     EMDKListener, DataListener, StatusListener, ScannerConnectionListener {
 
-
     private lateinit var binding: ActivityNewPrintRequestBinding
     var arrayStoreKey: ArrayList<String> = ArrayList()
     var arrayStoreValue: ArrayList<String> = ArrayList()
     var arrayDeptKey: ArrayList<String> = ArrayList()
     var arrayDeptValue: ArrayList<String> = ArrayList()
+    var tagTypeArray: ArrayList<String> = ArrayList()
+
     lateinit var addProducts: MutableList<AddProductModel>
 
-    private lateinit var arrayTemplate: MutableList<DepartmentModel.Data.Template>
+    lateinit var arrayTemplate: MutableList<DepartmentModel.Data.Template>
     var storeKey: String = ""
     var tagType: String = ""
     var departmentKey: String = ""
@@ -47,6 +52,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
     var effectiveDate: String = ""
     private var upcBarcode: String = ""
     var maxQuantity: String = ""
+    var reqId: String = ""
 
     private var templatePosition: Int = 0
     private var emdkManager: EMDKManager? = null
@@ -60,16 +66,28 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
     private var bExtScannerDisconnected = false
     private val lock = Any()
     private val position = 1
+    private lateinit var records: AllRequestModel.Data.Records
+    var isDraft = false
+    var templateId: String = ""
+    var newPrintReq: Boolean = false
+
+
 
     var action = ""
+    lateinit var navController: NavController
 
-
+    companion object {
+        @JvmStatic
+        var isSent = false
+    }
     override fun initMethod() {
         binding = getViewDataBinding()
         deviceList = ArrayList()
         addProducts = ArrayList()
 
+
         actBaseBinding.headerToolBar.setHeaderInterface(this)
+        setData()
 
         val results = EMDKManager.getEMDKManager(applicationContext, this)
         if (results.statusCode != EMDKResults.STATUS_CODE.SUCCESS) {
@@ -78,6 +96,53 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
 
         addSpinnerScannerDevicesListener()
 
+    }
+
+    private fun setData() {
+        if (intent.hasExtra(getString(R.string.records))) {
+
+            records = Gson().fromJson(
+                intent.extras!!.getString(getString(R.string.records)),
+                AllRequestModel.Data.Records::class.java
+            )
+            addProducts = records.products!!
+            reqId = records.reqId!!
+            templateId = records.templateId!!
+            tagType = records.tagType!!
+            storeKey = records.storeNumber!!
+            departmentKey = records.departmentId!!
+            effectiveDate = AppUtils.convertedDate(records.effectiveDate!!)
+            productInfo = records.aisleInfo!!
+            maxQuantity = records.maxQuantity!!
+
+
+            if (records.status.equals(getString(R.string.status_en_draft))) {
+
+                isDraft = true
+                isSent = false
+            }
+            if (records.status.equals(getString(R.string.status_en_sent))) {
+                isSent = true
+                isDraft = false
+            }
+
+            navController = findNavController(R.id.navigation_new_print_request)
+
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(R.id.actionNewRequest, true)
+                .build()
+            navController.navigate(R.id.actionAddProducts, null, navOptions)
+            //  Utils.navigateTo(navigation_new_print_request.view!!, R.id.actionAddProducts, null)
+
+            val currentFragment = getCurrentFragment()
+            if (currentFragment != null && currentFragment is FragmentAddProduct) {
+
+
+                currentFragment.adapter.notifyDataSetChanged()
+
+
+            }
+        }
     }
 
     private fun callUpcMatchApi() {
@@ -164,7 +229,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
             resources.getString(R.string.userId),
             AppUtils.getUserModel(this@ActivityNewPrintRequest).data!!.userId
         )
-        rootJson.put(resources.getString(R.string.key_templateId), arrayTemplate[position].id)
+        rootJson.put(resources.getString(R.string.key_templateId), templateId)
         rootJson.put(resources.getString(R.string.tagType), tagType)
 
         rootJson.put(resources.getString(R.string.storeNumber), storeKey)
@@ -186,7 +251,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
         val restClientModel = RestClientModel()
         restClientModel.isProgressDialogShow = true
 
-
+        //arrayTemplate[templatePosition].id
         action = actionFrom
         val rootJson = JSONObject()
         val jsonArray = JSONArray()
@@ -194,12 +259,13 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
             resources.getString(R.string.userId),
             AppUtils.getUserModel(this@ActivityNewPrintRequest).data!!.userId
         )
-        rootJson.put(resources.getString(R.string.key_templateId), arrayTemplate[templatePosition].id)
+        rootJson.put(resources.getString(R.string.key_templateId), templateId)
         rootJson.put(resources.getString(R.string.tagType), tagType)
 
         rootJson.put(resources.getString(R.string.storeNumber), storeKey)
         rootJson.put(resources.getString(R.string.department), departmentKey)
         rootJson.put(resources.getString(R.string.key_effectiveDate), effectiveDate)
+        rootJson.put(getString(R.string.reqId), reqId)
 
         rootJson.put(
             resources.getString(R.string.key_language),
@@ -249,6 +315,13 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
                             arrayStoreKey.add(rootResponse.data!!.stores?.get(i)?.key!!)
                             arrayStoreValue.add(rootResponse.data!!.stores?.get(i)?.value!!)
                         }
+
+                        if (rootResponse.data!!.tagTypes != null) {
+                            for (i in 0 until rootResponse.data!!.tagTypes!!.size) {
+
+                                tagTypeArray.add(rootResponse.data!!.tagTypes?.get(i)?.key!!)
+                            }
+                        }
                         if (!arrayStoreKey.isNullOrEmpty())
                             if (arrayStoreKey.size == 1) {
                                 val currentFragment = getCurrentFragment()
@@ -281,6 +354,8 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
                         arrayDeptKey = ArrayList()
                         arrayDeptValue = ArrayList()
                         arrayTemplate = ArrayList()
+
+
 
                         for (i in 0 until rootResponse.data!!.departments!!.size) {
 
@@ -495,19 +570,32 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
 
     override fun onData(scanDataCollection: ScanDataCollection?) {
         if (scanDataCollection != null && scanDataCollection.result == ScannerResults.SUCCESS) {
+            var isAvailble = false
             val scanData = scanDataCollection.scanData
             for (data in scanData) {
                 upcBarcode = data.data
-                Log.v("upcBarcode", upcBarcode)
 
 
                 if (data.data.length != 13) {
                     upcBarcode = StringUtils.leftPad(upcBarcode, 13, '0')
-                    Log.v("upcBarcode", upcBarcode)
-
-
                 }
-                callUpcMatchApi()
+                for (i in 0 until addProducts.size) {
+                    if (addProducts[i].upcNumber!!.trim().equals((upcBarcode.trim()))) {
+                        isAvailble = true
+                        CallDialog.errorDialog(
+                            this@ActivityNewPrintRequest,
+                            getString(R.string.a_lbl_warning_title),
+                            getString(R.string.a_msg_upc_exists),
+                            "",
+                            getString(R.string.a_btn_ok),
+                            "", null
+                        )
+
+                    }
+                }
+                if (!isAvailble) {
+                    callUpcMatchApi()
+                }
             }
         }
     }

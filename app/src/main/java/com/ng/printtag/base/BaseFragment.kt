@@ -11,8 +11,11 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.ng.printtag.R
 import com.ng.printtag.api.ApiResponseListener
 import com.ng.printtag.apputils.AppUtils
+import com.ng.printtag.apputils.BaseSharedPreference
+import com.ng.printtag.apputils.Utils
 import com.ng.printtag.login.FragmentLogin
 import retrofit2.Response
 
@@ -45,6 +48,11 @@ abstract class BaseFragment<out T : ViewDataBinding> : Fragment(), View.OnClickL
         savedInstanceState: Bundle?
     ): View? {
         if (mRootView == null) {
+            Utils.setLocalForTheApp(
+                activity!!,
+                BaseSharedPreference.getInstance(activity!!).getLanguage(getString(R.string.pref_language))
+            )
+
             fragmentChildBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
             mRootView = fragmentChildBinding.root
             initFragment()

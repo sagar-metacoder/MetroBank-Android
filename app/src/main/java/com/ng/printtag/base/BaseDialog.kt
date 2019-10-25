@@ -14,6 +14,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import com.ng.printtag.R
 import com.ng.printtag.apputils.AppUtils.Companion.setStatusBar
+import com.ng.printtag.apputils.BaseSharedPreference
+import com.ng.printtag.apputils.Utils
 import com.ng.printtag.interfaces.CallBackInterfaces
 
 
@@ -26,6 +28,11 @@ abstract class BaseDialog<out T : ViewDataBinding> : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Utils.setLocalForTheApp(
+            activity!!,
+            BaseSharedPreference.getInstance(activity!!).getLanguage(getString(R.string.pref_language))
+        )
+
         setStyle(STYLE_NO_TITLE, R.style.StyleBaseDialog)
     }
 

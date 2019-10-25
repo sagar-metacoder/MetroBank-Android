@@ -9,6 +9,7 @@ import com.ng.printtag.interfaces.CallBackInterfaces
 import com.ng.printtag.interfaces.OnItemClickListener
 import com.ng.printtag.models.newrequests.AddProductModel
 
+
 class FragmentAddProduct : BaseFragment<FragmentAddProductBinding>() {
 
     lateinit var binding: FragmentAddProductBinding
@@ -25,6 +26,14 @@ class FragmentAddProduct : BaseFragment<FragmentAddProductBinding>() {
             binding.rvAllProduct.visibility = View.GONE
             binding.linearFound.visibility = View.VISIBLE
             binding.relSave.visibility = View.GONE
+        } else if (!context!!.addProducts.isNullOrEmpty() && context!!.isDraft) {
+            binding.rvAllProduct.visibility = View.VISIBLE
+            binding.linearFound.visibility = View.GONE
+            binding.relSave.visibility = View.VISIBLE
+        } else if (!context!!.addProducts.isNullOrEmpty() && !context!!.isDraft) {
+            binding.rvAllProduct.visibility = View.VISIBLE
+            binding.linearFound.visibility = View.GONE
+            binding.relSave.visibility = View.GONE
         }
 
 
@@ -39,7 +48,7 @@ class FragmentAddProduct : BaseFragment<FragmentAddProductBinding>() {
     fun setAdapter() {
 
         adapter = AddProductAdapter(
-            context!!.addProducts,
+            context!!.addProducts, context!!.isDraft, context!!.newPrintReq,
             object : OnItemClickListener {
                 override fun onItemClick(item: Any, position: Int) {
 
@@ -95,18 +104,25 @@ class FragmentAddProduct : BaseFragment<FragmentAddProductBinding>() {
                             CallDialog.errorDialog(
                                 activity!!,
                                 getString(R.string.a_lbl_warning_title),
-                                getString(R.string.a_msg_delete),
-                                getString(R.string.a_btn_yes),
-                                getString(R.string.a_btn_no),
-                                getString(R.string.action_delete), null
+                                String.format(getString(R.string.a_msg_quantity), context!!.maxQuantity),
+                                "",
+                                getString(R.string.a_btn_ok),
+                                "", null
                             )
-                        } else {
-                            val allProducts = AddProductModel()
-                            allProducts.qty = item
-                            allProducts.upcName = context!!.addProducts[position].upcName
-                            allProducts.upcNumber = context!!.addProducts[position].upcNumber
-                            context!!.addProducts.set(position, allProducts)
                             adapter.notifyDataSetChanged()
+                        } else {
+                            try {
+
+
+                                val allProducts = AddProductModel()
+                                allProducts.qty = item
+                                allProducts.upcName = context!!.addProducts[position].upcName
+                                allProducts.upcNumber = context!!.addProducts[position].upcNumber
+                                context!!.addProducts.set(position, allProducts)
+                                adapter.notifyDataSetChanged()
+                            } catch (e: Exception) {
+
+                            }
                         }
                     }
                 }

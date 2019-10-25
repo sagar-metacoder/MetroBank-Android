@@ -4,10 +4,13 @@
         <variable name="model" type="String"/>
     </data>
     <LinearLayout
+            android:id="@+id/linear_chk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/margin_30"
             android:paddingEnd="@dimen/margin_30"
+            android:layout_marginBottom="@dimen/margin_10"
+
             android:orientation="vertical">
 
 
@@ -24,7 +27,6 @@
                     android:layoutDirection="rtl"
                     android:textDirection="ltr"
                     android:text="@{model}"
-                    android:layout_marginBottom="@dimen/margin_10"
                     android:textColor="@color/color_B0000000"
 
             />

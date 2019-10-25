@@ -62,6 +62,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             object : OnItemClickListener {
                 override fun onItemClick(item: Any, position: Int) {
 
+                    context!!.templateId = context!!.arrayTemplate[position].id!!
                     context!!.callTemplateDetails(position)
 
                     binding.linearTemplateData.visibility = View.VISIBLE
@@ -79,12 +80,9 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
         dialog.fromWhere = Constant.TAG_TYPE
 
 
-        val tagType: ArrayList<String> = ArrayList()
-        tagType.add(getString(R.string.item_freshtag))
-        tagType.add(getString(R.string.item_inventorytag))
 
 
-        dialog.stringList = tagType
+        dialog.stringList = context!!.tagTypeArray
         dialog.selectedTag = selectedTag
 
         dialog.callBackListener = object : CallBackInterfaces {
@@ -103,18 +101,24 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                         tagTypeExist = true
                     }
 
-                    binding.edtTagType.text = Editable.Factory.getInstance().newEditable(tagType.get(item))
+                    binding.edtTagType.text =
+                        Editable.Factory.getInstance().newEditable(context!!.tagTypeArray.get(item))
 
-                    if (item == 0) {
-                        context!!.tagType = getString(R.string.key_freshtag)
-                    } else {
-                        context!!.tagType = getString(R.string.key_inventorytag)
+                    context!!.tagType = context!!.tagTypeArray.get(item)
 
-                    }
+                    /*  if (item == 0) {
+                          context!!.tagType = getString(R.string.key_freshtag)
+                      } else {
+                          context!!.tagType = getString(R.string.key_inventorytag)
+
+                      }*/
 
                     if (tagTypeExist) {
                         if (!binding.edtDepartment.text.isNullOrBlank() && !binding.edtStoreNo.text.isNullOrBlank() && !binding.edtTagType.text.isNullOrBlank()) {
                             binding.linearRv.visibility = View.GONE
+                            binding.linearTemplateData.visibility = View.GONE
+                            ErrorActions.validateButton(binding.btnSubmit, false)
+
                             isDeptSelected = true
                             context!!.callDepartmentApi(
                                 context!!.tagType,
@@ -147,6 +151,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                     context!!.arrayDeptKey.clear()
 
                     binding.linearRv.visibility = View.GONE
+                    ErrorActions.validateButton(binding.btnSubmit, false)
 
                     binding.edtStoreNo.text =
                         Editable.Factory.getInstance().newEditable(context!!.arrayStoreKey.get(item))
@@ -194,8 +199,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                     context!!.storeKey, departmentValue
                 )
                 context!!.departmentKey = valueBuilder.substring(0, valueBuilder.length - 1)
-                BaseSharedPreference.getInstance(activity!!)
-                    .putValue(getString(R.string.department), context!!.departmentKey)
+
 
 //                Log.d("selected", item.toString())
 
@@ -208,6 +212,8 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
         binding.edtTagType.setOnClickListener {
             //            callTagTypeDialog()
             binding.linearRv.visibility = View.GONE
+            ErrorActions.validateButton(binding.btnSubmit, false)
+
             binding.linearTemplateData.visibility = View.GONE
 
             callTagTypeDialog()
@@ -217,6 +223,8 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             if (context!!.arrayStoreKey.isNotEmpty()) {
                 if (context!!.arrayStoreKey.size > 1) {
                     binding.linearRv.visibility = View.GONE
+                    ErrorActions.validateButton(binding.btnSubmit, false)
+
                     binding.linearTemplateData.visibility = View.GONE
 
                     callStoreTypeDialog()
@@ -226,6 +234,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             //callStoreApi()
         }
         binding.btnSubmit.setOnClickListener {
+            context!!.newPrintReq = true
             context!!.effectiveDate = binding.edtEffectiveDate.text.toString()
             context!!.productInfo = binding.edtInfo.text.toString()
             Utils.navigateTo(binding.btnSubmit, R.id.actionAddProducts, null)
@@ -235,14 +244,26 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
         }
         binding.edtDepartment.setOnClickListener {
-            if (context!!.storeKey.isNotEmpty() && !binding.edtTagType.text.isNullOrBlank() && context!!.arrayDeptKey.isNullOrEmpty()) {
+
+            if (binding.edtTagType.text.isNullOrBlank()) {
+                AppUtils.showLongToast(
+                    activity!!,
+                    resources.getString(R.string.a_msg_tag_type)
+                )
+            } else if (context!!.storeKey.isBlank()) {
+                AppUtils.showLongToast(
+                    activity!!,
+                    resources.getString(R.string.a_msg_store)
+                )
+            } else if (context!!.storeKey.isNotEmpty() && !binding.edtTagType.text.isNullOrBlank() && context!!.arrayDeptKey.isNullOrEmpty()) {
 
                 context!!.callDepartmentApi(context!!.tagType, context!!.storeKey, "")
-            }
-            if (!context!!.arrayDeptKey.isNullOrEmpty()) {
+            } else if (!context!!.arrayDeptKey.isNullOrEmpty() && context!!.storeKey.isNotEmpty() && !binding.edtTagType.text.isNullOrBlank()) {
 
                 callDepartmentDialog()
                 binding.linearRv.visibility = View.GONE
+                ErrorActions.validateButton(binding.btnSubmit, false)
+
                 binding.linearTemplateData.visibility = View.GONE
 
             }

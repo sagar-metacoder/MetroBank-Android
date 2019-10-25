@@ -13,18 +13,15 @@ import com.ng.printtag.R
 import com.ng.printtag.api.RequestMethods
 import com.ng.printtag.api.RestClient
 import com.ng.printtag.api.RestClientModel
-import com.ng.printtag.apputils.AppUtils
-import com.ng.printtag.apputils.CallDialog
-import com.ng.printtag.apputils.Constant
-import com.ng.printtag.apputils.ProgressDialog
+import com.ng.printtag.apputils.*
 import com.ng.printtag.base.BaseActivity
 import com.ng.printtag.common.DateRangePickerFragment
 import com.ng.printtag.databinding.ActivityAllRequestsBinding
 import com.ng.printtag.interfaces.OnItemClickListener
 import com.ng.printtag.models.allrequests.AllRequestModel
+import com.ng.printtag.models.newrequests.AddProductModel
 import org.json.JSONObject
 import retrofit2.Response
-import java.util.*
 
 
 class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
@@ -32,6 +29,7 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
 
     private lateinit var binding: ActivityAllRequestsBinding
     var allRequest: MutableList<AllRequestModel.Data.Records>? = null
+    var products: ArrayList<AddProductModel>? = null
     private val dateRangePickerFragment = DateRangePickerFragment()
     var action: String = ""
     var searchKey = ""
@@ -51,6 +49,7 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
     @SuppressLint("WrongConstant")
     override fun initMethod() {
         binding = getViewDataBinding()
+        products = ArrayList()
         actBaseBinding.rlMain.removeView(actBaseBinding.headerToolBar)
         action = intent.getStringExtra(getString(R.string.action_from))
         dateRangePickerFragment.newInstance(this@ActivityAllRequests, false)
@@ -261,6 +260,8 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
     }
 
     override fun onItemClick(item: Any, position: Int) {
+
+        Utils.navigateToNewPrintRequest(this@ActivityAllRequests, allRequest!!.get(position))
     }
 
 

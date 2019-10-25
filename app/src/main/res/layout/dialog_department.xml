@@ -38,6 +38,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/margin_200"
                         android:layout_marginTop="@dimen/margin_10"
+                        android:scrollbars="vertical"
+                        android:scrollbarSize="@dimen/margin_2"
                         bind:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:ignore="RtlSymmetry"/>
                 <RelativeLayout
