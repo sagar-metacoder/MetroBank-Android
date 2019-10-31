@@ -53,7 +53,7 @@ class DateRangePickerFragment : DialogFragment(), View.OnClickListener {
 
         val endDatePage = tabHost!!.newTabSpec("end")
         endDatePage.setContent(R.id.end_date_group)
-        endDatePage.setIndicator(getString(R.string.ttile_tab_end_date))
+        endDatePage.setIndicator(getString(R.string.a_title_tab_end_date))
 
         tabHost!!.addTab(startDatePage)
         tabHost!!.addTab(endDatePage)

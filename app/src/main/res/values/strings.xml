@@ -34,7 +34,6 @@
     <string name="a_lbl_delivery_day">Delivery Day</string>
     <string name="a_lbl_max_quantity">Max Quantity</string>
     <string name="a_lbl_effective_date">Effective Date</string>
-    <string name="a_lbl_enter_product_info">Enter Product Aisle Information</string>
     <string name="a_btn_next">Next</string>
     <string name="a_lbl_no_product_added">No Product Added</string>
     <string name="a_lbl_start_adding_product">You can start adding your products to print tag</string>
@@ -80,20 +79,13 @@
     <string name="a_title_sign_in">Sign In</string>
     <string name="a_lbl_server_title">Error</string>
     <string name="a_lbl_unknown">Unknown</string>
-
-
-    <!--Need to translate-->
-
     <string name="a_lbl_printing_day">Printing Day</string>
     <string name="a_lbl_product_info">ENTER PRODUCT AISLE INFORMATION</string>
     <string name="title_tab_start_date">Start Date</string>
-    <string name="ttile_tab_end_date">End Date</string>
+    <string name="a_title_tab_end_date">End Date</string>
     <string name="a_hint_search">Search</string>
     <string name="a_msg_loggedout">Logged out successfully!</string>
-    <string name="a_msg_product_added">Product Addded Successfully.</string>
-
-
-    <!-- Update -->
+    <string name="a_msg_product_added">Product Added Successfully.</string>
     <string name="a_net_message">Internet connection is not available. Please try again!</string>
     <string name="item_freshtag">Fresh Tag</string>
     <string name="item_inventorytag">Inventory Tag</string>
