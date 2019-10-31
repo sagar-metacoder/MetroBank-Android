@@ -5,9 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 class StoreDepartmentListModel {
 
-    @SerializedName("key")
-    @Expose
-    var key: String? = null
+
     @SerializedName("value")
     @Expose
     var value: String? = null

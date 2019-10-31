@@ -71,6 +71,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
     var isDraft = false
     var templateId: String = ""
     var newPrintReq: Boolean = false
+    lateinit var departmentArraylist: ArrayList<StoreDepartmentListModel>
 
 
 
@@ -86,6 +87,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
         binding = getViewDataBinding()
         deviceList = ArrayList()
         addProducts = ArrayList()
+        departmentArraylist = ArrayList()
 
 
         actBaseBinding.headerToolBar.setHeaderInterface(this)
@@ -346,6 +348,11 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
 
                                     arrayDeptKey.add(rootResponse.data!!.departments?.get(i)?.key!!)
                                     arrayDeptValue.add(rootResponse.data!!.departments?.get(i)?.value!!)
+
+                                    val department = StoreDepartmentListModel()
+                                    department.value = rootResponse.data!!.departments?.get(i)?.key!!
+                                    departmentArraylist.add(department)
+
                                 }
                             }
 
@@ -372,6 +379,10 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
 
                             arrayDeptKey.add(rootResponse.data!!.departments?.get(i)?.key!!)
                             arrayDeptValue.add(rootResponse.data!!.departments?.get(i)?.value!!)
+
+                            val department = StoreDepartmentListModel()
+                            department.value = rootResponse.data!!.departments?.get(i)?.key!!
+                            departmentArraylist.add(department)
                         }
                         val currentFragment = getCurrentFragment()
                         if (currentFragment != null && currentFragment is FragmentNewPrintRequest) {
@@ -650,6 +661,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
             ScannerStates.DISABLED -> {
                 statusString = statusData.friendlyName + getString(R.string.a_msg_disable)
                 //updateStatus(statusString)
+
 
             }
             ScannerStates.ERROR -> {

@@ -1,13 +1,11 @@
 package com.ng.printtag.printrequest
 
 import android.annotation.SuppressLint
-import android.view.KeyEvent
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ng.printtag.R
 import com.ng.printtag.databinding.RowAddProductBinding
@@ -69,27 +67,48 @@ class AddProductAdapter(
         init {
             binding.imgDelete.setOnClickListener(this)
             binding.linearRow.setOnClickListener(this)
-            binding.edtQty.onFocusChangeListener = object : OnFocusChangeListener {
-                override fun onFocusChange(v: View, hasFocus: Boolean) {
-                    if (hasFocus) {
-                        //got focus
-                    } else {
-                        onItemClickListener.onItemClick(binding.edtQty.text.toString(), adapterPosition)
-                    }
+
+
+            binding.edtQty.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(p0: Editable?) {
+                    onItemClickListener.onItemClick(p0.toString(), adapterPosition)
+
+
                 }
-            }
 
-            binding.edtQty.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
-                if ((actionId == EditorInfo.IME_ACTION_DONE) ||
-                    ((event.keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN))
-                ) {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
 
-                    binding.edtQty.clearFocus()
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
-                    true
 
-                } else false
+                }
             })
+
+
+            /*   binding.edtQty.onFocusChangeListener = object : OnFocusChangeListener {
+                   override fun onFocusChange(v: View, hasFocus: Boolean) {
+                       if (hasFocus) {
+                           //got focus
+                       } else {
+                           onItemClickListener.onItemClick(binding.edtQty.text.toString(), adapterPosition)
+                       }
+                   }
+               }
+
+               binding.edtQty.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+                   if ((actionId == EditorInfo.IME_ACTION_DONE) ||
+                       ((event.keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN))
+                   ) {
+
+                       binding.edtQty.clearFocus()
+
+                       true
+
+                   } else false
+               })
+               */
+
             /* binding.edtQty.setOnKeyListener(object : View.OnKeyListener {
 
                  override fun onKey(v: View, keyCode: Int, event: KeyEvent): Boolean {

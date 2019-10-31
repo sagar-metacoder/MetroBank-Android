@@ -6,12 +6,13 @@ import com.ng.printtag.apputils.ErrorActions
 import com.ng.printtag.base.BaseDialog
 import com.ng.printtag.databinding.DialogDepartmentBinding
 import com.ng.printtag.interfaces.OnItemClickListener
+import com.ng.printtag.models.newrequests.StoreDepartmentListModel
 
 class DialogDepartment : BaseDialog<DialogDepartmentBinding>(), OnItemClickListener {
 
 
     lateinit var binding: DialogDepartmentBinding
-    var stringList: ArrayList<String> = ArrayList()
+    var stringList: ArrayList<StoreDepartmentListModel> = ArrayList()
     lateinit var deptPosition: ArrayList<Int>
 
     val adapter = DepartmentDialogAdapter()

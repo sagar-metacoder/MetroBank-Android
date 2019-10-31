@@ -1,14 +1,13 @@
 package com.ng.printtag.printrequest
 
 import android.view.View
-import android.view.animation.TranslateAnimation
-import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.ng.printtag.R
+import com.ng.printtag.apputils.AppUtils
 import com.ng.printtag.apputils.CallDialog
 import com.ng.printtag.base.BaseFragment
 import com.ng.printtag.databinding.FragmentAddProductBinding
@@ -126,28 +125,32 @@ class FragmentAddProduct : BaseFragment<FragmentAddProductBinding>() {
 
                     } else {
 
-                        if (context!!.maxQuantity.toInt() < (item as String).toInt()) {
-                            CallDialog.errorDialog(
-                                activity!!,
-                                getString(R.string.a_lbl_warning_title),
-                                String.format(getString(R.string.a_msg_quantity), context!!.maxQuantity),
-                                "",
-                                getString(R.string.a_btn_ok),
-                                "", null
-                            )
-                            adapter.notifyDataSetChanged()
-                        } else {
-                            try {
+                        if (!(item as String).isEmpty()) {
 
-
-                                val allProducts = AddProductModel()
-                                allProducts.qty = item
-                                allProducts.upcName = context!!.addProducts[position].upcName
-                                allProducts.upcNumber = context!!.addProducts[position].upcNumber
-                                context!!.addProducts.set(position, allProducts)
+                            if (context!!.maxQuantity.toInt() < (item as String).toInt()) {
+                                AppUtils.hideKeyBoard(activity!!)
+                                CallDialog.errorDialog(
+                                    activity!!,
+                                    getString(R.string.a_lbl_warning_title),
+                                    String.format(getString(R.string.a_msg_quantity), context!!.maxQuantity),
+                                    "",
+                                    getString(R.string.a_btn_ok),
+                                    "", null
+                                )
                                 adapter.notifyDataSetChanged()
-                            } catch (e: Exception) {
+                            } else {
+                                try {
 
+
+                                    val allProducts = AddProductModel()
+                                    allProducts.qty = item
+                                    allProducts.upcName = context!!.addProducts[position].upcName
+                                    allProducts.upcNumber = context!!.addProducts[position].upcNumber
+                                    context!!.addProducts.set(position, allProducts)
+                                    //adapter.notifyDataSetChanged()
+                                } catch (e: Exception) {
+
+                                }
                             }
                         }
                     }
@@ -173,37 +176,5 @@ class FragmentAddProduct : BaseFragment<FragmentAddProductBinding>() {
 
     }
 
-    fun slideUp(view: View) {
-        binding.relProduct.background = ContextCompat.getDrawable(activity!!, R.color.color_80000000)
-        view.visibility = View.VISIBLE
-        val animate = TranslateAnimation(
-            0f, // fromXDelta
-            0f, // toXDelta
-            view.height.toFloat(), // fromYDelta
-            0f
-        )                // toYDelta
-        animate.duration = 500
-        animate.fillAfter = true
-        binding.relSave.visibility = View.GONE
-        view.startAnimation(animate)
-    }
 
-    // slide the view from its current position to below itself
-    fun slideDown(view: View) {
-        val animate = TranslateAnimation(
-            0f, // fromXDelta
-            0f, // toXDelta
-            0f, // fromYDelta
-            view.height.toFloat()
-        ) // toYDelta
-        animate.duration = 500
-        animate.fillAfter = true
-        binding.relProduct.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.colorWhite))
-
-        binding.relSave.visibility = View.VISIBLE
-        view.visibility = View.GONE
-
-
-        view.startAnimation(animate)
-    }
 }

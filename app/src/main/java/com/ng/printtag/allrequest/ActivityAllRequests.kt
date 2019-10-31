@@ -181,34 +181,41 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
                 when (rootResponse.success) {
                     true -> {
 
-                        val tempList = rootResponse.data!!.records!! as ArrayList<AllRequestModel.Data.Records>
-                        if (tempList.size == 0 || tempList.isEmpty() && page == 1) {
+                        if (rootResponse.data!!.records != null) {
+                            val tempList = rootResponse.data!!.records!! as ArrayList<AllRequestModel.Data.Records>
+                            if (tempList.size == 0 || tempList.isEmpty() && page == 1) {
+                                binding.tvMsg.visibility = VISIBLE
+                                binding.tvMsg.text = rootResponse.data!!.recordsMsg
+                                binding.rvAllRequests.visibility = GONE
+                            } else {
+                                totalPage = rootResponse.data!!.totalPages!!.toInt()
+                                if (allRequest.isNullOrEmpty()) {
+                                    allRequest = tempList
+                                    adapter = AllRequestsAdapter(allRequest!!, this)
+                                    binding.rvAllRequests.adapter = adapter
+
+                                } else {
+                                    allRequest!!.addAll(tempList)
+                                    isLoading = false
+                                    adapter.notifyDataSetChanged()
+
+                                }
+                                if (page == totalPage) {
+                                    isLastPage = true
+                                } else {
+                                    page += 1
+                                }
+                                binding.tvMsg.visibility = GONE
+                                binding.rvAllRequests.visibility = VISIBLE
+
+                            }
+                        } else {
                             binding.tvMsg.visibility = VISIBLE
                             binding.tvMsg.text = rootResponse.data!!.recordsMsg
                             binding.rvAllRequests.visibility = GONE
-                        } else {
-                            totalPage = rootResponse.data!!.totalPages!!.toInt()
-                            if (allRequest.isNullOrEmpty()) {
-                                allRequest = tempList
-                                adapter = AllRequestsAdapter(allRequest!!, this)
-                                binding.rvAllRequests.adapter = adapter
-
-                            } else {
-                                allRequest!!.addAll(tempList)
-                                isLoading = false
-                                adapter.notifyDataSetChanged()
-
-                            }
-                            if (page == totalPage) {
-                                isLastPage = true
-                            } else {
-                                page += 1
-                            }
-                            binding.tvMsg.visibility = GONE
-                            binding.rvAllRequests.visibility = VISIBLE
-
                         }
                     }
+
                     else -> {
                         showError(getString(R.string.a_lbl_server_title), rootResponse.msg!!)
                     }

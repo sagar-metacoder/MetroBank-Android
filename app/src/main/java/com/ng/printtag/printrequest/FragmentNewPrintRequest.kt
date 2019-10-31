@@ -15,7 +15,6 @@ import com.ng.printtag.dialog.DialogTypeStore
 import com.ng.printtag.interfaces.CallBackInterfaces
 import com.ng.printtag.interfaces.OnItemClickListener
 import com.ng.printtag.models.newrequests.DepartmentModel
-import com.ng.printtag.models.newrequests.StoreDepartmentListModel
 
 
 class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
@@ -27,7 +26,6 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
     var isDeptSelected: Boolean = false
     lateinit var departmentValue: String
     var tagTypeExist: Boolean = false
-    lateinit var tagTypeArrayList: ArrayList<StoreDepartmentListModel>
     var selectedTag: Int = -1
     var selectedStore: Int = -1
     var deptPositionValue: ArrayList<Int> = ArrayList()
@@ -36,7 +34,6 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
     override fun initFragment() {
         binding = getFragmentDataBinding()
         context = activity as ActivityNewPrintRequest
-        tagTypeArrayList = ArrayList()
 
         init()
         handleClick()
@@ -141,6 +138,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
         val dialog = DialogTypeStore()
         dialog.fromWhere = Constant.TAG_STORE
 
+
         dialog.stringList = context!!.arrayStoreKey
         dialog.selectedTag = selectedStore
 
@@ -193,7 +191,8 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
     fun callDepartmentDialog() {
         val dialog = DialogDepartment()
         dialog.title = getString(R.string.a_title_select_department)
-        dialog.stringList = context!!.arrayDeptKey
+        dialog.stringList = context!!.departmentArraylist
+
         dialog.deptPosition = deptPositionValue
 
         dialog.callBackListener = object : CallBackInterfaces {
