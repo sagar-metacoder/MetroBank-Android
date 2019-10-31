@@ -54,6 +54,10 @@ class HeaderModel {
 
                 setLeftIcon(R.mipmap.ic_back)
                 setLeftIconText(baseFragment!!.getString(R.string.a_lbl_new_print_request))
+                if (ActivityNewPrintRequest.fromAll) {
+                    setLeftIconText(baseFragment!!.getString(R.string.a_lbl_print_request))
+
+                }
                 backVisibility = true
                 barcodeVisibility = !ActivityNewPrintRequest.isSent
             }

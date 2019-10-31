@@ -4,22 +4,27 @@
 >
     <data>
         <import type="com.ng.printtag.apputils.Utils"/>
+        <variable name="model_view"
+                  type="com.ng.printtag.models.newrequests.AddProductModel"/>
     </data>
 
-    <RelativeLayout android:layout_width="match_parent"
+    <RelativeLayout android:id="@+id/rel_product"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingLeft="@dimen/margin_20"
                     android:paddingRight="@dimen/margin_20"
                     android:paddingBottom="@dimen/margin_10"
-
                     android:background="@color/colorWhite"
+
+
     >
 
         <RelativeLayout android:id="@+id/rel_list"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/colorWhite"
-                        android:layout_above="@id/rel_save"
+                        android:layout_above="@id/rel_action"
+
+
         >
 
             <LinearLayout android:layout_width="match_parent"
@@ -69,48 +74,56 @@
                     android:layout_height="match_parent"
                     bind:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
         </RelativeLayout>
-        <RelativeLayout android:id="@+id/rel_save"
-                        android:layout_width="match_parent"
+
+        <RelativeLayout android:id="@+id/rel_action" android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_alignParentBottom="true"
-
         >
+            <RelativeLayout android:id="@+id/rel_save"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
 
-            <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/btn_submit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/AppTextView.Button"
-                    android:text="@string/a_btn_submit"
-                    android:layout_centerVertical="true"
+            >
 
-            />
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/btn_submit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/AppTextView.Button"
+                        android:text="@string/a_btn_submit"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/margin_5"
 
-            <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/btn_draft"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/AppTextView.Button"
-                    android:text="@string/a_btn_draft"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/btn_submit"
-                    android:layout_marginStart="@dimen/margin_20"
+                />
 
-            />
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/btn_draft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/AppTextView.Button"
+                        android:text="@string/a_btn_draft"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/btn_submit"
+                        android:layout_marginStart="@dimen/margin_20"
+                        android:padding="@dimen/margin_5"
+
+                />
 
 
-            <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_print_now"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/AppButton.Colored.Green"
-                    android:layout_gravity="end"
-                    android:text="@string/a_btn_print_now"
-                    android:padding="@dimen/margin_8"
-                    android:layout_alignParentEnd="true"/>
+                <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_print_now"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/AppButton.Colored.Green"
+                        android:layout_gravity="end"
+                        android:text="@string/a_btn_print_now"
+                        android:padding="@dimen/margin_8"
+                        android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
 
         </RelativeLayout>
+
     </RelativeLayout>
 
 </layout>

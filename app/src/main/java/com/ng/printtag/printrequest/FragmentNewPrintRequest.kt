@@ -90,21 +90,22 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
                 if (fromWhere == Constant.TAG_TYPE) {
 
-                    binding.edtDepartment.text = Editable.Factory.getInstance().newEditable("")
-                    deptPositionValue.clear()
-                    context!!.arrayDeptKey.clear()
+                    //  binding.edtDepartment.text = Editable.Factory.getInstance().newEditable("")
+                    //deptPositionValue.clear()
+                    //context!!.arrayDeptKey.clear()
 
 
 
                     selectedTag = item as Int
-                    if (!binding.edtTagType.text.isNullOrBlank()) {
-                        tagTypeExist = true
-                    }
+                    /* if (!binding.edtTagType.text.isNullOrBlank()) {
+                         tagTypeExist = true
+                     }*/
 
                     binding.edtTagType.text =
                         Editable.Factory.getInstance().newEditable(context!!.tagTypeArray.get(item))
 
                     context!!.tagType = context!!.tagTypeArray.get(item)
+
 
                     /*  if (item == 0) {
                           context!!.tagType = getString(R.string.key_freshtag)
@@ -113,10 +114,12 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
                       }*/
 
-                    if (tagTypeExist) {
+                    //  if (tagTypeExist) {
                         if (!binding.edtDepartment.text.isNullOrBlank() && !binding.edtStoreNo.text.isNullOrBlank() && !binding.edtTagType.text.isNullOrBlank()) {
                             binding.linearRv.visibility = View.GONE
                             binding.linearTemplateData.visibility = View.GONE
+                            binding.edtInfo.text = Editable.Factory.getInstance().newEditable("")
+
                             ErrorActions.validateButton(binding.btnSubmit, false)
 
                             isDeptSelected = true
@@ -125,7 +128,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                                 context!!.storeKey,
                                 departmentValue
                             )
-                        }
+                            //  }
                     }
                 }
 
@@ -146,9 +149,9 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                 if (fromWhere == Constant.TAG_STORE) {
                     selectedStore = item as Int
 
-                    binding.edtDepartment.text = Editable.Factory.getInstance().newEditable("")
-                    deptPositionValue.clear()
-                    context!!.arrayDeptKey.clear()
+                    //binding.edtDepartment.text = Editable.Factory.getInstance().newEditable("")
+                    //deptPositionValue.clear()
+                    //context!!.arrayDeptKey.clear()
 
                     binding.linearRv.visibility = View.GONE
                     ErrorActions.validateButton(binding.btnSubmit, false)
@@ -158,8 +161,26 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
 
                     context!!.storeKey = context!!.arrayStoreValue.get(item)
-                    BaseSharedPreference.getInstance(activity!!)
-                        .putValue(getString(R.string.storeNumber), item.toString())
+
+
+                    if (!binding.edtDepartment.text.isNullOrBlank() && !binding.edtStoreNo.text.isNullOrBlank() && !binding.edtTagType.text.isNullOrBlank()) {
+                        binding.linearRv.visibility = View.GONE
+                        binding.linearTemplateData.visibility = View.GONE
+                        binding.edtInfo.text = Editable.Factory.getInstance().newEditable("")
+
+                        ErrorActions.validateButton(binding.btnSubmit, false)
+
+                        isDeptSelected = true
+                        context!!.callDepartmentApi(
+                            context!!.tagType,
+                            context!!.storeKey,
+                            departmentValue
+                        )
+
+                    }
+
+
+
 
                 }
 
@@ -194,12 +215,17 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
                 departmentValue = valueBuilder.substring(0, valueBuilder.length - 1)
 
-                context!!.callDepartmentApi(
-                    context!!.tagType,
-                    context!!.storeKey, departmentValue
-                )
-                context!!.departmentKey = valueBuilder.substring(0, valueBuilder.length - 1)
-
+                if (binding.edtTagType.text.isNullOrBlank()) {
+                    AppUtils.showLongToast(activity!!, resources.getString(R.string.a_msg_tag_type))
+                } else if (binding.edtStoreNo.text.isNullOrBlank()) {
+                    AppUtils.showLongToast(activity!!, resources.getString(R.string.a_msg_store))
+                } else {
+                    context!!.callDepartmentApi(
+                        context!!.tagType,
+                        context!!.storeKey, departmentValue
+                    )
+                    context!!.departmentKey = valueBuilder.substring(0, valueBuilder.length - 1)
+                }
 
 //                Log.d("selected", item.toString())
 
@@ -211,12 +237,17 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
     private fun handleClick() {
         binding.edtTagType.setOnClickListener {
             //            callTagTypeDialog()
-            binding.linearRv.visibility = View.GONE
-            ErrorActions.validateButton(binding.btnSubmit, false)
+            if (context!!.tagTypeArray.isNotEmpty()) {
+                binding.linearRv.visibility = View.GONE
+                ErrorActions.validateButton(binding.btnSubmit, false)
 
-            binding.linearTemplateData.visibility = View.GONE
+                binding.linearTemplateData.visibility = View.GONE
+                binding.edtInfo.text = Editable.Factory.getInstance().newEditable("")
 
-            callTagTypeDialog()
+
+
+                callTagTypeDialog()
+            }
         }
         binding.edtStoreNo.setOnClickListener {
 
@@ -226,6 +257,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                     ErrorActions.validateButton(binding.btnSubmit, false)
 
                     binding.linearTemplateData.visibility = View.GONE
+                    binding.edtInfo.text = Editable.Factory.getInstance().newEditable("")
 
                     callStoreTypeDialog()
                 }
@@ -236,7 +268,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
         binding.btnSubmit.setOnClickListener {
             context!!.newPrintReq = true
             context!!.effectiveDate = binding.edtEffectiveDate.text.toString()
-            context!!.productInfo = binding.edtInfo.text.toString()
+            context!!.productInfo = binding.edtInfo.text.toString().trim()
             Utils.navigateTo(binding.btnSubmit, R.id.actionAddProducts, null)
 
 
@@ -244,27 +276,28 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
         }
         binding.edtDepartment.setOnClickListener {
-
-            if (binding.edtTagType.text.isNullOrBlank()) {
-                AppUtils.showLongToast(
-                    activity!!,
-                    resources.getString(R.string.a_msg_tag_type)
-                )
-            } else if (context!!.storeKey.isBlank()) {
+            /*
+                        if (binding.edtTagType.text.isNullOrBlank()) {
+                            AppUtils.showLongToast(
+                                activity!!,
+                                resources.getString(R.string.a_msg_tag_type)
+                            )
+                        } else*/ if (context!!.storeKey.isBlank()) {
                 AppUtils.showLongToast(
                     activity!!,
                     resources.getString(R.string.a_msg_store)
                 )
-            } else if (context!!.storeKey.isNotEmpty() && !binding.edtTagType.text.isNullOrBlank() && context!!.arrayDeptKey.isNullOrEmpty()) {
+        } else if (context!!.storeKey.isNotEmpty() && context!!.arrayDeptKey.isNullOrEmpty()) {
 
                 context!!.callDepartmentApi(context!!.tagType, context!!.storeKey, "")
-            } else if (!context!!.arrayDeptKey.isNullOrEmpty() && context!!.storeKey.isNotEmpty() && !binding.edtTagType.text.isNullOrBlank()) {
+        } else if (!context!!.arrayDeptKey.isNullOrEmpty() && context!!.storeKey.isNotEmpty()) {
 
                 callDepartmentDialog()
                 binding.linearRv.visibility = View.GONE
                 ErrorActions.validateButton(binding.btnSubmit, false)
 
                 binding.linearTemplateData.visibility = View.GONE
+            binding.edtInfo.text = Editable.Factory.getInstance().newEditable("")
 
             }
         }

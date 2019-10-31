@@ -53,6 +53,7 @@ class DepartmentDialogAdapter : RecyclerView.Adapter<DepartmentDialogAdapter.Vie
             mInflater!!,
             viewType, parent, false
         ) as RowDialogDepartmentBinding
+
         return ViewHolder(layoutDataBinding)
     }
 
@@ -64,13 +65,12 @@ class DepartmentDialogAdapter : RecyclerView.Adapter<DepartmentDialogAdapter.Vie
         return R.layout.row_dialog_department
     }
 
+
     inner class ViewHolder(val dataBinding: RowDialogDepartmentBinding) :
         RecyclerView.ViewHolder(dataBinding.root), CompoundButton.OnCheckedChangeListener {
         init {
-
             dataBinding.chkDepartment.setOnCheckedChangeListener(this)
         }
-
 
         override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
             if (p1) {
@@ -86,6 +86,7 @@ class DepartmentDialogAdapter : RecyclerView.Adapter<DepartmentDialogAdapter.Vie
                 }
             }
         }
+
 
         /**
          * Bind the txt with xml

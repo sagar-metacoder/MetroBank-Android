@@ -32,6 +32,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Response
 
+
 class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), HeaderInterface,
     EMDKListener, DataListener, StatusListener, ScannerConnectionListener {
 
@@ -51,7 +52,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
     var productInfo: String = ""
     var effectiveDate: String = ""
     private var upcBarcode: String = ""
-    var maxQuantity: String = ""
+    var maxQuantity: String = "0"
     var reqId: String = ""
 
     private var templatePosition: Int = 0
@@ -79,6 +80,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
     companion object {
         @JvmStatic
         var isSent = false
+        var fromAll = false
     }
     override fun initMethod() {
         binding = getViewDataBinding()
@@ -101,6 +103,9 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
     private fun setData() {
         if (intent.hasExtra(getString(R.string.records))) {
 
+            fromAll = true
+
+
             records = Gson().fromJson(
                 intent.extras!!.getString(getString(R.string.records)),
                 AllRequestModel.Data.Records::class.java
@@ -116,12 +121,12 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
             maxQuantity = records.maxQuantity!!
 
 
-            if (records.status.equals(getString(R.string.status_en_draft))) {
+            if (records.status.equals(getString(R.string.status_en_draft)) || records.status.equals(getString(R.string.status_es_draft))) {
 
                 isDraft = true
                 isSent = false
             }
-            if (records.status.equals(getString(R.string.status_en_sent))) {
+            if (!records.status.equals(getString(R.string.status_en_draft)) && !records.status.equals(getString(R.string.status_es_draft))) {
                 isSent = true
                 isDraft = false
             }
@@ -142,13 +147,18 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
 
 
             }
+        } else {
+            fromAll = false
+            isSent = false
+
         }
     }
 
     private fun callUpcMatchApi() {
         val restClientModel = RestClientModel()
         restClientModel.isProgressDialogShow = true
-//        ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, true, "")
+        runOnUiThread({ ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, true, "") })
+
 
         val rootJson = JSONObject()
         rootJson.put(
@@ -250,6 +260,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
     fun callSubmitApi(actionFrom: String) {
         val restClientModel = RestClientModel()
         restClientModel.isProgressDialogShow = true
+        ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, true, "")
 
         //arrayTemplate[templatePosition].id
         action = actionFrom
@@ -404,16 +415,17 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
                         }
                     }
                     else -> {
-                        showError(getString(R.string.a_lbl_server_title), rootResponse.data!!.msg!!)
+                        showError(getString(R.string.a_lbl_server_title), rootResponse.msg!!)
                     }
                 }
             }
             Constant.CALL_UPC_VALIDATE -> {
-                ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, false, "")
 
+                ProgressDialog.displayProgressDialog(this@ActivityNewPrintRequest, false, "")
 
                 val rootResponse = response.body() as UpcValidateModel
                 when (rootResponse.success) {
+
                     true -> {
                         val currentFragment = getCurrentFragment()
                         if (currentFragment != null && currentFragment is FragmentAddProduct) {
@@ -450,12 +462,12 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
                         if (action == resources.getString(R.string.action_submit)) {
                         AppUtils.showLongToast(
                             this@ActivityNewPrintRequest,
-                            resources.getString(R.string.a_msg_product_added)
+                            rootResponse.data!!.msg!!
                         )
                         } else {
                             AppUtils.showLongToast(
                                 this@ActivityNewPrintRequest,
-                                getString(R.string.a_msg_product_added_draft)
+                                rootResponse.data!!.msg!!
                             )
                         }
                         Utils.gotoHomeScreen(this@ActivityNewPrintRequest)
@@ -638,10 +650,19 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
             ScannerStates.DISABLED -> {
                 statusString = statusData.friendlyName + getString(R.string.a_msg_disable)
                 //updateStatus(statusString)
+
             }
             ScannerStates.ERROR -> {
                 statusString = getString(R.string.a_msg_error)
                 // updateStatus(statusString)
+                CallDialog.errorDialog(
+                    this@ActivityNewPrintRequest,
+                    getString(R.string.a_lbl_warning_title),
+                    getString(R.string.a_msg_barcode_not_found),
+                    "",
+                    getString(R.string.a_btn_ok),
+                    "", null
+                )
             }
             else -> {
             }
@@ -788,20 +809,26 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
         }
     }
 
-
     private fun cancelRead() {
         if (scanner != null) {
             if (scanner!!.isReadPending) {
                 try {
                     scanner!!.cancelRead()
                 } catch (e: ScannerException) {
+                    CallDialog.errorDialog(
+                        this@ActivityNewPrintRequest,
+                        getString(R.string.a_lbl_warning_title),
+                        getString(R.string.a_msg_barcode_not_found),
+                        "",
+                        getString(R.string.a_btn_ok),
+                        "", null
+                    )
                     // e.message?.let { updateStatus(it) }
                 }
 
             }
         }
     }
-
 
 
     override fun getLayoutId(): Int = R.layout.activity_new_print_request

@@ -80,7 +80,7 @@ class AddProductAdapter(
             }
 
             binding.edtQty.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
-                if ((actionId == EditorInfo.IME_ACTION_DONE) || (event.action == KeyEvent.ACTION_DOWN) ||
+                if ((actionId == EditorInfo.IME_ACTION_DONE) ||
                     ((event.keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN))
                 ) {
 

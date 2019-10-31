@@ -56,5 +56,7 @@
     <string name="reqId">reqId</string>
     <string name="status_en_draft">Draft</string>
     <string name="status_en_sent">Sent</string>
+    <string name="action_printed">print</string>
+    <string name="status_es_draft">Borrador</string>
 
 </resources>
