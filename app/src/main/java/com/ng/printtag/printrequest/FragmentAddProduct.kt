@@ -2,10 +2,6 @@ package com.ng.printtag.printrequest
 
 import android.view.View
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.zxing.BarcodeFormat
-import com.google.zxing.MultiFormatWriter
-import com.google.zxing.WriterException
-import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.ng.printtag.R
 import com.ng.printtag.apputils.AppUtils
 import com.ng.printtag.apputils.CallDialog

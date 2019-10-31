@@ -282,10 +282,10 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                                 resources.getString(R.string.a_msg_tag_type)
                             )
                         } else*/ if (context!!.storeKey.isBlank()) {
-                AppUtils.showLongToast(
-                    activity!!,
-                    resources.getString(R.string.a_msg_store)
-                )
+            AppUtils.showLongToast(
+                activity!!,
+                resources.getString(R.string.a_msg_store)
+            )
         } else if (context!!.storeKey.isNotEmpty() && context!!.arrayDeptKey.isNullOrEmpty()) {
 
                 context!!.callDepartmentApi(context!!.tagType, context!!.storeKey, "")
@@ -293,7 +293,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
                 callDepartmentDialog()
                 binding.linearRv.visibility = View.GONE
-                ErrorActions.validateButton(binding.btnSubmit, false)
+            ErrorActions.validateButton(binding.btnSubmit, false)
 
                 binding.linearTemplateData.visibility = View.GONE
             binding.edtInfo.text = Editable.Factory.getInstance().newEditable("")
