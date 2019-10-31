@@ -1,10 +1,13 @@
 package com.ng.printtag.printrequest
 
 import android.annotation.SuppressLint
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ng.printtag.R
 import com.ng.printtag.databinding.RowAddProductBinding
@@ -17,6 +20,8 @@ import com.ng.printtag.models.newrequests.AddProductModel
  */
 class AddProductAdapter(
     private val results: MutableList<AddProductModel>,
+    private val isDraft: Boolean,
+    private val newPrintRequest: Boolean,
     private var onItemClickListener: OnItemClickListener
 ) :
     RecyclerView.Adapter<AddProductAdapter.CustomViewHolder>() {
@@ -74,6 +79,33 @@ class AddProductAdapter(
                 }
             }
 
+            binding.edtQty.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+                if ((actionId == EditorInfo.IME_ACTION_DONE) ||
+                    ((event.keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN))
+                ) {
+
+                    binding.edtQty.clearFocus()
+
+                    true
+
+                } else false
+            })
+            /* binding.edtQty.setOnKeyListener(object : View.OnKeyListener {
+
+                 override fun onKey(v: View, keyCode: Int, event: KeyEvent): Boolean {
+                     // If the event is a key-down event on the "enter" button
+                     if (event.getAction() == EditorInfo.IME_ACTION_DONE) {
+                         // Perform action on Enter key press
+                         onItemClickListener.onItemClick(binding.edtQty.text.toString(), adapterPosition)
+                         binding.edtQty.clearFocus()
+
+
+                         return true
+                     }
+                     return false
+                 }
+             })
+ */
 
             //  binding.btnSelect.setOnClickListener(this)
             //  binding.tvrefresh.setOnClickListener(this)
@@ -83,6 +115,17 @@ class AddProductAdapter(
          * Bind the txt with xml
          */
         fun bind(item: AddProductModel) {
+            if (isDraft && !newPrintRequest) {
+                binding.edtQty.isClickable = true
+                binding.edtQty.isFocusable = true
+                binding.imgDelete.visibility = View.VISIBLE
+
+            } else if (!isDraft && !newPrintRequest) {
+                binding.edtQty.isClickable = false
+                binding.edtQty.isFocusable = false
+                binding.imgDelete.visibility = View.GONE
+
+            }
             binding.model = item
             /* if (binding.model!!.dataType == Constant.TIER3 || binding.model!!.dataType == Constant.POWER_CHECK) {
                  binding.tvProfileFlag.text = Utils.getLabel(context.getString(R.string.a_lbl_legacy_record))

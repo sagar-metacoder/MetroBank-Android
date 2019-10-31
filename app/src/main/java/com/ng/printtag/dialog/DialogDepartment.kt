@@ -1,5 +1,6 @@
 package com.ng.printtag.dialog
 
+import android.util.Log
 import com.ng.printtag.R
 import com.ng.printtag.apputils.ErrorActions
 import com.ng.printtag.base.BaseDialog
@@ -18,6 +19,7 @@ class DialogDepartment : BaseDialog<DialogDepartmentBinding>(), OnItemClickListe
     override fun initDialog() {
         binding = getDialogDataBinding()
         binding.tvTitle.text = title
+        Log.e("position", deptPosition.toString())
 
         adapter.setData(activity!!, stringList, deptPosition, this)
         binding.rvList.adapter = adapter

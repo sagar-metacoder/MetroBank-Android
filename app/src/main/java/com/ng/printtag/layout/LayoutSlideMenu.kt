@@ -11,10 +11,7 @@ import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.ng.printtag.R
-import com.ng.printtag.apputils.AppUtils
-import com.ng.printtag.apputils.BaseSharedPreference
-import com.ng.printtag.apputils.BindingMethods
-import com.ng.printtag.apputils.CallDialog
+import com.ng.printtag.apputils.*
 import com.ng.printtag.dashboard.ActivityDashboard
 import com.ng.printtag.databinding.ManageSlideMenuBinding
 import com.ng.printtag.interfaces.CallBackInterfaces
@@ -119,12 +116,17 @@ class LayoutSlideMenu : LinearLayout {
                 null
             )
         } else if (tag == context.getString(R.string.action_menu_lan_spanish)) {
+            Utils.setLocalForTheApp(context as Activity, "es")
+
+
             BaseSharedPreference.getInstance(context).putValue(
                 context.getString(R.string.pref_language), "es"
             )
             callAppTextApi()
 
         } else if (tag == context.getString(R.string.action_menu_lan_english)) {
+            Utils.setLocalForTheApp(context as Activity, "en")
+
             BaseSharedPreference.getInstance(context).putValue(
                 context.getString(R.string.pref_language), "en"
             )

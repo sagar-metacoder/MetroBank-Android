@@ -31,11 +31,9 @@
                 android:screenOrientation="portrait"/>
 
         <activity android:name=".printrequest.ActivityNewPrintRequest"
-                  android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustPan">
+
         </activity>
 
         <activity android:name=".printrequest.ActivityUpc"
@@ -46,7 +44,10 @@
         <activity
                 android:name=".dashboard.ActivityDashboard"
                 android:screenOrientation="portrait">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
                 android:name="com.ng.printtag.allrequest.ActivityAllRequests"

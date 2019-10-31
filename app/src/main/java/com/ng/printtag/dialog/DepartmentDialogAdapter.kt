@@ -10,6 +10,7 @@ import com.ng.printtag.R
 import com.ng.printtag.databinding.RowDialogDepartmentBinding
 import com.ng.printtag.interfaces.OnItemClickListener
 
+
 class DepartmentDialogAdapter : RecyclerView.Adapter<DepartmentDialogAdapter.ViewHolder>() {
     private var mInflater: LayoutInflater? = null
     private lateinit var departmentList: ArrayList<String>
@@ -40,6 +41,7 @@ class DepartmentDialogAdapter : RecyclerView.Adapter<DepartmentDialogAdapter.Vie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.dataBinding.chkDepartment.setTag(position)
         if (selectedDept.contains(position)) {
             holder.dataBinding.chkDepartment.isChecked = true
         }
@@ -51,24 +53,28 @@ class DepartmentDialogAdapter : RecyclerView.Adapter<DepartmentDialogAdapter.Vie
             mInflater!!,
             viewType, parent, false
         ) as RowDialogDepartmentBinding
+
         return ViewHolder(layoutDataBinding)
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
     }
 
     override fun getItemViewType(position: Int): Int {
         return R.layout.row_dialog_department
     }
 
+
     inner class ViewHolder(val dataBinding: RowDialogDepartmentBinding) :
         RecyclerView.ViewHolder(dataBinding.root), CompoundButton.OnCheckedChangeListener {
         init {
-
             dataBinding.chkDepartment.setOnCheckedChangeListener(this)
         }
 
-
-
         override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
             if (p1) {
+
                 selectedDeptList.add(adapterPosition)
                 onItemClickListener.onItemClick(selectedDeptList, adapterPosition)
 
@@ -81,6 +87,7 @@ class DepartmentDialogAdapter : RecyclerView.Adapter<DepartmentDialogAdapter.Vie
             }
         }
 
+
         /**
          * Bind the txt with xml
          */
@@ -90,5 +97,7 @@ class DepartmentDialogAdapter : RecyclerView.Adapter<DepartmentDialogAdapter.Vie
 
 
         }
+
     }
+
 }

@@ -2,6 +2,7 @@ package com.ng.printtag.models.allrequests
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.ng.printtag.models.newrequests.AddProductModel
 
 
 class AllRequestModel {
@@ -32,9 +33,25 @@ class AllRequestModel {
         var totalRecords: String? = null
 
         inner class Records {
+
+
+            @SerializedName("storeNumber")
+            @Expose
+            var storeNumber: String? = null
+            @SerializedName("department")
+            @Expose
+            var departmentId: String? = null
+            @SerializedName("templateId")
+            @Expose
+            var templateId: String? = null
+
             @SerializedName("reqId")
             @Expose
             var reqId: String? = null
+            @SerializedName("aisleInfo")
+            @Expose
+            var aisleInfo: String? = null
+
             @SerializedName("tagType")
             @Expose
             var tagType: String? = null
@@ -59,8 +76,14 @@ class AllRequestModel {
             @SerializedName("status")
             @Expose
             var status: String? = null
+            @SerializedName("maxQuantity")
+            @Expose
+            var maxQuantity: String? = null
 
 
+            @SerializedName("productsQty")
+            @Expose
+            var products: MutableList<AddProductModel>? = null
         }
     }
 

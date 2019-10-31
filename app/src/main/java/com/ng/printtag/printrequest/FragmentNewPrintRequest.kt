@@ -62,6 +62,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             object : OnItemClickListener {
                 override fun onItemClick(item: Any, position: Int) {
 
+                    context!!.templateId = context!!.arrayTemplate[position].id!!
                     context!!.callTemplateDetails(position)
 
                     binding.linearTemplateData.visibility = View.VISIBLE
@@ -79,12 +80,9 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
         dialog.fromWhere = Constant.TAG_TYPE
 
 
-        val tagType: ArrayList<String> = ArrayList()
-        tagType.add(getString(R.string.item_freshtag))
-        tagType.add(getString(R.string.item_inventorytag))
 
 
-        dialog.stringList = tagType
+        dialog.stringList = context!!.tagTypeArray
         dialog.selectedTag = selectedTag
 
         dialog.callBackListener = object : CallBackInterfaces {
@@ -92,36 +90,45 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
                 if (fromWhere == Constant.TAG_TYPE) {
 
-                    binding.edtDepartment.text = Editable.Factory.getInstance().newEditable("")
-                    deptPositionValue.clear()
-                    context!!.arrayDeptKey.clear()
+                    //  binding.edtDepartment.text = Editable.Factory.getInstance().newEditable("")
+                    //deptPositionValue.clear()
+                    //context!!.arrayDeptKey.clear()
 
 
 
                     selectedTag = item as Int
-                    if (!binding.edtTagType.text.isNullOrBlank()) {
-                        tagTypeExist = true
-                    }
+                    /* if (!binding.edtTagType.text.isNullOrBlank()) {
+                         tagTypeExist = true
+                     }*/
 
-                    binding.edtTagType.text = Editable.Factory.getInstance().newEditable(tagType.get(item))
+                    binding.edtTagType.text =
+                        Editable.Factory.getInstance().newEditable(context!!.tagTypeArray.get(item))
 
-                    if (item == 0) {
-                        context!!.tagType = getString(R.string.key_freshtag)
-                    } else {
-                        context!!.tagType = getString(R.string.key_inventorytag)
+                    context!!.tagType = context!!.tagTypeArray.get(item)
 
-                    }
 
-                    if (tagTypeExist) {
+                    /*  if (item == 0) {
+                          context!!.tagType = getString(R.string.key_freshtag)
+                      } else {
+                          context!!.tagType = getString(R.string.key_inventorytag)
+
+                      }*/
+
+                    //  if (tagTypeExist) {
                         if (!binding.edtDepartment.text.isNullOrBlank() && !binding.edtStoreNo.text.isNullOrBlank() && !binding.edtTagType.text.isNullOrBlank()) {
                             binding.linearRv.visibility = View.GONE
+                            binding.linearTemplateData.visibility = View.GONE
+                            binding.edtInfo.text = Editable.Factory.getInstance().newEditable("")
+
+                            ErrorActions.validateButton(binding.btnSubmit, false)
+
                             isDeptSelected = true
                             context!!.callDepartmentApi(
                                 context!!.tagType,
                                 context!!.storeKey,
                                 departmentValue
                             )
-                        }
+                            //  }
                     }
                 }
 
@@ -142,19 +149,38 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                 if (fromWhere == Constant.TAG_STORE) {
                     selectedStore = item as Int
 
-                    binding.edtDepartment.text = Editable.Factory.getInstance().newEditable("")
-                    deptPositionValue.clear()
-                    context!!.arrayDeptKey.clear()
+                    //binding.edtDepartment.text = Editable.Factory.getInstance().newEditable("")
+                    //deptPositionValue.clear()
+                    //context!!.arrayDeptKey.clear()
 
                     binding.linearRv.visibility = View.GONE
+                    ErrorActions.validateButton(binding.btnSubmit, false)
 
                     binding.edtStoreNo.text =
                         Editable.Factory.getInstance().newEditable(context!!.arrayStoreKey.get(item))
 
 
                     context!!.storeKey = context!!.arrayStoreValue.get(item)
-                    BaseSharedPreference.getInstance(activity!!)
-                        .putValue(getString(R.string.storeNumber), item.toString())
+
+
+                    if (!binding.edtDepartment.text.isNullOrBlank() && !binding.edtStoreNo.text.isNullOrBlank() && !binding.edtTagType.text.isNullOrBlank()) {
+                        binding.linearRv.visibility = View.GONE
+                        binding.linearTemplateData.visibility = View.GONE
+                        binding.edtInfo.text = Editable.Factory.getInstance().newEditable("")
+
+                        ErrorActions.validateButton(binding.btnSubmit, false)
+
+                        isDeptSelected = true
+                        context!!.callDepartmentApi(
+                            context!!.tagType,
+                            context!!.storeKey,
+                            departmentValue
+                        )
+
+                    }
+
+
+
 
                 }
 
@@ -189,13 +215,17 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
                 departmentValue = valueBuilder.substring(0, valueBuilder.length - 1)
 
-                context!!.callDepartmentApi(
-                    context!!.tagType,
-                    context!!.storeKey, departmentValue
-                )
-                context!!.departmentKey = valueBuilder.substring(0, valueBuilder.length - 1)
-                BaseSharedPreference.getInstance(activity!!)
-                    .putValue(getString(R.string.department), context!!.departmentKey)
+                if (binding.edtTagType.text.isNullOrBlank()) {
+                    AppUtils.showLongToast(activity!!, resources.getString(R.string.a_msg_tag_type))
+                } else if (binding.edtStoreNo.text.isNullOrBlank()) {
+                    AppUtils.showLongToast(activity!!, resources.getString(R.string.a_msg_store))
+                } else {
+                    context!!.callDepartmentApi(
+                        context!!.tagType,
+                        context!!.storeKey, departmentValue
+                    )
+                    context!!.departmentKey = valueBuilder.substring(0, valueBuilder.length - 1)
+                }
 
 //                Log.d("selected", item.toString())
 
@@ -207,17 +237,27 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
     private fun handleClick() {
         binding.edtTagType.setOnClickListener {
             //            callTagTypeDialog()
-            binding.linearRv.visibility = View.GONE
-            binding.linearTemplateData.visibility = View.GONE
+            if (context!!.tagTypeArray.isNotEmpty()) {
+                binding.linearRv.visibility = View.GONE
+                ErrorActions.validateButton(binding.btnSubmit, false)
 
-            callTagTypeDialog()
+                binding.linearTemplateData.visibility = View.GONE
+                binding.edtInfo.text = Editable.Factory.getInstance().newEditable("")
+
+
+
+                callTagTypeDialog()
+            }
         }
         binding.edtStoreNo.setOnClickListener {
 
             if (context!!.arrayStoreKey.isNotEmpty()) {
                 if (context!!.arrayStoreKey.size > 1) {
                     binding.linearRv.visibility = View.GONE
+                    ErrorActions.validateButton(binding.btnSubmit, false)
+
                     binding.linearTemplateData.visibility = View.GONE
+                    binding.edtInfo.text = Editable.Factory.getInstance().newEditable("")
 
                     callStoreTypeDialog()
                 }
@@ -226,8 +266,9 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
             //callStoreApi()
         }
         binding.btnSubmit.setOnClickListener {
+            context!!.newPrintReq = true
             context!!.effectiveDate = binding.edtEffectiveDate.text.toString()
-            context!!.productInfo = binding.edtInfo.text.toString()
+            context!!.productInfo = binding.edtInfo.text.toString().trim()
             Utils.navigateTo(binding.btnSubmit, R.id.actionAddProducts, null)
 
 
@@ -235,15 +276,28 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
         }
         binding.edtDepartment.setOnClickListener {
-            if (context!!.storeKey.isNotEmpty() && !binding.edtTagType.text.isNullOrBlank() && context!!.arrayDeptKey.isNullOrEmpty()) {
+            /*
+                        if (binding.edtTagType.text.isNullOrBlank()) {
+                            AppUtils.showLongToast(
+                                activity!!,
+                                resources.getString(R.string.a_msg_tag_type)
+                            )
+                        } else*/ if (context!!.storeKey.isBlank()) {
+            AppUtils.showLongToast(
+                activity!!,
+                resources.getString(R.string.a_msg_store)
+            )
+        } else if (context!!.storeKey.isNotEmpty() && context!!.arrayDeptKey.isNullOrEmpty()) {
 
                 context!!.callDepartmentApi(context!!.tagType, context!!.storeKey, "")
-            }
-            if (!context!!.arrayDeptKey.isNullOrEmpty()) {
+        } else if (!context!!.arrayDeptKey.isNullOrEmpty() && context!!.storeKey.isNotEmpty()) {
 
                 callDepartmentDialog()
                 binding.linearRv.visibility = View.GONE
+            ErrorActions.validateButton(binding.btnSubmit, false)
+
                 binding.linearTemplateData.visibility = View.GONE
+            binding.edtInfo.text = Editable.Factory.getInstance().newEditable("")
 
             }
         }

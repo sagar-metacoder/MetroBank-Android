@@ -12,6 +12,9 @@ class TempletListModel {
     @SerializedName("data")
     @Expose
     var data: Data? = null
+    @SerializedName("msg")
+    @Expose
+    var msg: String? = null
 
     inner class Data {
         @SerializedName("templateDetails")

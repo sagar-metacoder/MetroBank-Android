@@ -3,6 +3,8 @@ package com.ng.printtag.apputils
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -11,11 +13,16 @@ import android.os.Bundle
 import android.provider.OpenableColumns
 import android.util.Base64
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
+import com.google.gson.Gson
 import com.ng.printtag.BuildConfig
+import com.ng.printtag.R
 import com.ng.printtag.dashboard.ActivityDashboard
 import com.ng.printtag.login.ActivityLogin
+import com.ng.printtag.models.allrequests.AllRequestModel
 import com.ng.printtag.models.login.LoginModel
+import com.ng.printtag.printrequest.ActivityNewPrintRequest
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -52,6 +59,15 @@ class Utils {
 
         }
 
+        fun navigateToNewPrintRequest(context: Context, records: AllRequestModel.Data.Records?) {
+            val intent = Intent(context, ActivityNewPrintRequest::class.java)
+            if (records != null)
+                intent.putExtra(context.getString(R.string.records), Gson().toJson(records))
+            AppUtils.navigateToOtherScreen(
+                context as AppCompatActivity, intent, false
+            )
+        }
+
 
         /**
          * Navigate to login screen
@@ -63,6 +79,17 @@ class Utils {
         }
 
 
+        @Suppress("DEPRECATION")
+        fun setLocalForTheApp(context: Activity, language: String) {
+            val locale = Locale(language)
+            Locale.setDefault(locale)
+            val config = Configuration()
+            config.locale = locale
+            context.baseContext.resources.updateConfiguration(
+                config,
+                context.baseContext.resources.displayMetrics
+            )
+        }
         /**
          * This method used to get file name from uri
          */
@@ -135,31 +162,12 @@ class Utils {
             }
         }
 
-        fun addDecimal(digits: String): String {
-            var string = "" // Your currency
-            // Amount length greater than 2 means we need to add a decimal point
-            when {
-                digits.length > 2 -> {
-                    val pound = digits.substring(0, digits.length - 2) // Pound
-                    // part
-                    val pence = digits.substring(digits.length - 2) // Pence part
-                    string += "$pound.$pence"
-                }
-                digits.length == 1 -> {
-                    string += digits
-                }
-                digits.length == 2 -> {
-                    string += ".$digits"
-                }
-            }
-            return string
-        }
 
 
         @SuppressLint("SimpleDateFormat")
-        fun parseDateToMMddyyyy(time: String): String? {
-            val inputPattern = "MM/dd/yyyy"
-            val outputPattern = "MM-dd-yyyy"
+        fun parseDateToMMddyyyy(dateConvert: String): String? {
+            val inputPattern = "MMM dd, yyyy"
+            val outputPattern = "MM/dd/yyyy"
             val inputFormat = SimpleDateFormat(inputPattern)
             val outputFormat = SimpleDateFormat(outputPattern)
 
@@ -167,7 +175,7 @@ class Utils {
             var str: String? = null
 
             try {
-                date = inputFormat.parse(time)
+                date = inputFormat.parse(dateConvert)
                 str = outputFormat.format(date)
             } catch (e: ParseException) {
                 e.printStackTrace()

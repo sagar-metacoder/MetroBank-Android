@@ -9,7 +9,7 @@
     <string name="a_btn_no">No</string>
     <string name="a_btn_yes">Yes</string>
     <string name="a_msg_server_error">There is some server error. Please try again later.</string>
-    <string name="a_msg_time_out_error">The request timed out.</string>
+    <string name="a_msg_time_out_error">The request timed out</string>
     <string name="a_lbl_net_title">Network</string>
     <string name="a_lbl_sign_back_in">Sign Back In</string>
     <string name="a_lbl_session_timeout">This session has timed out</string>
@@ -59,12 +59,12 @@
     <string name="a_btn_login">Login</string>
     <string name="a_lbl_sign_out_message">Are you sure you want to Logout from this application?</string>
     <string name="a_lbl_information">Information</string>
-    <string name="a_lbl_error_username_required">Username is required.</string>
-    <string name="a_lbl_error_incorrect_password">Incorrect password.</string>
-    <string name="a_lbl_error_select_tag_type">Please select tag type.</string>
-    <string name="a_lbl_error_store_number_required">Store no. is required.</string>
+    <string name="a_lbl_error_username_required">Username is required</string>
+    <string name="a_lbl_error_incorrect_password">Incorrect password</string>
+    <string name="a_lbl_error_select_tag_type">Please select tag type</string>
+    <string name="a_lbl_error_store_number_required">Store no. is required</string>
     <string name="a_lbl_error_select_template">Please select template</string>
-    <string name="a_lbl_error_upc_digit">UPC must be 13 digit.</string>
+    <string name="a_lbl_error_upc_digit">UPC must be 13 digit number</string>
     <string name="a_lbl_scanning">Scanning…</string>
     <string name="a_lbl_error_occured">An error has occurred.</string>
     <string name="a_lbl_error_scanning">Failed to get the specified scanner device! Please close and restart the
@@ -85,20 +85,26 @@
     <string name="a_title_tab_end_date">End Date</string>
     <string name="a_hint_search">Search</string>
     <string name="a_msg_loggedout">Logged out successfully!</string>
-    <string name="a_msg_product_added">Product Added Successfully.</string>
+    <string name="a_msg_product_added">Product Added Successfully</string>
     <string name="a_net_message">Internet connection is not available. Please try again!</string>
     <string name="item_freshtag">Fresh Tag</string>
     <string name="item_inventorytag">Inventory Tag</string>
     <string name="a_lbl_desk">-</string>
-    <string name="a_msg_emdk">EMDK closed unexpectedly! Please close and restart the application.</string>
+    <string name="a_msg_emdk">EMDK closed unexpectedly! Please close and restart the application</string>
     <string name="a_msg_scanning">Scanning…</string>
     <string name="a_msg_scanner_waiting">Scanner is waiting for trigger press…</string>
-    <string name="a_msg_error">An error has occurred.</string>
+    <string name="a_msg_error">An error has occurred</string>
     <string name="a_msg_idle">is enabled and idle…</string>
     <string name="a_msg_disable">is disabled.</string>
     <string name="a_msg_delete">Are you sure you want to delete?</string>
     <string name="a_lbl_description">DESCRIPTION</string>
-    <string name="a_msg_product_added_draft">Product added to draft.</string>
+    <string name="a_msg_product_added_draft">Product added to draft</string>
+    <string name="a_msg_tag_type">Please select tag type</string>
+    <string name="a_msg_store">Please select store</string>
+    <string name="a_msg_upc_exists">UPC number already exist</string>
+    <string name="a_msg_quantity">Cannot enter value greater than %1$s</string>
+    <string name="a_lbl_print_request">Print Request</string>
+    <string name="a_msg_barcode_not_found">Barcode not found</string>
 
 
 </resources>

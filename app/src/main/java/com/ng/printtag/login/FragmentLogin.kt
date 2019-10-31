@@ -53,8 +53,8 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
         ProgressDialog.displayProgressDialog(activity!!, true, "")
 
         val rootJson = JSONObject()
-        rootJson.put(activity!!.resources.getString(R.string.key_userName), binding.edtUserName.text.toString())
-        rootJson.put(activity!!.resources.getString(R.string.key_password), binding.edtPassword.text.toString())
+        rootJson.put(activity!!.resources.getString(R.string.key_userName), binding.edtUserName.text.toString().trim())
+        rootJson.put(activity!!.resources.getString(R.string.key_password), binding.edtPassword.text.toString().trim())
         val body = RequestMethods.getRequestBody(rootJson)
 
         RestClient().apiRequest(
@@ -111,8 +111,8 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
 
     override fun onResume() {
         super.onResume()
-        val edtPassword = binding.edtPassword.text.toString()
-        val edtUsername = binding.edtUserName.text.toString()
+        val edtPassword = binding.edtPassword.text.toString().trim()
+        val edtUsername = binding.edtUserName.text.toString().trim()
         if (edtPassword.isNotEmpty() && edtUsername.isNotEmpty()) {
             (activity as ActivityLogin).loginModel.password = edtPassword
             (activity as ActivityLogin).loginModel.userName = edtUsername

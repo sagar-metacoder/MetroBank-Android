@@ -14,6 +14,8 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.ng.printtag.R
 import com.ng.printtag.apputils.AppUtils
+import com.ng.printtag.apputils.BaseSharedPreference
+import com.ng.printtag.apputils.Utils
 import com.ng.printtag.databinding.HeaderToolBarBinding
 import com.ng.printtag.interfaces.HeaderInterface
 import androidx.databinding.DataBindingUtil.inflate as inflate1
@@ -46,6 +48,11 @@ class HeaderToolBar : Toolbar, PopupMenu.OnMenuItemClickListener {
     }
 
     private fun init(context: Context) {
+        Utils.setLocalForTheApp(
+            context as Activity,
+            BaseSharedPreference.getInstance(context).getLanguage(context.getString(R.string.pref_language))
+        )
+
         binding = DataBindingUtil.inflate(from(context), getLayoutId(), this, true)
         setContentInsetsAbsolute(0, 0)
         setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
