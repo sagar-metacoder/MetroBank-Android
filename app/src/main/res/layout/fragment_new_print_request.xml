@@ -17,10 +17,12 @@
                     android:paddingEnd="@dimen/margin_20"
                     android:background="@color/app_background"
                     android:orientation="vertical">
-        <ScrollView android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scrollbars="none"
-                    android:layout_above="@+id/btnSubmit"
+        <androidx.core.widget.NestedScrollView android:layout_width="match_parent"
+                                               android:layout_height="match_parent"
+                                               android:scrollbars="none"
+                                               android:fillViewport="true"
+                                               android:layout_above="@+id/btnSubmit"
+
         >
 
             <LinearLayout android:layout_width="match_parent"
@@ -141,6 +143,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             app:layoutManager="@{layoutManager}"
+                            android:nestedScrollingEnabled="false"
                             android:layout_marginTop="@dimen/margin_10"/>
 
 
@@ -314,7 +317,7 @@
                         </RelativeLayout>
                 -->
             </LinearLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
 
         <com.google.android.material.button.MaterialButton

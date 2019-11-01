@@ -37,8 +37,8 @@
                             android:gravity="start">
 
                         <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="@dimen/margin_70"
-                                android:layout_height="@dimen/margin_70"
+                                android:layout_width="@dimen/margin_60"
+                                android:layout_height="@dimen/margin_60"
                                 android:src="@mipmap/ic_user"
                                 android:contentDescription="@string/app_name"
                                 android:id="@+id/imageView"/>

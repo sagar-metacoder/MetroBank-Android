@@ -1,6 +1,5 @@
 package com.ng.printtag.allrequest
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Handler
 import android.util.Log
@@ -9,6 +8,7 @@ import android.view.View.VISIBLE
 import android.widget.EditText
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ng.printtag.R
 import com.ng.printtag.api.RequestMethods
 import com.ng.printtag.api.RestClient
@@ -46,7 +46,6 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
     /**
      * @see BaseActivity#initMethod()
      */
-    @SuppressLint("WrongConstant")
     override fun initMethod() {
         binding = getViewDataBinding()
         products = ArrayList()
@@ -61,7 +60,7 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
         }
         loadData()
         val linearLayoutManager = LinearLayoutManager(this)
-        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        linearLayoutManager.orientation = RecyclerView.VERTICAL
         binding.rvAllRequests.layoutManager = linearLayoutManager
 
 
@@ -182,6 +181,7 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
                     true -> {
 
                         if (rootResponse.data!!.records != null) {
+
                             val tempList = rootResponse.data!!.records!! as ArrayList<AllRequestModel.Data.Records>
                             if (tempList.size == 0 || tempList.isEmpty() && page == 1) {
                                 binding.tvMsg.visibility = VISIBLE
@@ -272,6 +272,17 @@ class ActivityAllRequests : BaseActivity<ActivityAllRequestsBinding>(),
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        if (!allRequest.isNullOrEmpty()) {
+            allRequest!!.clear()
+            page = 1
+            searchKey = ""
+            dateRange = ""
+            loadData()
+
+        }
+    }
     /**
      * Init layout genericModel id
      */

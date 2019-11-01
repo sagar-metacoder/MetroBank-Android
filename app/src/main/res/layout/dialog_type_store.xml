@@ -21,8 +21,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/margin_20"
-                    android:paddingStart="@dimen/margin_10"
-                    android:paddingEnd="@dimen/margin_10"
+                    android:paddingStart="@dimen/margin_20"
+                    android:paddingEnd="@dimen/margin_20"
+                    android:paddingBottom="@dimen/margin_10"
+
                     android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -34,17 +36,19 @@
                 />
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_list"
-                        android:paddingEnd="@dimen/margin_10"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/margin_150"
                         android:layout_marginTop="@dimen/margin_10"
+                        android:scrollbars="vertical"
+                        android:scrollbarSize="@dimen/margin_2"
+                        android:scrollbarThumbVertical="@drawable/bg_scrollbar"
                         bind:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:ignore="RtlSymmetry"/>
                 <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginBottom="@dimen/margin_20">
+                        android:layout_marginTop="@dimen/margin_10">
 
 
                     <com.google.android.material.button.MaterialButton
@@ -54,8 +58,8 @@
                             style="@style/AppButton.Colored.Green"
                             android:layout_gravity="end"
                             android:text="@string/a_btn_done"
-                            android:padding="@dimen/margin_10"
-                            android:layout_marginEnd="@dimen/margin_10"
+                            android:padding="@dimen/margin_8"
+                            android:gravity="center"
                             android:layout_alignParentEnd="true" tools:ignore="RelativeOverlap"/>
                 </RelativeLayout>
 

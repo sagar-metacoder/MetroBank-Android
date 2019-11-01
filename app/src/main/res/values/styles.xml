@@ -259,7 +259,7 @@
 
     <style name="AppTextView.SideNavMenu" parent="Theme.AppCompat.Light">
         <item name="android:textColor">@color/color_2D2D2D</item>
-        <item name="android:textSize">@dimen/font_title_small</item>
+        <item name="android:textSize">@dimen/font_13</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
@@ -289,7 +289,7 @@
     </style>
 
     <style name="AppTextView.List.Item" parent="Theme.AppCompat.Light">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/color_2D2D2D</item>
         <item name="android:gravity">center_vertical</item>
@@ -297,6 +297,7 @@
         <item name="android:textSize">@dimen/font_12</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textCursorDrawable">@drawable/bg_cursor_green</item>
+
     </style>
     <style name="AppTextView.List.Item.Medium" parent="Theme.AppCompat.Light">
         <item name="android:layout_width">wrap_content</item>
@@ -477,4 +478,5 @@
         <item name="android:background">@drawable/bg_view_product</item>
         <item name="behavior_peekHeight">@dimen/margin_350</item>
     </style>
+    <dimen name="font_13">13sp</dimen>
 </resources>

@@ -48,6 +48,8 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
         binding.layoutManager = GridLayoutManager(activity, Constant.DOC_LIST_COLUMN)
         val spacing = (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30f, resources.displayMetrics)).toInt()
         binding.rvTemplateList.addItemDecoration(GridItemDecoration(Constant.DOC_LIST_COLUMN, spacing, false))
+        binding.rvTemplateList.setNestedScrollingEnabled(false);
+        binding.rvTemplateList.setHasFixedSize(true);
         binding.edtEffectiveDate.text = Editable.Factory.getInstance().newEditable(AppUtils.currentDate())
 
     }
@@ -90,8 +92,6 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                     //  binding.edtDepartment.text = Editable.Factory.getInstance().newEditable("")
                     //deptPositionValue.clear()
                     //context!!.arrayDeptKey.clear()
-
-
 
                     selectedTag = item as Int
                     /* if (!binding.edtTagType.text.isNullOrBlank()) {
@@ -147,9 +147,9 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                 if (fromWhere == Constant.TAG_STORE) {
                     selectedStore = item as Int
 
-                    //binding.edtDepartment.text = Editable.Factory.getInstance().newEditable("")
-                    //deptPositionValue.clear()
-                    //context!!.arrayDeptKey.clear()
+                    binding.edtDepartment.text = Editable.Factory.getInstance().newEditable("")
+                    deptPositionValue.clear()
+                    context!!.arrayDeptKey.clear()
 
                     binding.linearRv.visibility = View.GONE
                     ErrorActions.validateButton(binding.btnSubmit, false)
@@ -213,6 +213,7 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                     Editable.Factory.getInstance().newEditable(stringBuilder.substring(0, stringBuilder.length - 2))
 
                 departmentValue = valueBuilder.substring(0, valueBuilder.length - 1)
+                context!!.departmentKey = valueBuilder.substring(0, valueBuilder.length - 1)
 
                 if (binding.edtTagType.text.isNullOrBlank()) {
                     AppUtils.showLongToast(activity!!, resources.getString(R.string.a_msg_tag_type))
@@ -223,7 +224,6 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                         context!!.tagType,
                         context!!.storeKey, departmentValue
                     )
-                    context!!.departmentKey = valueBuilder.substring(0, valueBuilder.length - 1)
                 }
 
 //                Log.d("selected", item.toString())
@@ -242,8 +242,6 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
 
                 binding.linearTemplateData.visibility = View.GONE
                 binding.edtInfo.text = Editable.Factory.getInstance().newEditable("")
-
-
 
                 callTagTypeDialog()
             }
@@ -281,15 +279,15 @@ class FragmentNewPrintRequest : BaseFragment<FragmentNewPrintRequestBinding>() {
                                 activity!!,
                                 resources.getString(R.string.a_msg_tag_type)
                             )
-                        } else*/ if (context!!.storeKey.isBlank()) {
+                        } else*/ /*if (context!!.storeKey.isBlank()) {
             AppUtils.showLongToast(
                 activity!!,
                 resources.getString(R.string.a_msg_store)
             )
-        } else if (context!!.storeKey.isNotEmpty() && context!!.arrayDeptKey.isNullOrEmpty()) {
+        } else */if (context!!.storeKey.isNotEmpty() && context!!.arrayDeptKey.isNullOrEmpty()) {
 
                 context!!.callDepartmentApi(context!!.tagType, context!!.storeKey, "")
-        } else if (!context!!.arrayDeptKey.isNullOrEmpty() && context!!.storeKey.isNotEmpty()) {
+        } else if (!context!!.arrayDeptKey.isNullOrEmpty()) {
 
                 callDepartmentDialog()
                 binding.linearRv.visibility = View.GONE

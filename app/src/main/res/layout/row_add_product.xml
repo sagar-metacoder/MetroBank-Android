@@ -54,15 +54,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5"
+                            android:gravity="center_vertical"
                             android:text='@{model.upcNumber.length() !=0?model.upcNumber:@string/a_lbl_unknown}'/>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                            style="@style/AppTextView.List.Item"
-                            android:textSize="@dimen/font_label"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_3"
-                            android:text='@{model.upcName.length() !=0?model.upcName:@string/a_lbl_unknown}'/>
 
 
                 </LinearLayout>
@@ -120,6 +114,17 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/AppTextView.List.Item"
+                    android:textSize="@dimen/font_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_3"
+                    android:singleLine="false"
+                    android:text='@{model.upcName.length() !=0?model.upcName:@string/a_lbl_unknown}'/>
+
+
             <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"

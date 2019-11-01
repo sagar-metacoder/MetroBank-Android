@@ -56,7 +56,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
     var reqId: String = ""
 
     private var templatePosition: Int = 0
-    private var emdkManager: EMDKManager? = null
+    var emdkManager: EMDKManager? = null
     private var barcodeManager: BarcodeManager? = null
     private var scanner: Scanner? = null
     private var deviceList: List<ScannerInfo>? = null
@@ -87,7 +87,6 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
         binding = getViewDataBinding()
         deviceList = ArrayList()
         addProducts = ArrayList()
-        departmentArraylist = ArrayList()
 
 
         actBaseBinding.headerToolBar.setHeaderInterface(this)
@@ -322,6 +321,8 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
                 val rootResponse = response.body() as StoreListModel
                 when (rootResponse.success) {
                     true -> {
+                        departmentArraylist = ArrayList()
+
                         // val jsonObj = JSONObject(jsonObjectStore)
                         for (i in 0 until rootResponse.data!!.stores!!.size) {
 
@@ -368,10 +369,12 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
 
                 val rootResponse = response.body() as DepartmentModel
                 when (rootResponse.success) {
+
                     true -> {
                         arrayDeptKey = ArrayList()
                         arrayDeptValue = ArrayList()
                         arrayTemplate = ArrayList()
+                        departmentArraylist = ArrayList()
 
 
 
@@ -481,7 +484,10 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
                                 rootResponse.data!!.msg!!
                             )
                         }
-                        Utils.gotoHomeScreen(this@ActivityNewPrintRequest)
+                        if (!fromAll)
+                            Utils.gotoHomeScreen(this@ActivityNewPrintRequest)
+                        else
+                            onBackPressed()
                     }
                     else -> {
                         showError(getString(R.string.a_lbl_server_title), rootResponse.msg!!)
@@ -714,7 +720,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
         }
     }
 
-    private fun initScanner() {
+    fun initScanner() {
         if (scanner == null) {
             if (deviceList != null && deviceList!!.isNotEmpty()) {
                 if (barcodeManager != null)
@@ -737,7 +743,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
         }
     }
 
-    private fun deInitScanner() {
+    fun deInitScanner() {
         if (scanner != null) {
             try {
                 scanner!!.disable()
@@ -762,7 +768,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
         }
     }
 
-    private fun initBarcodeManager() {
+    fun initBarcodeManager() {
         barcodeManager = emdkManager!!.getInstance(FEATURE_TYPE.BARCODE) as BarcodeManager
         // Add connection listener
         if (barcodeManager != null) {
@@ -770,7 +776,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
         }
     }
 
-    private fun deInitBarcodeManager() {
+    fun deInitBarcodeManager() {
         if (emdkManager != null) {
             emdkManager!!.release(FEATURE_TYPE.BARCODE)
         }
@@ -787,7 +793,7 @@ class ActivityNewPrintRequest : BaseActivity<ActivityNewPrintRequestBinding>(), 
 
     }
 
-    private fun enumerateScannerDevices() {
+    fun enumerateScannerDevices() {
         if (barcodeManager != null) {
             deviceList = barcodeManager!!.supportedDevicesInfo
 
