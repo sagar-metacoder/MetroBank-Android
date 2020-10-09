@@ -8,7 +8,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion project.compileSdkVersion
     defaultConfig {
-        applicationId "com.ng.printtag"
+        applicationId "com.ng.metrobank"
         minSdkVersion project.coreMinSdk
         targetSdkVersion project.targetSdkVersion
         versionCode 1
@@ -24,7 +24,8 @@ android {
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
-            buildConfigField "String", "DOMAIN_URL", '"http://192.168.11.7/"'
+            buildConfigField "String", "DOMAIN_URL", '"http://npa.silvercomsmartconsultancy.com/"'
+            buildConfigField "String", "BASE_DB", '"npa1"'
 
 
             buildConfigField "String", "API_BASE_MODULE", '"webserviceCustom/"'
@@ -44,7 +45,9 @@ android {
             minifyEnabled true
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "DOMAIN_URL", '"http://192.168.11.7/"'
+            buildConfigField "String", "DOMAIN_URL", '"http://npa.silvercomsmartconsultancy.com/"'
+            buildConfigField "String", "BASE_DB", '"npa1"'
+
 
             buildConfigField "String", "API_BASE_MODULE", '"webserviceCustom/"'
             buildConfigField "String", "USER_NAME", '"tesb"'
@@ -77,9 +80,11 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':pinlockview')
+    implementation project(path: ':library')
+
     testImplementation 'junit:junit:4.12'
 
-    compileOnly "com.symbol:emdk:$emdk_version"
 
     // AppNavigation
     implementation "android.arch.navigation:navigation-fragment:$navigation_version"
@@ -88,8 +93,7 @@ dependencies {
     implementation "android.arch.navigation:navigation-ui-ktx:$navigation_version"
 
     implementation libraries.legacy_support_v4
-    implementation 'com.google.android.material:material:1.0.0-beta01'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.3.0-alpha03'
     annotationProcessor libraries.glide_compiler
 
     implementation libraries.kotlin
@@ -102,15 +106,11 @@ dependencies {
     implementation libraries.logging_interceptor
     implementation files('libs/commons-lang3-3.9.jar')
 
-    //paging library
-    implementation "android.arch.paging:runtime:$paging_version"
-
     //adding view model
     implementation "android.arch.lifecycle:extensions:$view_model_version"
     implementation "android.arch.lifecycle:viewmodel:$view_model_version"
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    compile 'com.eightbitlab:bottomnavigationbar:0.9.6'
 
-//    Add Zxing library to generate barcode
-    implementation 'com.google.zxing:core:3.2.1'
-    implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
 
 }

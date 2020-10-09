@@ -7,12 +7,8 @@ import android.util.Base64
 import com.ng.printtag.BuildConfig
 import com.ng.printtag.R
 import com.ng.printtag.apputils.BaseSharedPreference
-import com.ng.printtag.apputils.Constant
-import com.ng.printtag.interfaces.CallBackInterfaces
-import com.ng.printtag.models.generic.GenericRootResponse
 import okhttp3.RequestBody
 import org.json.JSONObject
-import retrofit2.Response
 import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
 
@@ -23,7 +19,8 @@ object RequestMethods {
     @SuppressLint("ObsoleteSdkInt")
     fun getAuthToken(context: Context): String {
         val authToken =
-            BaseSharedPreference.getInstance(context).getPrefValue(context.getString(R.string.pref_auth_token))
+            BaseSharedPreference.getInstance(context)
+                .getPrefValue(context.getString(R.string.pref_auth_token), "")
         return if (authToken!!.isEmpty()) {
             val credentials = BuildConfig.USER_NAME + ":" + BuildConfig.PASSWORD
             when {
@@ -55,43 +52,6 @@ object RequestMethods {
 
 
 
-    fun callImageApi(activity: Context, image: String?, callBackInterfaces: CallBackInterfaces) {
-        if (!image.isNullOrEmpty()) {
-            val rootJson = JSONObject()
-            val restClientModel = RestClientModel()
-            restClientModel.isProgressDialogShow = false
-            restClientModel.isErrorScreenShow = true
-            rootJson.put("assetPath", image)
-            val body = getRequestBody(rootJson)
-            RestClient().apiRequest(activity, body, Constant.CALL_SIGN_URL, object : ApiResponseListener {
-                override fun onApiResponse(response: Response<Any>, reqCode: Int) {
-                    when (reqCode) {
-                        Constant.CALL_SIGN_URL -> {
-                            val rootModel = response.body() as GenericRootResponse
-                            when (rootModel.success) {
-                                true -> {
-                                    callBackInterfaces.onCallBack(rootModel.result!!.signedUrl!!, 1)
-                                }
-                                false ->
-                                    callBackInterfaces.onCallBack("", 0)
-                            }
-                        }
-                    }
-                }
-
-                override fun onApiError(response: Any, reqCode: Int) {
-                    //ProgressDialog.displayProgressDialog(activity, false, "")
-                }
-
-                override fun onApiNetwork(response: Any, reqCode: Int) {
-                    //ProgressDialog.displayProgressDialog(activity, false, "")
-                }
-
-            }, restClientModel)
-        } else {
-            callBackInterfaces.onCallBack("", -1)
-        }
-    }
 
 
 

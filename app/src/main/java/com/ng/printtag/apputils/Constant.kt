@@ -15,16 +15,15 @@ object Constant {
 
 
     const val CALL_SIGN_URL = 1
-    const val CALL_STORE_URL = 2
-    const val CALL_DEPARTMENT_URL = 3
     const val CALL_ALL_REQUEST = 4
-    const val CALL_TEMPLETS_DETAILS = 5
-    const val CALL_NEW_REQUEST_SUBMIT = 6
-    const val CALL_UPC_VALIDATE = 7
+    const val CALL_SHOP_SUPPLY_REQUEST = 5
+    val CALL_PUBLICATION = 2
+    val CALL_SHOP_NAME = 3
+    val CALL_PUBLICATION_PRICE = 6
+    val CALL_SHOP_TRAN = 7
+    val CALL_CREATE_RECIVED_DETAILS = 8
+    val CALL_CREATE_SUPPLY = 9
+    val CALL_CREATE_SHOP_PAYMENT = 10
 
 
-
-    const val TAG_TYPE =20
-    const val TAG_STORE =21
-    const val DOC_LIST_COLUMN = 2
 }

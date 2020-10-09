@@ -27,7 +27,7 @@
                 <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/color_BFBEC4">
+                        android:background="@color/primary_light">
 
                     <LinearLayout
                             android:layout_width="match_parent"
@@ -45,9 +45,9 @@
 
                         <LinearLayout android:layout_width="wrap_content"
                                       android:layout_height="wrap_content"
-                                      android:orientation="vertical"
-                                      android:layout_marginStart="@dimen/margin_10"
-                                      android:layout_gravity="center">
+                                android:orientation="vertical"
+                                android:layout_marginStart="@dimen/margin_15"
+                                android:layout_gravity="center">
                             <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/tv_username"
                                     android:layout_width="wrap_content"
@@ -56,6 +56,7 @@
                                     android:fontFamily="@font/roboto_bold"
                                     android:paddingTop="@dimen/nav_header_vertical_spacing"
                                     android:text="@string/app_name"
+
                                     android:ems="10"/>
 
                             <androidx.appcompat.widget.AppCompatTextView
@@ -63,9 +64,10 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     style="@style/AppTextView.SideNavMenu"
-                                    android:text="store 2"
-                                    android:maxLines="2"
-                            />
+                                    android:text=""
+                                    android:visibility="visible"
+
+                                    android:maxLines="2" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -81,86 +83,63 @@
                     -->
                 </RelativeLayout>
 
-
                 <LinearLayout
-                        android:id="@+id/li_block1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="@dimen/margin_15">
+                        android:layout_marginTop="@dimen/margin_15"
+                        android:onClick="@{() -> instance.onMenuItemClicks(@string/a_menu_received, @string/action_menu_received)}"
+                        android:orientation="horizontal">
 
+                    <androidx.appcompat.widget.AppCompatImageView
+                            style="@style/AppImageView.MenuItem"
+                            android:src="@mipmap/ic_menu_logout" />
 
-                    <!--    <androidx.appcompat.widget.AppCompatImageView
-                                style="@style/AppImageView.MenuItem"
-                                android:src="@mipmap/ic_language_change"/>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                                style="@style/AppTextView.MenuItem"
-                                android:text="@{Utils.getLabel(@string/a_menu_change_language)}"/>-->
-
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="wrap_content">
-                        <androidx.appcompat.widget.AppCompatImageView
-                                style="@style/AppImageView.MenuItem"
-                                android:src="@mipmap/ic_menu_language"/>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                                style="@style/AppTextView.MenuItem"
-                                android:text="@string/a_menu_change_language"
-                                android:layout_marginStart="@dimen/margin_minus_3"/>
-                    </LinearLayout>
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_5">
-                        <androidx.appcompat.widget.AppCompatImageView
-                                style="@style/AppImageView.MenuItem"
-                                android:visibility="invisible"
-                                android:src="@mipmap/ic_language_change"/>
-                        <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tv_language"
-                                style="@style/AppTextView.MenuItem"
-                                android:text="@string/a_app_menu_english"
-                                android:paddingTop="@dimen/margin_10"
-                                android:layout_marginEnd="@dimen/margin_10"
-
-                                android:onClick="@{() -> instance.onMenuItemClicks(@string/action_menu_lan_english, @string/action_menu_lan_english)}"/>
-                    </LinearLayout>
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="wrap_content">
-                        <androidx.appcompat.widget.AppCompatImageView
-                                style="@style/AppImageView.MenuItem"
-                                android:visibility="invisible"
-                                android:src="@mipmap/ic_language_change"/>
-                        <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tv_spanish"
-                                style="@style/AppTextView.MenuItem"
-                                android:text="@string/a_app_menu_spanish"
-                                android:paddingTop="@dimen/margin_10"
-                                android:layout_marginEnd="@dimen/margin_10"
-                                android:onClick="@{() -> instance.onMenuItemClicks(@string/action_menu_lan_spanish, @string/action_menu_lan_spanish)}"/>
-                    </LinearLayout>
-
-
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_received_details"
+                            style="@style/AppTextView.MenuItem"
+                            android:layout_gravity="start"
+                            android:text="@string/a_lbl_received_details"
+                            android:visibility="visible" />
                 </LinearLayout>
 
                 <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="@dimen/margin_10"
-                        android:background="@color/color_D9D9DA"/>
+                        android:layout_marginTop="@dimen/margin_15"
+                        android:background="@color/color_D9D9DA" />
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_15"
+                        android:onClick="@{() -> instance.onMenuItemClicks(@string/a_menu_shop_supply, @string/action_menu_shop_supplay)}"
+                        android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                            style="@style/AppImageView.MenuItem"
+                            android:src="@mipmap/ic_menu_logout" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_shop_supplay"
+                            style="@style/AppTextView.MenuItem"
+                            android:layout_gravity="start"
+                            android:text="@string/a_lbl_shop_supply_details"
+                            android:visibility="visible" />
+                </LinearLayout>
+
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/margin_15"
+                        android:background="@color/color_D9D9DA" />
 
 
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:orientation="horizontal"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_10"
+                        android:layout_marginTop="@dimen/margin_15"
                         android:onClick="@{() -> instance.onMenuItemClicks(@string/a_menu_logout, @string/action_menu_logout)}"
                 >
                     <androidx.appcompat.widget.AppCompatImageView
@@ -177,7 +156,7 @@
                 <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="@dimen/margin_10"
+                        android:layout_marginTop="@dimen/margin_15"
                         android:background="@color/color_D9D9DA"/>
 
             </LinearLayout>

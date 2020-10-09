@@ -1,62 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="instruction_action">instruction_action</string>
-    <string name="instruction_action_from">instruction_action_from</string>
-    <string name="instruction_action_data">instruction_action_data</string>
-    <string name="instruction_action_message">instruction_action_message</string>
     <string name="input_act_user">input_act_user</string>
     <string name="input_act_password">input_password</string>
     <string name="pref_language">pref_language</string>
     <string name="pref_user_data">pref_user_data</string>
-    <string name="pref_config_data">pref_config_data</string>
     <string name="pref_auth_token">Auth Token</string>
-    <string name="slide_menu_value">slide_menu_value</string>
-    <string name="slide_menu_title">slide_menu_title</string>
-    <string name="slide_menu_action">slide_menu_action</string>
     <string name="action_sign_out">action_sign_out</string>
-    <string name="action_menu_lan_english">action_menu_lan_english</string>
-    <string name="action_menu_lan_spanish">action_menu_lan_spanish</string>
     <string name="action_menu_logout">action_menu_logout</string>
-    <string name="language_en">en</string>
-    <string name="language_es">es</string>
     <string name="key_userName">userName</string>
     <string name="key_password">password</string>
-    <string name="from_type">from_type</string>
     <string name="pref_session_out">pref_session_out</string>
-    <string name="tagType">tagType</string>
-    <string name="storeNumber">storeNumber</string>
-    <string name="userId">userId</string>
-    <string name="department">department</string>
-    <string name="key_templateId">templateId</string>
-    <string name="key_effectiveDate">effectiveDate</string>
-    <string name="key_language">language</string>
-    <string name="key_action">action</string>
-    <string name="action_submit">submit</string>
-    <string name="key_expectedDate">expectedDate</string>
-    <string name="key_aisleInfo">aisleInfo</string>
-    <string name="key_status">status</string>
-    <string name="value_all">all</string>
-    <string name="key_page">page</string>
-    <string name="key_searchkey">searchKey</string>
-    <string name="key_date_range">dateRange</string>
-    <string name="action_from">action_from</string>
-    <string name="action_from_pending">action_from_pending</string>
-    <string name="action_from_all">action_from_all</string>
-    <string name="value_pending">pending</string>
-    <string name="key_freshtag">FreshTag</string>
-    <string name="key_inventorytag">InventoryTag</string>
-    <string name="key_upc">UPC</string>
-    <string name="upc">upc</string>
-    <string name="key_qty">qty</string>
-    <string name="action_draft">draft</string>
-    <string name="key_products">products</string>
     <string name="action_delete">action_delete</string>
-    <string name="action_new_print_request">action_new_print_request</string>
-    <string name="records">records</string>
-    <string name="reqId">reqId</string>
-    <string name="status_en_draft">Draft</string>
-    <string name="status_en_sent">Sent</string>
-    <string name="action_printed">print</string>
-    <string name="status_es_draft">Borrador</string>
+
+    <string name="key_jsonrpc">jsonrpc</string>
+    <string name="key_params">params</string>
+    <string name="action_menu_shop_supplay">action_menu_shop_supplay</string>
+    <string name="a_menu_shop_supply">a_menu_shop_supply</string>
+    <string name="a_menu_received">a_menu_received</string>
+    <string name="action_menu_received">action_menu_received</string>
+    <string name="company_name">company_name</string>
+    <string name="account_number">account_number</string>
+
 
 </resources>

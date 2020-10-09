@@ -119,16 +119,20 @@ abstract class BaseActivity<out T : ViewDataBinding> : AppCompatActivity(), OnCl
     }
 
     fun setHeaderBase(baseFragment: BaseFragment<*>) {
+
         headerModel = HeaderModel()
         headerModel.baseActivity = this
         headerModel.baseFragment = baseFragment
         headerModel.setHeaderValues()
+
+
     }
 
     private fun setHeaderBaseActivity() {
         headerModel = HeaderModel()
         headerModel.baseActivity = this
         headerModel.setHeaderValues()
+
     }
 
     fun setDashBoardHeaderIcon() {
@@ -160,6 +164,22 @@ abstract class BaseActivity<out T : ViewDataBinding> : AppCompatActivity(), OnCl
      */
     fun setHeaderVisibility(toolBarVisibility: Int) {
         actBaseBinding.headerToolBar.visibility = toolBarVisibility
+/*
+        when (this) {
+            is ActivityDashboard -> {
+
+                if(!AppUtils.getUserModel(this).result!!.userCompanies!!.allowedCompanies.isNullOrEmpty())
+                    {
+                       / if(AppUtils.getUserModel(this).result!!.userCompanies!!.allowedCompanies!!.size > 1)
+                            actBaseBinding.headerToolBar.binding.ivPrint.visibility = View.VISIBLE
+                        else
+                            actBaseBinding.headerToolBar.binding.ivPrint.visibility = View.GONE
+
+                    }
+
+            }
+        }
+*/
     }
 
     /**

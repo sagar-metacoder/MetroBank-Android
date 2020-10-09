@@ -54,6 +54,11 @@ class DialogInstruction : BaseDialog<DialogInstructionBinding>(), OnItemClickLis
                     getString(R.string.action_delete) -> {
                         dismiss()
                     }
+                    getString(R.string.action_whithout_save) -> {
+                        if (callBackListener != null) {
+                            callBackListener!!.onCallBack("", "ok")
+                        }
+                    }
                     /* getString(R.string.action_sign_out) -> {
                         BaseSharedPreference.getInstance(activity!!)
                             .putValue(getString(R.string.pref_session_out), false)
@@ -76,6 +81,7 @@ class DialogInstruction : BaseDialog<DialogInstructionBinding>(), OnItemClickLis
             if (callBackListener != null) {
                 callBackListener!!.onCallBack("", "cancel")
             }
+
         }
 
     }

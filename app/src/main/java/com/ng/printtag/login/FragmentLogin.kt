@@ -2,6 +2,7 @@ package com.ng.printtag.login
 
 
 import androidx.databinding.ObservableBoolean
+import com.ng.printtag.BuildConfig
 import com.ng.printtag.R
 import com.ng.printtag.api.RequestMethods
 import com.ng.printtag.api.RestClient
@@ -23,9 +24,10 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
     override fun initFragment() {
         binding = getFragmentDataBinding()
         binding.isEnable = ObservableBoolean(false)
-        binding.userName = (activity as ActivityLogin).loginModel.userName
-        binding.edtPassword.setText((activity as ActivityLogin).loginModel.password)
-        binding.edtUserName.setText((activity as ActivityLogin).loginModel.userName)
+        /* binding.userName = (activity as ActivityLogin).loginModel.userName
+         binding.edtPassword.setText((activity as ActivityLogin).loginModel.password)
+         binding.edtUserName.setText((activity as ActivityLogin).loginModel.userName)
+       */
         binding.edtUserName.requestFocus()
 
         handelClick()
@@ -53,13 +55,18 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
         ProgressDialog.displayProgressDialog(activity!!, true, "")
 
         val rootJson = JSONObject()
-        rootJson.put(activity!!.resources.getString(R.string.key_userName), binding.edtUserName.text.toString().trim())
-        rootJson.put(activity!!.resources.getString(R.string.key_password), binding.edtPassword.text.toString().trim())
+
+        val params = JSONObject()
+        params.put("login", binding.edtUserName.text!!.trim())
+        params.put("password", binding.edtPassword.text!!.trim())
+        params.put("db", BuildConfig.BASE_DB)
+        rootJson.put(resources.getString(R.string.key_jsonrpc), "2.0")
+        rootJson.put(resources.getString(R.string.key_params), params)
         val body = RequestMethods.getRequestBody(rootJson)
 
         RestClient().apiRequest(
             activity!!,
-            body,
+            body, "",
             CALL_SIGN_URL,
             this,
             restClientModel
@@ -74,16 +81,23 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
                 ProgressDialog.displayProgressDialog(activity!!, false, "")
 
                 val rootResponse = response.body() as LoginModel
-                when (rootResponse.success) {
+                when (rootResponse.result != null) {
                     true -> {
                         AppUtils.setUserData(
                             activity!!,
                             rootResponse
                         )
+                        BaseSharedPreference.getInstance(activity!!).putValue(
+                            getString(R.string.pref_company),
+                            AppUtils.getUserModel(activity!!).result!!.companyId.toString()
+                        )
                         Utils.gotoHomeScreen(activity!!)
                     }
                     else -> {
-                        showError(getString(R.string.a_lbl_server_title), rootResponse.msg!!)
+                        showError(
+                            getString(R.string.a_lbl_server_title),
+                            rootResponse.error!!.data!!.message!!
+                        )
                     }
                 }
             }
@@ -111,20 +125,20 @@ class FragmentLogin : BaseFragment<FragmentLoginBinding>() {
 
     override fun onResume() {
         super.onResume()
-        val edtPassword = binding.edtPassword.text.toString().trim()
-        val edtUsername = binding.edtUserName.text.toString().trim()
-        if (edtPassword.isNotEmpty() && edtUsername.isNotEmpty()) {
-            (activity as ActivityLogin).loginModel.password = edtPassword
-            (activity as ActivityLogin).loginModel.userName = edtUsername
+        /* val edtPassword = binding.edtPassword.text.toString().trim()
+         val edtUsername = binding.edtUserName.text.toString().trim()
+         if (edtPassword.isNotEmpty() && edtUsername.isNotEmpty()) {
+             (activity as ActivityLogin).loginModel.password = edtPassword
+             (activity as ActivityLogin).loginModel.userName = edtUsername
 
-            ErrorActions.validateButton(binding.btnLoginPassword, true)
-            binding.edtPassword.setText((activity as ActivityLogin).loginModel.password)
-            binding.edtPassword.setSelection(edtPassword.length)
-            binding.edtUserName.setText((activity as ActivityLogin).loginModel.userName)
-            binding.edtUserName.setSelection(edtUsername.length)
-        } else
-            ErrorActions.validateButton(binding.btnLoginPassword, false)
-        setLabel()
+             ErrorActions.validateButton(binding.btnLoginPassword, true)
+             binding.edtPassword.setText((activity as ActivityLogin).loginModel.password)
+             binding.edtPassword.setSelection(edtPassword.length)
+             binding.edtUserName.setText((activity as ActivityLogin).loginModel.userName)
+             binding.edtUserName.setSelection(edtUsername.length)
+         } else
+             ErrorActions.validateButton(binding.btnLoginPassword, false)
+  */       setLabel()
     }
 
     fun setLabel() {

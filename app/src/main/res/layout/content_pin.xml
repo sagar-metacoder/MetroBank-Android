@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+            android:id="@+id/linear_pinlock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+
+            >
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_logo"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:src="@mipmap/metro_logo"
+                android:visibility="gone"
+
+                />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_passoce"
+                style="@style/AppTextView.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_logo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:fontFamily="verdanao"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/passcode"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_msg"
+                style="@style/AppTextView.Title.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_passoce"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="verdana"
+                android:gravity="center"
+                android:text="@string/a_lbl_passcode"
+                android:textColor="@color/color_7ca0e5"
+                android:textSize="@dimen/_13sdp" />
+
+
+        <com.andrognito.pinlockview.IndicatorDots
+                android:id="@+id/indicator_dots"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_msg"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:gravity="center"
+
+
+                />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_forgot"
+                style="@style/AppTextView.Title.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/indicator_dots"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:fontFamily="verdana"
+                android:gravity="center"
+                android:text="@string/forgot_passcode"
+                android:textColor="@color/color_386ee6"
+                android:textSize="@dimen/_13sdp" />
+
+
+        <com.andrognito.pinlockview.PinLockView
+                android:id="@+id/pin_lock_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_forgot"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                app:keypadButtonSize="@dimen/_65sdp"
+                app:keypadShowDeleteButton="true"
+                app:keypadTextColor="@color/white"
+
+                app:keypadTextSize="@dimen/_21sdp" />
+
+    </RelativeLayout>
+
+</layout>

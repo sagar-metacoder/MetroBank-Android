@@ -275,7 +275,8 @@ class AppUtils {
 
         fun getUserModel(context: Context): LoginModel {
             val userData =
-                BaseSharedPreference.getInstance(context).getPrefValue(context.getString(R.string.pref_user_data))
+                BaseSharedPreference.getInstance(context)
+                    .getPrefValue(context.getString(R.string.pref_user_data), "")
             return if (userData.isNullOrEmpty()) {
                 val model = LoginModel()
                 model
@@ -323,22 +324,42 @@ class AppUtils {
         fun convertedDate(dateTime: String): String {
             return when (dateTime.isNotEmpty()) {
                 true -> {
-                    val inputPattern = "MMM dd, yyyy"
-                    val outputPattern = "MM/dd/yyyy"
-                    val inputDateFormat = SimpleDateFormat(inputPattern, Locale.getDefault())
-                    val outputDateFormat = SimpleDateFormat(outputPattern, Locale.getDefault())
-                    outputDateFormat.format(inputDateFormat.parse(dateTime))
+                    try {
+                        val inputPattern = "dd-MM-yyyy"
+                        val outputPattern = "yyyy-MM-dd"
+                        val inputDateFormat = SimpleDateFormat(inputPattern, Locale.getDefault())
+                        val outputDateFormat = SimpleDateFormat(outputPattern, Locale.getDefault())
+                        outputDateFormat.format(inputDateFormat.parse(dateTime))
+                    } catch (e: Exception) {
+                    }.toString()
                 }
                 false -> "--"
             }
         }
 
+        @JvmStatic
+        fun convertedDateServer(dateTime: String): String {
+            return when (dateTime.isNotEmpty()) {
+                true -> {
+                    try {
+                        val inputPattern = "yyyy-MM-dd"
+                        val outputPattern = "dd-MM-yyyy"
+                        val inputDateFormat = SimpleDateFormat(inputPattern, Locale.getDefault())
+                        val outputDateFormat = SimpleDateFormat(outputPattern, Locale.getDefault())
+                        outputDateFormat.format(inputDateFormat.parse(dateTime))
+                    } catch (e: Exception) {
+                    }.toString()
+                }
+                false -> "--"
+            }
+        }
 
         /**
          * This method will use to get current date and time
          */
+        @JvmStatic
         fun currentDate(): String {
-            return SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()).format(Date())
+            return SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
         }
 
 

@@ -5,17 +5,22 @@ import com.google.gson.annotations.SerializedName
 
 class LoginModel {
 
-    @SerializedName("success")
+    @SerializedName("jsonrpc")
     @Expose
-    var success: Boolean = false
+    var jsonrpc: String? = null
 
-    @SerializedName("msg")
+    @SerializedName("id")
     @Expose
-    var msg: String? = null
+    var id: Any? = null
 
-    @SerializedName("data")
+    @SerializedName("result")
     @Expose
-    var data: Data? = null
+    var result: Result? = null
+
+    @SerializedName("error")
+    @Expose
+    var error: ErrorModel? = null
+
 
     var userName: String? = null
 
@@ -23,42 +28,85 @@ class LoginModel {
 //    var storeList: MutableList<StoreModels>? = null
 
 
-    inner class Data {
-        @SerializedName("userId")
+    inner class Result {
+        @SerializedName("partner_id")
         @Expose
-        var userId: Int = 0
+        var partnerId: Int? = null
+
+        @SerializedName("db")
+        @Expose
+        var db: String? = null
+
+        @SerializedName("server_version")
+        @Expose
+        var serverVersion: String? = null
+
+        @SerializedName("is_system")
+        @Expose
+        var isSystem: Boolean? = null
+
+        @SerializedName("server_version_info")
+        @Expose
+        var serverVersionInfo: List<String>? = null
+
+        @SerializedName("name")
+        @Expose
+        var name: String? = null
+
+        @SerializedName("uid")
+        @Expose
+        var uid: Int? = null
+
+        @SerializedName("show_effect")
+        @Expose
+        var showEffect: String? = null
+
+        @SerializedName("has_advance_search_group")
+        @Expose
+        var hasAdvanceSearchGroup: Boolean? = null
+
         @SerializedName("username")
         @Expose
         var username: String? = null
-        @SerializedName("firstName")
-        @Expose
-        var firstName: String? = null
-        @SerializedName("lastName")
-        @Expose
-        var lastName: Any? = null
-        @SerializedName("password")
-        @Expose
-        var password: String? = null
-        @SerializedName("session")
-        @Expose
-        var session: String? = null
-        @SerializedName("roles")
-        @Expose
-        var roles: ArrayList<String>? = null
 
+        @SerializedName("company_id")
+        @Expose
+        var companyId: Int? = null
 
-        fun getFullProfileName(): String {
-            val stringBuilder = StringBuilder()
+        @SerializedName("is_admin")
+        @Expose
+        var isAdmin: Boolean? = null
 
-            if (firstName != null) {
-                stringBuilder.append(firstName)
-            }
-            if (lastName != null) {
-                stringBuilder.append(" ")
-                stringBuilder.append(lastName)
-            }
-            return stringBuilder.toString()
-        }
+        @SerializedName("session_id")
+        @Expose
+        var sessionId: String? = null
+
+        @SerializedName("partner_display_name")
+        @Expose
+        var partnerDisplayName: String? = null
+
+        @SerializedName("web.base.url")
+        @Expose
+        var webBaseUrl: String? = null
+
+        @SerializedName("web_tours")
+        @Expose
+        var webTours: List<Any>? = null
+
+        @SerializedName("user_companies")
+        @Expose
+        var userCompanies: UserCompanies? = null
+
     }
+    /* inner class UserCompanies
+     {
+         @SerializedName("allowed_companies")
+         @Expose
+        var allowedCompanies: ArrayList<List<String>>? = null
+         @SerializedName("current_company")
+         @Expose
+        var currentCompany: ArrayList<String>? = null
+     }*/
+
 }
 

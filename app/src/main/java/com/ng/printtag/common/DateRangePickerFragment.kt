@@ -39,7 +39,7 @@ class DateRangePickerFragment : DialogFragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.date_range_picker, container, false)
-        dialog.window.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog!!.window.requestFeature(Window.FEATURE_NO_TITLE)
         tabHost = root.findViewById(R.id.tabHost)
         butSetDateRange = root.findViewById(R.id.but_set_time_range)
         startDatePicker = root.findViewById(R.id.start_date_picker)
@@ -64,7 +64,7 @@ class DateRangePickerFragment : DialogFragment(), View.OnClickListener {
         super.onStart()
         if (dialog == null)
             return
-        dialog.window
+        dialog!!.window
             .setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
     }
 

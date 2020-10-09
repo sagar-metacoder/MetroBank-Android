@@ -51,8 +51,8 @@ open class BaseSharedPreference private constructor(context: Context) {
 
     }
 
-    fun getPrefValue(value: String): String? {
-        return sharedPref.getString(value, "")
+    fun getPrefValue(value: String, default: String): String? {
+        return sharedPref.getString(value, default)
     }
 
     fun getLanguage(key: String): String {

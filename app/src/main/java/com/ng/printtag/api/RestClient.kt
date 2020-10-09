@@ -14,9 +14,10 @@ import com.ng.printtag.apputils.*
 import com.ng.printtag.base.BaseActivity
 import com.ng.printtag.interfaces.SkipGetSerialisation
 import com.ng.printtag.interfaces.SkipPostSerialisation
-import com.ng.printtag.models.allrequests.AllRequestModel
+import com.ng.printtag.models.addItems.*
+import com.ng.printtag.models.allrequests.AllRequestList
+import com.ng.printtag.models.allrequests.ShopSupplyList
 import com.ng.printtag.models.login.LoginModel
-import com.ng.printtag.models.newrequests.*
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
@@ -401,53 +402,152 @@ open class RestClient {
     fun apiRequest(
         activity: Context,
         requestObject: Any,
+        header: String,
         reqCode: Int,
         apiResponseListener: ApiResponseListener,
         restClientModel: RestClientModel
     ) {
         when (reqCode) {
             Constant.CALL_SIGN_URL -> {
-                val callApi: Call<LoginModel> = getApiClient()!!.callLogin(requestObject as RequestBody)
-                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
+                val callApi: Call<LoginModel> =
+                    getApiClient()!!.callLogin(requestObject as RequestBody)
+                makeApiRequest(
+                    activity,
+                    requestObject,
+                    callApi,
+                    reqCode,
+                    restClientModel,
+                    apiResponseListener
+                )
                 return
             }
 
-            Constant.CALL_STORE_URL -> {
-                val callApi: Call<StoreListModel> = getApiClient()!!.callStoreList(requestObject as RequestBody)
-                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
-                return
-            }
             Constant.CALL_ALL_REQUEST -> {
-                val callApi: Call<AllRequestModel> = getApiClient()!!.callAllRequest(requestObject as RequestBody)
-                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
+                val callApi: Call<AllRequestList> =
+                    getApiClient()!!.callReceived(header, requestObject as RequestBody)
+                makeApiRequest(
+                    activity,
+                    requestObject,
+                    callApi,
+                    reqCode,
+                    restClientModel,
+                    apiResponseListener
+                )
                 return
             }
 
-            Constant.CALL_DEPARTMENT_URL -> {
-                val callApi: Call<DepartmentModel> = getApiClient()!!.callDepartmentList(requestObject as RequestBody)
-                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
+            Constant.CALL_SHOP_SUPPLY_REQUEST -> {
+                val callApi: Call<ShopSupplyList> =
+                    getApiClient()!!.callShopSupply(header, requestObject as RequestBody)
+                makeApiRequest(
+                    activity,
+                    requestObject,
+                    callApi,
+                    reqCode,
+                    restClientModel,
+                    apiResponseListener
+                )
+                return
+            }
+            Constant.CALL_PUBLICATION -> {
+                val callApi: Call<PublicationModel> =
+                    getApiClient()!!.callPublication(header, (requestObject as RequestBody))
+                makeApiRequest(
+                    activity,
+                    requestObject,
+                    callApi,
+                    reqCode,
+                    restClientModel,
+                    apiResponseListener
+                )
+                return
+            }
+            Constant.CALL_SHOP_NAME -> {
+                val callApi: Call<ShopNameModel> =
+                    getApiClient()!!.callShopName(header, (requestObject as RequestBody))
+                makeApiRequest(
+                    activity,
+                    requestObject,
+                    callApi,
+                    reqCode,
+                    restClientModel,
+                    apiResponseListener
+                )
                 return
             }
 
-            Constant.CALL_TEMPLETS_DETAILS -> {
-                val callApi: Call<TempletListModel> = getApiClient()!!.callTemplateDetails(requestObject as RequestBody)
-                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
+            Constant.CALL_PUBLICATION_PRICE -> {
+                val callApi: Call<PublicationPriceModel> =
+                    getApiClient()!!.callPublicationPrice(header, (requestObject as RequestBody))
+                makeApiRequest(
+                    activity,
+                    requestObject,
+                    callApi,
+                    reqCode,
+                    restClientModel,
+                    apiResponseListener
+                )
+                return
+            }
+            Constant.CALL_SHOP_TRAN -> {
+                val callApi: Call<GetShopTranModel> =
+                    getApiClient()!!.callGetShopTran(header, (requestObject as RequestBody))
+                makeApiRequest(
+                    activity,
+                    requestObject,
+                    callApi,
+                    reqCode,
+                    restClientModel,
+                    apiResponseListener
+                )
                 return
             }
 
-            Constant.CALL_NEW_REQUEST_SUBMIT -> {
-                val callApi: Call<NewPrintReqSubmit> =
-                    getApiClient()!!.callNewRequestSubmit(requestObject as RequestBody)
-                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
+            Constant.CALL_CREATE_RECIVED_DETAILS -> {
+                val callApi: Call<GenericModel> = getApiClient()!!.callCreateReceivedCopies(
+                    header,
+                    (requestObject as RequestBody)
+                )
+                makeApiRequest(
+                    activity,
+                    requestObject,
+                    callApi,
+                    reqCode,
+                    restClientModel,
+                    apiResponseListener
+                )
                 return
             }
 
-            Constant.CALL_UPC_VALIDATE -> {
-                val callApi: Call<UpcValidateModel> =
-                    getApiClient()!!.callUpcValidate(requestObject as RequestBody)
-                makeApiRequest(activity, requestObject, callApi, reqCode, restClientModel, apiResponseListener)
+            Constant.CALL_CREATE_SUPPLY -> {
+                val callApi: Call<GenericModel> =
+                    getApiClient()!!.callCreateSupply(header, (requestObject as RequestBody))
+                makeApiRequest(
+                    activity,
+                    requestObject,
+                    callApi,
+                    reqCode,
+                    restClientModel,
+                    apiResponseListener
+                )
                 return
             }
+
+
+            Constant.CALL_CREATE_SHOP_PAYMENT -> {
+                val callApi: Call<GenericModel> =
+                    getApiClient()!!.callCreateShopPayment(header, (requestObject as RequestBody))
+                makeApiRequest(
+                    activity,
+                    requestObject,
+                    callApi,
+                    reqCode,
+                    restClientModel,
+                    apiResponseListener
+                )
+                return
+            }
+
 
         }
     }

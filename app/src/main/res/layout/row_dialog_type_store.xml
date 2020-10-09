@@ -27,7 +27,6 @@
                 android:textDirection="ltr"
                 android:textColor="@color/color_B0000000"
                 android:text="@{model}"
-                android:button="@drawable/radio_button_selector"
         />
     </RelativeLayout>
 

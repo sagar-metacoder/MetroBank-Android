@@ -2,16 +2,40 @@ package com.ng.printtag.models.allrequests
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.ng.printtag.models.login.ErrorModel
 
 class AllRequestList {
+    /*@SerializedName("response")
+    @Expose
+    var response: ArrayList<ResponseClass>? = null*/
+    @SerializedName("id")
+    @Expose
+    var id: Any? = null
 
-    @SerializedName("status")
+    @SerializedName("jsonrpc")
     @Expose
-    var status: String? = null
-    @SerializedName("message")
+    var jsonrpc: String? = null
+
+    @SerializedName("error")
     @Expose
-    var message: String? = null
-    @SerializedName("data")
+    var error: ErrorModel? = null
+
+    @SerializedName("result")
     @Expose
-    var data: ArrayList<AllRequestModel>? = null
+    var result: Result? = null
+
+    inner class Result {
+        @SerializedName("response")
+        @Expose
+        var response: ArrayList<ResponseClass>? = null
+
+        @SerializedName("status")
+        @Expose
+        var status: String? = null
+
+        @SerializedName("message")
+        @Expose
+        var message: String? = null
+    }
+
 }

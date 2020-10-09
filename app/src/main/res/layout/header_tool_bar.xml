@@ -44,13 +44,29 @@
                 android:textSize="@dimen/font_20"
                 android:layout_toEndOf="@+id/iv_back"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="@dimen/margin_40"
+                android:layout_marginStart="@dimen/margin_45"
                 android:layout_centerVertical="true"
                 android:text="@{headerModel.title}"
                 tools:ignore="RelativeOverlap"
+                android:visibility="visible"
                 android:singleLine="true"
                 android:layout_toStartOf="@+id/li_header_regs"
-                android:ems="15"/>
+                android:ems="15" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_bar_code"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="?android:attr/selectableItemBackground"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="@dimen/margin_10"
+                android:paddingEnd="@dimen/margin_10"
+                android:src="@mipmap/ic_launcher_foreground"
+                android:visibility="@{headerModel.logovisibility?View.VISIBLE:View.GONE}" />
+
 
         <LinearLayout
                 android:id="@+id/li_header_regs"
@@ -60,23 +76,27 @@
                 android:layout_marginEnd="@dimen/margin_10"
                 android:layout_height="match_parent">
 
+
             <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_bar_code"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:id="@+id/iv_setting"
+                    android:layout_width="@dimen/margin_45"
+                    android:layout_height="@dimen/margin_45"
                     android:clickable="true"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_add"
+                    android:onClick="@{instance::onFilterClick}"
                     android:focusable="true"
-                    android:visibility="@{headerModel.barcodeVisibility?View.VISIBLE:View.GONE}"
                     android:paddingStart="@dimen/margin_10"
-                    android:paddingEnd="@dimen/margin_10"
-                    android:onClick="@{instance::onBarCodeClick}"
-                    android:background="?android:attr/selectableItemBackground"/>
+                    android:src="@mipmap/ic_setting"
+                    android:visibility="@{headerModel.printVisibility?View.VISIBLE:View.GONE}"
 
+                    android:paddingEnd="@dimen/margin_10"
+                    android:background="?android:attr/selectableItemBackground" />
 
         </LinearLayout>
 
+        <!--
+                android:visibility="@{headerModel.printVisibility?View.VISIBLE:View.GONE}"
+        -->
 
     </RelativeLayout>
 </layout>

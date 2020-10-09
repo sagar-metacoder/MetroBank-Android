@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+
+            android:orientation="vertical">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_10"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/page_side_margin"
+                android:paddingTop="@dimen/margin_20"
+                android:paddingEnd="@dimen/page_side_margin">
+
+
+            <com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout
+                    style="@style/AppEditText.Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_pin"
+                        style="@style/AppEditText.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="4-Digit Pin"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxEms="4"
+                        android:maxLength="4"></com.google.android.material.textfield.TextInputEditText>
+            </com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout>
+
+            <requestFocus />
+
+            <com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout
+                    style="@style/AppEditText.Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_companyname"
+                        style="@style/AppEditText.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter Company Name"
+                        android:imeOptions="actionNext"
+                        android:inputType="textNoSuggestions"
+                        android:textAllCaps="true"></com.google.android.material.textfield.TextInputEditText>
+            </com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout>
+
+            <com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout
+                    style="@style/AppEditText.Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_account_number"
+                        style="@style/AppEditText.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter Account Number"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"></com.google.android.material.textfield.TextInputEditText>
+            </com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout>
+
+            <com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout
+                    style="@style/AppEditText.Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_sort_code"
+                        style="@style/AppEditText.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter Address"
+
+                        android:imeOptions="actionNext"
+                        android:inputType="textNoSuggestions"></com.google.android.material.textfield.TextInputEditText>
+            </com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout>
+
+            <com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout
+                    style="@style/AppEditText.Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_balance"
+                        style="@style/AppEditText.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:hint="Enter Balance"
+
+                        android:imeOptions="actionDone"
+                        android:inputType="textNoSuggestions|numberDecimal"></com.google.android.material.textfield.TextInputEditText>
+            </com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout>
+
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:paddingStart="@dimen/margin_4"
+                    android:paddingEnd="@dimen/margin_4">
+
+
+                <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSave"
+                        style="@style/AppButton.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="end"
+                        android:gravity="center"
+
+                        android:padding="@dimen/margin_8"
+                        android:text="Save"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_15sdp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

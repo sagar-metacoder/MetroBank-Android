@@ -2,7 +2,6 @@ package com.ng.printtag.models.allrequests
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import com.ng.printtag.models.newrequests.AddProductModel
 
 
 class AllRequestModel {
@@ -81,9 +80,6 @@ class AllRequestModel {
             var maxQuantity: String? = null
 
 
-            @SerializedName("productsQty")
-            @Expose
-            var products: MutableList<AddProductModel>? = null
         }
     }
 

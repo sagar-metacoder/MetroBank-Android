@@ -1,14 +1,11 @@
 package com.ng.printtag.base
 
 import android.view.View
-import android.widget.RelativeLayout
 import com.ng.printtag.R
 import com.ng.printtag.api.ActivityAppSessionTimeout
 import com.ng.printtag.dashboard.FragmentDashboard
 import com.ng.printtag.login.FragmentLogin
-import com.ng.printtag.printrequest.ActivityNewPrintRequest
-import com.ng.printtag.printrequest.FragmentAddProduct
-import com.ng.printtag.printrequest.FragmentNewPrintRequest
+import com.ng.printtag.setting.ActivitySetting
 import com.ng.printtag.splash.ActivitySplash
 
 
@@ -24,6 +21,7 @@ class HeaderModel {
     var printVisibility = false
     var filterVisibility = false
     var generateNewPinVisibility = false
+    var logovisibility = false
     var printReceiptVisibility = false
     var closeVisibility = false
     var transactionHistoryVisibility = false
@@ -42,55 +40,35 @@ class HeaderModel {
                 backVisibility = false*/
             }
 
-            is FragmentNewPrintRequest -> {
 
-                setLeftIcon(R.mipmap.ic_back)
-                setLeftIconText(baseFragment!!.getString(R.string.a_lbl_new_print_request))
-                backVisibility = true
-                barcodeVisibility = false
-            }
-
-            is FragmentAddProduct -> {
-
-                setLeftIcon(R.mipmap.ic_back)
-                setLeftIconText(baseFragment!!.getString(R.string.a_lbl_new_print_request))
-                if (ActivityNewPrintRequest.fromAll) {
-                    setLeftIconText(baseFragment!!.getString(R.string.a_lbl_print_request))
-
-                }
-                backVisibility = true
-                barcodeVisibility = !ActivityNewPrintRequest.isSent
-            }
 
             is FragmentDashboard -> {
-                title =
-                    baseFragment!!.getString(R.string.a_title_dashboard)
+                baseActivity!!.setHeaderVisibility(View.GONE)
 
-                setLeftIcon(hamburgerIcon)
-                val param = RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT,
-                    RelativeLayout.LayoutParams.WRAP_CONTENT
-                )
-                param.addRule(
-                    RelativeLayout.RIGHT_OF,
-                    baseActivity!!.actBaseBinding.headerToolBar.binding.ivBack.id
-                )
-                param.addRule(RelativeLayout.CENTER_VERTICAL)
-                param.setMargins(baseActivity!!.resources.getDimension(R.dimen.margin_5).toInt(), 0, 0, 0)
-                baseActivity!!.actBaseBinding.headerToolBar.binding.tvHeaderTitle.layoutParams = param
             }
 
         }
         when (baseActivity) {
             is ActivitySplash -> {
-                baseActivity!!.setNoStatusBar()
+                //  baseActivity!!.setNoStatusBar()
                 baseActivity!!.setHeaderVisibility(View.GONE)
             }
-
             is ActivityAppSessionTimeout -> {
                 backVisibility = false
 
             }
+            is ActivitySetting -> {
+                //  baseActivity!!.setNoStatusBar()
+                backVisibility = true
+                title = "Setting"
+            }
+/*
+            is ActivityDashboard -> {
+                // baseActivity!!.setNoStatusBar()
+                baseActivity!!.setHeaderVisibility(View.GONE)
+            }
+*/
+
 
         }
         baseActivity!!.actBaseBinding.headerToolBar.binding.headerModel = this
@@ -100,7 +78,7 @@ class HeaderModel {
     private fun setDefaultHeader() {
         baseActivity!!.setHeaderVisibility(View.VISIBLE)
         baseActivity!!.actBaseBinding.headerToolBar.binding.ivBack.text = ""
-        backVisibility = true
+        backVisibility = false
         title = ""
         settingsVisibility = true
         barcodeVisibility = false

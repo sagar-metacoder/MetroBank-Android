@@ -3,7 +3,6 @@ package com.ng.printtag.apputils
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -13,16 +12,11 @@ import android.os.Bundle
 import android.provider.OpenableColumns
 import android.util.Base64
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
-import com.google.gson.Gson
 import com.ng.printtag.BuildConfig
-import com.ng.printtag.R
 import com.ng.printtag.dashboard.ActivityDashboard
 import com.ng.printtag.login.ActivityLogin
-import com.ng.printtag.models.allrequests.AllRequestModel
 import com.ng.printtag.models.login.LoginModel
-import com.ng.printtag.printrequest.ActivityNewPrintRequest
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -59,14 +53,6 @@ class Utils {
 
         }
 
-        fun navigateToNewPrintRequest(context: Context, records: AllRequestModel.Data.Records?) {
-            val intent = Intent(context, ActivityNewPrintRequest::class.java)
-            if (records != null)
-                intent.putExtra(context.getString(R.string.records), Gson().toJson(records))
-            AppUtils.navigateToOtherScreen(
-                context as AppCompatActivity, intent, false
-            )
-        }
 
 
         /**

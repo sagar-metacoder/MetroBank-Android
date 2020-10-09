@@ -18,7 +18,6 @@ import com.ng.printtag.apputils.BaseSharedPreference
 import com.ng.printtag.apputils.Utils
 import com.ng.printtag.databinding.HeaderToolBarBinding
 import com.ng.printtag.interfaces.HeaderInterface
-import androidx.databinding.DataBindingUtil.inflate as inflate1
 
 
 /**
@@ -53,10 +52,12 @@ class HeaderToolBar : Toolbar, PopupMenu.OnMenuItemClickListener {
             BaseSharedPreference.getInstance(context).getLanguage(context.getString(R.string.pref_language))
         )
 
+
         binding = DataBindingUtil.inflate(from(context), getLayoutId(), this, true)
         setContentInsetsAbsolute(0, 0)
         setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
         binding.instance = this
+
     }
 
 
@@ -108,6 +109,14 @@ class HeaderToolBar : Toolbar, PopupMenu.OnMenuItemClickListener {
             headerInterface.onHeaderMenuItemClick(view)
     }
 
+    @SuppressLint
+    fun onFilterClick(view: View) {
+        AppUtils.hideKeyBoard(context as Activity)
+
+        if (::headerInterface.isInitialized)
+            headerInterface.onHeaderMenuItemClick(view)
+    }
+
     /**
      * @see HeaderInterface
      */
@@ -125,7 +134,9 @@ class HeaderToolBar : Toolbar, PopupMenu.OnMenuItemClickListener {
      * @param headerInterface the handler call back
      */
     fun setHeaderInterface(headerInterface: HeaderInterface) {
+
         this.headerInterface = headerInterface
+
     }
 
     /**

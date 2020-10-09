@@ -25,19 +25,26 @@
                 android:id="@+id/tv_sign_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
+                android:visibility="invisible"
                 style="@style/AppTextView.Title"
                 android:layout_marginTop="-5dp"
 
-        />
+                />
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_splash"
+                android:layout_width="250dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_latha_logo" />
+
 
         <com.ng.printtag.apputils.custom.CollapsedHintTextInputLayout
                 android:id="@+id/inputUser"
                 style="@style/AppEditText.Text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_30"
-        >
+                android:layout_marginTop="@dimen/margin_50">
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_user_name"

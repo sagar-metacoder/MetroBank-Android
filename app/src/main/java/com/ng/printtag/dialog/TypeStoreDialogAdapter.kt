@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ng.printtag.R
@@ -15,19 +14,16 @@ class TypeStoreDialogAdapter : RecyclerView.Adapter<TypeStoreDialogAdapter.ViewH
 
     private var mInflater: LayoutInflater? = null
     private lateinit var context: Context
-    private var fromWhere: Int = 0
     private lateinit var onItemClickListener: OnItemClickListener
 
     private lateinit var storeList: ArrayList<String>
     var selPosValue: Int = -1
 
-    var selected: AppCompatRadioButton? = null
 
 
     fun setData(
         context: Context,
         storeList: ArrayList<String>,
-        fromWhere: Int,
         selPosValue: Int,
         onItemClickListener: OnItemClickListener
 
@@ -35,7 +31,6 @@ class TypeStoreDialogAdapter : RecyclerView.Adapter<TypeStoreDialogAdapter.ViewH
         this.context = context
         this.storeList = storeList
         mInflater = LayoutInflater.from(context)
-        this.fromWhere = fromWhere
         this.selPosValue = selPosValue
         this.onItemClickListener = onItemClickListener
 
@@ -112,4 +107,6 @@ class TypeStoreDialogAdapter : RecyclerView.Adapter<TypeStoreDialogAdapter.ViewH
         }
 
     }
+
+
 }

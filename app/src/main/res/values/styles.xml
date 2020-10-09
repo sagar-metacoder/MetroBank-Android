@@ -1,11 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimary</item>
         <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
         <item name="android:datePickerDialogTheme">@style/MyDatePickerDialogTheme</item>
 
@@ -16,10 +16,6 @@
         <item name="android:activityOpenExitAnimation">@anim/push_out_to_right</item>
         <item name="android:activityCloseEnterAnimation">@anim/push_in_from_right</item>
         <item name="android:activityCloseExitAnimation">@anim/push_out_to_left</item>
-    </style>
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="ErrorLogInText" parent="android:Widget">
@@ -42,10 +38,10 @@
         <item name="android:textAllCaps">false</item>
         <item name="cornerRadius">4dp</item>
         <item name="android:minEms">5</item>
-        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:fontFamily">@font/verdana</item>
     </style>
 
-    <style name="AppButton.dialog.Colored" parent="Widget.AppCompat.Button.Colored">
+    <style name="AppButton.dialog.Colored" parent="Widget.MaterialComponents.Button">
         <item name="android:theme">@style/Theme.MaterialComponents.Light</item>
         <item name="android:layout_gravity">end</item>
         <item name="android:textColor">@color/colorWhite</item>
@@ -58,72 +54,10 @@
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 
-    <style name="AppButton.Colored.Green" parent="Widget.AppCompat.Button.Colored">
-        <item name="android:theme">@style/Theme.MaterialComponents.Light</item>
-        <item name="android:layout_gravity">end</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="colorControlHighlight">@color/colorWhite</item>
-        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/app_background</item>
-        <item name="android:textSize">@dimen/font_button</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="cornerRadius">4dp</item>
-        <item name="android:minEms">5</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-    </style>
-    <style name="AppButton.Colored.Borderless" parent="Widget.AppCompat.Button.Borderless">
-        <item name="android:layout_gravity">end</item>
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="colorControlHighlight">@color/colorWhite</item>
-        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/colorTransparent</item>
-        <item name="android:textSize">@dimen/font_button</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="cornerRadius">4dp</item>
-        <item name="android:minEms">5</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-    </style>
-
-    <style name="ButtonInActive">
-        <item name="android:layout_gravity">end</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textSize">@dimen/font_button</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-    </style>
-
-    <style name="AppButton.Outlined" parent="Widget.AppCompat.Button">
-        <item name="android:layout_width">@dimen/width_different_person_button</item>
-        <item name="android:background">@drawable/btn_outlined</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textSize">@dimen/font_button</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-    </style>
-
-    <style name="AppButton.Rectangle.Colored" parent="Widget.AppCompat.Button.Colored">
-        <item name="colorControlHighlight">@android:color/white</item>
-        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/colorWhite</item>
-        <item name="android:textSize">@dimen/font_floating_menu</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@color/color_B0000000</item>
-        <item name="cornerRadius">6dp</item>
-        <item name="android:fontFamily">@font/roboto_bold</item>
-    </style>
-
-    <style name="AppButton.Colored.Disable" parent="Widget.AppCompat.Button.Colored">
-        <item name="colorControlHighlight">@android:color/white</item>
-        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/color_1AFF007F</item>
-        <item name="android:textSize">@dimen/font_button</item>
-        <item name="android:enabled">false</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="cornerRadius">4dp</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-    </style>
-
 
     <!--Floating label text style-->
     <style name="AppEditText.HintText" parent="TextAppearance.AppCompat.Small">
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColor">@color/color_4A4A4A</item>
         <item name="android:textSize">@dimen/font_floating_text</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:alpha">128</item>
@@ -135,10 +69,10 @@
         <item name="android:insetRight">0dp</item>
         <item name="android:maxLines">1</item>
         <item name="android:maxLength">50</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textColorHint">@color/colorWhite50</item>
+        <item name="android:textColor">@color/color_4A4A4A</item>
+        <item name="android:textColorHint">@color/color_4A4A4A</item>
         <item name="hintTextAppearance">@style/AppEditText.HintText</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">@font/verdana</item>
         <item name="android:layout_marginStart">@dimen/margin_minus_3</item>
         <item name="android:layout_marginEnd">@dimen/margin_minus_3</item>
         <item name="errorEnabled">true</item>
@@ -170,32 +104,19 @@
     <style name="AppEditText.EditText" parent="Theme.AppCompat.Light">
         <item name="android:textCursorDrawable">@drawable/bg_cursor_drawable</item>
         <item name="android:cursorVisible">true</item>
-        <item name="android:textColorHint">@color/color_1AFF007F</item>
         <item name="android:maxLines">1</item>
         <item name="android:imeOptions">actionNext</item>
-        <item name="backgroundTint">@color/colorWhite50</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:cacheColorHint">@color/color_4A4A4A</item>
+        <item name="android:textColorHint">@color/color_4A4A4A</item>
         <item name="android:textSize">@dimen/font_input</item>
         <item name="android:paddingBottom">@dimen/margin_20</item>
         <item name="android:paddingTop">@dimen/margin_10</item>
         <item name="android:paddingStart">@dimen/margin_5</item>
         <item name="android:paddingEnd">@dimen/margin_5</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">@font/verdana</item>
         <item name="android:inputType">textNoSuggestions</item>
-    </style>
-
-    <style name="AppEditText.EditText.Search" parent="Theme.AppCompat.Light">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColorHint">@color/color_B7B7BA</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textSize">@dimen/font_hint</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:maxLength">50</item>
-        <item name="android:layout_centerVertical">true</item>
-        <item name="android:background">@color/colorTransparent</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 
     <style name="AppTextView.Header" parent="Theme.AppCompat.Light">
@@ -209,7 +130,7 @@
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">@dimen/font_title</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:fontFamily">@font/verdanao</item>
     </style>
 
     <style name="AppTextView.Title.Small" parent="Theme.AppCompat.Light">
@@ -225,17 +146,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">@dimen/font_18</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-    </style>
-
-    <style name="AppTextView.Button" parent="Theme.AppCompat.Light">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">@dimen/font_18</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-        <item name="android:textStyle">bold</item>
-
+        <item name="android:fontFamily">@font/verdana</item>
     </style>
 
 
@@ -251,31 +162,11 @@
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 
-    <style name="AppTextView.Dialog.Item" parent="Theme.AppCompat.Light">
-        <item name="android:textColor">@color/color_B0000000</item>
-        <item name="android:textSize">@dimen/font_dialog_item</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-    </style>
-
     <style name="AppTextView.SideNavMenu" parent="Theme.AppCompat.Light">
         <item name="android:textColor">@color/color_2D2D2D</item>
         <item name="android:textSize">@dimen/font_13</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
-    </style>
-
-    <style name="AppSearchBar.Icons" parent="Theme.AppCompat.Light">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingTop">@dimen/margin_10</item>
-        <item name="android:paddingBottom">@dimen/margin_10</item>
-        <item name="android:paddingStart">@dimen/margin_20</item>
-        <item name="android:paddingEnd">@dimen/margin_20</item>
-        <item name="android:scaleType">center</item>
-        <item name="android:layout_centerVertical">true</item>
-        <item name="android:clickable">true</item>
-        <item name="android:focusable">true</item>
-        <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
     <style name="StyleBaseDialog" parent="android:Theme.Dialog">
@@ -288,26 +179,6 @@
         <item name="android:windowMinWidthMinor">100%</item>
     </style>
 
-    <style name="AppTextView.List.Item" parent="Theme.AppCompat.Light">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/color_2D2D2D</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textSize">@dimen/font_12</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-        <item name="android:textCursorDrawable">@drawable/bg_cursor_green</item>
-
-    </style>
-    <style name="AppTextView.List.Item.Medium" parent="Theme.AppCompat.Light">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/color_2D2D2D</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textSize">@dimen/font_12</item>
-        <item name="android:fontFamily">@font/roboto_medium</item>
-    </style>
     <style name="AppTextView.MenuItem" parent="Theme.AppCompat.Light">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -326,23 +197,6 @@
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
-    <style name="AppImageView.MenuItem.Text" parent="AppTextView.MenuItem">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingTop">@dimen/margin_15</item>
-        <item name="android:paddingBottom">@dimen/margin_15</item>
-        <item name="android:paddingStart">@dimen/margin_35</item>
-        <item name="android:paddingEnd">@dimen/margin_35</item>
-        <item name="android:background">?android:attr/selectableItemBackground</item>
-        <item name="android:clickable">true</item>
-        <item name="android:focusable">true</item>
-        <item name="android:fontFamily">@font/roboto_medium</item>
-    </style>
-
-    <style name="progressBarTheme" parent="@style/Theme.AppCompat">
-        <item name="colorAccent">@color/colorPrimary</item>
-    </style>
-
     <!--
         &lt;!&ndash; Base application theme is the default theme. &ndash;&gt;
         <style name="Theme" parent="Theme.MaterialComponents">
@@ -355,128 +209,50 @@
         </style>-->
 
     <!-- WHITE THEME FOR IDENTIFICATION SCREEN -->
-    <style name="AppEditText.EditText.White" parent="Theme.AppCompat.Light">
-        <item name="android:textCursorDrawable">@drawable/bg_cursor_drawable</item>
-        <item name="android:cursorVisible">true</item>
-        <item name="android:textColorHint">@color/colorWhite</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:maxLength">50</item>
-        <item name="backgroundTint">@color/colorWhite</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textSize">@dimen/font_input_detail</item>
-        <item name="android:paddingBottom">@dimen/margin_15</item>
-        <item name="android:paddingTop">@dimen/margin_20</item>
-        <item name="android:paddingStart">@dimen/margin_5</item>
-        <item name="android:paddingEnd">@dimen/margin_5</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-        <item name="android:inputType">textNoSuggestions</item>
-
-    </style>
 
     <!-- WHITE THEME FOR IDENTIFICATION SCREEN -->
-    <style name="AppEditText.Text.White" parent="Theme.AppCompat.Light">
-        <item name="android:insetLeft">0dp</item>
-        <item name="android:insetRight">0dp</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:maxLength">50</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textColorHint">@color/colorWhite</item>
-        <item name="theme">@style/AppEditText.InputText.White</item>
-        <item name="hintTextAppearance">@style/AppEditText.HintText.White</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-        <item name="android:layout_marginStart">@dimen/margin_minus_3</item>
-        <item name="android:layout_marginEnd">@dimen/margin_minus_3</item>
-        <item name="errorEnabled">true</item>
-    </style>
 
     <!-- WHITE THEME FOR IDENTIFICATION SCREEN -->
-    <style name="AppEditText.InputText.White" parent="Theme.AppCompat.Light">
-        <item name="android:textColorHint">@color/colorWhite</item>
-        <item name="colorControlNormal">@color/colorWhite</item>
-        <item name="colorControlHighlight">@color/colorWhite</item>
-        <item name="colorControlActivated">@color/colorWhite</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textSize">@dimen/font_input_detail</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-    </style>
 
     <!-- WHITE THEME FOR IDENTIFICATION SCREEN -->
-    <style name="AppEditText.HintText.White" parent="TextAppearance.AppCompat.Small">
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textSize">@dimen/font_floating_text</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-    </style>
-
-    <style name="MyPopupMenu" parent="@style/Widget.AppCompat.PopupMenu">
-        <item name="android:overlapAnchor" tools:targetApi="lollipop">true</item>
-        <item name="android:dropDownHorizontalOffset">-40dp</item>
-        <item name="android:dropDownVerticalOffset">20dp</item>
-    </style>
-
-    <style name="MyEditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorControlNormal">@color/colorWhite</item>
-        <item name="colorControlActivated">@color/colorWhite</item>
-        <item name="colorControlHighlight">@color/colorWhite</item>
-        <item name="backgroundTint">@color/colorWhite</item>
-    </style>
-    <style name="TextAppearance.App.TextInputLayout" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="backgroundTint">@color/colorWhite</item>
-    </style>
-
-    <style name="AppTextView.Spinner" parent="Theme.AppCompat.Light">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/color_B0000000</item>
-        <item name="android:textSize">@dimen/font_20</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-    </style>
-
-    <style name="MySeekBar" parent="Widget.AppCompat.SeekBar">
-        <item name="android:progressBackgroundTint">@color/color_CDE0EC</item>
-        <item name="android:progressTint">@color/colorWhite</item>
-        <item name="android:colorControlActivated">@color/colorWhite</item>
-        <item name="android:minHeight">@dimen/margin_30</item>
-        <item name="android:maxHeight">@dimen/margin_30</item>
-    </style>
 
     <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
         <item name="android:datePickerStyle">@style/MyDatePickerStyle</item>
-        <item name="android:textColorPrimaryInverse">#000
+        <item name="android:textColorPrimaryInverse">#FFF
         </item> <!-- header date, month color && calendar text highlight color -->
-        <item name="android:textColorSecondaryInverse">#000</item> <!-- header year color -->
+        <item name="android:textColorSecondaryInverse">#FFF</item> <!-- header year color -->
 
-        <item name="android:colorAccent">@color/primary_light</item> <!-- button color -->
+        <item name="android:colorAccent">@color/colorPrimaryDark</item> <!-- button color -->
 
     </style>
 
     <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
-        <item name="android:headerBackground">#fff</item> <!-- header background color -->
+        <item name="android:headerBackground">@color/colorPrimary
+        </item> <!-- header background color -->
     </style>
 
-    <style name="MaterialDialogSheet" parent="@android:style/Theme.Dialog">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowAnimationStyle">@style/MaterialDialogSheetAnimation</item>
+    <style name="AppButton.Colored.Green" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:theme">@style/Theme.MaterialComponents.Light</item>
+        <item name="android:layout_gravity">end</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="colorControlHighlight">@color/colorWhite</item>
+        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/app_background</item>
+        <item name="android:textSize">@dimen/font_button</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">4dp</item>
+        <item name="android:minEms">5</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 
-
-    <style name="MaterialDialogSheetAnimation">
-        <item name="android:windowEnterAnimation">@anim/popup_show</item>
-        <item name="android:windowExitAnimation">@anim/popup_hide</item>
+    <style name="BottomNavigationView.InActive" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">@dimen/_8sdp</item>
     </style>
 
-    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">@dimen/_8sdp</item>
     </style>
-    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/bg_view_product</item>
-        <item name="behavior_peekHeight">@dimen/margin_350</item>
+
+    <style name="Theme.MyApp" parent="Theme.MaterialComponents.Light.Bridge">
+        <!-- ... -->
     </style>
-    <dimen name="font_13">13sp</dimen>
 </resources>
