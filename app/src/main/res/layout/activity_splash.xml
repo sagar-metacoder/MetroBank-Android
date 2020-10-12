@@ -37,6 +37,7 @@
                 android:layoutAnimation="@anim/pulse_layout_animation"
                 android:src="@drawable/ic_login_logo"
                 android:visibility="gone"
+                android:layout_gravity="center"
 
 
                 />

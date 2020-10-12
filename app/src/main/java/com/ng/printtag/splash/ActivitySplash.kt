@@ -74,7 +74,7 @@ class ActivitySplash : BaseActivity<ActivitySplashBinding>() {
             }
 
             valueAnimator.interpolator = LinearInterpolator()
-            valueAnimator.duration = 1200
+            valueAnimator.duration = 700
 
             valueAnimator.start()
 
@@ -103,7 +103,7 @@ class ActivitySplash : BaseActivity<ActivitySplashBinding>() {
 
             binding.linearPinlock.visibility = View.VISIBLE
 
-        }, 2600)
+        }, 2100)
 
         //slideUp!!.show()
     }
