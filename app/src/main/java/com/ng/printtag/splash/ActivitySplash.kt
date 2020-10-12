@@ -1,15 +1,17 @@
 package com.ng.printtag.splash
 
+import android.animation.ValueAnimator
 import android.os.Handler
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.animation.LinearInterpolator
 import android.view.animation.TranslateAnimation
 import androidx.core.content.ContextCompat
 import com.andrognito.pinlockview.IndicatorDots
 import com.andrognito.pinlockview.PinLockListener
-import com.mancj.slideup.SlideUp
 import com.ng.printtag.R
 import com.ng.printtag.apputils.BaseSharedPreference
 import com.ng.printtag.apputils.CallDialog
@@ -21,13 +23,19 @@ import com.ng.printtag.databinding.ActivitySplashBinding
 class ActivitySplash : BaseActivity<ActivitySplashBinding>() {
 
     private lateinit var binding: ActivitySplashBinding
-    lateinit var slideUp: SlideUp
+    protected var screenHeight = 0f
+
     override fun getLayoutId(): Int = R.layout.activity_splash
 
     override fun initMethod() {
 
         //AppUtils.noStatusBar(window)
         binding = getViewDataBinding()
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        screenHeight = (displayMetrics.heightPixels.toFloat() / 2.8).toFloat()
+
+        Log.e("screenHeight", screenHeight.toString())
         val slideUpAnimation: Animation = AnimationUtils.loadAnimation(
             applicationContext,
             R.anim.move
@@ -44,33 +52,7 @@ class ActivitySplash : BaseActivity<ActivitySplashBinding>() {
         binding.indicatorDots.indicatorType = IndicatorDots.IndicatorType.FIXED
 
 
-/*
-        slideUp = SlideUpBuilder(binding.ivSplash)
-            .withListeners(object : SlideUp.Listener.Events {
-                override fun onSlide(percent: Float) {
-
-
-                }
-
-                override fun onVisibilityChanged(visibility: Int) {
-                   // binding.incldePin.linearPinlock.visibility =View.VISIBLE
-
-
-
-
-
-                }
-            })
-            .withStartGravity(Gravity.CENTER)
-            .withLoggingEnabled(true)
-            .withGesturesEnabled(true)
-            .withStartState(SlideUp.State.HIDDEN)
-             .withSlideFromOtherView(findViewById(R.id.linear_top))
-            .build()
-*/
-
-
-        //binding.linearTop.startAnimation(animMoveToTop);
+        //  binding.linearTop.startAnimation(animMoveToTop);
 
         Handler().postDelayed({
 
@@ -79,11 +61,22 @@ class ActivitySplash : BaseActivity<ActivitySplashBinding>() {
             //slideUp.show()
 
             val animation = TranslateAnimation(0f, 0f, 0f, -350f)
-            animation.setDuration(500)
-            animation.setFillAfter(false)
+            animation.duration = 500
+            animation.fillAfter = false
 
-            binding.linearSecond.startAnimation(animation)
+            //binding.linearSecond.startAnimation(animation)
 
+            val valueAnimator = ValueAnimator.ofFloat(0f, -screenHeight)
+
+            valueAnimator.addUpdateListener {
+                val value = it.animatedValue as Float
+                binding.linearSecond.translationY = value
+            }
+
+            valueAnimator.interpolator = LinearInterpolator()
+            valueAnimator.duration = 1200
+
+            valueAnimator.start()
 
             // binding.linearSecond.startAnimation(animMoveToTop)
 
@@ -108,15 +101,9 @@ class ActivitySplash : BaseActivity<ActivitySplashBinding>() {
         Handler().postDelayed({
 
 
-            //  binding.linearSecond.visibility =View.GONE
-
-            //binding.incldePin.linearPinlock.visibility =View.VISIBLE
-            // slideUp!!.show()
             binding.linearPinlock.visibility = View.VISIBLE
 
-            // binding.linearPinlock.startAnimation(animMoveToTop);
-
-        }, 1500)
+        }, 2600)
 
         //slideUp!!.show()
     }
